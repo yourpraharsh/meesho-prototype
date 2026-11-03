@@ -63,24 +63,14 @@ export const NAV_ITEMS = [
 
 /**
  * App bottom nav. Only Home and My Orders navigate; the rest are placeholders.
- * `minimized` (iOS skin only) collapses the bar into a single floating Meesho
- * button while the feed scrolls; `onExpand` restores it.
+ * On the iOS skin it floats as a glass bar and stays full while the feed scrolls.
  */
-export default function BottomNav({ active, minimized = false, onExpand }) {
+export default function BottomNav({ active }) {
   const navigate = useNavigate()
   return (
     <>
     <div className="bottom-nav-wash" aria-hidden />
-    <nav className={`bottom-nav${minimized ? ' bottom-nav--minimized' : ''}`} aria-label="Primary">
-      <button
-        type="button"
-        className="bottom-nav-fab"
-        aria-label="Show navigation"
-        tabIndex={minimized ? 0 : -1}
-        onClick={onExpand}
-      >
-        <HomeIcon active />
-      </button>
+    <nav className="bottom-nav" aria-label="Primary">
       {NAV_ITEMS.map(({ id, label, to, Icon }) => {
         const isActive = id === active
         const tappable = Boolean(to)

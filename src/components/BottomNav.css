@@ -56,8 +56,7 @@
   color: var(--grey-base);
 }
 
-/* minimized-state button — only the iOS skin ever shows it */
-.bottom-nav-fab,
+/* the wash under the floating bar — only the iOS skin shows it */
 .bottom-nav-wash {
   display: none;
 }

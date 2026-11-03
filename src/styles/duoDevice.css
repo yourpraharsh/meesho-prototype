@@ -646,18 +646,13 @@ body.duo-device .app .buy-now-sheet {
 }
 
 /* the floating tab bar stays a compact pill, centred on the wider inner display */
-body.duo-device .app .bottom-nav:not(.bottom-nav--minimized) {
+body.duo-device .app .bottom-nav {
   max-width: 560px;
 }
 
 /* the second region gets the same treatment for anything portalled into it */
 body.duo-device .duo-region :is(.pdp-cta-wrap, .dtr-footer, .review-shell-footer, .payment-page-footer, .review-v4-footer, .odp-sticky) {
   max-width: none;
-}
-
-/* the minimized tab button keeps its 16px inset from the screen edge (not the phone frame) */
-body.duo-device .app .bottom-nav.bottom-nav--minimized {
-  left: var(--glass-inset-x, 16px);
 }
 
 /* ---------- split view corners (Open and Book): square at the hinge, rounded outside ----------

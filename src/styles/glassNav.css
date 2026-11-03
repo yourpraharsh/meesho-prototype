@@ -2,7 +2,7 @@
    Liquid Glass (iOS 26) — NAVIGATION CHROME ONLY
    Source: Figma "Liquid Glass" › Dev Handoff - Final (JOgoaSeFMndUDqX9uxAaqh)
    Scoped to body.ui-ios. Covers top bars (incl. search pill, capsules, titles,
-   stepper, header washes), the floating tab bar (incl. minimized state) and
+   stepper, header washes), the floating tab bar and
    the bottom CTA footer bars. Cards, lists, sheets and buttons stay Meesho DS.
    ===================================================================== */
 
@@ -723,56 +723,6 @@ body.ui-ios .bottom-nav-item--active .bottom-nav-label {
   color: var(--glass-ink);
 }
 
-/* minimized: the bar becomes one 62px disc at the frame's bottom-left */
-body.ui-ios .bottom-nav-fab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: none;
-  color: var(--glass-accent);
-  opacity: 0;
-  pointer-events: none;
-  cursor: pointer;
-  transition: opacity 120ms ease;
-}
-
-body.ui-ios .bottom-nav-fab svg {
-  width: 26px;
-  height: 26px;
-}
-
-body.ui-ios .bottom-nav--minimized {
-  left: max(var(--glass-inset-x), calc(50% - 215px + var(--glass-inset-x)));
-  transform: none;
-  width: var(--glass-tab-h);
-  max-width: var(--glass-tab-h);
-  padding: 0;
-  background: var(--glass-fill-fab);
-  -webkit-backdrop-filter: blur(var(--glass-blur-capsule));
-  backdrop-filter: blur(var(--glass-blur-capsule));
-  box-shadow: var(--glass-shadow-fab);
-}
-
-body.ui-ios .bottom-nav--minimized .bottom-nav-item {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 120ms ease, visibility 0s 120ms;
-}
-
-body.ui-ios .bottom-nav--minimized .bottom-nav-fab {
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 120ms ease 140ms;
-}
-
 /* page reserves for the floating bar */
 body.ui-ios .has-bottom-nav {
   padding-bottom: calc(var(--glass-tab-h) + 32px + var(--safe-bottom, 0px)) !important;
@@ -851,8 +801,7 @@ body.ui-ios .payment-page-body {
   body.ui-ios .home-header-row,
   body.ui-ios .home-search-wrap,
   body.ui-ios .bottom-nav,
-  body.ui-ios .bottom-nav-item,
-  body.ui-ios .bottom-nav-fab {
+  body.ui-ios .bottom-nav-item {
     transition: none !important;
     animation: none !important;
   }

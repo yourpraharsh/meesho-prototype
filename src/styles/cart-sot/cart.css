@@ -8,7 +8,8 @@
    The root is also .review-page and the bar is a .review-shell-header, so the glass skin
    (glassNav.css) and every Duo posture (duoLayout.css / duoDevice.css) style them as they
    do the review page. App bar + stepper rules are Meesho-skin only (body:not(.ui-ios)), like
-   payment-sot/top.css; the footer copies .dtr-footer's glass and Duo placement below.
+   payment-sot/top.css; the footer shares the CTA bars' glass (glassNav.css) and copies
+   .dtr-footer's Duo placement below.
    Figma "Book" = 400, "Demi" = 600, "Bold" = 700 (Mier B02).
    ===================================================================== */
 

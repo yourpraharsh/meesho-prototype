@@ -273,6 +273,38 @@ body.duo-device .app .pdp--web .pdp-web-left .pdp-cta-wrap {
   border-top: none;
 }
 
+/* Open / Book full screen: the buy bar spans the whole inner display along its bottom edge,
+   one button per half of the hinge (Add to Cart left, Buy Now right), clear of the rail. It
+   is the iOS glass bar again (fading ::before in glassNav.css), not the column's white strip. */
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full'] .app .pdp--web .pdp-web-left .pdp-cta-wrap {
+  position: fixed;
+  left: 0;
+  right: var(--duo-rail-w);
+  bottom: 0;
+  width: auto;
+  max-width: none;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: var(--duo-hinge-x) minmax(0, 1fr);
+  gap: 0;
+  margin-top: 0;
+  padding: 12px 0 16px;
+  background: transparent;
+}
+
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full'] .app .pdp--web .pdp-web-left .pdp-cta-wrap > button {
+  margin: 0 16px;
+}
+
+/* nothing in either column (or the grid below) ends up under the 72px bar */
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full'] .app .pdp--web .pdp-web-left {
+  padding-bottom: 72px;
+}
+
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full'] .app .pdp.pdp--web {
+  padding-bottom: calc(24px + 72px);
+}
+
 .pdp-web-right {
   min-width: 0;
 }
