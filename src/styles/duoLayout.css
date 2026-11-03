@@ -122,24 +122,6 @@ body.layout-duo .home-header .home-search-wrap {
   margin-top: 0;
 }
 
-body.layout-duo .home-header--collapsed {
-  padding-bottom: 16px;
-}
-
-body.layout-duo .home-header--collapsed::after {
-  opacity: 0;
-}
-
-body.layout-duo .home-header--collapsed::before {
-  opacity: 1;
-}
-
-body.layout-duo .home-header--collapsed {
-  background-color: var(--glass-fill-pill);
-  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
-  backdrop-filter: blur(var(--glass-blur-bar));
-}
-
 body.layout-duo .home--search {
   padding-top: calc(92px + var(--safe-top, 0px));
   --home-sticky-header-h: calc(92px + var(--safe-top, 0px));
@@ -594,46 +576,8 @@ body.layout-duo[data-posture='stand'] .app :is(
   margin-top: auto;
 }
 
-/* Portrait / Laptop Home: the sort / filter row sits right under the collapsed search row
-   (no 56px fade gap between them), on the same glass bar the rail layouts use */
-body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home:not(.home--search) {
-  --home-sticky-header-h: calc(88px + var(--safe-top, 0px));
-}
-
-body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed {
-  padding-bottom: 16px;
-  background-color: var(--glass-fill-pill);
-  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
-  backdrop-filter: blur(var(--glass-blur-bar));
-}
-
-body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed::after {
-  opacity: 0;
-}
-
-body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed::before {
-  opacity: 1;
-}
-
-/* ---- Duo Home, collapsed: the search row and the sort / filter row share ONE glass ----
-   The collapsed bar's glass (and its pink wash) extends behind the filter chips (16px gap +
-   the 48px chip row) and the chip row's own strip turns clear, so the two rows read as a
-   single sheet of material instead of two stacked ones. */
-body.duo-device .home.home--toolbar-docked .home-header.home-header--collapsed {
-  padding-bottom: calc(16px + 48px);
-}
-
-/* the band appears with the docking, not 220ms after it (chips must never sit unbacked) */
-body.duo-device .app .home-header {
-  transition: background-color 200ms ease;
-}
-
-body.duo-device .home.home--toolbar-docked:has(.home-header--collapsed) .home-toolbar {
-  z-index: 21; /* over the extended bar, which it now sits on */
-  background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
+/* Home's collapsed glass bar, docked filter row and shared glass sheet are the iOS skin's
+   own rules now (glassNav.css) — Duo carries that skin, so they apply here unchanged */
 
 /* Portrait / Laptop: page titles sit left, after the back button (as on the rail postures);
    the trailing spacer that balanced a centred title gives way to the status */

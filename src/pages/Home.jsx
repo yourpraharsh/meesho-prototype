@@ -180,12 +180,13 @@ export default function Home() {
       : 2
   const chrome = useScrollChrome({ enabled: isIos, rootKey: `${uiLayout}:${committedPosture ?? ''}` })
 
-  /* iPhone Duo: is the sort / filter row docked under the bar? Only then does the collapsed
-     bar's glass extend behind it (one sheet of glass), never as an empty band before it */
+  /* iOS skin (phone and Duo): is the sort / filter row docked under the bar? Only then does
+     the collapsed bar's glass extend behind it (one sheet of glass), never as an empty band */
+  const homeRef = useRef(null)
   const toolbarRef = useRef(null)
   const [toolbarDocked, setToolbarDocked] = useState(false)
   useEffect(() => {
-    if (uiLayout !== 'duo') {
+    if (!isIos) {
       setToolbarDocked(false)
       return undefined
     }
@@ -204,12 +205,29 @@ export default function Home() {
     check()
     const off = onRootScroll(schedule)
     window.addEventListener('resize', schedule)
+    /* the feed also moves without a scroll: entering / leaving search animates the page's
+       top padding (150px ↔ 92px on the phone), so follow the page's own size too */
+    const ro = new ResizeObserver(schedule)
+    if (homeRef.current) ro.observe(homeRef.current, { box: 'border-box' })
     return () => {
       off()
       window.removeEventListener('resize', schedule)
+      ro.disconnect()
       if (raf) cancelAnimationFrame(raf)
     }
-  }, [uiLayout, committedPosture])
+  }, [isIos, uiLayout, committedPosture])
+  /* The bar takes 220ms to collapse (glassNav.css). A jump past the dock point (scroll
+     restore, fast flick) docks the chips in that same frame, so they only move onto the bar
+     once the search pill has risen clear of their row (~80ms in on the ease-out curve) */
+  const [collapseSettled, setCollapseSettled] = useState(false)
+  useEffect(() => {
+    if (!chrome.collapsed) {
+      setCollapseSettled(false)
+      return undefined
+    }
+    const t = setTimeout(() => setCollapseSettled(true), 80)
+    return () => clearTimeout(t)
+  }, [chrome.collapsed])
   /* iPhone Duo folded: header actions live in the right rail */
   useRailActions([
     { id: 'profile', icon: 'profile', label: 'Meesho User', onClick: openTestGate },
@@ -245,7 +263,10 @@ export default function Home() {
   }
 
   return (
-    <div className={`home has-bottom-nav${isSearchActive ? ' home--search' : ''}${toolbarDocked ? ' home--toolbar-docked' : ''}`}>
+    <div
+      ref={homeRef}
+      className={`home has-bottom-nav${isSearchActive ? ' home--search' : ''}${toolbarDocked && collapseSettled ? ' home--toolbar-docked' : ''}`}
+    >
       {isListening && (
         <div className="voice-modal-overlay" onClick={() => recognitionRef.current?.stop()}>
           <div className="voice-modal" onClick={(e) => e.stopPropagation()}>

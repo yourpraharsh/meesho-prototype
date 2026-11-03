@@ -311,8 +311,8 @@ body.ui-ios .glass-stepper-label {
 body.ui-ios .home {
   /* content starts under the fixed expanded header: 24 + 46 row + 16 + 48 pill + 16 */
   padding-top: calc(150px + var(--safe-top, 0px));
-  /* the sort/filter toolbar sticks below the collapsed header + its fade */
-  --home-sticky-header-h: calc(128px + var(--safe-top, 0px));
+  /* the sort/filter toolbar sticks right under the collapsed search row: 24 + 48 pill + 16 */
+  --home-sticky-header-h: calc(88px + var(--safe-top, 0px));
   transition: padding-top 220ms var(--glass-ease);
 }
 
@@ -332,19 +332,9 @@ body.ui-ios .home-header {
   backdrop-filter: blur(var(--glass-blur-bar));
   border-bottom: none;
   box-shadow: none;
-  transition: padding 220ms var(--glass-ease), background-color 200ms ease;
-}
-
-/* grey top fade for the collapsed state, cross-faded via opacity */
-body.ui-ios .home-header::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(180deg, var(--glass-wash) 0%, var(--glass-wash) 12%, rgba(245, 245, 245, 0) 100%);
-  transition: opacity 200ms ease;
+  /* no padding transition: the bar must grow behind the docked filter chips in the same
+     frame the chips' own strip turns clear, never 220ms later (chips would sit unbacked) */
+  transition: background-color 200ms ease;
 }
 
 /* pink wash — strongest at the top-centre edge, gone by the bar's bottom edge */
@@ -382,25 +372,25 @@ body.ui-ios .home-location {
   border-bottom: none;
 }
 
-/* collapsed: only the search row stays, on a grey fade with no fill (Figma 758:30914) */
+/* collapsed: only the search row stays, on the same glass bar. The sort / filter row docks
+   right under it — no see-through fade band between the two rows for the feed to show in */
 body.ui-ios .home-header--collapsed {
-  padding-bottom: 56px;
-  background-color: transparent;
+  padding-bottom: 16px;
+}
+
+/* ---- collapsed + docked: the search row and the sort / filter row share ONE glass ----
+   The bar's glass (and its pink wash) extends behind the filter chips (16px gap + the 48px
+   chip row) and the chip row's own strip turns clear, so the two rows read as a single
+   sheet of material instead of two stacked ones. Home sets home--toolbar-docked. */
+body.ui-ios .home.home--toolbar-docked .home-header.home-header--collapsed {
+  padding-bottom: calc(16px + 48px);
+}
+
+body.ui-ios .home.home--toolbar-docked:has(.home-header--collapsed) .home-toolbar {
+  z-index: 21; /* over the extended bar, which it now sits on */
+  background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-  pointer-events: none;
-}
-
-body.ui-ios .home-header--collapsed::after {
-  opacity: 1;
-}
-
-body.ui-ios .home-header--collapsed > * {
-  pointer-events: auto;
-}
-
-body.ui-ios .home-header--collapsed::before {
-  opacity: 0;
 }
 
 body.ui-ios .home-header--collapsed .home-header-row {
@@ -534,9 +524,19 @@ body.ui-ios .home-header--search {
   pointer-events: auto;
 }
 
-body.ui-ios .home-header--search::before,
-body.ui-ios .home-header--search::after {
+body.ui-ios .home-header--search::before {
   opacity: 0;
+}
+
+/* scrolled search results: back on the collapsed bar's glass and pink wash (as Duo had) */
+body.ui-ios .home-header--collapsed.home-header--search {
+  background-color: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+}
+
+body.ui-ios .home-header--collapsed.home-header--search::before {
+  opacity: 1;
 }
 
 body.ui-ios .home-header--search .home-header-row {
@@ -563,7 +563,7 @@ body.ui-ios .home--search {
 }
 
 /* inside a blurred bar the children's own blur is redundant (and costly) */
-body.ui-ios .home-header:not(.home-header--collapsed) :is(.home-search, .home-search-mic, .home-actions button) {
+body.ui-ios .home-header :is(.home-search, .home-search-mic, .home-actions button) {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
@@ -641,10 +641,14 @@ body.ui-ios .bottom-nav-wash {
   transform: translateX(-50%);
   width: 100%;
   max-width: 430px;
-  height: calc(118px + var(--glass-tab-bottom));
+  /* reaches 24px above the tab bar, no further */
+  height: calc(var(--glass-tab-h) + var(--glass-tab-bottom) + 24px);
   background: linear-gradient(180deg, rgba(245, 245, 245, 0) 0%, var(--glass-wash) 100%);
   -webkit-backdrop-filter: blur(var(--glass-blur-wash));
   backdrop-filter: blur(var(--glass-blur-wash));
+  /* the blur ramps in from nothing at the top edge, so the feed never meets a hard line */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 65%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 65%);
   pointer-events: none;
   z-index: 29;
 }
