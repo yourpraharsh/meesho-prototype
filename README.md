@@ -1,4 +1,4 @@
-# ShopX Proto (Meesho-style PDP)
+# Meesho Prototype
 
 React + Vite prototype: Meesho-like home feed and product detail page (PDP) with **VSKU** (variant SKU) layers—color, size, volume, etc.
 

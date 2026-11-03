@@ -89,7 +89,7 @@
         "vite",
         "preview",
         "--base",
-        "/feed-ux-proto/",
+        "/meesho-prototype/",
         "--port",
         "4175",
         "--strictPort"
