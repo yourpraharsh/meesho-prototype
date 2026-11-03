@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { getProductsForGrid } from '../data/products'
 import { useWishlist } from '../context/WishlistContext'
@@ -10,12 +10,15 @@ import { HeartIcon } from '../components/ProductCard'
 import { useRailActions } from '../context/RailContext'
 import { useCommittedPosture, useCommittedSplit, useUiLayout } from '../utils/uiTheme'
 import { buildMixedFeed } from '../utils/cohortFeed'
+import { getScrollY, scrollRootTo } from '../utils/scrollRoot'
 import { rememberFeedPosition } from '../utils/pickupVariants'
 import { searchProducts } from '../utils/search'
 import { WishlistDrawer } from './Home'
 import './Home.css'
 import './SearchResults.css'
 import '../styles/cart-sot/badge.css'
+
+const SRP_SCROLL_KEY = 'searchResultsScroll'
 
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -74,12 +77,29 @@ export default function SearchResults() {
   const [wishlistOpen, setWishlistOpen] = useState(false)
   const sheetRef = useRef(null)
 
-  /* back to wherever the search started (Home), or Home on a cold open of the link */
-  const goBack = () => (location.key !== 'default' ? navigate(-1) : navigate('/'))
+  /* Back opens Home, which puts its feed back where the search started (as the PDP's Back
+     does) — never a history step that could leave the app after a cold-opened link */
+  const goBack = () => navigate('/')
   const goToCart = () => navigate('/cart', { state: { returnTo } })
-  const runSearch = (term) => {
-    navigate(`/search?q=${encodeURIComponent(term)}`, { replace: true })
-    window.scrollTo(0, 0)
+  const runSearch = (term) => navigate(`/search?q=${encodeURIComponent(term)}`, { replace: true })
+
+  /* a new query starts at the top, so its real matches are in view; coming back from a
+     product of this search puts the list back where it was */
+  useLayoutEffect(() => {
+    let saved = null
+    try {
+      saved = JSON.parse(sessionStorage.getItem(SRP_SCROLL_KEY) ?? 'null')
+    } catch {
+      saved = null
+    }
+    sessionStorage.removeItem(SRP_SCROLL_KEY)
+    const y = saved?.q === query ? saved.y : 0
+    scrollRootTo(y) /* before paint: no frame at Home's (or the last query's) depth */
+    if (y) requestAnimationFrame(() => scrollRootTo(y)) /* again once images have sized */
+  }, [query])
+  const openProduct = (product, index) => {
+    sessionStorage.setItem(SRP_SCROLL_KEY, JSON.stringify({ q: query, y: getScrollY() }))
+    rememberFeedPosition(product.product_id, index)
   }
 
   /* iPhone Duo with the rail: back, wishlist and cart live in the rail */
@@ -136,7 +156,7 @@ export default function SearchResults() {
         <ProductCardGrid
           {...gridProps}
           products={matches}
-          onNavigate={(product, index) => rememberFeedPosition(product.product_id, index)}
+          onNavigate={openProduct}
         />
       )}
       {others.length > 0 && (
@@ -145,7 +165,7 @@ export default function SearchResults() {
           <ProductCardGrid
             {...gridProps}
             products={others}
-            onNavigate={(product, index) => rememberFeedPosition(product.product_id, matches.length + index)}
+            onNavigate={(product, index) => openProduct(product, matches.length + index)}
           />
         </>
       )}

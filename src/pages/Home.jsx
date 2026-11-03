@@ -64,7 +64,11 @@ export default function Home() {
   /* the bar opens the search sheet; a submitted search shows on its own page (/search) */
   const searchSheetRef = useRef(null)
   const openSearch = () => searchSheetRef.current?.open('')
-  const goToSearch = useCallback((term) => navigate(`/search?q=${encodeURIComponent(term)}`), [navigate])
+  const goToSearch = useCallback((term) => {
+    /* Back from the results returns to this feed position (restored on mount below) */
+    sessionStorage.setItem(HOME_SCROLL_KEY, String(getScrollY()))
+    navigate(`/search?q=${encodeURIComponent(term)}`)
+  }, [navigate])
   const [isListening, setIsListening] = useState(false)
   const [interimText, setInterimText] = useState('')
   const recognitionRef = useRef(null)

@@ -183,9 +183,12 @@ export default function ProductDetails() {
   const location = useLocation()
   const product = getProductById(id)
 
+  /* Back opens the page the product came from when that was a search (it restores its own
+     scroll), otherwise Home; checkout's Back carries the same returnTo through */
+  const searchReturn = location.state?.returnTo?.startsWith('/search') ? location.state.returnTo : null
   const handleBack = useCallback(() => {
-    navigate('/')
-  }, [navigate])
+    navigate(searchReturn ?? '/')
+  }, [navigate, searchReturn])
 
   const layers = product?.vsku?.layers ?? []
   const functionalLayers = useMemo(

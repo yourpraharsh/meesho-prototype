@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import SoftKeyboard from './SoftKeyboard'
 import { getSuggestions, normalize, POPULAR_SEARCHES } from '../../utils/search'
 import { useUiTheme } from '../../utils/uiTheme'
@@ -48,20 +48,45 @@ const SearchSheet = forwardRef(function SearchSheet({ onSubmit, placeholder }, r
   const [open, setOpen] = useState(false)
   const [draft, setDraft] = useState('')
   const [softKeyboard] = useState(wantsSoftKeyboard)
+  const rootRef = useRef(null)
   const inputRef = useRef(null)
+  /* where focus goes back to on close (not a read-only trigger: refocusing it would reopen) */
+  const returnFocusRef = useRef(null)
 
   const close = () => {
     setOpen(false)
     inputRef.current?.blur()
+    const back = returnFocusRef.current
+    returnFocusRef.current = null
+    if (back?.isConnected) back.focus({ preventScroll: true })
   }
   useImperativeHandle(ref, () => ({
     open(initial = '') {
+      const active = document.activeElement
+      returnFocusRef.current = active && active !== document.body && !active.readOnly ? active : null
       setDraft(initial)
       setOpen(true)
       inputRef.current?.focus({ preventScroll: true })
     },
     close,
   }))
+
+  /* the page underneath must not scroll while the sheet is up: only a list that can scroll
+     takes the wheel / drag; anywhere else it stops at the sheet */
+  useEffect(() => {
+    const el = rootRef.current
+    if (!open || !el) return undefined
+    const block = (e) => {
+      const list = e.target.closest?.('.search-sheet-body')
+      if (!list || list.scrollHeight <= list.clientHeight) e.preventDefault()
+    }
+    el.addEventListener('wheel', block, { passive: false })
+    el.addEventListener('touchmove', block, { passive: false })
+    return () => {
+      el.removeEventListener('wheel', block)
+      el.removeEventListener('touchmove', block)
+    }
+  }, [open])
 
   const submit = (term) => {
     const q = term.trim()
@@ -71,7 +96,8 @@ const SearchSheet = forwardRef(function SearchSheet({ onSubmit, placeholder }, r
   }
 
   const suggestions = useMemo(() => getSuggestions(draft), [draft])
-  const typed = draft.trim().length > 0
+  /* symbols alone ("-", "!!") normalise to nothing: keep showing popular searches */
+  const typed = normalize(draft).length > 0
 
   const back = (
     <button type="button" className={isIos ? 'home-search-back' : 'search-sheet-back'} aria-label="Back" tabIndex={open ? 0 : -1} onMouseDown={(e) => e.preventDefault()} onClick={close}>
@@ -80,7 +106,7 @@ const SearchSheet = forwardRef(function SearchSheet({ onSubmit, placeholder }, r
   )
 
   return (
-    <div className={`search-sheet${open ? ' search-sheet--open' : ''}`} role="dialog" aria-label="Search" aria-hidden={!open}>
+    <div ref={rootRef} className={`search-sheet${open ? ' search-sheet--open' : ''}`} role="dialog" aria-modal="true" aria-label="Search" aria-hidden={!open}>
       <form
         className="search-sheet-bar"
         role="search"
@@ -111,7 +137,7 @@ const SearchSheet = forwardRef(function SearchSheet({ onSubmit, placeholder }, r
             }}
             aria-label="Search products"
           />
-          {typed && (
+          {open && draft.length > 0 && (
             <button type="button" className="home-search-icon-btn search-sheet-clear" aria-label="Clear" onMouseDown={(e) => e.preventDefault()} onClick={() => setDraft('')}>
               <CloseIcon />
             </button>
@@ -119,8 +145,9 @@ const SearchSheet = forwardRef(function SearchSheet({ onSubmit, placeholder }, r
         </div>
       </form>
 
+      {/* closed, the sheet renders no controls at all, so nothing invisible is ever tabbable */}
       <div className="search-sheet-body">
-        {typed ? (
+        {!open ? null : typed ? (
           <ul className="search-suggest" aria-label="Suggestions">
             {suggestions.map((s) => (
               <li key={s} className="search-suggest-row">

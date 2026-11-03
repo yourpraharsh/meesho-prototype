@@ -10,7 +10,7 @@ const CATALOG = [
   {
     label: 'Sarees',
     categoryIds: ['women_saree'],
-    keywords: ['saree', 'sari', 'saaree', 'saree blouse'],
+    keywords: ['saree', 'sari', 'saaree', 'blouse'],
     suggestions: [
       'saree', 'sarees for women', 'silk saree', 'cotton saree', 'saree with blouse',
       'banarasi saree', 'georgette saree', 'party wear saree', 'printed saree', 'chiffon saree',
@@ -29,7 +29,8 @@ const CATALOG = [
   {
     label: 'Top & Bottom Sets',
     categoryIds: ['lod_top_bottom_sets'],
-    keywords: ['co ord', 'coord', 'top and bottom', 'top bottom', 'night suit', 'nightsuit', 'western', 'dress', 'set', 'top'],
+    /* no bare 'set' / 'top': they qualify other products ("kurti pant set", "lipstick set") */
+    keywords: ['co ord', 'coord', 'top and bottom', 'top bottom', 'night suit', 'nightsuit', 'western', 'dress'],
     suggestions: [
       'co ord set for women', 'top and bottom set', 'night suit for women', 'western dress for women',
       'tops for women', 'dress for women',
@@ -98,8 +99,12 @@ export function normalize(text) {
     .trim()
 }
 
-/* "sarees" → "saree", "kurtis" → "kurti", "shoes" → "shoe" (keeps "dress") */
-const singular = (word) => (word.length > 3 && word.endsWith('s') && !word.endsWith('ss') ? word.slice(0, -1) : word)
+/* "sarees" → "saree", "kurtis" → "kurti", "shoes" → "shoe", "dresses" → "dress" (keeps "dress") */
+const singular = (word) => {
+  if (word.length <= 3) return word
+  if (/(ss|x|ch|sh)es$/.test(word)) return word.slice(0, -2)
+  return word.endsWith('s') && !word.endsWith('ss') ? word.slice(0, -1) : word
+}
 
 const words = (text) => normalize(text).split(' ').filter(Boolean).map(singular)
 
@@ -146,17 +151,18 @@ const uniqueById = (list) => {
  * @param {object[]} catalogue every product (the order of `fallbackOrder` decides "others")
  * @param {string} query
  * @param {object[]} [fallbackOrder] usually Home's mixed feed
- * @returns {{ matches: object[], others: object[] }} matches first (each once), then the rest
+ * @returns {{ matches: object[], others: object[] }} the category's own products (each once),
+ *   then the rest — near misses (e.g. kurta sets for "kurti") at the head of the rest
  */
 export function searchProducts(catalogue, query, fallbackOrder = catalogue) {
   const cats = categoriesFor(query)
   let matches = []
+  let related = []
   if (cats.length) {
     const ids = new Set(cats.flatMap((c) => c.categoryIds))
     const titleWords = cats.flatMap((c) => c.titleWords ?? [])
-    matches = catalogue.filter(
-      (p) => ids.has(p.categoryId) || titleWords.some((w) => normalize(p.title).split(' ').includes(w)),
-    )
+    matches = catalogue.filter((p) => ids.has(p.categoryId))
+    related = catalogue.filter((p) => !ids.has(p.categoryId) && titleWords.some((w) => words(p.title).includes(w)))
   } else {
     const qWords = words(query).filter((w) => w.length >= 3)
     if (qWords.length) {
@@ -168,6 +174,6 @@ export function searchProducts(catalogue, query, fallbackOrder = catalogue) {
   }
   matches = uniqueById(matches)
   const matched = new Set(matches.map((p) => p.product_id))
-  const others = uniqueById(fallbackOrder).filter((p) => !matched.has(p.product_id))
+  const others = uniqueById([...related, ...fallbackOrder]).filter((p) => !matched.has(p.product_id))
   return { matches, others }
 }

@@ -193,6 +193,11 @@ body.duo-device .app .search-sheet {
   max-width: none;
 }
 
+/* Folded: the front camera sits in the rail band at the top, so the bar stops short of it */
+body.layout-duo[data-posture='folded'] .app .search-sheet-bar {
+  padding-right: calc(var(--duo-rail-w) + 16px);
+}
+
 body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .search-sheet-kb {
   width: min(640px, calc(100% - 48px));
   margin: 0 auto 8px;

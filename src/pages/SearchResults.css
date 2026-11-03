@@ -134,6 +134,13 @@ body.layout-duo .srp .srp-toolbar {
   padding-right: calc(var(--duo-rail-w) + 16px);
 }
 
+/* the bar may run beneath the glass rail; the products keep clear of it (as every page
+   root does in duoLayout.css) */
+body.layout-duo .srp > .home-grid,
+body.layout-duo .srp-more {
+  margin-right: var(--duo-rail-w);
+}
+
 /* Portrait / Laptop: the status sits top-right */
 body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .srp-header {
   padding-right: calc(var(--glass-inset-x, 16px) + var(--duo-status-w));
