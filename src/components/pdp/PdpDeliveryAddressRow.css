@@ -1,0 +1,42 @@
+.pdp-delivery-address-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--white);
+  border-top: 1px solid var(--grey-t3-divider);
+  border-bottom: 1px solid var(--grey-t3-divider);
+}
+
+.pdp-delivery-address-row__text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.pdp-delivery-address-row__free {
+  color: var(--grey-t1);
+}
+
+.pdp-delivery-address-row__text strong {
+  font-weight: 700;
+  color: var(--grey-base);
+}
+
+.pdp-delivery-address-row__change {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pdp-delivery-address-row__change:active {
+  opacity: 0.85;
+}

@@ -1,0 +1,784 @@
+/* =====================================================================
+   iPhone Duo preview stage (body.duo-device)
+   Geometry comes from src/utils/duoGeometry.js as custom properties on
+   .duo-device; the fold choreography from DuoDevice.jsx via data-phase.
+   On the phone layouts every wrapper below is display:contents / hidden.
+   ===================================================================== */
+
+.duo-stage,
+.duo-device {
+  display: contents;
+}
+
+.duo-half,
+.duo-crease,
+.duo-region,
+.duo-mirror,
+.duo-spare {
+  display: none;
+}
+
+/* ---------- stage ---------- */
+body.duo-device {
+  --duo-frame: #d7d7dc; /* titanium edge */
+  --duo-glass: #050507;
+  --duo-move-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --duo-move-ms: 1050ms;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #f4f2f7 0%, #e6e4ec 55%, #d9d7e1 100%);
+}
+
+body.duo-device #root {
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.duo-device .duo-stage {
+  position: fixed;
+  inset: 0;
+  top: var(--stage-top, 96px);
+  display: grid;
+  place-items: center;
+  place-content: center; /* an oversized device overflows evenly, so its centre stays the stage centre */
+  perspective: var(--stage-persp, 2800px);
+  perspective-origin: 50% var(--stage-eye, 50%);
+  translate: var(--stage-dx, 0) var(--stage-dy, 0);
+}
+
+body.duo-device .duo-device {
+  display: block;
+  position: relative;
+  width: var(--dw);
+  height: var(--dh);
+  /* scaled in 3D (x, y and z) so the fit's projection math holds; animatable, unlike zoom */
+  scale: var(--duo-zoom, 1) var(--duo-zoom, 1) var(--duo-zoom, 1);
+  transform-style: preserve-3d;
+  transform: var(--dev-tf);
+}
+
+/* ---------- chassis: two hinged halves ---------- */
+body.duo-device .duo-half {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: var(--hw);
+  height: var(--dh);
+  transform-style: preserve-3d;
+}
+
+body.duo-device .duo-half--l {
+  left: 0;
+  transform-origin: 100% 50%;
+  transform: rotateY(var(--beta));
+}
+
+body.duo-device .duo-half--r {
+  left: var(--hw);
+}
+
+body.duo-device .duo-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--duo-frame);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18), inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* the glass inside a minimal bezel; wallpaper sits on ::after, off until a display wakes */
+body.duo-device .duo-face::before,
+body.duo-device .duo-face::after {
+  content: '';
+  position: absolute;
+  inset: var(--bez);
+  border-radius: inherit;
+  background: var(--duo-glass);
+}
+
+body.duo-device .duo-face::after {
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+
+/* L front = inner display, left half (glass runs over the spine) */
+.duo-half--l .duo-face--front {
+  border-radius: var(--r-outer) 0 0 var(--r-outer);
+}
+
+body.duo-device .duo-half--l .duo-face--front::before,
+body.duo-device .duo-half--l .duo-face--front::after {
+  right: 0;
+  border-radius: calc(var(--r-outer) - var(--bez)) 0 0 calc(var(--r-outer) - var(--bez));
+}
+
+/* R front = inner display, right half */
+.duo-half--r .duo-face--front {
+  border-radius: 0 var(--r-outer) var(--r-outer) 0;
+}
+
+body.duo-device .duo-half--r .duo-face--front::before,
+body.duo-device .duo-half--r .duo-face--front::after {
+  left: 0;
+  border-radius: 0 calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) 0;
+}
+
+/* L back = outer display (faces the viewer once L has swung shut) */
+body.duo-device .duo-half--l .duo-face--back {
+  transform: translateZ(calc(-1 * 3px)) rotateY(180deg);
+  border-radius: var(--r-hinge) var(--r-outer) var(--r-outer) var(--r-hinge);
+}
+
+body.duo-device .duo-half--l .duo-face--back::before,
+body.duo-device .duo-half--l .duo-face--back::after {
+  inset: calc((var(--dh) - var(--out-h)) / 2) calc((var(--hw) - var(--out-w)) / 2);
+  border-radius: calc(var(--r-hinge) - 2px) calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) calc(var(--r-hinge) - 2px);
+}
+
+/* R back = the device back (no glass) */
+body.duo-device .duo-half--r .duo-face--back {
+  transform: rotateY(180deg);
+  border-radius: var(--r-outer) var(--r-hinge) var(--r-hinge) var(--r-outer);
+  background: linear-gradient(160deg, #e9e8ee 0%, #cfced6 100%);
+}
+
+body.duo-device .duo-half--r .duo-face--back::before,
+body.duo-device .duo-half--r .duo-face--back::after {
+  display: none;
+}
+
+/* wallpapers (the "lock screen" each display wakes to) */
+body.duo-device .duo-face--front::after {
+  background:
+    radial-gradient(70% 90% at 0% 50%, rgba(255, 196, 239, 0.75) 0%, rgba(255, 196, 239, 0) 60%),
+    radial-gradient(90% 70% at 100% 100%, rgba(255, 157, 0, 0.5) 0%, rgba(255, 157, 0, 0) 55%),
+    linear-gradient(135deg, #3b0a35 0%, #9f2089 48%, #c74aa8 100%);
+}
+
+body.duo-device .duo-half--l .duo-face--front::after {
+  background:
+    radial-gradient(70% 90% at 100% 50%, rgba(255, 196, 239, 0.75) 0%, rgba(255, 196, 239, 0) 60%),
+    radial-gradient(90% 70% at 0% 0%, rgba(96, 1, 74, 0.9) 0%, rgba(96, 1, 74, 0) 60%),
+    linear-gradient(225deg, #3b0a35 0%, #9f2089 48%, #c74aa8 100%);
+}
+
+body.duo-device .duo-half--l .duo-face--back::after {
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(255, 196, 239, 0.7) 0%, rgba(255, 196, 239, 0) 60%),
+    linear-gradient(170deg, #9f2089 0%, #60014a 100%);
+}
+
+/* cameras */
+.duo-cam {
+  display: none;
+}
+
+body.duo-device .duo-cam {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #2a2a36 0%, #000 60%);
+}
+
+body.duo-device .duo-cam--inner {
+  top: calc(var(--bez) + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* the outer display's hole-punch lives in the app's rail on the folded posture */
+body.duo-device .duo-cam--outer {
+  display: none;
+}
+
+/* crease highlight along the spine (inner postures) */
+body.duo-device .duo-crease {
+  display: block;
+  position: absolute;
+  top: var(--bez);
+  bottom: var(--bez);
+  left: calc(var(--hw) - 14px);
+  width: 28px;
+  pointer-events: none;
+  transform: translateZ(2px);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.07) 46%, rgba(255, 255, 255, 0.1) 54%, rgba(0, 0, 0, 0) 100%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.duo-stage[data-pose='book'] .duo-crease,
+.duo-stage[data-pose='laptop'] .duo-crease {
+  opacity: 1;
+}
+
+/* not while the hinge swings or bends (it would draw outside the folded phone); it fades in
+   once Book has settled */
+.duo-stage[data-swing] .duo-crease {
+  opacity: 0;
+  transition: none;
+}
+
+/* ---------- the live app (the display that is on) ---------- */
+body.duo-device .app {
+  position: absolute;
+  left: var(--app-l);
+  top: var(--app-t);
+  width: var(--app-w);
+  height: var(--app-h);
+  min-height: 0;
+  overflow: hidden;
+  transform: var(--app-tf);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: none;
+  border-radius: 40px;
+  clip-path: var(--app-clip, none);
+  transition: opacity 260ms ease;
+}
+
+/* bent postures: the live mirror on the other half of the hinge. The holder is that half's
+   glass (black wherever the copy inside it doesn't reach); the copy fills it */
+body.duo-device .duo-mirror.duo-mirror--on {
+  display: block;
+  position: absolute;
+  left: var(--reg-l);
+  top: var(--reg-t);
+  width: var(--reg-w);
+  height: var(--reg-h);
+  min-height: 0;
+  overflow: hidden;
+  transform: var(--reg-tf);
+  transform-origin: 50% 50%;
+  clip-path: var(--reg-clip, none);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 40px;
+  background: var(--duo-glass);
+  box-shadow: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+  /* no fade of its own: it waits invisible in Duo (the cover stand-in), and must appear the
+     instant a fold starts; the phases that fade the screen set their own */
+  transition: none;
+}
+
+.duo-stage:is([data-phase='dim'], [data-phase='move']) .duo-mirror.duo-mirror--on {
+  transition: opacity 180ms ease;
+}
+
+/* split view on Open: the spare half shows the wallpaper and a hint */
+body.duo-device .duo-spare.duo-spare--on {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  left: var(--reg-l);
+  top: var(--reg-t);
+  width: var(--reg-w);
+  height: var(--reg-h);
+  transform: var(--reg-tf);
+  overflow: hidden;
+  background:
+    radial-gradient(70% 60% at 30% 20%, rgba(255, 196, 239, 0.65) 0%, rgba(255, 196, 239, 0) 60%),
+    radial-gradient(80% 70% at 90% 100%, rgba(255, 157, 0, 0.45) 0%, rgba(255, 157, 0, 0) 55%),
+    linear-gradient(135deg, #3b0a35 0%, #9f2089 52%, #c74aa8 100%);
+  /* it slides only in the slide phase (a Book page swap must not drag it across the hinge) */
+  transition: opacity 260ms ease;
+}
+
+.duo-stage[data-split='left'] .duo-spare {
+  border-radius: 0 calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) 0;
+}
+
+.duo-stage[data-split='right'] .duo-spare {
+  border-radius: calc(var(--r-outer) - var(--bez)) 0 0 calc(var(--r-outer) - var(--bez));
+}
+
+.duo-spare-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 260px;
+  padding: 20px 22px;
+  border-radius: 24px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.duo-spare-title {
+  font: 700 17px/22px var(--font-mier);
+}
+
+.duo-spare-text {
+  font: 500 13px/18px var(--font-mier);
+  opacity: 0.9;
+}
+
+.duo-spare-move {
+  margin-top: 6px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+  font: 700 13px/16px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+/* split view: the app slides between halves */
+.duo-stage[data-phase='slide'] .app {
+  transition: left var(--duo-slide-ms, 480ms) var(--duo-ease, var(--duo-move-ease)), opacity 260ms ease;
+}
+
+.duo-stage[data-split='left'] .app {
+  border-radius: calc(var(--r-outer) - var(--bez)) 0 0 calc(var(--r-outer) - var(--bez));
+}
+
+.duo-stage[data-split='right'] .app {
+  border-radius: 0 calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) 0;
+}
+
+body.duo-device .app-scroll {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+body.duo-device .app-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* the second region (book: left page · laptop: lower half) */
+body.duo-device .duo-region.duo-region--on {
+  display: block;
+  position: absolute;
+  left: var(--reg-l);
+  top: var(--reg-t);
+  width: var(--reg-w);
+  height: var(--reg-h);
+  overflow: hidden;
+  transform: var(--reg-tf);
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--white);
+  transition: opacity 260ms ease;
+}
+
+/* corner radii follow the glass of each posture (spine side square) */
+.duo-stage[data-pose='folded'] .app {
+  border-radius: calc(var(--r-hinge) - 2px) calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) calc(var(--r-hinge) - 2px);
+}
+
+.duo-stage[data-pose='stand'] .app {
+  border-radius: calc(var(--r-hinge) - 2px) calc(var(--r-hinge) - 2px) calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez));
+}
+
+.duo-stage[data-pose='landscape'] .app,
+.duo-stage[data-pose='portrait'] .app {
+  border-radius: calc(var(--r-outer) - var(--bez));
+}
+
+.duo-stage[data-pose='book'] .app,
+.duo-stage[data-pose='book'] .duo-mirror,
+.duo-stage[data-pose='laptop'] .app,
+.duo-stage[data-pose='laptop'] .duo-mirror {
+  border-radius: calc(var(--r-outer) - var(--bez));
+}
+
+/* ---------- fold choreography ---------- */
+/* dim: the display that is on powers down */
+.duo-stage[data-phase='dim'] .app,
+.duo-stage[data-phase='dim'] .duo-mirror,
+.duo-stage[data-phase='dim'] .duo-spare,
+.duo-stage[data-phase='dim'] .duo-sys-status,
+.duo-stage[data-phase='move'] .app,
+.duo-stage[data-phase='move'] .duo-mirror,
+.duo-stage[data-phase='move'] .duo-spare,
+.duo-stage[data-phase='move'] .duo-sys-status {
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 180ms;
+}
+
+/* move: the display being opened wakes to its wallpaper part-way through the motion */
+.duo-stage[data-phase='move'][data-pose='folded'] .duo-half--l .duo-face--back::after,
+.duo-stage[data-phase='move'][data-pose='stand'] .duo-half--l .duo-face--back::after,
+.duo-stage[data-phase='move']:not([data-pose='folded']):not([data-pose='stand']) .duo-face--front::after,
+.duo-stage[data-phase='light'][data-pose='folded'] .duo-half--l .duo-face--back::after,
+.duo-stage[data-phase='light'][data-pose='stand'] .duo-half--l .duo-face--back::after,
+.duo-stage[data-phase='light']:not([data-pose='folded']):not([data-pose='stand']) .duo-face--front::after {
+  opacity: 1;
+  transition: opacity 520ms ease 380ms;
+}
+
+/* light: a bloom from the hinge, then the app fades in */
+.duo-stage[data-phase='light'] .app,
+.duo-stage[data-phase='light'] .duo-mirror,
+.duo-stage[data-phase='light'] .duo-spare,
+.duo-stage[data-phase='light'] .duo-sys-status {
+  opacity: 0;
+  animation: duo-wake 520ms ease 60ms forwards;
+}
+
+@keyframes duo-wake {
+  from {
+    opacity: 0;
+    filter: brightness(1.35) saturate(1.1);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+/* ---------- smart animate: fold · rotate · power move ----------
+   The chassis, the swinging half, the live app and its mirror all ride ONE ease-in-out
+   curve, and only while a move is running: load, resize and entering Duo never glide.
+   (The stage fit animates alongside through the Web Animations API in DuoDevice.jsx.) */
+@media (prefers-reduced-motion: no-preference) {
+  .duo-stage:is([data-phase='move'], [data-phase='fold'], [data-phase='rotate']) .duo-device,
+  .duo-stage:is([data-phase='move'], [data-phase='fold'], [data-phase='rotate']) .duo-half--l {
+    transition: transform var(--duo-anim-ms, 900ms) var(--duo-ease, ease-in-out);
+  }
+
+  .duo-stage:is([data-phase='fold'], [data-phase='rotate']) .app,
+  .duo-stage:is([data-phase='fold'], [data-phase='rotate']) .duo-mirror.duo-mirror--on,
+  .duo-stage:is([data-phase='fold'], [data-phase='rotate']) .duo-spare.duo-spare--on {
+    transition: transform var(--duo-anim-ms, 900ms) var(--duo-ease, ease-in-out), opacity 260ms ease;
+  }
+
+  /* Open split view, app left ↔ right: app and spare trade halves on one curve */
+  .duo-stage[data-phase='slide'] .duo-spare.duo-spare--on {
+    transition: left var(--duo-slide-ms, 480ms) var(--duo-ease, var(--duo-move-ease)), opacity 260ms ease;
+  }
+
+  /* the system status appears as the app moves off the right half */
+  .duo-stage[data-phase='slide'] .duo-sys-status {
+    animation: duo-swap-in var(--duo-slide-ms, 480ms) ease-out both;
+  }
+}
+
+/* no taps while the screen is in motion */
+.duo-stage:is(
+    [data-phase='prep'],
+    [data-phase='unfold-blur'],
+    [data-phase='close-clear'],
+    [data-phase='fold'],
+    [data-phase='rotate'],
+    [data-phase='swap-out'],
+    [data-phase='swap-in'],
+    [data-phase='unfold'],
+    [data-phase='close'],
+    [data-phase='bend']
+  )
+  :is(.app, .duo-mirror, .duo-spare) {
+  pointer-events: none;
+}
+
+/* ---------- Folded ↔ Open / Book: one continuous swing ----------
+   (the motion, and the swinging half's blur, run on the Web Animations timeline in
+   DuoDevice.jsx). The inner display is on through the whole swing: the live app on the half
+   that stays put, a live copy on each face of the swinging half. Where a held-flat copy
+   doesn't cover the turned glass, that glass stays black. */
+
+/* the cover screen's blur stays inside its glass (blurring in before opening, clearing after
+   closing) */
+body.duo-device .duo-stage[data-pose='folded']:is([data-phase='unfold-blur'], [data-phase='close-clear']) .app:not(.app-mirror) {
+  clip-path: inset(0 round calc(var(--r-hinge) - 2px) calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) calc(var(--r-hinge) - 2px));
+}
+
+/* mid-swing the swinging half is ONE element, the mirror's holder: the browser can't reliably
+   depth-sort an animated copy against the half's own animated glass 1px behind it (it draws
+   the glass on top: a black panel), so the half's faces step aside and the holder is the
+   glass, seen from either side (over the inner glass while L faces the viewer, just outside
+   the cover glass once it has turned over), with a hairline of the frame around it */
+body.duo-device .duo-stage[data-swing] .duo-half--l .duo-face {
+  visibility: hidden;
+}
+
+body.duo-device .duo-stage[data-swing] .duo-mirror.duo-mirror--on {
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  will-change: transform;
+}
+
+body.duo-device .duo-stage[data-swing] .duo-mirror.duo-mirror--on::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 2px var(--duo-frame);
+  pointer-events: none;
+}
+
+/* the copy's warp and blur ride the hinge: its filter exists before it starts moving */
+body.duo-device .duo-stage[data-swing] .duo-mirror > .app-mirror {
+  filter: blur(0.01px);
+  will-change: transform, filter;
+}
+
+/* where a freshly laid-out screen hasn't been drawn yet, its glass shows white (the app's
+   canvas), never a black hole: the inner display's right half while opening, the cover glass
+   as the app lands on it after closing */
+.duo-stage[data-phase='unfold'] .duo-half--r .duo-face--front::before,
+html.duo-relayout .duo-stage:not([data-swing]) .duo-half--l .duo-face--back::before,
+.duo-stage[data-phase='close-clear'] .duo-half--l .duo-face--back::before {
+  background: #fff;
+}
+
+/* the app re-lays out for another display under the blur: its own transitions are held off
+   for that one commit, so the new layout lands as it will rest */
+html.duo-relayout body.duo-device .app,
+html.duo-relayout body.duo-device .app * {
+  transition: none !important;
+}
+
+/* rotate / Book split change: the old screen fades out over white glass, the new one fades in */
+.duo-stage:is([data-phase='swap-out'], [data-phase='swap-in']) .duo-face::before {
+  background: #fff;
+}
+
+body.duo-device .duo-stage[data-phase='swap-out'] :is(.app, .duo-mirror, .duo-spare, .duo-sys-status) {
+  opacity: 0;
+  transition: opacity var(--duo-swap-out-ms, 160ms) ease-in;
+}
+
+body.duo-device .duo-stage[data-phase='swap-in'] :is(.app, .duo-mirror, .duo-spare, .duo-sys-status) {
+  animation: duo-swap-in var(--duo-swap-in-ms, 300ms) ease-out both;
+}
+
+@keyframes duo-swap-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.duo-device .duo-stage,
+  body.duo-device .duo-device,
+  body.duo-device .duo-half--l,
+  body.duo-device .duo-stage[data-phase='slide'] .app {
+    transition: none;
+  }
+
+  /* keep the spare's fade, drop its horizontal slide */
+  body.duo-device .duo-spare.duo-spare--on {
+    transition: opacity 260ms ease;
+  }
+}
+
+/* the mirror follows the live offsets exactly: it never snaps or smooth-scrolls on its own,
+   and the browser never pans it (drags are forwarded as scrolling) */
+body.duo-device .app-mirror,
+body.duo-device .app-mirror * {
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;
+}
+
+body.duo-device .duo-mirror.duo-mirror--on,
+body.duo-device .duo-mirror.duo-mirror--on * {
+  touch-action: none;
+}
+
+/* ---------- phone-width caps → the Duo screen width ----------
+   Page roots, fixed bars, footers and sheets are capped at 430px for the phone frame.
+   Inside the Duo screen they are anchored to .app, so they fill whatever display is on.
+   (Specificity 0,3,1 so it wins over the glass skin's body.ui-ios rules.) */
+body.duo-device .app :is(
+  .home-header,
+  .bottom-nav-wash,
+  .review-page,
+  .review-shell,
+  .review-shell-footer,
+  .review-shell-address-dock,
+  .payment-page,
+  .payment-page-footer,
+  .review-v4,
+  .review-v4-footer,
+  .dtr-footer,
+  .dtr-stores-sheet,
+  .odp-sticky,
+  .odp-sheet,
+  .pdp-cta-wrap,
+  .pdp-oos-toast,
+  .pdp-bottomsheet,
+  .buy-now-sheet,
+  .cod-switch-sheet,
+  .address-picker-sheet,
+  .payment-offers-sheet,
+  .dil-sheet,
+  .order-success
+) {
+  max-width: none;
+}
+
+/* sheets cap their height against the Duo screen, not the browser window (vh) */
+body.duo-device .app .dtr-stores-sheet {
+  max-height: calc(var(--duo-screen-h) * 0.82);
+}
+
+body.duo-device .app .buy-now-sheet {
+  max-height: calc(var(--duo-screen-h) * 0.88);
+}
+
+/* the floating tab bar stays a compact pill, centred on the wider inner display */
+body.duo-device .app .bottom-nav:not(.bottom-nav--minimized) {
+  max-width: 560px;
+}
+
+/* the second region gets the same treatment for anything portalled into it */
+body.duo-device .duo-region :is(.pdp-cta-wrap, .dtr-footer, .review-shell-footer, .payment-page-footer, .review-v4-footer, .odp-sticky) {
+  max-width: none;
+}
+
+/* the minimized tab button keeps its 16px inset from the screen edge (not the phone frame) */
+body.duo-device .app .bottom-nav.bottom-nav--minimized {
+  left: var(--glass-inset-x, 16px);
+}
+
+/* ---------- split view corners (Open and Book): square at the hinge, rounded outside ----------
+   (also while a split screen rides the chassis through a rotation) */
+body.duo-device .duo-stage[data-split='left'] .app {
+  border-radius: calc(var(--r-outer) - var(--bez)) 0 0 calc(var(--r-outer) - var(--bez));
+}
+
+body.duo-device .duo-stage[data-split='right'] .app {
+  border-radius: 0 calc(var(--r-outer) - var(--bez)) calc(var(--r-outer) - var(--bez)) 0;
+}
+
+/* system status (camera · time · signal) pinned at the device's right edge */
+body.duo-device .duo-sys-status {
+  position: absolute;
+  top: calc(var(--bez) + 25px);
+  right: calc(var(--bez) + 24px);
+  z-index: 3;
+  transform: translateZ(3px);
+  pointer-events: none;
+}
+
+.duo-sys-status .duo-rail-status {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* the copy inside the mirror's holder fills it (it lays out as the whole live app) */
+body.duo-device .duo-mirror > .app.app-mirror {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  transform-origin: 50% 50%;
+  clip-path: none;
+  border-radius: 0;
+  background: var(--white);
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  transition: none;
+}
+
+/* the Folded ↔ Open / Book layout swap, under the blur, dissolves (DuoDevice.jsx crossfade) */
+html.duo-vt::view-transition-old(root),
+html.duo-vt::view-transition-new(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease-in-out;
+}
+
+/* ---------- the cover stand-in ----------
+   The closed screen itself, for the swinging half's cover face: a second copy of the app in an
+   iframe that always renders the folded layout of the same page and scroll (duoCoverEmbed.js).
+   The mirror's holder stays laid out in Duo (invisible) so the stand-in stays loaded and keeps
+   rendering, ready the moment a fold starts; the swing's own timeline shows it on the cover face. */
+body.duo-device .duo-mirror:not(.duo-mirror--on) {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--inner-w);
+  height: var(--inner-h);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.duo-device .duo-cover-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* it sits on the holder's half that folds over, turned round so it reads right from behind */
+body.duo-device .duo-cover-view > iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: var(--out-w);
+  height: var(--out-h);
+  border: 0;
+  background: #fff;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+
+/* inside the stand-in: only the folded cover screen, at 1:1, filling the frame */
+html.duo-cover-embed body.duo-device {
+  background: #fff;
+}
+
+html.duo-cover-embed body.duo-device .duo-stage {
+  position: fixed;
+  inset: 0;
+  display: block;
+  translate: none !important;
+  perspective: none !important;
+}
+
+html.duo-cover-embed body.duo-device .duo-device {
+  position: absolute;
+  left: calc(-1 * var(--app-l));
+  top: calc(-1 * var(--app-t));
+  scale: none !important;
+  transform: none !important;
+}
+
+html.duo-cover-embed body.duo-device :is(.duo-half, .duo-crease, .duo-mirror, .duo-spare, .duo-sys-status) {
+  display: none !important;
+}
+
+/* (it keeps a transform: the screen stays the containing block of its fixed chrome, the rail) */
+html.duo-cover-embed body.duo-device .app {
+  transform: translateZ(0) !important;
+  clip-path: none !important;
+  border-radius: 0 !important;
+}

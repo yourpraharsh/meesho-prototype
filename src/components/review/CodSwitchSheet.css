@@ -1,0 +1,466 @@
+/* COD-after-pickup sheet, animated flow — Figma 2340:12732.
+   Choreography ≤ 3s: price strike (0.7s) → red home price (1.3s) → lottie ends ~2.9s. */
+
+.cod-switch-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(23, 23, 33, 0.55);
+}
+
+.cod-switch-sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 430px;
+  padding: 10px 0 0;
+  border-radius: 16px 16px 0 0;
+  background: var(--white);
+  box-sizing: border-box;
+  animation: cod-switch-rise 0.22s ease-out;
+}
+
+@keyframes cod-switch-rise {
+  from {
+    transform: translateY(24px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cod-switch-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--grey-t3-divider);
+}
+
+.cod-switch-close {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.cod-switch-title {
+  margin: 22px 48px 6px;
+  font: 700 17px/22px var(--font-mier);
+  color: var(--grey-base);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Static compare arm: two option cards with the price delta called out */
+
+.cod-compare {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  padding: 16px 24px 4px;
+}
+
+.cod-compare-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 126px;
+  padding: 12px 10px 10px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+  box-sizing: border-box;
+}
+
+/* Selection highlight hops between the two options on a 3s loop:
+   store lit → crossfade → home lit → crossfade back. */
+.cod-compare-card:first-of-type {
+  animation: cod-compare-hl-store 3s ease-in-out infinite;
+}
+
+.cod-compare-card:last-of-type {
+  animation: cod-compare-hl-home 3s ease-in-out infinite;
+}
+
+@keyframes cod-compare-hl-store {
+  0%,
+  40% {
+    background-color: var(--grey-t4-bg);
+  }
+  50%,
+  90% {
+    background-color: var(--white);
+  }
+  100% {
+    background-color: var(--grey-t4-bg);
+  }
+}
+
+@keyframes cod-compare-hl-home {
+  0%,
+  40% {
+    background-color: var(--white);
+  }
+  50%,
+  90% {
+    background-color: var(--grey-t4-bg);
+  }
+  100% {
+    background-color: var(--white);
+  }
+}
+
+.cod-compare-price {
+  margin: 0;
+  font: 700 19px/24px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+.cod-compare-price--home {
+  color: var(--red-base);
+}
+
+/* Baseline-aligned with the big price */
+.cod-compare-delta {
+  margin-left: 3px;
+  font: 700 11.5px/14px var(--font-mier);
+  color: var(--red-base);
+}
+
+.cod-compare-caption {
+  margin: 2px 0 0;
+  font: 600 11.5px/15px var(--font-mier);
+  color: var(--grey-t1);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Glyph pair: delivery destination + how you pay there */
+.cod-compare-glyphs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cod-compare-icon {
+  display: block;
+  height: 42px;
+  width: auto;
+}
+
+/* Overlapping UPI app circles next to the store */
+.cod-compare-minis {
+  display: flex;
+  align-items: center;
+}
+
+.cod-compare-mini {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--grey-t3-divider);
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-left: -6px;
+}
+
+.cod-compare-mini:first-child {
+  margin-left: 0;
+}
+
+.cod-compare-arrow {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.cod-compare-note {
+  margin: 12px 32px 8px;
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Confirm-selection design: two selectable option cards + one Confirm CTA */
+
+.cod-confirm-options {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 18px 20px 10px;
+  box-sizing: border-box;
+}
+
+.cod-confirm-card {
+  position: relative;
+  flex: 1;
+  max-width: 172px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border: 1.5px solid var(--grey-t3-divider);
+  border-radius: 14px;
+  background: var(--white);
+  cursor: pointer;
+  text-align: center;
+}
+
+.cod-confirm-card--selected {
+  border-color: var(--jamun-base);
+  background: #fdf0fa;
+}
+
+.cod-confirm-badge {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--jamun-base);
+  box-shadow: 0 0 0 2px var(--white);
+}
+
+.cod-confirm-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 8px 16px;
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.cod-confirm-price {
+  font: 800 24px/28px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--grey-base);
+}
+
+.cod-confirm-price--home {
+  color: var(--red-base);
+}
+
+.cod-confirm-icons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 46px;
+}
+
+.cod-confirm-plus {
+  font: 700 18px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.cod-confirm-caption {
+  padding: 10px 4px 8px;
+  font: 700 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.cod-confirm-card--selected .cod-confirm-caption {
+  color: var(--jamun-base);
+}
+
+.cod-confirm-cta {
+  width: 100%;
+}
+
+/* Animated price + store→home morph stack */
+
+.cod-switch-anim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 24px 8px;
+}
+
+.cod-switch-prices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 66px;
+  justify-content: flex-end;
+}
+
+.cod-switch-store-price {
+  position: relative;
+  font: 700 26px/32px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--grey-base);
+  transition: font-size 0.3s ease, line-height 0.3s ease, color 0.3s ease;
+}
+
+/* Strike sweeps left → right */
+.cod-switch-strike {
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: width 0.45s ease;
+}
+
+.cod-switch-prices--p1 .cod-switch-strike,
+.cod-switch-prices--p2 .cod-switch-strike {
+  width: calc(100% + 4px);
+}
+
+/* Struck price shrinks and greys once the COD price lands */
+.cod-switch-prices--p2 .cod-switch-store-price {
+  font-size: 15px;
+  line-height: 20px;
+  color: var(--grey-t1);
+}
+
+.cod-switch-home-price {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  overflow: hidden;
+  font: 800 30px/36px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--red-base);
+  transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+
+.cod-switch-prices--p2 .cod-switch-home-price {
+  max-height: 40px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cod-switch-lottie {
+  width: 136px;
+  height: 136px;
+  margin-top: 2px;
+}
+
+/* Caption crossfades with the morph: store label out, home label in */
+.cod-switch-caption {
+  display: grid;
+  margin: 0;
+  text-align: center;
+}
+
+.cod-switch-caption-line {
+  grid-area: 1 / 1;
+  font: 600 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cod-switch-caption-line--store {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cod-switch-caption-line--home {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.cod-switch-caption--home .cod-switch-caption-line--store {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.cod-switch-caption--home .cod-switch-caption-line--home {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cod-switch-caption--reset .cod-switch-caption-line {
+  transition: none;
+}
+
+.cod-switch-lottie svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cod-switch-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px calc(12px + var(--safe-bottom, 0));
+  border-top: 1px solid var(--grey-t4-bg);
+  box-sizing: border-box;
+}
+
+.cod-switch-online,
+.cod-switch-cash {
+  flex: 1;
+  min-height: 44px;
+  padding: 12px;
+  border-radius: 8px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  cursor: pointer;
+}
+
+.cod-switch-online {
+  border: 1px solid var(--jamun-base);
+  background: var(--white);
+  color: var(--jamun-base);
+}
+
+.cod-switch-cash {
+  border: none;
+  background: var(--jamun-base);
+  color: var(--white);
+}
+
+/* Loop restart: snap back to the start state without reverse-animating */
+.cod-switch-prices--reset .cod-switch-store-price,
+.cod-switch-prices--reset .cod-switch-strike,
+.cod-switch-prices--reset .cod-switch-home-price {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cod-switch-sheet {
+    animation: none;
+  }
+  .cod-compare-card:first-of-type,
+  .cod-compare-card:last-of-type {
+    animation: none;
+  }
+  .cod-switch-store-price,
+  .cod-switch-strike,
+  .cod-switch-home-price,
+  .cod-switch-caption-line {
+    transition: none;
+  }
+}

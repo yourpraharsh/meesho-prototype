@@ -1,0 +1,312 @@
+/* Payment SoT — expanded Pay Online (section key: online)
+   Source: Figma "Design SoT Apr 24" (fdR1rJfu0Yszfeb1Em0Hma), frame Payment 167:26572:
+   167:26628 (bordered wrapper), 167:26629 (Pay Online Card, selected state),
+   167:26630 (expanded content: "UPI" title row 167:26631, UPI app cards 167:26636/37/38,
+   text buttons 167:26640 / 167:26644, inset dividers, method rows 167:26646/51/56/61).
+   Markup: PaysOnlineExpanded / PaysInstrumentCard / PaysMethodRow in PaymentPage.jsx
+   (rendered while the Pay Online card is selected on the prepaid-v3 payment step).
+   Every selector is scoped under .payment-page. Header, stepper and footer bars (and their
+   body.ui-ios / body.duo-device / body.layout-duo skins) are not touched here.
+   Icons/logos are the exported SoT assets in src/assets/payment-sot/online/. */
+
+/* ------------------------------------------------------------ wrapper 167:26628 */
+/* 1px Jamun stroke, 8px radius, "Top Navbar" shadow (0 1 4 #3333331F); clips card + list */
+.payment-page .payment-page-pay-online-wrap--selected {
+  border: 1px solid var(--jamun-base);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(51, 51, 51, 0.12);
+  background: var(--white);
+  overflow: hidden;
+}
+
+/* inside the wrapper the Pay Online card has no stroke of its own */
+.payment-page .payment-page-pay-online-wrap--selected .payment-method-card--page {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ------------------------------------------------- Pay Online Card 167:26629 (selected) */
+/* selected mark: Line Icons "check", 20px (Jamun disc + white tick) */
+.payment-page .payment-page-pay-online-wrap--selected .payment-method-radio--selected {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: url('../../assets/payment-sot/online/check-selected.svg') center / 20px 20px no-repeat;
+}
+
+.payment-page .payment-page-pay-online-wrap--selected .payment-method-radio--selected > svg {
+  display: none;
+}
+
+/* "View Offers" — Caption1 Book 13/16 Green Base, dashed 0.8px underline (exported line) */
+.payment-page .payment-page-pay-online-wrap--selected .payment-method-view-offers {
+  padding: 0;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--green-base);
+  text-decoration: none;
+  /* the dashed rule is top.css's ::after (Line 140): one underline, not two */
+  background: none;
+}
+
+/* ------------------------------------------------------ expanded block 167:26630 */
+/* white, 16px top/bottom, 16px between every child (title row, list, actions, dividers, rows) */
+.payment-page .pays-online-expanded {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+  background: var(--white);
+}
+
+/* 20px chevron — Line Icons "down" (#666666). Open = rotated 180°, as the UPI row shows it */
+.payment-page .pays-chevron {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: url('../../assets/payment-sot/online/chevron-down.svg') center / 20px 20px no-repeat;
+  transition: transform 0.2s ease;
+}
+
+.payment-page .pays-chevron--open {
+  transform: rotate(180deg);
+}
+
+/* "UPI" title row 167:26631 and method rows 167:26646… — 16px inset, title left, chevron right */
+.payment-page .pays-online-head,
+.payment-page .pays-method-trigger {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Subtitle1 — Demi 15/20, Grey Base */
+.payment-page .pays-online-title,
+.payment-page .pays-method-title {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+/* existing "Select to continue" nudge (Pay Online picked, no instrument yet) — not in the SoT,
+   kept for the prototype flow; sits just before the chevron */
+.payment-page .pays-online-prompt {
+  margin-left: auto;
+  align-self: center;
+  font: 600 12px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--jamun-base);
+  white-space: nowrap;
+}
+
+/* UPI app cards 167:26635 — stacked 8px apart, full card width */
+.payment-page .pays-upi-list,
+.payment-page .pays-method-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment-page .pays-method {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-page .pays-method-panel {
+  margin-top: 16px;
+}
+
+/* UPI Cards 167:26636 — 12px top/bottom, 16px right, no left inset; selected = Green T2 */
+.payment-page .pays-upi-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 12px 16px 12px 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.payment-page .pays-upi-card--selected {
+  background: var(--green-t2);
+}
+
+/* 12px Grey T4 tick off the wrapper edge, 12px before the logo
+   (exported vector is 13px wide incl. round caps: -0.5px start, 3.5px + 8px gap after) */
+.payment-page .pays-upi-card-lead {
+  flex: none;
+  width: 13px;
+  height: 1px;
+  margin: 0 3.5px 0 -0.5px;
+  background: url('../../assets/payment-sot/online/upi-card-lead-line.svg') 0 0 / 13px 1px no-repeat;
+}
+
+/* 28px logo discs, 0.5px Grey T4 stroke; image crops follow the SoT fills (all centred) */
+.payment-page .pays-upi-logo {
+  flex: none;
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border: 0.5px solid var(--grey-t4-bg);
+  border-radius: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.payment-page .pays-upi-logo--gpay {
+  background-image: url('../../assets/payment-sot/top/upi-gpay.png');
+  background-size: 144.03% 108.11%;
+}
+
+.payment-page .pays-upi-logo--phonepe {
+  background-image: url('../../assets/payment-sot/top/upi-phonepe.png');
+  background-size: cover;
+}
+
+/* Paytm: white disc, wordmark in a 15px-radius inner frame inset 12.5%-0.38px / 2.5%-0.48px */
+.payment-page .pays-upi-logo--paytm {
+  border-radius: 20px;
+  background-color: var(--white);
+}
+
+.payment-page .pays-upi-logo--paytm::before {
+  content: '';
+  position: absolute;
+  inset: calc(12.5% - 0.38px) calc(2.5% - 0.48px);
+  border-radius: 15px;
+  background: url('../../assets/payment-sot/top/upi-paytm.png') center / 105.26% 71.11% no-repeat;
+}
+
+/* non-SoT brands (Amazon Pay, cards) keep the existing PaymentBrandIcon in the same slot */
+.payment-page .pays-upi-card .payment-brand-icon {
+  flex: none;
+}
+
+/* label + optional offer, 4px apart */
+.payment-page .pays-upi-card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* Subtitle2 — Demi 13/16, Grey Base */
+.payment-page .pays-upi-card-label {
+  max-width: 100%;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Caption2 — Book 11/16, Green Base, dashed 0.8px underline (exported line) */
+.payment-page .pays-upi-card-offer {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.012em;
+  color: var(--green-base);
+  white-space: nowrap;
+  background: url('../../assets/payment-sot/online/offer-underline-paytm.svg') left bottom / 100% 0.8px no-repeat;
+}
+
+/* radio 20px — Line Icons "radio" (#666666 ring) / Filled Icons "radio" (Jamun), 16px glyph */
+.payment-page .pays-radio {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: url('../../assets/payment-sot/online/radio-line.svg') center / 16px 16px no-repeat;
+}
+
+.payment-page .pays-radio--on {
+  background-image: url('../../assets/payment-sot/online/radio-filled.svg');
+}
+
+/* text buttons 167:26639 — ends of the 16px-inset row (72px apart at 360) */
+.payment-page .pays-upi-actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+/* Actions/Link — Bold 13/16, Jamun Base, uppercase */
+.payment-page .pays-text-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--jamun-base);
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.payment-page .pays-text-btn--add {
+  gap: 2px;
+}
+
+.payment-page .pays-text-btn[aria-disabled='true'] {
+  cursor: default;
+}
+
+/* 16px icons — Line Icons "add" / "right chevron" (Jamun) */
+.payment-page .pays-icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background-position: center;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+}
+
+.payment-page .pays-icon--add {
+  background-image: url('../../assets/payment-sot/online/add.svg');
+}
+
+.payment-page .pays-icon--chevron-right {
+  background-image: url('../../assets/payment-sot/online/chevron-right.svg');
+  transition: transform 0.2s ease;
+}
+
+/* "Pay by any UPI app" open (extra UPI rows listed) → chevron points down */
+.payment-page .pays-icon--open {
+  transform: rotate(90deg);
+}
+
+/* Divider "Inset" — 1px Grey T4, full card width */
+.payment-page .pays-divider {
+  flex: none;
+  height: 1px;
+  border-radius: 2px;
+  background: var(--grey-t4-bg);
+}

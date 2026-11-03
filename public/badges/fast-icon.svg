@@ -1,0 +1,11 @@
+<svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="fastGrad" cx="1" cy="0.07" r="1.35" gradientUnits="objectBoundingBox">
+      <stop offset="12.55%" stop-color="#FF750B"/>
+      <stop offset="100%" stop-color="#8F0E2E"/>
+    </radialGradient>
+  </defs>
+  <path d="M1 3.35L12.75 1.15L14.15 3.85L2.45 6.05Z" fill="url(#fastGrad)"/>
+  <path d="M1 6.25L10.15 5.05L11.35 6.95L2.15 8.15Z" fill="url(#fastGrad)"/>
+  <path d="M1 8.85L7.15 8.15L8.05 9.55L1.75 10.25Z" fill="url(#fastGrad)"/>
+</svg>

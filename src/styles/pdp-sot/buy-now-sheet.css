@@ -1,0 +1,143 @@
+/* =====================================================================
+   Buy Now sheet: size pills + type, matched to the PDP SoT
+   - Size pills ..... Figma fdR1rJfu0Yszfeb1Em0Hma, Size Section 13630:130068
+                      (the same spec as the PDP pills in ./size.css, .pdps-size .pdp-vsku-pill)
+   - Type scale ..... MESH / Mier B02 (Headline6, Subtitle1, Caption2, Actions/Large),
+                      section label as in Self-pickup v2 H1GW5y6IAWYTrscEJHvRK4 3695:105756
+                      ("Select Delivery Type": Subtitle1 Demi 15/20, #333)
+   Imported by BuyNowSheet.jsx after BuyNowSheet.css. Every selector is scoped under
+   .buy-now-sheet, so it styles the sheet wherever it opens (inside .pdp on the PDP, or on
+   its own elsewhere) and never the PDP's own size block.
+   Duo keeps its own sheet chrome (duoLayout.css / duoDevice.css): close button, 24px CTA
+   pill and sheet sizing are left to those rules, and the pill row stays one scrolling line
+   in Duo (phones wrap like the PDP); nothing here sets
+   radius, padding or position on the header, close or CTA.
+   ===================================================================== */
+
+/* ---------- Header ---------- */
+
+/* sheet title ("Select Size" / "Select Return Type"): Headers/Headline6, Mier Bold 17/20,
+   Grey/Base, the same as the PDP's "Select Size" */
+.buy-now-sheet .buy-now-sheet-title {
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* ---------- Size pills (13630:130068) ---------- */
+
+/* Phone (Android / iOS): the pills wrap like the PDP (SoT "Sizes": flex-wrap, gap 12).
+   At 360 the 36px pills no longer fit one row: four fill the 328px row exactly
+   (4 x 72.7 + 3 x 12 = 326.75), so in a sideways scroller the fifth size showed only as a
+   5px sliver at the screen edge. Wrapping puts it on a second row, as on the PDP. */
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-options {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  max-height: none;
+}
+
+/* Duo keeps its single scrolling row (duoLayout.css: "a row too long for a narrower popup
+   scrolls"); the folded and open sheets are wide enough that a row of shoe sizes fits */
+body.duo-device .buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-options {
+  flex-wrap: nowrap;
+}
+
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-option-wrap {
+  flex: none;
+  gap: 4px;
+}
+
+/* Size Option: 36 tall, one line, 20px side padding (Figma's 1px stroke sits inside the box,
+   so 19px + 1px border here), radius 8, 1px Grey/Base border, white.
+   Label: Subtitles/Subtitle1, Mier Demi 15/20, letter-spacing 0.1%, #333 */
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 19px;
+  border: 1px solid var(--grey-base);
+  border-radius: 8px;
+  background: var(--white);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: #333333;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+/* selected: Jamun/T2 fill, Jamun/Base border + label */
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill.selected {
+  border-color: var(--jamun-base);
+  background: var(--jamun-t2);
+  color: var(--jamun-base);
+}
+
+/* out of stock in this colour (the button is disabled): dashed Grey/T3 #CECEDE border,
+   Grey/T1 label, white; the shared :disabled grey fill and 60% fade are dropped */
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill.oos,
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill:disabled {
+  border: 1px dashed #CECEDE;
+  background: var(--white);
+  color: var(--grey-t1);
+  opacity: 1;
+}
+
+/* the selected size is out of stock in this colour: keep the selection visible (as the PDP) */
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill.oos.selected,
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill.selected:disabled {
+  border-color: var(--jamun-base);
+  background: var(--jamun-t2);
+  color: var(--jamun-base);
+}
+
+/* ---------- Return type ---------- */
+
+/* "Select Return Type" under the pills: Subtitles/Subtitle1, Mier Demi 15/20, 0.1%, #333 */
+.buy-now-sheet .buy-now-sheet-section-label {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: #333333;
+}
+
+/* YES / NO tag: the SoT tag style (as the PDP "Sold by" tag), Mier Demi 8/12 */
+.buy-now-sheet .buy-now-sheet-return-badge {
+  font: 600 8px/12px var(--font-mier);
+  letter-spacing: 0.096px;
+}
+
+/* "All issue easy returns allowed": Caption/Caption2, Mier Book 11/16, Grey/T1 */
+.buy-now-sheet .buy-now-sheet-return-desc {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t1);
+}
+
+/* order total: Headers/Headline6, Mier Bold 17/20, Grey/Base */
+.buy-now-sheet .buy-now-sheet-return-price {
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* "Special Offer | Save ₹x": Caption2 weight Demi, Mier 11/16, Green/Base */
+.buy-now-sheet .buy-now-sheet-return-offer {
+  font: 600 11px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--green-base);
+}
+
+/* ---------- CTA ---------- */
+
+/* Buy Now: Actions/Large, Mier Demi 15/20, letter-spacing 0.15% (the PDP action bar's type).
+   Shape (radius, height) stays the sheet's own, and Duo's 24px pill keeps winning. */
+.buy-now-sheet .buy-now-sheet-cta {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0225px;
+}

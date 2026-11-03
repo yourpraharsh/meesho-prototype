@@ -1,0 +1,354 @@
+/* ===== iPhone Duo folded — right navigation rail (only under body.layout-duo) ===== */
+.duo-rail {
+  display: none;
+}
+
+body.layout-duo .duo-rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: max(0px, calc(50% - var(--duo-screen-w) / 2));
+  z-index: 28; /* above sticky/fixed headers (20), below CTA footers (30) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--duo-rail-w);
+  /* the rail's 56px column hugs the seam; everything centres on the camera axis (28px in) */
+  padding: calc(25px + var(--safe-top, 0px)) 20px calc(24px + var(--safe-bottom, 0px)) 0;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+body.layout-duo .duo-rail > * {
+  pointer-events: auto;
+}
+
+/* an overlay (e.g. the address page) owns the rail: rise above its backdrop */
+body.layout-duo .duo-rail--overlay {
+  z-index: 400;
+}
+
+/* status cluster: a 48×128 glass pill holding the camera hole, the time and the levels glyph
+   (Figma: pt 4 · camera 36 · gap 2 · status bar [pt 11 · time 19 · gap 6 · levels 46 · pb 4]) */
+.duo-rail-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+  height: 128px;
+  padding-top: 4px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  /* "clear" glass: the strip scrolling beneath stays readable through it */
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45), 0 4px 14px rgba(0, 0, 0, 0.06);
+  pointer-events: none !important;
+}
+
+.duo-rail-camera {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 40%, #22222c 0%, #000 55%);
+  box-shadow: inset 0 0 0 3px #0b0b0f;
+}
+
+.duo-rail-time {
+  margin-top: 13px; /* 2px gap + 11px status-bar padding */
+  font: 700 16px/19px -apple-system, 'SF Pro Rounded', 'SF Pro Text', var(--font-mier);
+  color: #000;
+}
+
+.duo-rail-signal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-top: 6px;
+  color: #000;
+}
+
+.duo-rail-signal svg {
+  width: 46px;
+  height: 46px;
+}
+
+/* inner display (Open, Book): under-display camera, so the pill holds only the status bar
+   (Figma status bar: pt 11 · time 19 · gap 6 · levels 46 · pb 4) */
+.duo-rail-status.duo-rail-status--no-camera {
+  height: auto;
+  padding: 11px 0 4px;
+}
+
+.duo-rail-status--no-camera .duo-rail-time {
+  margin-top: 0;
+}
+
+/* page actions: 40px glass circles, 13px below the cluster, 12px apart */
+.duo-rail-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 13px;
+}
+
+.duo-rail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.duo-rail-btn--active {
+  color: var(--red-base);
+}
+
+/* count badge (styles/cart-sot/badge.css): rides the glass circle's top-right edge */
+.duo-rail-btn > .cart-badge {
+  top: -3px;
+  right: -3px;
+  left: auto;
+}
+
+/* vertical tab pill replacing the bottom tab bar: 48px wide, 48px cells, 8px end padding,
+   hairline border, soft shadow (Figma 17:59123 / 17:62024) */
+.duo-rail-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-top: auto;
+  padding: 8px 0;
+  width: 48px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.duo-rail-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 24px;
+  background: none;
+  color: var(--grey-base);
+  cursor: pointer;
+  overflow: hidden;
+  transition: height 200ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 150ms ease, margin 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* collapsed while scrolling: only the Meesho mark stays */
+.duo-rail-tabs-mark,
+.duo-rail-tabs--collapsed .duo-rail-tab:not(.duo-rail-tabs-mark) {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.duo-rail-tabs--collapsed .duo-rail-tabs-mark {
+  height: 48px;
+  margin-top: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.duo-rail-tabs--collapsed .duo-rail-tab--active {
+  margin: -4px 0 0; /* the gap-swallowing margin applies while hidden */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duo-rail-tab {
+    transition: none;
+  }
+}
+
+.duo-rail-tab[aria-disabled='true'] {
+  cursor: default;
+}
+
+.duo-rail-tab svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* active item: #EBEBEB stadium that is slightly taller than its cell */
+.duo-rail-tab--active {
+  height: 56px;
+  margin: -4px 0;
+  background: #ebebeb;
+  color: var(--grey-base);
+}
+
+.duo-rail-tab--active svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* split view, app on the left half: the rail sits on the app's left edge (left-hand reach) */
+body.layout-duo .duo-rail.duo-rail--left {
+  right: auto;
+  left: 0;
+  padding: calc(25px + var(--safe-top, 0px)) 0 calc(24px + var(--safe-bottom, 0px)) 20px;
+}
+
+body.layout-duo .duo-rail--left .duo-rail-actions {
+  margin-top: 0;
+}
+
+/* ===== Stand: the outer display turned landscape (Apple) =====
+   Toolbar items stay at the top of the rail; the camera sits at the bottom-right corner
+   (the folded screen's top-right after the quarter turn) on its own, with no time or signal
+   ring; the tab bar rests just above it, collapsed to the current tab's icon. */
+body.layout-duo .duo-rail.duo-rail--stand {
+  --duo-stand-cam-bottom: 25px;
+  --duo-stand-cam-h: 44px;
+  /* the first toolbar item (40px) centres on the top bar's 48px row (search pill + mic) */
+  padding-top: calc(var(--glass-inset-top, 24px) + 4px);
+  /* the camera's corner is reserved: rail items stack above it on every page */
+  padding-bottom: calc(var(--duo-stand-cam-bottom) + var(--duo-stand-cam-h) + 12px);
+}
+
+/* the camera is hardware: pinned to the bottom-right corner whatever the page shows
+   (centred on the rail's 56px column, like the folded camera at the top), and drawn above
+   everything the app shows, full-page sheets included */
+.duo-stand-camera {
+  display: none;
+}
+
+body.layout-duo .duo-stand-camera {
+  position: fixed;
+  right: 24px;
+  bottom: 25px;
+  z-index: 5000;
+  display: block;
+  pointer-events: none;
+}
+
+.duo-rail-status.duo-rail-status--stand {
+  height: 44px;
+  margin: 0;
+  padding: 4px 0;
+}
+
+/* the tab bar keeps one 48px slot; opened, it grows upwards over the toolbar items */
+.duo-rail-tabslot {
+  position: relative;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  margin-top: auto;
+}
+
+.duo-rail-tabslot > .duo-rail-tabs {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  margin: 0;
+  transition: padding 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* pages whose top bar is a 40px capsule row (review, payment, order details) centre it 44px
+   down; only Home's 48px search row sits 48px down */
+body.layout-duo .app:not(:has(.home-header)) .duo-rail.duo-rail--stand {
+  padding-top: var(--glass-inset-top, 24px);
+}
+
+/* nothing sits above the toolbar items in Stand (the camera is at the bottom) */
+.duo-rail--stand .duo-rail-actions {
+  margin-top: 0;
+}
+
+/* collapsed: a single glass circle showing the current tab */
+.duo-rail-tabs--stand.duo-rail-tabs--collapsed {
+  padding: 0;
+}
+
+.duo-rail-tabs--stand .duo-rail-tabs-mark {
+  color: var(--grey-base);
+}
+
+.duo-rail-tabs--stand.duo-rail-tabs--collapsed .duo-rail-tabs-mark {
+  width: 46px;
+  height: 46px;
+}
+
+/* toolbar compressed: back + "⋯" fade in as the tab bar opens */
+.duo-rail--toolbar-compressed .duo-rail-actions {
+  animation: duo-rail-swap 200ms ease-out;
+}
+
+@keyframes duo-rail-swap {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* ===== Portrait / Laptop: the inner display held upright =====
+   Time + signal ring sit in the top bar's right corner (Figma "Vertical Bar / Inner -
+   Portrait"); page bars keep clear of it. */
+.duo-top-status {
+  display: none;
+}
+
+/* centred on the page's top row: 40px capsule rows (PDP, orders, checkout) centre 44px down,
+   Home's 48px search row 48px down; inset like the bars (16px) */
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .duo-top-status {
+  position: fixed;
+  top: var(--glass-inset-top, 24px);
+  right: var(--glass-inset-x, 16px);
+  z-index: 29;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  pointer-events: none;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .app:has(.home-header) .duo-top-status {
+  height: 48px;
+}
+
+.duo-top-status .duo-rail-time {
+  min-width: 31px;
+  text-align: right;
+}
+
+.duo-top-status .duo-rail-time,
+.duo-top-status .duo-rail-signal {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duo-rail-tabslot > .duo-rail-tabs {
+    transition: none;
+  }
+
+  .duo-rail--toolbar-compressed .duo-rail-actions {
+    animation: none;
+  }
+}

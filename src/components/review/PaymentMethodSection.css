@@ -1,0 +1,354 @@
+/* Figma 1766:17278 — inline payment on CHECK ADDRESS review (variant 3, COD user) */
+
+.payment-method-section {
+  padding: 16px 16px 12px;
+  border: none;
+}
+
+.payment-method-heading {
+  margin: 0 0 12px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.payment-method-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment-method-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--grey-t4-bg);
+  border-radius: 4px;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.payment-method-card--selected {
+  border-color: var(--jamun-base);
+  border-width: 1.5px;
+}
+
+.payment-method-card-main {
+  display: grid;
+  grid-template-columns: auto 1px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+}
+
+.payment-method-price-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 52px;
+}
+
+.payment-method-compare {
+  font: 500 11px/14px var(--font-mier);
+  color: var(--grey-t2);
+  text-decoration: line-through;
+}
+
+.payment-method-payable {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+.payment-method-payable--discount {
+  color: var(--green-base);
+}
+
+.payment-method-save {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: #e8f7f1;
+  font: 600 10px/14px var(--font-mier);
+  color: var(--green-base);
+  white-space: nowrap;
+}
+
+.payment-method-save--hidden {
+  visibility: hidden;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-method-divider {
+  width: 1px;
+  align-self: stretch;
+  min-height: 36px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--grey-t3-divider) 0,
+    var(--grey-t3-divider) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+.payment-method-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.payment-method-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-base);
+}
+
+.payment-method-sub {
+  font: 400 11px/14px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.payment-method-flag {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.payment-method-friends-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.payment-method-radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--grey-t2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--white);
+}
+
+.payment-method-radio--selected {
+  border-color: var(--jamun-base);
+  background: var(--jamun-base);
+}
+
+.payment-method-offers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--blue-t2);
+  background: var(--grey-t5-subdued);
+  font: 500 11px/14px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.payment-method-offers svg {
+  flex-shrink: 0;
+  color: var(--green-base);
+}
+
+.payment-method-view-offers {
+  margin-left: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: 600 11px/14px var(--font-mier);
+  color: var(--green-base);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Delivery-context note strip (Self-pickup v2 — Figma 2094:109461) */
+.payment-method-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--grey-t4-bg);
+  background: var(--grey-t5-subdued);
+  font: 500 12px/15px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.payment-method-note svg {
+  flex-shrink: 0;
+}
+
+.payment-method-note--good {
+  color: var(--grey-base);
+}
+
+.payment-method-qr {
+  padding: 0 12px 12px;
+}
+
+.payment-method-qr-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 128px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.payment-method-qr-img {
+  width: 368px;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Legacy placeholder — removed */
+.payment-method-qr-placeholder,
+.payment-method-qr-scan {
+  display: none;
+}
+
+/* Bank offers stub sheet */
+.payment-offers-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.payment-offers-sheet {
+  width: 100%;
+  max-width: 430px;
+  padding: 20px 16px calc(20px + var(--safe-bottom, 0));
+  border-radius: 16px 16px 0 0;
+  background: var(--white);
+}
+
+.payment-offers-sheet h3 {
+  margin: 0 0 8px;
+  font: 600 16px/20px var(--font-mier);
+}
+
+.payment-offers-sheet p {
+  margin: 0 0 16px;
+  font: 400 14px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.payment-offers-close {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  font: 600 14px/18px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* Figma 1766:17467 — payment page card density */
+.payment-method-card--page {
+  border: 1px solid #cecede;
+  border-radius: 8px;
+}
+
+.payment-method-card--page.payment-method-card--selected {
+  border-color: var(--jamun-base);
+  border-width: 1px;
+}
+
+.payment-page-pay-online-wrap--selected .payment-method-card--page {
+  border: none;
+  box-shadow: none;
+}
+
+.payment-method-card--page .payment-method-card-main {
+  padding: 12px 16px;
+  gap: 10px;
+}
+
+.payment-method-card--page .payment-method-price-col {
+  align-items: center;
+  min-width: 53px;
+}
+
+.payment-method-card--page .payment-method-compare {
+  font: 600 12px/20px var(--font-mier);
+  color: var(--grey-t1);
+  text-decoration: line-through;
+}
+
+.payment-method-card--page .payment-method-payable {
+  font: 700 20px/28px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.payment-method-card--page .payment-method-payable--discount {
+  color: var(--green-base);
+}
+
+.payment-method-card--page .payment-method-save {
+  padding: 2px 4px;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.012em;
+  background: var(--green-t2, #d3f4ea);
+}
+
+.payment-method-card--page .payment-method-label {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+}
+
+.payment-method-card--page .payment-method-sub {
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--grey-t1);
+}
+
+.payment-method-card--page .payment-method-radio {
+  width: 16px;
+  height: 16px;
+  border-width: 0.8px;
+  border-color: var(--grey-t1);
+}
+
+.payment-method-card--page.payment-method-card--selected .payment-method-radio {
+  width: 20px;
+  height: 20px;
+  border-width: 0;
+}
+
+.payment-method-card--page .payment-method-offers {
+  min-height: 32px;
+  padding: 8px 12px;
+  border-top: none;
+  background: var(--grey-t5-subdued);
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--grey-t1);
+}
+
+.payment-method-card--page .payment-method-view-offers {
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0015em;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 2px;
+}

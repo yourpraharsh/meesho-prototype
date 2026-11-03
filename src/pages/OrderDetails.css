@@ -1,0 +1,1184 @@
+/* Order Details Page (ODP) */
+
+.odp {
+  min-height: 100vh;
+  padding-bottom: 32px;
+  background: var(--grey-t4-bg);
+}
+
+.odp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: calc(var(--safe-top, 0px) + 12px) 12px 12px;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-t3-divider);
+}
+
+.odp-back {
+  display: flex;
+  padding: 6px;
+  border: none;
+  background: none;
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.odp-title {
+  flex: 1;
+  margin: 0;
+  font: 600 17px/22px var(--font-mier);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--grey-base);
+}
+
+.odp-help {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  border: none;
+  background: none;
+  font: 700 17px/22px var(--font-mier);
+  text-transform: uppercase;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.odp-missing {
+  margin: 24px 16px;
+  font: 500 15px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-section {
+  margin-top: 12px;
+  padding: 16px;
+  background: var(--white);
+}
+
+.odp-section:first-of-type {
+  margin-top: 0;
+}
+
+/* Product */
+.odp-product {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.odp-product-media {
+  position: relative;
+  flex-shrink: 0;
+  width: 124px;
+  height: 124px;
+}
+
+.odp-product-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--grey-t4-bg);
+}
+
+.odp-mall-chip {
+  position: absolute;
+  left: 6px;
+  bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 2px solid var(--white);
+  background: #1e3fd6;
+  font: 700 15px/18px var(--font-mier);
+  color: var(--white);
+}
+
+.odp-qty-tag {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 3px 9px;
+  border-radius: 8px 0 8px 0;
+  background: rgba(23, 23, 33, 0.6);
+  font: 600 14px/18px var(--font-mier);
+  color: var(--white);
+}
+
+.odp-product-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.odp-order-no {
+  font: 700 19px/24px var(--font-mier);
+  white-space: nowrap;
+  color: var(--grey-base);
+}
+
+.odp-product-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 500 16px/22px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-product-line {
+  display: flex;
+  align-items: center;
+  font: 500 16px/22px var(--font-mier);
+  color: var(--grey-t2);
+}
+
+.odp-dot {
+  width: 4px;
+  height: 4px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: var(--grey-t3-divider);
+}
+
+.odp-chevron {
+  flex-shrink: 0;
+  color: var(--grey-t1);
+}
+
+/* Status */
+.odp-status-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.odp-status-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  background: var(--grey-t5-subdued);
+}
+
+.odp-status-check {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+}
+
+.odp-status-title {
+  margin: 0;
+  font: 700 22px/28px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-status-sub {
+  margin: 4px 0 0;
+  font: 500 17px/22px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+/* Timeline */
+.odp-track {
+  position: relative;
+  height: 32px;
+  margin: 62px 12px 12px;
+}
+
+.odp-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform: translateY(-50%);
+  background: #D6D6E1;
+}
+
+.odp-line--done {
+  right: auto;
+  width: 22%;
+  background: var(--green-base);
+}
+
+.odp-node {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  transform: translate(-50%, -50%);
+}
+
+.odp-node--1 { left: 0; }
+.odp-node--2 { left: 40%; }
+.odp-node--3 { left: 66%; }
+.odp-node--4 { left: 100%; }
+
+.odp-truck {
+  position: absolute;
+  top: 50%;
+  left: 22%;
+  display: flex;
+  transform: translate(-50%, -50%);
+}
+
+.odp-tooltip {
+  position: absolute;
+  bottom: 44px;
+  left: 22%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  background: #2B2B37;
+  font: 600 17px/22px var(--font-mier);
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.odp-tooltip::after {
+  content: '';
+  position: absolute;
+  left: 30px;
+  bottom: -8px;
+  border: 8px solid transparent;
+  border-top-color: #2B2B37;
+  border-bottom: 0;
+}
+
+.odp-tooltip-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--green-base);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.odp-steps {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.4fr 1fr;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.odp-step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font: 500 17px/22px var(--font-mier);
+  color: var(--grey-t2);
+  text-align: center;
+}
+
+.odp-step b {
+  font-weight: 500;
+}
+
+.odp-step:first-child {
+  text-align: left;
+}
+
+.odp-step--end {
+  text-align: right;
+}
+
+.odp-step--done {
+  color: var(--grey-base);
+}
+
+.odp-step--done b {
+  font-weight: 600;
+}
+
+/* Cancel */
+.odp-cancel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.odp-cancel-text {
+  font: 500 17px/22px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-cancel-btn {
+  flex-shrink: 0;
+  padding: 14px 24px;
+  border: 1.5px solid var(--jamun-base);
+  border-radius: 10px;
+  background: var(--white);
+  font: 600 19px/22px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+/* Address / store */
+.odp-address-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.odp-address-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 600 21px/26px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-link {
+  flex-shrink: 0;
+  padding: 4px 0;
+  border: none;
+  background: none;
+  font: 700 17px/22px var(--font-mier);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.odp-address-body {
+  margin: 14px 0 0;
+  font: 500 17px/26px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-address-name {
+  display: block;
+}
+
+/* Price */
+.odp-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.odp-price-title {
+  font: 600 21px/26px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-price-total {
+  font: 600 21px/26px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-price-saved {
+  font: 500 17px/22px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-price-saved b {
+  color: var(--green-base);
+  font-weight: 600;
+}
+
+.odp-pay-card {
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #F4F4FB;
+}
+
+.odp-pay-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.odp-pay-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 17px/22px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-pay-amount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 19px/24px var(--font-mier);
+  color: var(--grey-base);
+}
+
+/* ================= store-pickup ODP (design: "Reaching Store") ================= */
+
+.odp-status-tile--store {
+  background: #F4F4FB;
+}
+
+.odp-status-title--sm {
+  font: 600 19px/24px var(--font-mier);
+}
+
+.odp-track--pickup {
+  margin-top: 78px;
+}
+
+.odp-node--p1 { left: 0; }
+.odp-node--p2 { left: 50%; }
+.odp-node--p3 { left: 100%; }
+
+.odp-line--done-pickup {
+  width: 74%;
+}
+
+.odp-truck--pickup {
+  left: 74%;
+}
+
+.odp-tooltip--pickup {
+  left: 50%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px 18px;
+  transform: translateX(-10%);
+}
+
+.odp-tooltip--pickup::after {
+  left: auto;
+  right: 34px;
+}
+
+.odp-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.odp-tooltip-link {
+  padding-bottom: 2px;
+  border-bottom: 1.5px dashed rgba(255, 255, 255, 0.6);
+  font: 600 16px/20px var(--font-mier);
+}
+
+.odp-steps--pickup {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.odp-store {
+  display: flex;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.odp-store-photo {
+  flex-shrink: 0;
+  width: 156px;
+  height: 156px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.odp-store-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.odp-store-name {
+  margin: 0 0 4px;
+  font: 700 18px/24px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-store-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font: 500 15px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-store-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.odp-store-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  background: var(--grey-t5-subdued);
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.odp-howto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px -16px -16px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+.odp-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + var(--safe-bottom, 0px));
+  z-index: 70;
+  max-width: 360px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #2B2B37;
+  transform: translateX(-50%);
+  font: 600 14px/19px var(--font-mier);
+  color: var(--white);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(23, 23, 33, 0.3);
+}
+
+/* ================= switch-to-pickup lab (design-system skin) =================
+   White sections, jamun primaries, grey text; green only for savings text,
+   blue only for info icons — the same rules the rest of the page follows. */
+
+.odp--with-sticky {
+  padding-bottom: calc(96px + var(--safe-bottom, 0px));
+}
+
+.odp-idea-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--jamun-base);
+  font: 700 16px/20px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.odp-idea-primary svg path,
+.odp-idea-primary svg rect {
+  fill: #fff;
+  stroke: #fff;
+}
+
+/* 1. inline CTA under the status head */
+.odp-idea-inline {
+  margin: 14px 0 6px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--grey-t5-subdued);
+}
+
+.odp-idea-inline-copy {
+  margin: 0 0 12px;
+  font: 500 15px/21px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-idea-inline-copy strong {
+  font-weight: 700;
+}
+
+/* 2. store banner — inside the address section, under the address */
+.odp-idea-banner {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+.odp-idea-banner-eyebrow {
+  margin: 0 0 12px;
+  font: 700 16px/21px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-idea-banner-head {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.odp-idea-banner-img {
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.odp-idea-banner-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.odp-idea-banner-title {
+  font: 700 17px/22px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-idea-banner-meta {
+  font: 500 13.5px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+/* 3. will you be home? — Yes primary, No outlined, No reveals the switch */
+.odp-idea-question-title {
+  margin: 0 0 12px;
+  font: 700 19px/24px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-idea-question-row {
+  display: flex;
+  gap: 10px;
+}
+
+.odp-idea-choice {
+  flex: 1;
+  min-height: 52px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--jamun-base);
+  border-radius: 10px;
+  background: var(--white);
+  font: 600 15px/19px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.odp-idea-choice--primary {
+  background: var(--jamun-base);
+  color: var(--white);
+}
+
+.odp-idea-choice--no {
+  flex: 0 0 96px;
+}
+
+.odp-idea-question-ok {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--grey-t5-subdued);
+  font: 500 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-idea-reveal {
+  display: flex;
+  flex-direction: column;
+}
+
+.odp-idea-reveal-title {
+  margin: 0 0 12px;
+  font: 600 15px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-idea-reveal .odp-sheet-skip {
+  align-self: center;
+}
+
+/* 4. sticky bar */
+.odp-sticky {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 430px;
+  box-sizing: border-box;
+  padding: 12px 16px calc(12px + var(--safe-bottom, 0px));
+  background: var(--white);
+  border-top: 1px solid var(--grey-t3-divider);
+  box-shadow: 0 -6px 18px rgba(23, 23, 33, 0.08);
+}
+
+.odp-sticky-text {
+  font: 600 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-sticky-cta {
+  flex-shrink: 0;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--jamun-base);
+  font: 700 15px/18px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* 5. Deliver to: Home (full address) | Meesho Store */
+.odp-toggle {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.odp-toggle-card {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1.5px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+}
+
+.odp-toggle-card--on {
+  border-color: var(--jamun-base);
+  cursor: default;
+}
+
+.odp-toggle-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font: 700 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-toggle-badge {
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--jamun-base);
+  font: 600 11px/14px var(--font-mier);
+  color: var(--white);
+}
+
+.odp-toggle-badge--save {
+  background: var(--green-t2);
+  color: var(--green-base);
+}
+
+.odp-toggle-address {
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+  overflow-wrap: anywhere;
+}
+
+.odp-toggle-address b {
+  display: block;
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+.odp-toggle-hint {
+  margin-top: auto;
+  font: 700 13px/17px var(--font-mier);
+  color: var(--jamun-base);
+}
+
+/* 6. ask sheet */
+.odp-ask-yes {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* 7. missed first attempt — visual tiles */
+.odp-tooltip--missed .odp-tooltip-dot {
+  background: var(--red-base);
+}
+
+.odp-line--done-missed {
+  width: 66%;
+}
+
+.odp-missed-visual {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.odp-missed-tile {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px 12px;
+  border: 1.5px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.odp-missed-tile--store {
+  border-color: var(--jamun-base);
+}
+
+.odp-missed-icon {
+  position: relative;
+  display: flex;
+}
+
+.odp-missed-badge {
+  position: absolute;
+  right: -8px;
+  top: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--white);
+  font: 800 13px/1 var(--font-mier);
+  color: var(--white);
+}
+
+.odp-missed-badge--miss {
+  background: var(--red-base);
+}
+
+.odp-missed-badge--ok {
+  background: var(--green-base);
+}
+
+.odp-missed-label {
+  font: 700 14px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-missed-sub {
+  font: 500 12.5px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-missed-arrow {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--grey-t1);
+}
+
+/* 8. countdown */
+.odp-idea-count {
+  margin: 14px 0 6px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--grey-t5-subdued);
+}
+
+.odp-idea-count-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.odp-idea-count-copy {
+  font: 500 14.5px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-idea-count-copy strong {
+  font-weight: 700;
+}
+
+.odp-idea-count-timer {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #2B2B37;
+  font: 800 15px/18px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* 9. icon-first comparison */
+.odp-cmp-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.odp-cmp-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  background: var(--grey-t5-subdued);
+  font: 700 14px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-cmp-col--store {
+  color: var(--jamun-base);
+}
+
+.odp-cmp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--grey-t4-bg);
+}
+
+.odp-cmp-row:last-of-type {
+  border-bottom: none;
+  margin-bottom: 8px;
+}
+
+.odp-cmp-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font: 600 13px/17px var(--font-mier);
+  color: var(--grey-t1);
+  text-align: center;
+}
+
+.odp-cmp-cell--store {
+  color: var(--jamun-base);
+}
+
+.odp-cmp-cell--store span {
+  color: var(--grey-base);
+}
+
+.odp-cmp-row:last-of-type .odp-cmp-cell--store span {
+  color: var(--green-base);
+}
+
+/* ---- switch sheet ---- */
+.odp-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(23, 23, 33, 0.55);
+}
+
+.odp-sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  padding: 10px 20px calc(18px + var(--safe-bottom, 0px));
+  border-radius: 18px 18px 0 0;
+  background: var(--white);
+  box-sizing: border-box;
+  animation: odp-sheet-up 0.28s ease;
+}
+
+@keyframes odp-sheet-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.odp-sheet-handle {
+  align-self: center;
+  width: 36px;
+  height: 4px;
+  margin-bottom: 14px;
+  border-radius: 2px;
+  background: var(--grey-t3-divider);
+}
+
+.odp-sheet-title {
+  margin: 0 0 6px;
+  font: 700 19px/24px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-sheet-sub {
+  margin: 0 0 14px;
+  font: 500 14.5px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-sheet-store {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+}
+
+.odp-sheet-store-img {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.odp-sheet-store-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.odp-sheet-store-name {
+  font: 700 16px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-sheet-store-meta {
+  font: 500 13.5px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-sheet-refund {
+  margin: 14px 0 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--grey-t5-subdued);
+  font: 500 14px/19px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-sheet-refund strong {
+  color: var(--green-base);
+  font-weight: 700;
+}
+
+.odp-sheet-cta {
+  min-height: 48px;
+  border: none;
+  border-radius: 10px;
+  background: var(--jamun-base);
+  font: 700 16px/20px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.odp-sheet-skip {
+  margin-top: 8px;
+  padding: 10px;
+  border: none;
+  background: none;
+  font: 600 14px/18px var(--font-mier);
+  color: var(--grey-t1);
+  cursor: pointer;
+}
+
+/* ================= the "nobody home" scene ================= */
+
+.odp-art {
+  display: block;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+.odp-art-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+/* scene beside copy (ideas 1, 2, 8) */
+.odp-idea-inline-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.odp-idea-inline-row .odp-idea-inline-copy,
+.odp-idea-inline-row .odp-idea-banner-eyebrow {
+  margin: 0;
+}
+
+/* scene beside the question (idea 3) */
+.odp-q-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.odp-q-head .odp-idea-question-title {
+  margin: 0;
+}
+
+/* sticky bar (idea 4) */
+.odp-sticky .odp-art {
+  width: 72px;
+  height: auto;
+  margin-right: 2px;
+}
+
+.odp-sticky .odp-sticky-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* landing sheet (idea 6) */
+.odp-sheet-title--center {
+  text-align: center;
+}
+
+/* missed attempt (idea 7) */
+.odp-missed-captions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+  font: 600 12.5px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp-missed-captions-store {
+  text-align: right;
+  color: var(--jamun-base);
+}

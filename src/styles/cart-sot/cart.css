@@ -1,0 +1,813 @@
+/* =====================================================================
+   Cart page — Figma cart file utVjj3B1srPjlUd1kWDvGs, frame 1:1215 (360 wide)
+     1:1598  app bar "CART"          1:1599  Cart · Review · Payment stepper
+     1:1255  Delivery at strip        1:1301  item card (x N)
+     1:1291  Wishlist row             1:1217  Price Details
+     1:1279  sticky footer (Info + 1 CTA)
+   Snackbars (1:2055 / 1:2802) are the app-wide toast (toast.css), lifted 76px.
+   The root is also .review-page and the bar is a .review-shell-header, so the glass skin
+   (glassNav.css) and every Duo posture (duoLayout.css / duoDevice.css) style them as they
+   do the review page. App bar + stepper rules are Meesho-skin only (body:not(.ui-ios)), like
+   payment-sot/top.css; the footer copies .dtr-footer's glass and Duo placement below.
+   Figma "Book" = 400, "Demi" = 600, "Bold" = 700 (Mier B02).
+   ===================================================================== */
+
+/* a short cart (one or two items) still fills the screen with the grey page, not the white
+   app behind it; in the Duo preview the screen is the device's, not the browser window */
+.cart-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.duo-device .app .cart-page {
+  min-height: var(--duo-screen-h, 100%);
+}
+
+/* ---------- App bar (1:1598, Meesho skin) ----------
+   56px row: 24px back (8x16 glyph) · 8px · "CART" Subtitle2.Caps; full-width #CECEDE rule */
+body:not(.ui-ios) .cart-page .cart-header {
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  min-height: 0;
+  padding: var(--safe-top, 0) 0 0;
+  background: var(--white);
+  border-bottom: none;
+}
+
+body:not(.ui-ios) .cart-page .cart-header-main {
+  flex: 1 1 100%;
+  gap: 8px;
+  height: 56px;
+  padding: 0 16px;
+  border-bottom: 1px solid #cecede;
+  box-sizing: border-box;
+}
+
+body:not(.ui-ios) .cart-page .cart-back {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.cart-page .cart-appbar-back {
+  display: block;
+  width: 8px;
+  height: 16px;
+  max-width: none;
+}
+
+/* Subtitles/Subtitle2.Caps — Demi 13/16, 0.5% tracking, uppercase */
+body:not(.ui-ios) .cart-page .cart-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+  text-transform: uppercase;
+  color: var(--grey-base);
+}
+
+/* ---------- Stepper (1:1599, 48px row, Meesho skin) ----------
+   Node centres at x 40 / 180 / 320 of 360; the 1.5px grey track runs 33 -> 327 at y 16.
+   The cart step has no blue progress segment. */
+.cart-page .cart-stepper {
+  --cart-step-1: 11.111%; /* 40 / 360 */
+  --cart-step-2: 50%;
+  --cart-step-3: 88.889%; /* 320 / 360 */
+  position: relative;
+  flex: 1 1 100%;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--white);
+}
+
+.cart-page .cart-stepper::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: calc(var(--cart-step-1) - 7px);
+  right: calc(100% - var(--cart-step-3) - 7px);
+  height: 1.5px;
+  background: #cecede;
+}
+
+.cart-page .cart-stepper-step {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+  transform: translateX(-50%);
+}
+
+.cart-page .cart-stepper-step:nth-child(1) {
+  left: var(--cart-step-1);
+}
+
+.cart-page .cart-stepper-step:nth-child(2) {
+  left: var(--cart-step-2);
+}
+
+.cart-page .cart-stepper-step:nth-child(3) {
+  left: var(--cart-step-3);
+}
+
+.cart-page .cart-stepper-node {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* the exported ovals carry their 1.5px stroke outside the 16px box */
+.cart-page .cart-stepper-node img {
+  position: absolute;
+  top: -0.75px;
+  left: -0.75px;
+  width: 17.5px;
+  height: 17.5px;
+  max-width: none;
+}
+
+/* Caption/Caption3 — Demi 10/12, 1.2% tracking */
+.cart-page .cart-stepper-num {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  text-align: center;
+  color: #cecede;
+}
+
+.cart-page .cart-stepper-step--current .cart-stepper-num {
+  color: var(--blue-base);
+}
+
+/* Overline — Book 11/16, 2% tracking; the current label stays Grey/Base (not blue) */
+.cart-page .cart-stepper-label {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--grey-t2);
+}
+
+.cart-page .cart-stepper-step--current .cart-stepper-label {
+  color: var(--grey-base);
+}
+
+/* ---------- Body: grey gutters between white blocks ----------
+   header → 1 → address → 4 → cards (8 apart) → 8 → Wishlist → 8 → Price → 8 → footer */
+.cart-page .cart-body {
+  display: flex;
+  flex-direction: column;
+  padding: 1px 0 calc(68px + 8px + var(--safe-bottom, 0px));
+}
+
+.cart-page .cart-body > * + * {
+  margin-top: 8px;
+}
+
+.cart-page .cart-body > .cart-address + .cart-items {
+  margin-top: 4px;
+}
+
+/* the glass bar floats over the page: a 4px gutter like the review page */
+body.ui-ios .cart-page .cart-body {
+  padding-top: 4px;
+}
+
+/* ---------- Ghost button (Ghost_Black "Change") ----------
+   28px: 1px border (inside), 6/8 padding, radius 4; Actions/Small — Bold 13/16, 0.5% */
+.cart-page .cart-ghost-btn {
+  flex: none;
+  height: 28px;
+  padding: 5px 7px;
+  border: 1px solid var(--grey-base);
+  border-radius: 4px;
+  background: var(--white);
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+  color: var(--grey-base);
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* ---------- Delivery at (1:1255) ----------
+   56px: 20px pin box at x16 y12 · two 20px lines at x40 (231 wide) · Change at x287 y14 */
+.cart-page .cart-address {
+  display: flex;
+  align-items: flex-start;
+  min-height: 56px;
+  padding: 8px 12px 8px 16px;
+  background: var(--white);
+  box-sizing: border-box;
+}
+
+.cart-page .cart-address-icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 4px 4px 0 0;
+}
+
+.cart-page .cart-address-icon img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* flex parent: gives the clamped paragraph a definite height for the float spacer below */
+.cart-page .cart-address-text-wrap {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-right: 16px;
+}
+
+/* Body2 — Book 15/20, 0.1%, Grey/T1; two lines, "..." before the pincode */
+.cart-page .cart-address-text {
+  min-width: 0;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font: 400 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-t1);
+  overflow-wrap: anywhere;
+}
+
+/* spacer float one line short of the box, so the pincode float drops onto the last line */
+.cart-page .cart-address-text::before {
+  content: '';
+  float: right;
+  width: 0;
+  height: calc(100% - 20px);
+}
+
+.cart-page .cart-address-pin {
+  float: right;
+  clear: both;
+  margin-left: 4px;
+}
+
+/* "Delivery at " — Subtitle1, Demi 15/20, Grey/Base */
+.cart-page .cart-address-lead {
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+.cart-page .cart-address-change {
+  margin-top: 6px;
+}
+
+/* ---------- Item cards (1:1301) ---------- */
+.cart-page .cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cart-page .cart-item {
+  background: var(--white);
+}
+
+/* 139px body: 12px padding · 115px image · 12px · info column */
+.cart-page .cart-item-body {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.cart-page .cart-item-media {
+  position: relative;
+  flex: none;
+  width: 115px;
+  height: 115px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: var(--grey-t5-subdued);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* inner #CECEDE frame, clipped by the 5px corner */
+.cart-page .cart-item-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid #cecede;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.cart-page .cart-item-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* expand chip: 20px, white 80%, ~4px from the right and 3px from the bottom */
+.cart-page .cart-item-expand {
+  position: absolute;
+  right: 4px;
+  bottom: 3px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cart-page .cart-item-expand img {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+/* title 16 · 4 · price 20 · 4 · meta 24 · 8 · delivery 16 */
+.cart-page .cart-item-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Caption2 — Book 11/16, 1.2%, Grey/Base, one line */
+.cart-page .cart-item-title {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-base);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+/* Subtitle1 — Demi 15/20 */
+.cart-page .cart-item-price {
+  margin: 4px 0 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* rating · dot · Size · Qty, 8px apart (Size → Qty 7px) */
+.cart-page .cart-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  margin-top: 4px;
+}
+
+/* rating pill: 20px, Green/Base, fully rounded; Demi 13/16 white · 4 · 8px star · 6 */
+.cart-page .cart-item-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--green-base);
+  font: 600 13px/16px var(--font-mier);
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.cart-page .cart-item-rating img {
+  display: block;
+  width: 8px;
+  height: 7.64px;
+  max-width: none;
+}
+
+.cart-page .cart-item-dot {
+  flex: none;
+  display: block;
+  width: 4px;
+  height: 4px;
+}
+
+/* Size / Qty pills: 58x24, Grey/T5 fill, 1px Grey/T4 border, radius 4; Demi 11 Grey/T1
+   at x6, 12px chevron (exported pointing down) at x40 */
+.cart-page .cart-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 58px;
+  height: 24px;
+  padding: 0 5px;
+  border: 1px solid var(--grey-t4-bg);
+  border-radius: 4px;
+  background: var(--grey-t5-subdued);
+  font: 600 11px/normal var(--font-mier);
+  color: var(--grey-t1);
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.cart-page .cart-pill + .cart-pill {
+  margin-left: -1px;
+}
+
+.cart-page .cart-pill-text {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.cart-page .cart-pill-chevron {
+  flex: none;
+  display: block;
+  width: 12px;
+  height: 12px;
+  transform: rotate(-90deg);
+}
+
+/* truck · 4 · "Free Delivery by" Book 11/16 · 2 · date Bold 11/16, #333 */
+.cart-page .cart-item-delivery {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 8px 0 0;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.cart-page .cart-item-delivery strong {
+  min-width: 0;
+  margin-left: -2px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-page .cart-item-truck {
+  flex: none;
+  display: flex;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.cart-page .cart-item-truck img {
+  display: block;
+  width: 16px;
+  height: 11.48px;
+  max-width: none;
+}
+
+/* 36px action row: 1px Grey/T4 top line, two halves split by a 1px Grey/T4 divider;
+   20px icon box · 4 · Caption1 Book 13/16, 0.25%, #333 */
+.cart-page .cart-item-actions {
+  display: flex;
+  height: 36px;
+  border-top: 1px solid var(--grey-t4-bg);
+  box-sizing: border-box;
+}
+
+.cart-page .cart-item-action {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 0 8px;
+  border: none;
+  background: var(--white);
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: #333333;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cart-page .cart-item-action + .cart-item-action {
+  border-left: 1px solid var(--grey-t4-bg);
+}
+
+.cart-page .cart-item-action-icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.cart-page .cart-item-action-icon img {
+  display: block;
+  max-width: none;
+}
+
+/* ---------- Wishlist row (1:1291) ----------
+   55px: 24px heart button at x10 · "Wishlist" at x41 (Subtitle1) · 24px chevron at x320 */
+.cart-page .cart-wishlist {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 55px;
+  padding: 0 16px 0 10px;
+  border: none;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cart-page .cart-wishlist-icon,
+.cart-page .cart-wishlist-chevron {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.cart-page .cart-wishlist-icon {
+  margin-right: 7px;
+}
+
+.cart-page .cart-wishlist-icon img {
+  display: block;
+  width: 20px;
+  height: 18px;
+  max-width: none;
+}
+
+.cart-page .cart-wishlist-chevron img {
+  display: block;
+  width: 7px;
+  height: 12px;
+  max-width: none;
+}
+
+.cart-page .cart-wishlist-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* ---------- Price Details (1:1217) ----------
+   heading (16 16 0) · 10 · 36px rows · inset divider · Order Total · 8 · 40px banner · 8.
+   scroll-margin keeps it clear of the footer (and the iOS glass bar) on VIEW PRICE DETAILS. */
+.cart-page .cart-price {
+  padding-bottom: 8px;
+  background: var(--white);
+  scroll-margin: 140px 0 84px;
+}
+
+.cart-page .cart-price-heading {
+  margin: 0;
+  padding: 16px 16px 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+.cart-page .cart-price-rows {
+  margin-top: 10px;
+}
+
+/* Caption1 — Book 13/16, 0.25%: Grey/T1 label, Grey/Base value */
+.cart-page .cart-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 36px;
+  padding: 8px 16px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+  box-sizing: border-box;
+}
+
+.cart-page .cart-price-value {
+  color: var(--grey-base);
+  text-align: right;
+}
+
+.cart-page .cart-price-row--discount {
+  color: var(--green-base);
+}
+
+/* "Total Discount" link: 0.8px dashed green rule (1.5/1.5, round caps) at y 18 */
+.cart-page .cart-price-link {
+  position: relative;
+}
+
+.cart-page .cart-price-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2.4px;
+  height: 0.8px;
+  background: url('../../assets/cart-sot/cart-link-underline.svg') 0 0 / 100% 100% no-repeat;
+}
+
+.cart-page .cart-price-divider {
+  height: 1px;
+  margin: 0 16px;
+  background: #cecede;
+}
+
+/* Order Total — Subtitle2, Demi 13/16, Grey/Base */
+.cart-page .cart-price-row--total {
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+/* savings banner: 40px, Green/T2, radius 4; 16px party popper · 3 · Demi 13/16 Green/Base */
+.cart-page .cart-price-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 40px;
+  margin: 8px 16px 0;
+  padding: 0 12px;
+  border-radius: 4px;
+  background: var(--green-t2);
+  font: 600 13px/16px var(--font-mier);
+  color: var(--green-base);
+  text-align: center;
+}
+
+.cart-page .cart-price-banner img {
+  flex: none;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Sticky footer (1:1279, "Action bar / Info + 1 CTA") ----------
+   68px, white, 1px #DFDFDF top line: ₹total (Headline6) at 16/12, VIEW PRICE DETAILS
+   (Bold 13/16 caps Jamun) at 16/40; Continue 158x44 (insets 12/16/12/186), radius 4.
+   Fixed and centred like .dtr-footer; inside the Duo screen it is anchored to .app. */
+.cart-page .cart-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 430px;
+  min-height: 68px;
+  padding: 11px 16px calc(12px + var(--safe-bottom, 0px));
+  border-top: 1px solid var(--grey-t3-divider);
+  background: var(--white);
+  box-sizing: border-box;
+  transform: translateX(-50%);
+}
+
+.cart-page .cart-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cart-page .cart-footer-price {
+  font: 700 17px/20px var(--font-mier);
+  color: #333333;
+}
+
+.cart-page .cart-footer-details {
+  padding: 0;
+  border: none;
+  background: none;
+  font: 700 13px/16px var(--font-mier);
+  text-transform: uppercase;
+  color: var(--jamun-base);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Actions/Large — Demi 15/20, 0.15%, white on Jamun */
+.cart-page .cart-footer-continue {
+  flex: none;
+  min-width: 158px;
+  height: 44px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 4px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0225px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* glass CTA bar on the iOS skin (as body.ui-ios .dtr-footer in glassNav.css) */
+body.ui-ios .cart-page .cart-footer {
+  min-height: 0;
+  padding: 12px 24px max(12px, var(--safe-bottom, 0px));
+  background: var(--glass-fill-footer);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  border-top: none;
+  box-shadow: none;
+}
+
+/* Duo: fill whichever display is on (duoDevice.css phone-width caps) */
+body.duo-device .app .cart-page .cart-footer {
+  max-width: none;
+}
+
+/* Duo Stand: end before the rail band, clear of the camera (duoLayout.css) */
+body.layout-duo[data-posture='stand'] .app .cart-page .cart-footer {
+  left: 0;
+  right: var(--duo-rail-w);
+  width: auto;
+  max-width: none;
+  transform: none;
+}
+
+/* Duo page-footer CTAs are 24px pills on every posture */
+body.duo-device .cart-page .cart-footer-continue,
+body.duo-device .cart-page .cart-empty-cta {
+  border-radius: 24px;
+}
+
+/* ---------- Empty cart ---------- */
+.cart-page .cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+  padding: 48px 24px 56px;
+  background: var(--white);
+  text-align: center;
+}
+
+.cart-page .cart-empty-icon {
+  display: block;
+  width: 48px;
+  height: auto;
+}
+
+.cart-page .cart-empty-title {
+  margin: 16px 0 4px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+.cart-page .cart-empty-text {
+  max-width: 260px;
+  margin: 0 0 20px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+.cart-page .cart-empty-cta {
+  min-width: 158px;
+  height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 4px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0225px;
+  color: var(--white);
+  cursor: pointer;
+}

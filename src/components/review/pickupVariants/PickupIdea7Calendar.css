@@ -1,0 +1,136 @@
+/* "Anytime calendar" eyebrow (pi7-) — matches the final UT mock:
+   left column "Pickup in 3 days" + white hours pill; right column three
+   calendar-page tiles (✓ Delivery Day · Day 2 · Day 3); dashed divider below. */
+
+.pi7-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 10px;
+  background: linear-gradient(90deg, #f0f6ff 0%, #e3edfd 100%);
+  border-bottom: 1px dashed #c3d4f2;
+}
+
+/* Title and hours pill stretch to the same width, content centered —
+   whichever is wider sets the column, keeping the pair visually balanced.
+   flex-shrink: 0 stops the column being squeezed below the nowrap title,
+   which would let the text poke out past the pill. */
+.pi7-left {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.pi7-title {
+  margin: 0;
+  font: 500 14px/18px var(--font-mier);
+  color: var(--grey-t1);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.pi7-title strong {
+  font: 700 19px/20px var(--font-mier);
+  color: #33415e;
+}
+
+/* Dated arm: EDD strip (same as the home card) stacked above the calendar row */
+.pi7-dates .pi6-eyebrow {
+  border-bottom: 1px solid rgba(85, 133, 248, 0.18);
+}
+
+/* Hours in a white pill, blue text — per the mock */
+.pi7-hours {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--white);
+  font: 600 11.5px/15px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--blue-base);
+  white-space: nowrap;
+}
+
+.pi7-hours-dash {
+  color: var(--blue-base);
+  opacity: 0.6;
+}
+
+.pi7-tiles {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Calendar-page tile: muted-blue header cap with punched corners + number body */
+.pi7-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 1px 3px rgba(23, 23, 33, 0.1);
+}
+
+.pi7-tile-head {
+  position: relative;
+  width: 100%;
+  padding: 3px 0 4px;
+  background: #5e86c0;
+  font: 700 11px/14px var(--font-mier);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--white);
+}
+
+/* Perforated tear edge under the header — two punched notches */
+.pi7-tile-perf {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2.5px;
+  height: 5px;
+  background-image:
+    radial-gradient(circle at 11px 2.5px, var(--white) 2.4px, transparent 2.6px),
+    radial-gradient(circle at calc(100% - 11px) 2.5px, var(--white) 2.4px, transparent 2.6px);
+}
+
+.pi7-tile-num {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font: 700 19px/22px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: #3f74c2;
+  padding: 4px 0 6px;
+}
+
+/* Dated arm: exact date in the tile body ("1 Sep") instead of a bare number */
+.pi7-tile-date {
+  font-size: 12.5px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+/* Delivery-day tile: soft green, check on top */
+.pi7-tile--delivery {
+  gap: 3px;
+  padding: 7px 3px 6px;
+  background: linear-gradient(180deg, #e2f4ea 0%, #f3fbf7 100%);
+}
+
+.pi7-tile-delivery-label {
+  font: 700 10px/12px var(--font-mier);
+  text-align: center;
+  color: var(--green-base);
+}

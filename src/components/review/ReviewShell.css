@@ -1,0 +1,808 @@
+/* Figma 1766:17073 — Review order clarity baseline (Variant 1)
+   https://www.figma.com/design/MsMSb7AuabSGLQ2PlCDmks/BrowseX-Playground-2026?node-id=1766-17073 */
+
+.review-page {
+  --review-section-gap: 4px;
+  min-height: 100%;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--grey-t4-bg);
+  overflow-x: hidden;
+}
+
+.review-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--grey-t4-bg);
+}
+
+/* ── Header (Appbar 56px) ── */
+.review-shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 56px;
+  padding: 0 16px;
+  padding-top: var(--safe-top, 0);
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-t4-bg);
+  box-sizing: border-box;
+}
+
+.review-shell-header-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.review-shell-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--grey-base);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.review-shell-title {
+  margin: 0;
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0.005em;
+  color: var(--grey-base);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-shell-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 4px 6px;
+  border: 1px solid var(--grey-t4-bg);
+  border-radius: 12px;
+  background: var(--blue-t2);
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--blue-base);
+  white-space: nowrap;
+}
+
+.review-shell-step-label,
+.review-shell-step-value {
+  display: inline-block;
+}
+
+.review-shell-step-spacer {
+  width: 57px;
+  flex-shrink: 0;
+}
+
+/* ── Body — 4px grey strip between every white section (all variants) ── */
+.review-shell-header + .review-shell-body,
+.review-shell-offer-scallop + .review-shell-body {
+  margin-top: var(--review-section-gap);
+}
+
+.review-shell-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--review-section-gap);
+  padding: 0 0 calc(68px + var(--safe-bottom, 0));
+  background: var(--grey-t4-bg);
+}
+
+.review-shell-section {
+  width: 100%;
+  background: var(--white);
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+/* ── 1. Product card ── */
+.review-shell-product-card {
+  position: relative;
+  padding: 10px;
+  background: var(--white);
+}
+
+.review-shell-product-card-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 8px 8px;
+  border: 1px solid var(--grey-t4-bg);
+  border-radius: 8px;
+  background: var(--white);
+  isolation: isolate;
+}
+
+.review-shell-item {
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+}
+
+.review-shell-item-img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid var(--grey-t4-bg);
+  object-fit: cover;
+  background: var(--grey-t4-bg);
+}
+
+.review-shell-item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.review-shell-item-title {
+  margin: 0;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.review-shell-item-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.review-shell-item-price {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.review-shell-item-mrp {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.012em;
+  color: var(--grey-t2);
+  text-decoration: line-through;
+}
+
+.review-shell-item-off {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.012em;
+  color: var(--green-base);
+}
+
+.review-shell-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+}
+
+.review-shell-meta-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #cecede;
+  flex-shrink: 0;
+}
+
+.review-shell-item-rating {
+  display: flex;
+  align-items: center;
+  gap: 3.2px;
+}
+
+.review-shell-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3.2px;
+  padding: 1.6px 4.8px;
+  border-radius: 9.6px;
+  background: var(--green-base);
+  font: 600 10px/13px var(--font-mier);
+  color: var(--white);
+}
+
+.review-shell-rating-pill svg {
+  width: 6.4px;
+  height: 6.4px;
+}
+
+.review-shell-rating-count {
+  font: 500 9px/13px var(--font-mier);
+  letter-spacing: 0.012em;
+  color: var(--grey-t2);
+}
+
+/* ── 2. Price details ── */
+.review-shell-price-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0 8px;
+  background: var(--white);
+}
+
+.review-shell-price-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 52px;
+  padding: 16px;
+  border: none;
+  background: transparent;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.review-shell-price-summary-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.review-shell-chevron {
+  color: var(--grey-base);
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.review-shell-chevron--open {
+  transform: rotate(-90deg);
+}
+
+.review-shell-price-breakdown {
+  width: 100%;
+  padding: 0 16px 4px;
+  box-sizing: border-box;
+}
+
+.review-shell-price-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.review-shell-price-row--discount {
+  color: var(--green-base);
+}
+
+.review-shell-price-row--marker {
+  align-items: center;
+  gap: 8px;
+}
+
+.review-shell-price-marker {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.review-shell-price-row--total {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--grey-t3-divider);
+  font: 600 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.review-shell-price-details-inset {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 16px 4px;
+  box-sizing: border-box;
+}
+
+.review-shell-discount-chip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 372px;
+  height: 32px;
+  margin: 0;
+  padding: 12px 24px;
+  border-radius: 4px;
+  background: #F8F8FF;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+  box-sizing: border-box;
+  flex: none;
+  flex-grow: 0;
+}
+
+.review-shell-discount-chip-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+/* ── 3. Delivery address (inline V1) ── */
+.review-shell-address {
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--grey-t3-divider);
+  border-bottom: 1px solid var(--grey-t3-divider);
+}
+
+.review-shell-address-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.review-shell-address-head svg {
+  color: var(--blue-base);
+  flex-shrink: 0;
+}
+
+.review-shell-address-head h3 {
+  margin: 0;
+  font: 600 14px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.review-shell-address-name {
+  margin: 0 0 6px;
+  font: 600 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.review-shell-address-sep {
+  font-weight: 400;
+  color: var(--grey-t2);
+}
+
+.review-shell-address-line {
+  margin: 0 0 14px;
+  font: 400 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.review-shell-address-confirmed {
+  margin: 0 0 8px;
+  font: 600 12px/16px var(--font-mier);
+  color: var(--green-base);
+}
+
+.review-shell-address-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid var(--jamun-base);
+  border-radius: 8px;
+  background: var(--white);
+  font: 600 14px/18px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+/* ── Sticky footer (Action bar 68px) ── */
+.review-shell-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  z-index: 30;
+  min-height: 68px;
+  padding: 12px 16px calc(12px + var(--safe-bottom, 0));
+  background: var(--white);
+  border-top: 1px solid #cecede;
+  box-sizing: border-box;
+}
+
+.review-shell-confirm {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.review-shell-confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.review-shell-confirm--placing {
+  position: relative;
+  overflow: hidden;
+  animation: review-shell-confirm-pulse 0.55s ease-in-out infinite;
+}
+
+.review-shell-confirm--placing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 48%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  animation: review-shell-confirm-shimmer 0.9s ease-in-out infinite;
+}
+
+@keyframes review-shell-confirm-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.985);
+  }
+}
+
+@keyframes review-shell-confirm-shimmer {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-shell-confirm--placing {
+    animation: none !important;
+  }
+
+  .review-shell-confirm--placing::after {
+    display: none;
+  }
+}
+
+.review-shell-pending {
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.review-shell-pending-title {
+  margin: 0 0 8px;
+  font: 700 17px/22px var(--font-mier);
+}
+
+.review-shell-pending-desc {
+  margin: 0 0 20px;
+  font: 400 14px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.review-shell-pending-link {
+  font: 600 14px/18px var(--font-mier);
+  color: var(--jamun-base);
+}
+
+/* ── Variant 2: CHECK ADDRESS (Figma 1766:17168) ── */
+.review-shell--address-first .review-shell-body {
+  padding-bottom: calc(192px + var(--safe-bottom, 0));
+}
+
+/* Product card — flat row (V2 address-first + V3 payment-inline) */
+.review-shell--address-first .review-shell-product-card,
+.review-shell--payment-inline .review-shell-product-card {
+  padding: 10px;
+  margin: 0;
+  border: none;
+}
+
+.review-shell--address-first .review-shell-item,
+.review-shell--payment-inline .review-shell-item {
+  gap: 10px;
+}
+
+/* Price details — always expanded */
+.review-shell--address-first .review-shell-price-details {
+  align-items: stretch;
+  padding: 0 0 10px;
+  gap: var(--review-section-gap);
+}
+
+.review-shell-price-heading {
+  margin: 0;
+  padding: 16px 16px 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.review-shell-price-breakdown--address-first {
+  width: 100%;
+  padding: 0;
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row {
+  min-height: 36px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row span:last-child {
+  color: var(--grey-base);
+  text-align: right;
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row--discount {
+  color: var(--green-base);
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row--discount span:last-child {
+  color: var(--green-base);
+}
+
+.review-shell-price-divider {
+  height: 1px;
+  margin: 0 16px;
+  background: #cecede;
+  border-radius: 2px;
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row--total {
+  margin-top: 0;
+  padding-top: 8px;
+  border-top: none;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row--marker {
+  align-items: center;
+}
+
+.review-shell-price-breakdown--address-first .review-shell-price-row--marker .review-shell-price-marker {
+  flex: 0 1 auto;
+}
+
+.review-shell--address-first .review-shell-price-details-inset {
+  padding: 0 16px 8px;
+}
+
+/* Bottom dock — address panel + action bar */
+.review-shell-address-dock {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  z-index: 30;
+  background: var(--white);
+  box-sizing: border-box;
+}
+
+.review-shell-address-dock-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--review-section-gap);
+  padding: 0 16px 16px;
+  isolation: isolate;
+}
+
+.review-shell-address-dock-panel--has-delivery {
+  padding-top: 44px;
+}
+
+/* V2 dock — 12px gap between delivery ribbon and address title */
+.review-shell--address-first .review-shell-address-dock-panel--has-delivery {
+  padding-top: 48px;
+}
+
+.review-shell-address-dock .review-shell-address-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.review-shell-address-dock .review-shell-address-head h3 {
+  margin: 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.review-shell-address-dock .review-shell-address-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.review-shell-address-dock .review-shell-address-name span:last-child {
+  font-weight: 500;
+  color: var(--grey-t1);
+}
+
+.review-shell-address-dock .review-shell-address-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dfdfdf;
+  flex-shrink: 0;
+}
+
+.review-shell-address-dock .review-shell-address-line {
+  margin: 0;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+}
+
+.review-shell-address-dock-actions {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px calc(12px + var(--safe-bottom, 0));
+  border-top: 1px solid #cecede;
+  box-sizing: border-box;
+}
+
+.review-shell-address-add-new {
+  flex: 0 0 98px;
+  width: 98px;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid var(--jamun-base);
+  border-radius: 4px;
+  background: var(--white);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--jamun-base);
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.review-shell-deliver-btn {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--white);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* ── Variant 3: PAYMENT INLINE — COD user (Figma 1766:17278) ── */
+.review-shell--payment-inline .review-shell-body {
+  padding-bottom: calc(68px + var(--safe-bottom, 0));
+}
+
+.review-shell--payment-inline .review-shell-product-card {
+  padding: 12px 16px;
+}
+
+.review-shell--payment-inline-prepaid .review-shell-step {
+  border-color: var(--blue-base);
+}
+
+/* ── Variant 3: prepaid order summary (Figma 1766:17386) ── */
+.review-shell--prepaid-summary .review-shell-step {
+  border-color: var(--blue-base);
+}
+
+.review-shell-offer-scallop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 35px;
+  padding: 6px 16px;
+  background: linear-gradient(90deg, #d3f4ea 0%, #fff 49.45%, #d3f4ea 100%);
+}
+
+.review-shell-offer-scallop-text {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+}
+
+.review-shell-offer-highlight {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--green-base);
+}
+
+.review-shell-offer-rest {
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: #263238;
+}
+
+.review-shell--prepaid-summary .review-shell-body {
+  padding-bottom: calc(68px + var(--safe-bottom, 0));
+}
+
+.review-shell--prepaid-summary .review-shell-product-card {
+  padding: 10px;
+  margin: 0;
+  border: none;
+}
+
+.review-shell--prepaid-summary .review-shell-item {
+  gap: 10px;
+}
+
+.review-shell--prepaid-summary .review-shell-price-details {
+  align-items: stretch;
+  padding: 0 0 10px;
+  gap: var(--review-section-gap);
+}
+
+.review-shell--prepaid-summary .review-shell-price-details-inset {
+  padding: 0 16px 8px;
+}
+
+.review-shell--prepaid-summary .review-shell-discount-chip {
+  width: 100%;
+  max-width: 328px;
+  min-height: 40px;
+  height: auto;
+  padding: 12px 16px;
+  background: #f8f8ff;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+}

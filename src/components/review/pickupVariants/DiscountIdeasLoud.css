@@ -1,0 +1,1037 @@
+/* Discount-salience lab, LOUD round (dil-) */
+
+/* ---- 1. Spotlight takeover → "Save ₹" eyebrow ---- */
+
+.dil-spot {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  animation: dil-fade-in 0.2s ease;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* spotlight → white card: the dim lifts over 500ms */
+.dil-spot--leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dil-spot-hole {
+  position: fixed;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 9999px rgba(23, 23, 33, 0.66),
+    0 0 0 3px var(--green-base),
+    0 0 26px 6px rgba(3, 141, 99, 0.55);
+  pointer-events: none;
+  animation: dil-spot-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes dil-spot-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 9999px rgba(23, 23, 33, 0.66),
+      0 0 0 3px var(--green-base),
+      0 0 26px 6px rgba(3, 141, 99, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 0 0 9999px rgba(23, 23, 33, 0.66),
+      0 0 0 6px var(--green-base),
+      0 0 34px 10px rgba(3, 141, 99, 0.75);
+  }
+}
+
+@keyframes dil-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Green "Save ₹35" eyebrow — the white content below reads as an inset
+   rounded panel (a rounded "lip" at the eyebrow's foot), so the green wraps
+   the card instead of ending in a hard line. Mounts collapsed, grows in. */
+.dil-save-eyebrow {
+  max-height: 0;
+  padding: 0 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  background: var(--green-base);
+  font: 700 16px/20px var(--font-mier);
+  color: var(--white);
+  text-align: center;
+  transition:
+    max-height 0.5s ease-in-out,
+    padding 0.5s ease-in-out,
+    opacity 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+}
+
+/* the panel lip — follows the card's background (white, or the flash green) */
+.dil-save-eyebrow::after {
+  content: '';
+  display: block;
+  height: 12px;
+  margin: 8px -12px 0;
+  border-radius: 12px 12px 0 0;
+  background: var(--dil-panel, var(--white));
+  transition: background-color 0.5s ease-in-out;
+}
+
+.dil-save-eyebrow--in {
+  max-height: 48px; /* 8 pad + 20 text + 8 gap + 12 lip */
+  padding: 8px 12px 0;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card frame: grey by default, green when this option is selected.
+   white → green → white flash: both directions ease in-out over 500ms. */
+.dtr-card.dil-spot-card {
+  --dil-panel: var(--white);
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.3s ease,
+    transform 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out;
+}
+
+/* spotlit (F1): the card is lifted — scale 1.04, 8dp elevation; T1 brings it to rest */
+.dtr-card.dil-spot-card:has(.dil-spot-eyebrow--spot) {
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(23, 23, 33, 0.22);
+}
+
+/* Collapsed arm: only the header shows while spotlit; the store card
+   expands into view over the same 500ms as the card settles. The height
+   cap exists only during the choreography, so nothing is ever clipped later. */
+.dtr-card.dil-spot-collapse .dtr-card-body {
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.dtr-card.dil-spot-collapse:has(.dil-spot-eyebrow--spot) .dtr-card-body,
+.dtr-card.dil-spot-collapse:has(.dil-spot-eyebrow--leaving) .dtr-card-body,
+.dtr-card.dil-spot-collapse:has(.dil-spot-eyebrow--reveal) .dtr-card-body {
+  overflow: hidden;
+}
+
+/* F1 + T1: stays collapsed while spotlit and while the card comes to rest */
+.dtr-card.dil-spot-collapse:has(.dil-spot-eyebrow--spot) .dtr-card-body,
+.dtr-card.dil-spot-collapse:has(.dil-spot-eyebrow--leaving) .dtr-card-body {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* T2 reveal: expands (cap near the store card's natural height so it uses the
+   full 500ms) while the store block fades in */
+.dtr-card.dil-spot-collapse:has(.dil-spot-eyebrow--reveal) .dtr-card-body {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.dtr-card.dil-spot-card.dtr-card--selected {
+  border-color: var(--green-base);
+}
+
+/* mint: enters during T2 (reveal) on the collapsed arm, during "flash" elsewhere; holds through F3 */
+.dtr-card.dil-spot-card:has(.dil-spot-eyebrow--reveal),
+.dtr-card.dil-spot-card:has(.dil-spot-eyebrow--flash) {
+  --dil-panel: #e3f6ee;
+  background-color: #e3f6ee;
+}
+
+/* ---- 2. Fly-in OFF banner ---- */
+
+.dil-fly {
+  position: fixed;
+  left: 50%;
+  top: 36%;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 18px 30px;
+  border-radius: 16px;
+  background: var(--green-base);
+  box-shadow: 0 14px 40px rgba(3, 141, 99, 0.5);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.75s cubic-bezier(0.5, -0.1, 0.7, 0.4), opacity 0.75s ease;
+  pointer-events: none;
+}
+
+.dil-fly--drop {
+  animation: dil-fly-drop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes dil-fly-drop {
+  from {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.dil-fly-amount {
+  font: 800 30px/34px var(--font-mier);
+  color: var(--white);
+}
+
+.dil-fly-sub {
+  font: 600 13.5px/18px var(--font-mier);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---- 3. Hero card ---- */
+
+.dtr-card.dil-hero {
+  border: 2px solid var(--green-base);
+  background: linear-gradient(180deg, #eafaf3 0%, #ffffff 55%);
+  animation: dil-hero-glow 1.8s ease-in-out infinite;
+}
+
+@keyframes dil-hero-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(3, 141, 99, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(3, 141, 99, 0.28);
+  }
+}
+
+.dil-hero-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--green-base);
+}
+
+.dil-hero-flag {
+  padding: 2.5px 8px;
+  border-radius: 5px;
+  background: #ffd35c;
+  font: 800 11px/15px var(--font-mier);
+  letter-spacing: 0.05em;
+  color: #7a4d00;
+  white-space: nowrap;
+}
+
+.dil-hero-copy {
+  font: 600 13px/17px var(--font-mier);
+  color: var(--white);
+}
+
+.dil-hero-copy strong {
+  font-weight: 800;
+}
+
+/* ---- 4. Auto-opening offer sheet ---- */
+
+.dil-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(23, 23, 33, 0.6);
+  animation: dil-fade-in 0.25s ease;
+}
+
+.dil-sheet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 430px;
+  padding: 26px 20px calc(18px + env(safe-area-inset-bottom));
+  border-radius: 18px 18px 0 0;
+  background: var(--white);
+  text-align: center;
+  animation: dil-sheet-up 0.3s ease;
+}
+
+@keyframes dil-sheet-up {
+  from {
+    transform: translateY(60px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dil-sheet-burst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #0fae7d 0%, var(--green-base) 70%);
+  box-shadow: 0 0 0 8px rgba(3, 141, 99, 0.14), 0 0 0 16px rgba(3, 141, 99, 0.07);
+  font: 800 26px/28px var(--font-mier);
+  color: var(--white);
+  animation: dil-burst-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dil-sheet-burst span {
+  font: 800 13px/15px var(--font-mier);
+  letter-spacing: 0.12em;
+}
+
+@keyframes dil-burst-pop {
+  from {
+    transform: scale(0.4);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.dil-sheet-title {
+  margin: 0 0 6px;
+  font: 700 19px/25px var(--font-mier);
+  color: var(--grey-base);
+  text-wrap: balance;
+}
+
+.dil-sheet-copy {
+  margin: 0 0 18px;
+  font: 500 14px/20px var(--font-mier);
+  color: var(--grey-t1);
+  text-wrap: balance;
+}
+
+.dil-sheet-copy strong {
+  color: var(--green-base);
+  font-weight: 700;
+}
+
+.dil-sheet-cta {
+  width: 100%;
+  min-height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: var(--green-base);
+  font: 700 15px/20px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.dil-sheet-skip {
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  background: none;
+  font: 600 13.5px/18px var(--font-mier);
+  color: var(--grey-t1);
+  cursor: pointer;
+}
+
+/* ---- 5. Swinging price tag ---- */
+
+.dtr-card.dil-tag-card {
+  overflow: visible;
+}
+
+.dil-tag-wrap {
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.dil-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px 7px 10px;
+  border-radius: 6px 12px 12px 6px;
+  background: var(--green-base);
+  box-shadow: 0 4px 10px rgba(3, 141, 99, 0.4);
+  font: 800 16px/20px var(--font-mier);
+  color: var(--white);
+  transform-origin: -6px 50%;
+  animation: dil-tag-swing 1.6s ease-in-out infinite;
+}
+
+.dil-tag-hole {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes dil-tag-swing {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/* ---- 6. Flashing lowest-price banner + pointer ---- */
+
+.dil-blink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px 0 4px;
+  padding: 11px 12px 13px;
+  border-radius: 10px;
+  animation: dil-blink-bg 1.1s ease-in-out infinite;
+}
+
+@keyframes dil-blink-bg {
+  0%,
+  100% {
+    background: var(--green-base);
+    box-shadow: 0 0 0 0 rgba(3, 141, 99, 0.45);
+  }
+  50% {
+    background: #0fae7d;
+    box-shadow: 0 0 0 6px rgba(3, 141, 99, 0);
+  }
+}
+
+.dil-blink-text {
+  font: 800 14px/19px var(--font-mier);
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+
+.dil-blink-text strong {
+  color: #ffd35c;
+}
+
+.dil-blink-pointer {
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  animation: dil-pointer-bounce 0.9s ease-in-out infinite;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes dil-pointer-bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+  }
+}
+
+/* ---- 7. Footer interrupt bar ---- */
+
+.dil-footbar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 92px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: #0d6b4c;
+  box-shadow: 0 8px 22px rgba(23, 23, 33, 0.35);
+  animation: dil-footbar-in 0.35s ease, dil-footbar-nudge 2.4s ease-in-out 1s infinite;
+}
+
+@keyframes dil-footbar-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dil-footbar-nudge {
+  0%,
+  86%,
+  100% {
+    transform: translateY(0);
+  }
+  90% {
+    transform: translateY(-4px);
+  }
+  94% {
+    transform: translateY(2px);
+  }
+}
+
+.dil-footbar-text {
+  font: 600 13.5px/18px var(--font-mier);
+  color: var(--white);
+}
+
+.dil-footbar-text strong {
+  color: #ffd35c;
+  font-weight: 800;
+}
+
+.dil-footbar-cta {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--white);
+  font: 700 13.5px/18px var(--font-mier);
+  color: #0d6b4c;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dil-spot,
+  .dil-spot-hole,
+  .dil-fly,
+  .dtr-card.dil-hero,
+  .dil-sheet,
+  .dil-sheet-burst,
+  .dil-tag,
+  .dil-blink,
+  .dil-blink-pointer,
+  .dil-footbar {
+    animation: none;
+  }
+}
+
+/* ======================= Round three ======================= */
+
+/* ---- 8. Scratch card ---- */
+
+.dil-scratch {
+  position: relative;
+  margin: 14px 0 4px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(23, 23, 33, 0.14);
+  animation: dil-scratch-wiggle 2.2s ease-in-out infinite;
+}
+
+.dil-scratch--revealed {
+  animation: none;
+}
+
+@keyframes dil-scratch-wiggle {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0);
+  }
+  91% {
+    transform: rotate(-1.2deg);
+  }
+  94% {
+    transform: rotate(1.2deg);
+  }
+  97% {
+    transform: rotate(-0.6deg);
+  }
+}
+
+.dil-scratch-prize {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-height: 92px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #0fae7d 0%, var(--green-base) 100%);
+  text-align: center;
+}
+
+.dil-scratch-amount {
+  font: 800 28px/32px var(--font-mier);
+  color: var(--white);
+}
+
+.dil-scratch-sub {
+  font: 600 13px/17px var(--font-mier);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dil-scratch-apply {
+  margin-top: 6px;
+  padding: 8px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--white);
+  font: 700 14px/18px var(--font-mier);
+  color: var(--green-base);
+  cursor: pointer;
+}
+
+.dil-scratch-applied {
+  margin-top: 6px;
+  font: 700 14px/18px var(--font-mier);
+  color: #ffd35c;
+}
+
+.dil-scratch-foil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+/* ---- 9. Countdown urgency strip ---- */
+
+.dtr-card.dil-count-card {
+  border-color: var(--red-base);
+}
+
+.dil-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  background: #fff1f0;
+  border-bottom: 1px solid rgba(217, 45, 32, 0.25);
+}
+
+.dil-count-text {
+  font: 600 13px/17px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dil-count-text strong {
+  color: var(--red-base);
+  font-weight: 800;
+}
+
+.dil-count-timer {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--red-base);
+  font: 800 16px/20px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  animation: dil-count-tick 1s steps(1) infinite;
+}
+
+@keyframes dil-count-tick {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(217, 45, 32, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(217, 45, 32, 0.15);
+  }
+}
+
+/* ---- 10. Confetti price-drop celebration ---- */
+
+.dtr-card.dil-confetti-card {
+  overflow: visible;
+}
+
+.dil-confetti {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 12px 12px 0 0;
+  background: linear-gradient(90deg, #f6e8ff 0%, #e6f8f0 100%);
+  border-bottom: 1px dashed rgba(159, 32, 137, 0.3);
+}
+
+.dil-confetti-text {
+  font: 700 14px/18px var(--font-mier);
+  color: var(--grey-base);
+  animation: dil-confetti-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dil-confetti-text s {
+  color: var(--grey-t1);
+  font-weight: 500;
+}
+
+.dil-confetti-text strong {
+  color: var(--green-base);
+  font-size: 16px;
+}
+
+@keyframes dil-confetti-pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dil-confetti-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.dil-confetti-piece {
+  position: absolute;
+  left: calc(6% + var(--i) * 5.8%);
+  top: 50%;
+  width: 7px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--jamun-base);
+  opacity: 0;
+  animation: dil-confetti-fall 5s ease-in calc(var(--i) * 0.04s) infinite;
+}
+
+.dil-confetti-piece:nth-child(3n) {
+  background: var(--green-base);
+}
+
+.dil-confetti-piece:nth-child(3n + 1) {
+  background: #ffd35c;
+}
+
+.dil-confetti-piece:nth-child(4n) {
+  background: var(--blue-base);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* burst for the first ~1.6s of every 5s cycle, then hide */
+@keyframes dil-confetti-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0);
+  }
+  4% {
+    opacity: 1;
+    transform: translateY(-38px) rotate(90deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(96px) rotate(520deg);
+  }
+  34%,
+  100% {
+    opacity: 0;
+    transform: translateY(110px) rotate(560deg);
+  }
+}
+
+/* ---- 11. Vernacular banner ---- */
+
+.dil-vern {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0 4px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #ffd35c;
+  box-shadow: 0 6px 16px rgba(247, 144, 9, 0.3);
+  animation: dil-vern-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dil-vern-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+.dil-vern-coins {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.dil-vern-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.dil-vern-big {
+  font: 800 24px/30px var(--font-mier), 'Noto Sans Devanagari', sans-serif;
+  color: #5a3a00;
+}
+
+.dil-vern-sub {
+  font: 600 13.5px/18px var(--font-mier);
+  color: #7a4d00;
+}
+
+/* ---- 12. Pre-selected default with opt-out ---- */
+
+.dil-pre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 14px 0 4px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  animation: dil-fade-in 0.3s ease;
+}
+
+.dil-pre--on {
+  background: var(--green-base);
+}
+
+.dil-pre--off {
+  background: var(--red-base);
+}
+
+.dil-pre-text {
+  font: 600 13.5px/18px var(--font-mier);
+  color: var(--white);
+}
+
+.dil-pre-text strong {
+  font-weight: 800;
+}
+
+.dil-pre-link {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  font: 700 12.5px/16px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+  text-align: right;
+}
+
+/* ---- 13. Coupon ticket with APPLY ---- */
+
+.dil-ticket {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0 4px;
+  padding: 12px 14px 12px 0;
+  border: 1.5px dashed var(--jamun-base);
+  border-radius: 12px;
+  background: #fdf0fa;
+  animation: dil-ticket-nudge 2.6s ease-in-out infinite;
+}
+
+@keyframes dil-ticket-nudge {
+  0%,
+  86%,
+  100% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-4px);
+  }
+  95% {
+    transform: translateX(3px);
+  }
+}
+
+.dil-ticket-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 78px;
+  padding: 8px 6px;
+  border-right: 1.5px dashed var(--jamun-base);
+  font: 800 24px/26px var(--font-mier);
+  color: var(--jamun-base);
+}
+
+.dil-ticket-amount small {
+  font: 800 11px/14px var(--font-mier);
+  letter-spacing: 0.1em;
+}
+
+.dil-ticket-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dil-ticket-title {
+  font: 700 14px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dil-ticket-sub {
+  font: 500 11.5px/15px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.dil-ticket-apply {
+  flex-shrink: 0;
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  font: 800 13px/16px var(--font-mier);
+  letter-spacing: 0.06em;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.dil-ticket--applied {
+  animation: none;
+  border-style: solid;
+  border-color: var(--green-base);
+  background: #eafaf3;
+}
+
+.dil-ticket--applied .dil-ticket-amount {
+  border-right-color: var(--green-base);
+  color: var(--green-base);
+}
+
+.dil-ticket-done {
+  flex-shrink: 0;
+  font: 800 13px/16px var(--font-mier);
+  letter-spacing: 0.04em;
+  color: var(--green-base);
+}
+
+/* ---- 14. Comparison bars ---- */
+
+.dil-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 4px;
+  padding: 14px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.dil-bars-title {
+  margin: 0 0 2px;
+  font: 700 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dil-bars-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.dil-bars-row--pickup {
+  cursor: pointer;
+}
+
+.dil-bars-label {
+  flex-shrink: 0;
+  width: 92px;
+  font: 600 12.5px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.dil-bars-track {
+  position: relative;
+  flex: 1;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--grey-t4-bg);
+  overflow: visible;
+}
+
+.dil-bars-fill {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 10px;
+  border-radius: 6px;
+  font: 800 14px/18px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--white);
+  white-space: nowrap;
+  transition: width 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.dil-bars-fill--home {
+  background: var(--grey-t2);
+}
+
+.dil-bars-fill--pickup {
+  background: var(--green-base);
+  transition-delay: 0.2s;
+}
+
+.dil-bars-delta {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) scale(0.6);
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #ffd35c;
+  font: 800 12px/15px var(--font-mier);
+  color: #5a3a00;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.35s ease 1.1s, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 1.1s;
+}
+
+.dil-bars-delta--in {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dil-scratch,
+  .dil-count-timer,
+  .dil-confetti-text,
+  .dil-confetti-piece,
+  .dil-vern,
+  .dil-pre,
+  .dil-ticket {
+    animation: none;
+  }
+}

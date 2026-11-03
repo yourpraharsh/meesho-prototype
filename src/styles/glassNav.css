@@ -1,0 +1,832 @@
+/* =====================================================================
+   Liquid Glass (iOS 26) — NAVIGATION CHROME ONLY
+   Source: Figma "Liquid Glass" › Dev Handoff - Final (JOgoaSeFMndUDqX9uxAaqh)
+   Scoped to body.ui-ios. Covers top bars (incl. search pill, capsules, titles,
+   stepper, header washes), the floating tab bar (incl. minimized state) and
+   the bottom CTA footer bars. Cards, lists, sheets and buttons stay Meesho DS.
+   ===================================================================== */
+
+/* ---------- tokens ---------- */
+body.ui-ios {
+  --glass-ink: var(--grey-base);                  /* icons, titles, tab labels */
+  --glass-accent: var(--jamun-base);              /* mic glyph, HELP, active Home mark */
+
+  --glass-fill-capsule: rgba(255, 255, 255, 0.6); /* 40/48px circles, back, HELP */
+  --glass-fill-pill: rgba(255, 255, 255, 0.7);    /* search pill, tab bar */
+  --glass-fill-bar: rgba(255, 255, 255, 0.8);     /* full-width top bars */
+  --glass-fill-footer: rgba(255, 255, 255, 0.7);  /* bottom CTA footers */
+  --glass-fill-fab: rgba(255, 255, 255, 0.4);     /* Figma 0.1 — lifted for legibility */
+
+  /* Figma "Frost - Regular" ≈ a soft blur; measured ≈3–6px σ in the renders. No saturate(). */
+  --glass-blur-bar: 8px;
+  --glass-blur-capsule: 6px;
+  --glass-blur-wash: 2px;
+
+  --glass-shadow-capsule: 0 5px 20px rgba(0, 0, 0, 0.08);
+  --glass-shadow-pill: 0 5px 20px rgba(0, 0, 0, 0.06);
+  --glass-shadow-fab: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  --glass-radius: 999px;
+  --glass-capsule-size: 40px;
+  --glass-row-size: 48px;
+  --glass-inset-x: 16px;
+  --glass-inset-top: calc(24px + var(--safe-top, 0px));
+  --glass-tab-h: 62px;
+  --glass-tab-bottom: max(16px, var(--safe-bottom, 0px));
+  --glass-wash: #f5f5f5;
+  --glass-divider: #cecede;
+  --glass-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* elements that exist only for the iOS skin */
+.glass-nav-spacer,
+.glass-arrow {
+  display: none;
+}
+
+body.ui-ios .glass-arrow {
+  display: inline;
+}
+
+body.ui-ios .glass-chevron {
+  display: none;
+}
+
+body.ui-ios .glass-nav-spacer {
+  display: block;
+  flex: none;
+  width: var(--glass-capsule-size);
+  height: var(--glass-capsule-size);
+}
+
+/* ---------- shared capsule material ---------- */
+body.ui-ios .odp-back,
+body.ui-ios .pdp-back,
+body.ui-ios .review-shell-back,
+body.ui-ios .payment-page-back,
+body.ui-ios .review-v4-back,
+body.ui-ios .home-actions button,
+body.ui-ios .pdp-actions button,
+body.ui-ios .odp-help,
+body.ui-ios .home-search-mic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule);
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule));
+  backdrop-filter: blur(var(--glass-blur-capsule));
+  box-shadow: var(--glass-shadow-capsule);
+  color: var(--glass-ink);
+  cursor: pointer;
+}
+
+body.ui-ios .odp-back,
+body.ui-ios .pdp-back,
+body.ui-ios .review-shell-back,
+body.ui-ios .payment-page-back,
+body.ui-ios .review-v4-back,
+body.ui-ios .home-actions button,
+body.ui-ios .pdp-actions button {
+  width: var(--glass-capsule-size);
+  height: var(--glass-capsule-size);
+}
+
+/* back arrow: 24px glyph at 1.3px */
+body.ui-ios .odp-back svg,
+body.ui-ios .pdp-back svg,
+body.ui-ios .review-shell-back svg,
+body.ui-ios .payment-page-back svg,
+body.ui-ios .review-v4-back svg {
+  width: 24px;
+  height: 24px;
+  color: var(--glass-ink);
+}
+
+/* trailing action icons: individual circles, 12px apart, 20px glyphs
+   (24-viewBox icons drawn at 20px → 1.6px attr ≈ 1.3px rendered) */
+body.ui-ios .home-actions,
+body.ui-ios .pdp-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+body.ui-ios .home-actions svg,
+body.ui-ios .pdp-actions svg {
+  width: 20px;
+  height: 20px;
+  color: var(--glass-ink);
+}
+
+body.ui-ios .home-actions svg *,
+body.ui-ios .pdp-actions svg * {
+  stroke-width: 1.6px;
+}
+
+body.ui-ios .pdp-actions .pdp-header-wishlist.selected svg {
+  color: var(--red-base);
+}
+
+/* ---------- Variant A: translucent full-width top bar ---------- */
+body.ui-ios .olp-header,
+body.ui-ios .odp-header,
+body.ui-ios .review-shell-header,
+body.ui-ios .payment-page-header,
+body.ui-ios .review-v4-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  padding: var(--glass-inset-top) var(--glass-inset-x) 16px;
+  background: var(--glass-fill-bar);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* separation from content is a grey gutter, not a hairline */
+body.ui-ios .odp-header + .odp-section {
+  margin-top: 8px;
+}
+
+body.ui-ios .olp-header + .olp-toolbar {
+  margin-top: 8px;
+}
+
+/* OLP has no capsules: keep the 40px row so the title aligns with ODP */
+body.ui-ios .olp-header {
+  min-height: calc(var(--glass-inset-top) + 56px);
+  box-sizing: border-box;
+}
+
+/* uppercase centred title between two 40px gutters */
+body.ui-ios .olp-title,
+body.ui-ios .odp-title,
+body.ui-ios .review-shell-title,
+body.ui-ios .payment-page-title,
+body.ui-ios .review-v4-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font: var(--subtitle1);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--glass-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* .review-page clips x-overflow, which would make it the sticky header's scroll container */
+body.ui-ios .review-page {
+  overflow-x: clip;
+}
+
+/* checkout bars: nav row + stepper on a second row */
+body.ui-ios .review-shell-header,
+body.ui-ios .payment-page-header,
+body.ui-ios .review-v4-header {
+  flex-wrap: wrap;
+  gap: 12px 8px;
+}
+
+body.ui-ios .review-shell-header-main,
+body.ui-ios .payment-page-header-main,
+body.ui-ios .review-v4-header-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 100%;
+  height: var(--glass-capsule-size);
+}
+
+body.ui-ios .review-shell-step,
+body.ui-ios .payment-page-step,
+body.ui-ios .review-shell-step-spacer {
+  display: none;
+}
+
+/* HELP capsule */
+body.ui-ios .odp-help {
+  gap: 4px;
+  height: var(--glass-capsule-size);
+  min-height: 0;
+  padding: 0 8px;
+  border-radius: var(--glass-radius);
+  font: var(--link);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--glass-accent);
+}
+
+body.ui-ios .odp-help svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ---------- stepper (1 Review ── 2 Payment) inside the header ---------- */
+body.ui-ios .glass-stepper {
+  position: relative;
+  display: flex;
+  flex: 1 1 100%;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 0;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+body.ui-ios .glass-stepper::before {
+  content: '';
+  position: absolute;
+  top: 19.5px;
+  left: calc(25% + 10px);
+  right: calc(25% + 10px);
+  height: 1px;
+  background: var(--glass-divider);
+}
+
+/* three steps (cart flow: Cart · Review · Payment): node centres at 1/6, 1/2, 5/6 */
+body.ui-ios .glass-stepper:has(> :nth-child(3))::before {
+  left: calc(100% / 6 + 10px);
+  right: calc(100% / 6 + 10px);
+}
+
+body.ui-ios .glass-stepper-step {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--grey-t2);
+}
+
+body.ui-ios .glass-stepper-step--current,
+body.ui-ios .glass-stepper-step--done {
+  color: var(--blue-base);
+}
+
+body.ui-ios .glass-stepper-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  background: var(--white);
+  font: 600 10px/16px var(--font-mier);
+  letter-spacing: 0.12px;
+}
+
+body.ui-ios .glass-stepper-step--done .glass-stepper-node {
+  background: var(--blue-base);
+  color: var(--white);
+}
+
+body.ui-ios .glass-stepper-label {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ---------- Home header: fixed glass bar with the pink radial wash ---------- */
+body.ui-ios .home {
+  /* content starts under the fixed expanded header: 24 + 46 row + 16 + 48 pill + 16 */
+  padding-top: calc(150px + var(--safe-top, 0px));
+  /* the sort/filter toolbar sticks below the collapsed header + its fade */
+  --home-sticky-header-h: calc(128px + var(--safe-top, 0px));
+  transition: padding-top 220ms var(--glass-ease);
+}
+
+body.ui-ios .home-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  box-sizing: border-box;
+  z-index: 20;
+  isolation: isolate;
+  padding: var(--glass-inset-top) var(--glass-inset-x) 16px;
+  background: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  border-bottom: none;
+  box-shadow: none;
+  transition: padding 220ms var(--glass-ease), background-color 200ms ease;
+}
+
+/* grey top fade for the collapsed state, cross-faded via opacity */
+body.ui-ios .home-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg, var(--glass-wash) 0%, var(--glass-wash) 12%, rgba(245, 245, 245, 0) 100%);
+  transition: opacity 200ms ease;
+}
+
+/* pink wash — strongest at the top-centre edge, gone by the bar's bottom edge */
+body.ui-ios .home-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(704px 100% at 50% 0%, rgba(159, 32, 137, 0.36) 0%, rgba(159, 32, 137, 0) 100%);
+  transition: opacity 200ms ease;
+}
+
+body.ui-ios .home-header-row {
+  min-height: 46px;
+  max-height: 62px;
+  /* clip only when collapsing; the margin keeps the circles' 20px shadows visible */
+  clip-path: inset(-24px -24px -16px);
+  transition: max-height 220ms var(--glass-ease), opacity 160ms ease, margin 220ms var(--glass-ease), visibility 0s;
+}
+
+body.ui-ios .home-avatar {
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 0 0 1px var(--white);
+}
+
+body.ui-ios .home-user-name {
+  font: 600 13px/16px var(--font-mier);
+  color: var(--glass-ink);
+}
+
+/* the "Delivering to" strip is content, but its hairline would read as a bar edge */
+body.ui-ios .home-location {
+  border-bottom: none;
+}
+
+/* collapsed: only the search row stays, on a grey fade with no fill (Figma 758:30914) */
+body.ui-ios .home-header--collapsed {
+  padding-bottom: 56px;
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+body.ui-ios .home-header--collapsed::after {
+  opacity: 1;
+}
+
+body.ui-ios .home-header--collapsed > * {
+  pointer-events: auto;
+}
+
+body.ui-ios .home-header--collapsed::before {
+  opacity: 0;
+}
+
+body.ui-ios .home-header--collapsed .home-header-row {
+  max-height: 0;
+  min-height: 0;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  clip-path: inset(0);
+  transition: max-height 220ms var(--glass-ease), opacity 160ms ease, margin 220ms var(--glass-ease), visibility 0s 220ms;
+}
+
+/* ---------- search pill + detached mic ---------- */
+body.ui-ios .home-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  transition: margin 220ms var(--glass-ease);
+}
+
+body.ui-ios .home-header--collapsed .home-search-wrap {
+  margin-top: 0;
+}
+
+body.ui-ios .home-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: var(--glass-row-size);
+  box-sizing: border-box;
+  padding: 0 16px;
+  gap: 4px;
+  border-radius: var(--glass-radius);
+  background: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  box-shadow: var(--glass-shadow-pill);
+  color: var(--glass-ink);
+}
+
+body.ui-ios .home-search-input {
+  font: var(--body2);
+  color: var(--glass-ink);
+}
+
+body.ui-ios .home-search-input::placeholder {
+  color: var(--grey-t2);
+}
+
+body.ui-ios .home-search svg {
+  width: 20px;
+  height: 20px;
+  color: var(--glass-ink);
+}
+
+body.ui-ios .home-search svg * {
+  stroke-width: 1.6px;
+}
+
+body.ui-ios .home-search-icon-btn {
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  color: var(--glass-ink);
+}
+
+body.ui-ios .home-search-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--glass-ink);
+  cursor: pointer;
+}
+
+body.ui-ios .home-search-back svg {
+  width: 24px;
+  height: 24px;
+}
+
+body.ui-ios .home-search-back svg * {
+  stroke-width: 1.3px;
+}
+
+body.ui-ios .home-search-divider {
+  flex: none;
+  width: 1px;
+  height: 24px;
+  margin: 0 12px 0 8px;
+  background: var(--glass-divider);
+}
+
+body.ui-ios .home-search-mic {
+  width: var(--glass-row-size);
+  height: var(--glass-row-size);
+  color: var(--glass-accent);
+}
+
+body.ui-ios .home-search-mic svg {
+  width: 20px;
+  height: 20px;
+}
+
+body.ui-ios .home-search-mic svg * {
+  stroke-width: 1.6px;
+}
+
+body.ui-ios .home-search-mic--listening {
+  background: var(--jamun-t2);
+  color: var(--jamun-primary);
+  animation: glass-mic-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes glass-mic-pulse {
+  0%, 100% { box-shadow: var(--glass-shadow-capsule), 0 0 0 0 rgba(159, 32, 137, 0.25); }
+  50% { box-shadow: var(--glass-shadow-capsule), 0 0 0 8px rgba(159, 32, 137, 0); }
+}
+
+/* search-focused band (Figma "Search Landing"): opaque grey, pill row only, no divider */
+body.ui-ios .home-header--search {
+  padding: var(--glass-inset-top) var(--glass-inset-x) 16px;
+  background-color: var(--glass-wash);
+  border-bottom: 4px solid var(--grey-t4-bg); /* the 4px slot before the list */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  pointer-events: auto;
+}
+
+body.ui-ios .home-header--search::before,
+body.ui-ios .home-header--search::after {
+  opacity: 0;
+}
+
+body.ui-ios .home-header--search .home-header-row {
+  max-height: 0;
+  min-height: 0;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  clip-path: inset(0);
+  transition: max-height 220ms var(--glass-ease), opacity 160ms ease, margin 220ms var(--glass-ease), visibility 0s 220ms;
+}
+
+body.ui-ios .home-header--search .home-search-wrap {
+  margin-top: 0;
+}
+
+body.ui-ios .home-header--search .home-search-divider {
+  display: none;
+}
+
+body.ui-ios .home--search {
+  padding-top: calc(92px + var(--safe-top, 0px));
+  --home-sticky-header-h: calc(92px + var(--safe-top, 0px));
+}
+
+/* inside a blurred bar the children's own blur is redundant (and costly) */
+body.ui-ios .home-header:not(.home-header--collapsed) :is(.home-search, .home-search-mic, .home-actions button) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* ---------- Home sort/filter row: Liquid Glass pill chips on a soft wash strip ---------- */
+body.ui-ios .home-toolbar {
+  gap: 8px;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(245, 245, 245, 0.9);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  border-bottom: none;
+}
+
+body.ui-ios .home-toolbar-btn {
+  flex: 1 1 auto;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px 0 12px;
+  border: none;
+  border-radius: var(--glass-radius);
+  background: var(--glass-fill-pill);
+  box-shadow: var(--glass-shadow-pill);
+  font: 400 15px/20px var(--font-mier);
+  color: var(--glass-ink);
+}
+
+body.ui-ios .home-toolbar-btn:not(:last-child) {
+  border-right: none;
+}
+
+/* label first, glyph after it (Sort ⇅ · Category ⌄ · Price ⌄ · Filters ≡) */
+body.ui-ios .home-toolbar-btn span {
+  order: 1;
+}
+
+body.ui-ios .home-toolbar-btn svg {
+  order: 2;
+  width: 16px;
+  height: 16px;
+  color: var(--glass-ink);
+}
+
+/* ---------- PDP header: Variant B — no bar, grey fade, floating capsules ---------- */
+body.ui-ios .pdp-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: var(--glass-inset-top) var(--glass-inset-x) 56px;
+  margin-bottom: -56px;
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0.9) 0%, rgba(245, 245, 245, 0.9) 12%, rgba(245, 245, 245, 0) 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+body.ui-ios .pdp-header > * {
+  pointer-events: auto;
+}
+
+body.ui-ios .pdp-hero {
+  position: relative;
+  z-index: 0;
+}
+
+/* ---------- floating tab bar ---------- */
+body.ui-ios .bottom-nav-wash {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  height: calc(118px + var(--glass-tab-bottom));
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0) 0%, var(--glass-wash) 100%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-wash));
+  backdrop-filter: blur(var(--glass-blur-wash));
+  pointer-events: none;
+  z-index: 29;
+}
+
+body.ui-ios .bottom-nav {
+  left: 50%;
+  right: auto;
+  bottom: var(--glass-tab-bottom);
+  transform: translateX(-50%);
+  width: calc(100% - 2 * var(--glass-inset-x));
+  max-width: calc(430px - 2 * var(--glass-inset-x));
+  height: var(--glass-tab-h);
+  padding: 0 8px;
+  gap: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  border: none;
+  border-top: none;
+  border-radius: var(--glass-radius);
+  background: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  box-shadow: var(--glass-shadow-capsule);
+  transition:
+    width 260ms var(--glass-ease),
+    max-width 260ms var(--glass-ease),
+    left 260ms var(--glass-ease),
+    transform 260ms var(--glass-ease),
+    padding 260ms var(--glass-ease),
+    background 200ms ease,
+    box-shadow 200ms ease;
+}
+
+body.ui-ios .bottom-nav-item {
+  position: relative;
+  flex: 1 1 0;
+  justify-content: center;
+  height: 52px;
+  gap: 1px;
+  padding: 6px 8px 7px;
+  border-radius: 100px;
+  background: none;
+  box-shadow: none;
+  color: var(--glass-ink);
+  opacity: 1;
+  transition: opacity 120ms ease 120ms, visibility 0s;
+}
+
+body.ui-ios .bottom-nav-item svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* selection capsule is a translucent tint so the blurred backdrop shows through */
+body.ui-ios .bottom-nav-item--active {
+  background: rgba(0, 0, 0, 0.09);
+  box-shadow: none;
+}
+
+body.ui-ios .bottom-nav-label {
+  font: 400 11px/12px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--glass-ink);
+}
+
+body.ui-ios .bottom-nav-item--active .bottom-nav-label {
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  color: var(--glass-ink);
+}
+
+/* minimized: the bar becomes one 62px disc at the frame's bottom-left */
+body.ui-ios .bottom-nav-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--glass-accent);
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 120ms ease;
+}
+
+body.ui-ios .bottom-nav-fab svg {
+  width: 26px;
+  height: 26px;
+}
+
+body.ui-ios .bottom-nav--minimized {
+  left: max(var(--glass-inset-x), calc(50% - 215px + var(--glass-inset-x)));
+  transform: none;
+  width: var(--glass-tab-h);
+  max-width: var(--glass-tab-h);
+  padding: 0;
+  background: var(--glass-fill-fab);
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule));
+  backdrop-filter: blur(var(--glass-blur-capsule));
+  box-shadow: var(--glass-shadow-fab);
+}
+
+body.ui-ios .bottom-nav--minimized .bottom-nav-item {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms ease, visibility 0s 120ms;
+}
+
+body.ui-ios .bottom-nav--minimized .bottom-nav-fab {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 120ms ease 140ms;
+}
+
+/* page reserves for the floating bar */
+body.ui-ios .has-bottom-nav {
+  padding-bottom: calc(var(--glass-tab-h) + 32px + var(--safe-bottom, 0px)) !important;
+}
+
+body.ui-ios .ui-skin {
+  bottom: calc(var(--glass-tab-h) + 32px + var(--safe-bottom, 0px));
+}
+
+/* ---------- glass CTA footer bars (buttons on them stay Meesho DS) ---------- */
+body.ui-ios .pdp-cta-wrap,
+body.ui-ios .review-shell-footer,
+body.ui-ios .dtr-footer,
+body.ui-ios .review-v4-footer,
+body.ui-ios .payment-page-footer,
+body.ui-ios .odp-sticky {
+  min-height: 0;
+  padding: 12px 24px max(12px, var(--safe-bottom, 0px));
+  background: var(--glass-fill-footer);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  border-top: none;
+  box-shadow: none;
+}
+
+/* the outlined button lets the glass show through (Figma 758:34175) */
+body.ui-ios .pdp-cta-wrap .pdp-add-to-cart {
+  background: transparent;
+}
+
+body.ui-ios .pdp {
+  padding-bottom: calc(88px + var(--safe-bottom, 0px));
+}
+
+body.ui-ios .review-shell-body {
+  padding-bottom: calc(84px + var(--safe-bottom, 0px));
+}
+
+/* the address-first variant ends in a tall Meesho address dock, not the glass bar */
+body.ui-ios .review-shell--address-first .review-shell-body {
+  padding-bottom: calc(192px + var(--safe-bottom, 0px));
+}
+
+/* payment footer also carries the "select a method" nudge line */
+body.ui-ios .payment-page-body {
+  padding-bottom: calc(104px + var(--safe-bottom, 0px));
+}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  body.ui-ios .home-header,
+  body.ui-ios .home-header::before,
+  body.ui-ios .home-header-row,
+  body.ui-ios .home-search-wrap,
+  body.ui-ios .bottom-nav,
+  body.ui-ios .bottom-nav-item,
+  body.ui-ios .bottom-nav-fab {
+    transition: none !important;
+    animation: none !important;
+  }
+}

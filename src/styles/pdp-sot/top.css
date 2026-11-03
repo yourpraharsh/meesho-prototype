@@ -1,0 +1,206 @@
+/* PDP SoT — top of the page: App Bar, hero image + "More Like This" pill, image progress
+   indicator, "N Similar Products" strip.
+   Source: Figma "Design SoT Apr 24" (fdR1rJfu0Yszfeb1Em0Hma), frame PDP 13630:129956, nodes
+   13630:129958 (App Bar), 13630:129982 (Image), 13630:129997 (Progress Bar),
+   13630:129999 (Similar Products Container).
+   Every selector is scoped under .pdp. The iOS glass header (body.ui-ios ...) and the Duo
+   skins (body.duo-device / body.layout-duo) keep winning on specificity; the only
+   body.ui-ios rules below show/hide the SoT-only elements this file introduces. */
+
+/* ------------------------------------------------------------------ App Bar (56px) */
+/* 16px padding all round, 24px icons, 1px #CECEDE bottom stroke inside the 56px bar */
+.pdp .pdp-header {
+  padding: 16px 16px 15px;
+  padding-top: calc(16px + var(--safe-top));
+  background: var(--white);
+  border-bottom: 1px solid #CECEDE;
+}
+
+/* action icons: 24px glyph boxes, 12px apart; the button keeps a 36px tap area that
+   takes up only 24px in the row (6px padding, -6px margin) */
+.pdp .pdp-actions {
+  gap: 12px;
+}
+
+.pdp .pdp-actions button {
+  width: 36px;
+  height: 36px;
+  margin: -6px;
+  padding: 6px;
+}
+
+/* the filled (wishlisted) heart is still the code icon: 24px box = 20x18 glyph, as in the SoT */
+.pdp .pdp-actions svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* SoT icons (Android skin). The old line icons stay in the markup for the iOS glass skin. */
+.pdp .pdps-appbar-legacy {
+  display: none;
+}
+
+.pdp .pdps-appbar-img {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.pdp .pdps-appbar-img--wishlist {
+  width: 19.99px;
+  height: 18px;
+}
+
+/* cart glyph sits at (2.25, 2.75) in its 24px box, not dead centre */
+.pdp .pdps-appbar-img--cart {
+  width: 19.68px;
+  height: 18px;
+  margin: -0.5px 0 0 0.18px;
+}
+
+/* the language icon is exported as its whole 24px box */
+.pdp .pdps-appbar-img--language {
+  width: 24px;
+  height: 24px;
+}
+
+/* iOS glass skin: keep its own icons and capsules exactly as before */
+body.ui-ios .pdp .pdps-appbar-legacy {
+  display: contents;
+}
+
+body.ui-ios .pdp .pdps-appbar-img,
+body.ui-ios .pdp .pdps-appbar-lang {
+  display: none;
+}
+
+/* ------------------------------------------------------------------ Hero (phone layout) */
+/* square image, photo fills it (cover, anchored to the top as in the SoT crop) */
+.pdp:not(.pdp--web) .pdp-hero {
+  margin-bottom: 12px; /* 8px gap + 4px progress bar, drawn below the image */
+}
+
+.pdp:not(.pdp--web) .pdp-hero-slide img {
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+/* the row no longer overlays the photo: it becomes the progress bar 8px under the image */
+.pdp:not(.pdp--web) .pdp-hero-row {
+  top: calc(100% + 8px);
+  bottom: auto;
+  height: 4px;
+  padding: 0;
+  gap: 0;
+  justify-content: center;
+  background: none;
+}
+
+/* Carousel indicator: 8x4 pills, active 12x4 Jamun, 4px apart */
+.pdp:not(.pdp--web) .pdp-dots {
+  gap: 4px;
+}
+
+.pdp:not(.pdp--web) .pdp-dot {
+  width: 8px;
+  height: 4px;
+  padding: 0;
+  border-radius: 4px;
+  background: #F0F0F0;
+  transition: width 0.2s, background 0.2s;
+}
+
+.pdp:not(.pdp--web) .pdp-dot.active {
+  width: 12px;
+  border-radius: 4px;
+  background: var(--jamun-base);
+}
+
+/* "More Like This" stays on the photo, 12px from its bottom-right corner
+   (the row's bottom edge is 12px below the photo, hence 24px) */
+.pdp:not(.pdp--web) .pdp-more-like {
+  position: absolute;
+  right: 12px;
+  bottom: 24px;
+}
+
+/* ------------------------------------------------------------------ More Like This pill */
+.pdp .pdp-more-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 4px;
+  background: var(--white);
+  border-radius: 23px;
+  box-shadow: 0 1px 4px 0 rgba(51, 51, 51, 0.12);
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+.pdp .pdps-more-like-icon {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 18px;
+}
+
+/* ------------------------------------------------------------------ Similar Products strip */
+/* 12px under the progress bar; 12px to the title below is the next block's top padding */
+.pdp:not(.pdp--web) .pdp-similar {
+  position: relative;
+  padding: 12px 16px 0;
+  overflow-x: clip; /* the 60px chevron asset (shadow) would otherwise stick out 10px past the screen */
+}
+
+.pdp:not(.pdp--web) .pdp-similar-head {
+  margin-bottom: 8px;
+}
+
+.pdp:not(.pdp--web) .pdp-similar-title {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t1);
+}
+
+.pdp:not(.pdp--web) .pdp-similar-row {
+  gap: 8px;
+}
+
+.pdp:not(.pdp--web) .pdp-similar-thumb {
+  width: 48px;
+  height: 64px;
+  border: 1px solid #CECEDE;
+  border-radius: 4px;
+}
+
+.pdp:not(.pdp--web) .pdp-similar-thumb--current {
+  border: 1px solid var(--jamun-base);
+}
+
+/* round "next" chevron, 8px from the screen edge, centred on the 64px thumbnails */
+.pdp .pdps-similar-next {
+  position: absolute;
+  right: 8px;
+  bottom: 20px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  z-index: 1;
+}
+
+/* the exported asset is 60x60: a 24px white circle at (18,16) plus its FAB shadow */
+.pdp .pdps-similar-next img {
+  position: absolute;
+  left: -18px;
+  top: -16px;
+  width: 60px;
+  height: 60px;
+  max-width: none;
+  pointer-events: none;
+}

@@ -1,0 +1,573 @@
+/* =====================================================================
+   Payment page — SoT "top" section
+   Meesho Design SoT (fdR1rJfu0Yszfeb1Em0Hma), frames 167:26405 / 167:26572:
+     167:26436  app bar + Review -> Payment stepper + divider
+     167:26459  "Select payment method"
+     167:26460  COD Card            (collapsed)
+     167:26486  Pay Online Card     (collapsed)
+   Every selector is scoped under .payment-page. The header rules are gated on
+   body:not(.ui-ios) (the Meesho / Android skin): the Liquid Glass skin and the
+   iPhone Duo layouts (which always carry the glass skin) keep their own bar,
+   stepper and footer untouched.
+   Figma "Book" = 400, "Demi" = 600, "Bold" = 700 (Mier B02).
+   Inside-stroke maths: Figma measures padding from the card's outer edge, so the
+   CSS paddings below are the Figma values minus the 1px border.
+   ===================================================================== */
+
+/* SoT gutters between page blocks are 8px (header 105 -> first section 113).
+   Set on the body (not the root) so it beats PaymentPage.css by specificity,
+   whatever order the stylesheets load in. */
+.payment-page .payment-page-body {
+  --review-section-gap: 8px;
+}
+
+/* ---------- App bar (Appbar 167:26437, Android skin only) ---------- */
+body:not(.ui-ios) .payment-page .payment-page-header {
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  min-height: 0;
+  padding: var(--safe-top, 0) 0 0;
+  background: var(--white);
+  /* Divider 167:26457 under the stepper */
+  border-bottom: 1px solid #cecede;
+}
+
+body:not(.ui-ios) .payment-page .payment-page-header-main {
+  flex: 1 1 100%;
+  gap: 8px;
+  height: 56px;
+  padding: 0 16px;
+  /* the app bar's own full-width divider (y 55) */
+  border-bottom: 1px solid #cecede;
+  box-sizing: border-box;
+}
+
+body:not(.ui-ios) .payment-page .payment-page-back {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+body:not(.ui-ios) .payment-page .pays-appbar-back {
+  display: block;
+  width: 8px;
+  height: 16px;
+  max-width: none;
+}
+
+/* Subtitles/Subtitle2.Caps — Demi 13/16, 0.5% tracking, uppercase */
+body:not(.ui-ios) .payment-page .payment-page-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+  text-transform: uppercase;
+  color: var(--grey-base);
+}
+
+/* the "STEP 2/2" pill gives way to the SoT stepper row on the Meesho skin */
+body:not(.ui-ios) .payment-page .payment-page-step {
+  display: none;
+}
+
+/* ---------- Stepper (167:26438, 48px row) ----------
+   Node centres sit at x 86 and x 273 of the 360 frame; the grey track runs
+   79 -> 276 (1px) and the blue progress 79 -> 264 (2px), both at y 16. */
+.payment-page .pays-stepper {
+  --pays-step-done-x: 23.889%; /* 86 / 360 */
+  --pays-step-current-x: 75.833%; /* 273 / 360 */
+  position: relative;
+  flex: 1 1 100%;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--white);
+}
+
+body.ui-ios .payment-page .pays-stepper {
+  display: none;
+}
+
+.payment-page .pays-stepper::before,
+.payment-page .pays-stepper::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: calc(var(--pays-step-done-x) - 7px);
+}
+
+.payment-page .pays-stepper::before {
+  width: calc(var(--pays-step-current-x) - var(--pays-step-done-x) + 10px);
+  height: 1px;
+  background: #cecede;
+}
+
+.payment-page .pays-stepper::after {
+  width: calc(var(--pays-step-current-x) - var(--pays-step-done-x) - 2px);
+  height: 2px;
+  background: var(--blue-base);
+}
+
+.payment-page .pays-stepper-step {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.payment-page .pays-stepper-step--done {
+  left: var(--pays-step-done-x);
+}
+
+.payment-page .pays-stepper-step--current {
+  left: var(--pays-step-current-x);
+}
+
+.payment-page .pays-stepper-node {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* the exported ovals carry their 1.5px stroke outside the 16px box (inset -4.69%) */
+.payment-page .pays-stepper-node img {
+  position: absolute;
+  top: -0.75px;
+  left: -0.75px;
+  width: 17.5px;
+  height: 17.5px;
+  max-width: none;
+}
+
+/* Caption/Caption3 — Demi 10/12, 1.2% tracking */
+.payment-page .pays-stepper-num {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  text-align: center;
+  color: var(--blue-base);
+}
+
+/* Overline — Book 11/16, 2% tracking */
+.payment-page .pays-stepper-label {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--grey-t2);
+}
+
+.payment-page .pays-stepper-step--current .pays-stepper-label {
+  color: var(--blue-base);
+}
+
+/* ---------- 3-step stepper (cart flow: Cart -> Review -> Payment) ----------
+   Cart file utVjj3B1srPjlUd1kWDvGs, Payment 1:834: node centres at x 40 / 180 / 320 of
+   the 360 frame, a 1.5px grey track 33 -> 327 at y 16. Cart and Review are done; the
+   blue progress runs on to the current Payment node like the two-step bar (33 -> 311). */
+.payment-page .pays-stepper--3 {
+  --pays-step-done-x: 11.111%; /* 40 / 360 — Cart */
+  --pays-step-mid-x: 50%; /* 180 / 360 — Review */
+  --pays-step-current-x: 88.889%; /* 320 / 360 — Payment */
+}
+
+.payment-page .pays-stepper--3::before {
+  width: calc(var(--pays-step-current-x) - var(--pays-step-done-x) + 14px);
+  height: 1.5px;
+}
+
+.payment-page .pays-stepper--3::after {
+  height: 1.5px;
+}
+
+/* the second done node (Review) sits mid-row */
+.payment-page .pays-stepper--3 .pays-stepper-step:nth-child(2) {
+  left: var(--pays-step-mid-x);
+}
+
+/* ---------- "Select payment method" (167:26459) ---------- */
+/* Subtitles/Subtitle1 — Demi 15/20; title at y 16, first card at y 52 */
+.payment-page .payment-page-methods-heading {
+  margin: 0 0 16px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* cards are 16px apart (COD 52 -> 120, Pay Online 136) */
+.payment-page .payment-page-method-list,
+.payment-page .payment-page-prepaid-list {
+  gap: 16px;
+}
+
+/* ---------- Payment option cards (COD 167:26460 / Pay Online 167:26486) ---------- */
+.payment-page .pays-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 1px solid #cecede;
+  border-radius: 8px;
+  background: var(--white);
+  /* Effect "Top Navbar": #3333331F, y 1, blur 4 */
+  box-shadow: 0 1px 4px rgba(51, 51, 51, 0.12);
+  overflow: hidden;
+  text-align: left;
+}
+
+/* price | 36px dashed divider | label + icon … radio — 12px gaps, 12px insets */
+.payment-page .pays-card .payment-method-card-main {
+  display: grid;
+  grid-template-columns: auto 0 minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0 12px;
+  padding: 15px 11px;
+}
+
+/* Pay Online geometry: price stack 16 -> 68 at x 11, divider 20 -> 56 at x 72,
+   label 24 -> 52 at x 84, radio 28 -> 48 — i.e. everything but the price stack
+   centres on y 38 and the main row ends at y 80. */
+.payment-page .pays-card--discount .payment-method-card-main {
+  padding: 11px 11px 16px 10px;
+}
+
+.payment-page .pays-card--discount .payment-method-price-col {
+  margin: 4px -1px -4px 0;
+}
+
+.payment-page .pays-card .payment-method-price-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  min-width: 0;
+}
+
+/* strike price: Demi 12/20 trimmed to the cap height (8px box), Grey/T1 */
+.payment-page .pays-card .payment-method-compare {
+  height: 8px;
+  font: 600 12px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t1);
+  text-align: center;
+  text-decoration: line-through;
+  text-decoration-skip-ink: none;
+  text-box: trim-both cap alphabetic;
+  white-space: nowrap;
+}
+
+@supports not (text-box: trim-both cap alphabetic) {
+  .payment-page .pays-card .payment-method-compare {
+    line-height: 8px;
+  }
+}
+
+/* Headers/Headline6.Web — Bold 20/28 */
+.payment-page .pays-card .payment-method-payable {
+  font: 700 20px/28px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.payment-page .pays-card .payment-method-payable--discount {
+  color: var(--green-base);
+}
+
+/* Save pill: Green/T2 fill, 2/4 padding, r4, Caption3 Demi 10/12 */
+.payment-page .pays-card .payment-method-save {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: var(--green-t2);
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--green-base);
+  white-space: nowrap;
+}
+
+.payment-page .pays-card .payment-method-save--hidden {
+  display: none;
+}
+
+/* Vector 941 — 36px dashed stroke (#CECEDE, 0.5px), exported horizontal, stood upright */
+.payment-page .pays-card .pays-card-divider {
+  position: relative;
+  align-self: center;
+  width: 0;
+  height: 36px;
+  min-height: 0;
+  background: none;
+}
+
+.payment-page .pays-card .pays-card-divider img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36.5px;
+  height: 0.5px;
+  max-width: none;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.payment-page .pays-card .payment-method-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Subtitles/Subtitle1 — Demi 15/20; icon 8px after the title */
+.payment-page .pays-card .payment-method-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* Meesho Pay Later "Pay before …" (no SoT counterpart) — Caption1 Book 13/16 */
+.payment-page .pays-card .payment-method-sub {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-t1);
+}
+
+/* COD cash icon — 24px roundel (white, 0.5px #EAEAF2 ring baked into the export) */
+.payment-page .pays-card .pays-card-icon {
+  flex: none;
+  display: block;
+  width: 24px;
+  height: 24px;
+  max-width: none;
+}
+
+/* Pay Online "GIF" (286:7195): 24px roundel clipping a strip of four 24.5px UPI
+   marks 8.167px apart — BHIM, Google Pay, PhonePe, Paytm. The strip steps one
+   mark at a time (a fifth BHIM copy closes the loop seamlessly). */
+.payment-page .pays-upi-gif {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 0.5px solid var(--grey-t4-bg);
+  border-radius: 12px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.payment-page .pays-upi-gif-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8.167px;
+  animation: pays-upi-gif 7.5s ease-in-out infinite;
+}
+
+.payment-page .pays-upi-gif-frame {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 24.5px;
+  height: 24.5px;
+  overflow: hidden;
+}
+
+.payment-page .pays-upi-gif-frame img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.payment-page .pays-upi-gif-frame--bhim img {
+  left: -5.26%;
+  top: -5.26%;
+  width: 110.53%;
+  height: 110.53%;
+}
+
+.payment-page .pays-upi-gif-frame--gpay {
+  border-radius: 12.25px;
+}
+
+.payment-page .pays-upi-gif-frame--gpay img {
+  left: -22.02%;
+  top: -4.05%;
+  width: 144.03%;
+  height: 108.11%;
+}
+
+.payment-page .pays-upi-gif-frame--phonepe {
+  border-radius: 12.25px;
+}
+
+.payment-page .pays-upi-gif-frame--phonepe img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.payment-page .pays-upi-gif-frame--paytm {
+  background: var(--white);
+}
+
+.payment-page .pays-upi-gif-paytm-clip {
+  position: absolute;
+  top: 2.04px;
+  left: 0;
+  width: 24.5px;
+  height: 20.417px;
+  border-radius: 18.548px;
+  overflow: hidden;
+}
+
+.payment-page .pays-upi-gif-frame--paytm img {
+  left: -2.63%;
+  top: 19.91%;
+  width: 105.26%;
+  height: 60.17%;
+}
+
+@keyframes pays-upi-gif {
+  0%,
+  20% {
+    transform: translateX(0);
+  }
+  25%,
+  45% {
+    transform: translateX(-32.667px);
+  }
+  50%,
+  70% {
+    transform: translateX(-65.334px);
+  }
+  75%,
+  95% {
+    transform: translateX(-98px);
+  }
+  100% {
+    transform: translateX(-130.668px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .payment-page .pays-upi-gif-track {
+    animation: none;
+  }
+}
+
+/* Radio — "Line Icons" check: 20px, Grey/T1 ring (off) / Jamun disc + tick (on) */
+.payment-page .pays-card .payment-method-radio,
+.payment-page .pays-card.payment-method-card--selected .payment-method-radio {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.payment-page .pays-card .pays-card-radio {
+  display: block;
+  width: 20px;
+  height: 20px;
+  max-width: none;
+}
+
+/* selected card: Jamun 1px outline (SoT 167:26628) */
+.payment-page .pays-card.payment-method-card--selected {
+  border-color: var(--jamun-base);
+  border-width: 1px;
+}
+
+/* prepaid step: the selected Pay Online card sits inside its outlined wrap */
+.payment-page .payment-page-pay-online-wrap:not(.payment-page-pay-online-wrap--selected) {
+  box-shadow: 0 1px 4px rgba(51, 51, 51, 0.12);
+}
+
+.payment-page .payment-page-pay-online-wrap--selected > .pays-card {
+  border: 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: none;
+}
+
+/* ---------- card foot strips (bank offers 33:10775 + Store Pickup notes) ---------- */
+/* Grey/T5 fill, 8/12 padding, 14px icon + 4px gap, Caption1 Book 13/16 Grey/T1;
+   the last strip is 31px so the card's inside stroke overlaps it (card = 112px) */
+.payment-page .pays-card .payment-method-offers,
+.payment-page .pays-card .payment-method-note {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 0;
+  padding: 8px 11px;
+  border-top: 0;
+  background: var(--grey-t5-subdued);
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-t1);
+}
+
+.payment-page .pays-card .payment-method-offers:last-child,
+.payment-page .pays-card .payment-method-note:last-child {
+  padding-bottom: 7px;
+}
+
+/* inside the outlined wrap the card has no stroke of its own: full 32px strip */
+.payment-page .payment-page-pay-online-wrap--selected > .pays-card .payment-method-offers:last-child {
+  padding-bottom: 8px;
+}
+
+.payment-page .pays-card .payment-method-note + .payment-method-offers {
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+.payment-page .pays-card .payment-method-note--good {
+  color: var(--grey-base);
+}
+
+.payment-page .pays-card .pays-card-strip-icon {
+  flex: none;
+  display: block;
+  width: 14px;
+  height: 14px;
+  max-width: none;
+}
+
+/* View Offers (selected instance 300:13229): Book 13/16 Green, dashed 0.8px underline */
+.payment-page .pays-card .payment-method-view-offers {
+  position: relative;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--green-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Line 140: 0.8px dashed rule straddling the text box's bottom edge (inset -0.4px) */
+.payment-page .pays-card .payment-method-view-offers::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.4px;
+  height: 0.8px;
+  background: url('../../assets/payment-sot/top/view-offers-underline.svg') 0 0 / 100% 100% no-repeat;
+}

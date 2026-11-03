@@ -1,0 +1,1089 @@
+/* =====================================================================
+   iPhone Duo — FOLDED outer screen layout (body.layout-duo)
+   Source: Figma "meesho meets apple duo" (hQTO0whRosAiqcnNlfHCg8, section 17-62620)
+   The screen is wider and shorter than a phone; app content stays in a left
+   column while ALL navigation chrome moves into the right-hand rail
+   (src/components/DuoRail.jsx). Composes with the iOS glass skin.
+   ===================================================================== */
+
+body.layout-duo {
+  --duo-rail-w: 76px; /* right rail band from the column edge to the screen edge */
+}
+
+/* the screen width comes from the posture geometry (set on .duo-device) */
+body.layout-duo .app {
+  --duo-col-w: calc(var(--duo-screen-w) - var(--duo-rail-w));
+}
+
+/* The rail is transparent glass: vertically stacked content keeps the right margin
+   (each page root reserves the rail band), while horizontal strips may run beneath it. */
+body.layout-duo .home,
+body.layout-duo .pdp,
+body.layout-duo .olp,
+body.layout-duo .odp,
+body.layout-duo .review-page,
+body.layout-duo .order-success {
+  padding-right: var(--duo-rail-w);
+  box-sizing: border-box;
+}
+
+body.layout-duo .review-page {
+  max-width: none;
+}
+
+/* pages with a grey surface: the rail band stays white, like Home and the PDP */
+body.layout-duo .olp,
+body.layout-duo .odp,
+body.layout-duo .review-page {
+  background: linear-gradient(
+    90deg,
+    var(--grey-t4-bg) 0,
+    var(--grey-t4-bg) calc(100% - var(--duo-rail-w)),
+    var(--white) calc(100% - var(--duo-rail-w))
+  );
+}
+
+/* horizontal scrollers bleed under the rail and stay scrollable there */
+body.layout-duo .home-categories {
+  margin-right: calc(-1 * var(--duo-rail-w));
+}
+
+/* top bars: the glass surface continues under the rail, the controls keep the margin */
+body.layout-duo .olp-header,
+body.layout-duo .odp-header,
+body.layout-duo .review-shell-header,
+body.layout-duo .payment-page-header,
+body.layout-duo .review-v4-header {
+  margin-right: calc(-1 * var(--duo-rail-w));
+  padding-right: calc(16px + var(--duo-rail-w));
+}
+
+/* fixed chrome spans the whole folded screen */
+body.layout-duo .home-header,
+body.layout-duo .pdp-cta-wrap,
+body.layout-duo .review-shell-footer,
+body.layout-duo .dtr-footer,
+body.layout-duo .payment-page-footer,
+body.layout-duo .review-v4-footer,
+body.layout-duo .odp-sticky,
+body.layout-duo .review-shell-address-dock {
+  max-width: var(--duo-screen-w);
+}
+
+/* chrome that moved into the rail */
+body.layout-duo .bottom-nav,
+body.layout-duo .bottom-nav-wash,
+body.layout-duo .home-header-row,
+body.layout-duo .home-actions,
+body.layout-duo .pdp-actions,
+body.layout-duo .pdp-back,
+body.layout-duo .odp-back,
+body.layout-duo .review-shell-back,
+body.layout-duo .payment-page-back,
+body.layout-duo .review-v4-back,
+body.layout-duo .glass-nav-spacer,
+body.layout-duo .glass-stepper,
+body.layout-duo .pdp-header {
+  display: none !important;
+}
+
+/* a STEP pill that exists only for the folded layout */
+.review-shell-step--duo {
+  display: none !important;
+}
+
+/* the Meesho STEP pill returns in place of the stepper (per the Duo frames) */
+body.layout-duo .review-shell-step,
+body.layout-duo .review-shell-step--duo,
+body.layout-duo .payment-page-step {
+  display: inline-flex !important;
+}
+
+body.layout-duo .review-shell-step-spacer {
+  display: none !important;
+}
+
+/* no bottom tab bar → no bottom reserve beyond breathing room */
+body.layout-duo .has-bottom-nav {
+  padding-bottom: calc(24px + var(--safe-bottom, 0px)) !important;
+}
+
+/* ---- Home: pill + mic row only, wash spans the rail too ---- */
+body.layout-duo .home {
+  padding-top: calc(88px + var(--safe-top, 0px));
+  --home-sticky-header-h: calc(88px + var(--safe-top, 0px));
+}
+
+body.layout-duo .home-header {
+  padding: calc(24px + var(--safe-top, 0px)) calc(var(--duo-rail-w) + 16px) 16px 16px;
+}
+
+body.layout-duo .home-header .home-search-wrap {
+  margin-top: 0;
+}
+
+body.layout-duo .home-header--collapsed {
+  padding-bottom: 16px;
+}
+
+body.layout-duo .home-header--collapsed::after {
+  opacity: 0;
+}
+
+body.layout-duo .home-header--collapsed::before {
+  opacity: 1;
+}
+
+body.layout-duo .home-header--collapsed {
+  background-color: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+}
+
+body.layout-duo .home--search {
+  padding-top: calc(92px + var(--safe-top, 0px));
+  --home-sticky-header-h: calc(92px + var(--safe-top, 0px));
+}
+
+/* ---- top bars: titles sit left, single row ---- */
+body.layout-duo .olp-title,
+body.layout-duo .odp-title,
+body.layout-duo .review-shell-title,
+body.layout-duo .payment-page-title,
+body.layout-duo .review-v4-title {
+  text-align: left;
+}
+
+body.layout-duo .review-shell-header,
+body.layout-duo .payment-page-header,
+body.layout-duo .review-v4-header {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+body.layout-duo .review-shell-header-main,
+body.layout-duo .payment-page-header-main,
+body.layout-duo .review-v4-header-main {
+  flex: 1 1 auto;
+}
+
+/* ---- PDP: no top bar, hero flush; footer CTAs are pills on the folded screen ---- */
+body.layout-duo .pdp-hero {
+  margin-top: 0;
+}
+
+/* (every Duo posture, Portrait and Laptop included, so CTA corners match everywhere) */
+body.duo-device .pdp-cta-wrap .pdp-add-to-cart,
+body.duo-device .pdp-cta-wrap .pdp-buy-now {
+  border-radius: 24px;
+}
+
+/* ---- sheets ---- */
+/* the buy-now sheet spans the whole folded screen and keeps its own close */
+body.layout-duo .buy-now-sheet {
+  max-width: var(--duo-screen-w);
+}
+
+/* the address picker becomes a full-height page; its close moves into the rail */
+body.layout-duo .address-picker-backdrop {
+  align-items: stretch;
+}
+
+body.layout-duo .address-picker-sheet {
+  max-width: var(--duo-screen-w);
+  max-height: none;
+  min-height: 100%;
+  padding: calc(24px + var(--safe-top, 0px)) calc(var(--duo-rail-w) + 16px) calc(16px + var(--safe-bottom, 0px)) 16px;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+body.layout-duo .address-picker-handle,
+body.layout-duo .address-picker-close {
+  display: none;
+}
+
+body.layout-duo .address-picker-title {
+  font: var(--subtitle1);
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+/* ---- page-footer CTAs are 48px pills on every Duo posture (Figma r24) ---- */
+body.duo-device .dtr-footer-continue,
+body.duo-device .review-shell-footer .review-shell-confirm,
+body.duo-device .payment-page-footer .review-shell-confirm,
+body.duo-device .review-v4-footer .review-shell-confirm {
+  border-radius: 24px;
+}
+
+/* ---- sheet scrims use the Figma Duo dim (#353543 @ 90%) ---- */
+body.layout-duo .buy-now-sheet-backdrop,
+body.layout-duo .address-picker-backdrop {
+  background: rgba(53, 53, 67, 0.9);
+}
+
+/* =====================================================================
+   PDP on the unfolded landscape display: a website-style product page.
+   Left (sticky, screen-tall): image · similar products · colour/size · buy buttons
+   Right (scrolls): title & price · seller · product details · ratings & reviews
+   Then a full-width "Products for you" grid, four per row.
+   ===================================================================== */
+body.duo-device .app .pdp.pdp--web {
+  padding-bottom: 24px;
+}
+
+.pdp-web {
+  display: grid;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  align-items: start;
+  border-bottom: 8px solid var(--grey-t4-bg);
+}
+
+.pdp-web-left {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: var(--duo-screen-h, 100dvh);
+  overflow-y: auto;
+  scrollbar-width: none;
+  border-right: 1px solid var(--grey-t3-divider);
+  background: var(--white);
+}
+
+.pdp-web-left::-webkit-scrollbar {
+  display: none;
+}
+
+/* the hero takes whatever height is left after the details below it */
+body.duo-device .pdp-web-left .pdp-hero {
+  flex: 1 1 0;
+  min-height: 170px;
+  max-height: none;
+  aspect-ratio: auto;
+}
+
+.pdp-web-variants {
+  padding: 4px 16px 0;
+}
+
+.pdp-web-variants .pdp-color-section,
+.pdp-web-variants .pdp-vsku {
+  margin-top: 8px;
+}
+
+/* buy buttons sit in the column, under the size they act on (no full-width bar) */
+body.duo-device .app .pdp--web .pdp-web-left .pdp-cta-wrap {
+  /* always reachable: pinned to the bottom of the left column if its content runs long */
+  position: sticky;
+  left: auto;
+  bottom: 0;
+  transform: none;
+  width: auto;
+  z-index: 2;
+  margin-top: auto;
+  padding: 12px 16px 16px;
+  background: var(--white);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-top: none;
+}
+
+.pdp-web-right {
+  min-width: 0;
+}
+
+.pdp-web-right .pdp-info {
+  padding-top: 20px;
+}
+
+/* the "Products for you" grid spans the full width, four up */
+.pdp--web .pdp-also-viewed {
+  padding-top: 16px;
+}
+
+.pdp--web .pdp-also-viewed h3 {
+  font: 600 17px/22px var(--font-mier);
+}
+
+/* ---- the hinge splits the inner display into two regions (Apple) ----
+   Open full screen and Book share one layout: the PDP's two columns and the 2 + 2 grids meet
+   exactly at the hinge, so folding Open → Book never moves a column.
+   (Keyed on the committed layout on <body>, which stays put while the chassis turns.) */
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full'] .pdp-web {
+  grid-template-columns: var(--duo-hinge-x) minmax(0, 1fr);
+}
+
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full']
+  :is(.home-grid, .pdp-also-grid).product-card-masonry--wide
+  > .product-card-column:nth-child(-n + 2) {
+  flex: 0 0 calc(var(--duo-hinge-x) / 2);
+}
+
+body:is([data-posture='book'], [data-posture='landscape'])[data-split='full']
+  :is(.home-grid, .pdp-also-grid).product-card-grid--wide {
+  grid-template-columns:
+    calc(var(--duo-hinge-x) / 2) calc(var(--duo-hinge-x) / 2)
+    minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* PDP "Products for you": uniform-grid card variants go N-up on the wide display too */
+.pdp-also-viewed .pdp-also-grid.product-card-grid--wide {
+  grid-template-columns: repeat(var(--grid-cols, 2), minmax(0, 1fr));
+}
+
+.pdp-also-viewed .product-card-grid.product-card-grid--wide .product-card:nth-child(2n) {
+  border-right: 1px solid var(--grey-t3-divider);
+}
+
+.pdp-also-viewed .product-card-grid.product-card-grid--cols-4 .product-card:nth-child(4n) {
+  border-right: none;
+}
+
+.pdp-also-viewed .product-card-grid.product-card-grid--cols-4 .product-card:nth-last-child(-n + 4) {
+  border-bottom: none;
+}
+
+/* ---- split view, app on the left: everything that hugs the rail mirrors to the left ---- */
+.duo-stage[data-split='left'] .home,
+.duo-stage[data-split='left'] .pdp,
+.duo-stage[data-split='left'] .olp,
+.duo-stage[data-split='left'] .odp,
+.duo-stage[data-split='left'] .review-page,
+.duo-stage[data-split='left'] .order-success {
+  padding-right: 0;
+  padding-left: var(--duo-rail-w);
+}
+
+.duo-stage[data-split='left'] .olp,
+.duo-stage[data-split='left'] .odp,
+.duo-stage[data-split='left'] .review-page {
+  background: linear-gradient(
+    90deg,
+    var(--white) 0,
+    var(--white) var(--duo-rail-w),
+    var(--grey-t4-bg) var(--duo-rail-w)
+  );
+}
+
+.duo-stage[data-split='left'] .home-categories {
+  margin-right: 0;
+  margin-left: calc(-1 * var(--duo-rail-w));
+  padding-left: calc(16px + var(--duo-rail-w));
+}
+
+.duo-stage[data-split='left'] .olp-header,
+.duo-stage[data-split='left'] .odp-header,
+.duo-stage[data-split='left'] .review-shell-header,
+.duo-stage[data-split='left'] .payment-page-header,
+.duo-stage[data-split='left'] .review-v4-header {
+  margin-right: 0;
+  margin-left: calc(-1 * var(--duo-rail-w));
+  padding-right: 16px;
+  padding-left: calc(16px + var(--duo-rail-w));
+}
+
+.duo-stage[data-split='left'] .home-header {
+  padding-right: 16px;
+  padding-left: calc(var(--duo-rail-w) + 16px);
+}
+
+.duo-stage[data-split='left'] .address-picker-sheet {
+  padding-right: 16px;
+  padding-left: calc(var(--duo-rail-w) + 16px);
+}
+
+/* title / price / rating in the left column, under the similar products */
+.pdp-web-left .pdp-web-info {
+  padding: 12px 16px 4px;
+  border-bottom: none;
+}
+
+/* the right column now opens with the seller row */
+.pdp-web-right > :first-child {
+  border-top: none;
+}
+
+/* =====================================================================
+   Portrait / Laptop (inner display upright): the system status (time + signal) sits in the
+   top bar's right corner (Figma "Vertical Bar / Inner - Portrait"), so every top bar keeps
+   clear of it. The trailing icons stay separate glass circles (Praharsh: don't combine).
+   ===================================================================== */
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) {
+  /* status (time 31 + gap 6 + ring 46 = 83) + the 12px gap the bar's own controls use */
+  --duo-status-w: 95px;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header-row {
+  padding-right: var(--duo-status-w);
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) :is(.home-header--collapsed, .home-header--search) .home-search-wrap {
+  margin-right: var(--duo-status-w);
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop'])
+  :is(.pdp-header, .olp-header, .odp-header, .review-shell-header, .payment-page-header, .review-v4-header) {
+  padding-right: calc(var(--glass-inset-x, 16px) + var(--duo-status-w));
+}
+
+/* =====================================================================
+   Stand: the camera sits in the bottom-right corner, so bottom-anchored chrome (CTA
+   footers, docks, the out-of-stock toast, bottom sheets) ends before the rail band —
+   the bar and its own padding stop short of the camera instead of running under it.
+   ===================================================================== */
+body.layout-duo[data-posture='stand'] .app :is(
+  .pdp-cta-wrap,
+  .review-shell-footer,
+  .review-shell-address-dock,
+  .dtr-footer,
+  .payment-page-footer,
+  .review-v4-footer,
+  .odp-sticky
+) {
+  left: 0;
+  right: var(--duo-rail-w);
+  width: auto;
+  max-width: none;
+  transform: none;
+}
+
+body.layout-duo[data-posture='stand'] .app .pdp-oos-toast {
+  left: 0;
+  right: var(--duo-rail-w);
+  width: auto;
+  max-width: none;
+  transform: none;
+}
+
+/* ---- Stand sheets fill the page (Figma "iPhone Duo/Sheets/Outer - Landscape") ----
+   8pt from the top and sides, a large top radius, the title on the left, the close in the
+   right-hand column (on the rail axis, level with the title) and the content kept inside
+   the safe area: 28pt from the left edge, clear of the column, the CTA pinned to the bottom
+   and ending before the camera. */
+body.layout-duo[data-posture='stand'] {
+  --stand-sheet-inset: 8px;
+  --stand-sheet-col: calc(var(--duo-rail-w) - var(--stand-sheet-inset)); /* column inside the sheet */
+}
+
+body.layout-duo[data-posture='stand'] .app :is(
+  .buy-now-sheet-backdrop,
+  .cod-switch-backdrop,
+  .upi-sheet-backdrop,
+  .dtr-stores-backdrop,
+  .payment-offers-backdrop,
+  .dil-sheet-backdrop,
+  .odp-sheet-backdrop
+) {
+  align-items: stretch;
+  justify-content: stretch;
+  padding: var(--stand-sheet-inset) var(--stand-sheet-inset) 0;
+}
+
+body.layout-duo[data-posture='stand'] .app :is(
+  .buy-now-sheet,
+  .cod-switch-sheet,
+  .upi-sheet,
+  .dtr-stores-sheet,
+  .payment-offers-sheet,
+  .dil-sheet,
+  .odp-sheet
+) {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border-radius: 34px 34px 0 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* sheets that pad themselves: 20 + 8 = 28pt from the screen edge, content ends at the column */
+body.layout-duo[data-posture='stand'] .app :is(.buy-now-sheet, .payment-offers-sheet, .dil-sheet, .odp-sheet) {
+  padding: 28px var(--stand-sheet-col) 20px 20px;
+}
+
+/* sheets whose sections pad themselves (16px): only the difference is added */
+body.layout-duo[data-posture='stand'] .app :is(.cod-switch-sheet, .upi-sheet, .dtr-stores-sheet) {
+  padding: 12px calc(var(--stand-sheet-col) - 16px) 0 4px;
+}
+
+/* the grab handle has no place on a full-page sheet */
+body.layout-duo[data-posture='stand'] .app :is(.buy-now-sheet-handle, .cod-switch-handle, .odp-sheet-handle) {
+  display: none;
+}
+
+/* the title row: 40pt tall, its centre 48pt below the sheet's top edge (Figma) */
+body.layout-duo[data-posture='stand'] .app .buy-now-sheet-header {
+  min-height: 40px;
+  margin-bottom: 16px;
+}
+
+/* close: a 40pt glass circle on the rail axis in the right-hand column */
+body.layout-duo[data-posture='stand'] .app :is(.buy-now-sheet-close, .cod-switch-close, .upi-sheet-close, .dtr-stores-close) {
+  position: absolute;
+  top: 28px;
+  /* the rail axis is 28px in from the column's inner edge (48px from the screen edge) */
+  right: calc(var(--duo-rail-w) - 28px - var(--stand-sheet-inset) - 20px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+}
+
+/* the UPI sheet's top bar only held the close: collapse it, and centre the logo + title row
+   on the close's line (12 sheet + 12 body padding + 24 = 48) */
+body.layout-duo[data-posture='stand'] .app .upi-sheet-topbar {
+  min-height: 0;
+  height: 0;
+  padding: 0;
+  border-bottom: none;
+}
+
+body.layout-duo[data-posture='stand'] .app .upi-sheet-body {
+  padding-top: 12px;
+}
+
+body.layout-duo[data-posture='stand'] .app .upi-sheet-row {
+  align-items: center;
+}
+
+/* the wishlist drawer's last item scrolls clear of the camera */
+body.layout-duo[data-posture='stand'] .app .wishlist-drawer-list {
+  padding-bottom: calc(25px + 44px + 12px);
+}
+
+/* the store picker's list takes the free height and scrolls; its header keeps clear of the close */
+body.layout-duo[data-posture='stand'] .app .dtr-stores-head {
+  min-height: 72px; /* 16 + 40 + 16 (border-box): the title's centre lands level with the close */
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: none;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-stores-list {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* CTAs sit at the bottom of the page-tall sheet */
+body.layout-duo[data-posture='stand'] .app :is(
+  .buy-now-sheet-cta,
+  .cod-switch-actions,
+  .upi-sheet-footer,
+  .dtr-stores-footer,
+  .payment-offers-close,
+  .dil-sheet-cta,
+  .odp-sheet-cta
+) {
+  margin-top: auto;
+}
+
+/* Portrait / Laptop Home: the sort / filter row sits right under the collapsed search row
+   (no 56px fade gap between them), on the same glass bar the rail layouts use */
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home:not(.home--search) {
+  --home-sticky-header-h: calc(88px + var(--safe-top, 0px));
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed {
+  padding-bottom: 16px;
+  background-color: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed::after {
+  opacity: 0;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed::before {
+  opacity: 1;
+}
+
+/* ---- Duo Home, collapsed: the search row and the sort / filter row share ONE glass ----
+   The collapsed bar's glass (and its pink wash) extends behind the filter chips (16px gap +
+   the 48px chip row) and the chip row's own strip turns clear, so the two rows read as a
+   single sheet of material instead of two stacked ones. */
+body.duo-device .home.home--toolbar-docked .home-header.home-header--collapsed {
+  padding-bottom: calc(16px + 48px);
+}
+
+/* the band appears with the docking, not 220ms after it (chips must never sit unbacked) */
+body.duo-device .app .home-header {
+  transition: background-color 200ms ease;
+}
+
+body.duo-device .home.home--toolbar-docked:has(.home-header--collapsed) .home-toolbar {
+  z-index: 21; /* over the extended bar, which it now sits on */
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Portrait / Laptop: page titles sit left, after the back button (as on the rail postures);
+   the trailing spacer that balanced a centred title gives way to the status */
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop'])
+  :is(.olp-title, .odp-title, .review-shell-title, .payment-page-title, .review-v4-title) {
+  text-align: left;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .glass-nav-spacer {
+  display: none;
+}
+
+/* Portrait / Laptop checkout: the Meesho STEP pill replaces the 1 ── 2 stepper, as on every
+   other Duo posture; the bar stays one row (back · title … STEP 1/2 · status) */
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .glass-stepper,
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .review-shell-step-spacer {
+  display: none !important;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop'])
+  :is(.review-shell-step, .review-shell-step--duo, .payment-page-step) {
+  display: inline-flex !important;
+  flex: none;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop'])
+  :is(.review-shell-header, .payment-page-header, .review-v4-header) {
+  flex-wrap: nowrap;
+}
+
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop'])
+  :is(.review-shell-header-main, .payment-page-header-main, .review-v4-header-main) {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* sheet CTAs match the page CTAs: 24px pills on every Duo posture */
+body.duo-device :is(
+  .buy-now-sheet-cta,
+  .address-picker-cta,
+  .address-picker-add,
+  .cod-switch-online,
+  .cod-switch-cash,
+  .payment-offers-close,
+  .upi-sheet-cta,
+  .dtr-stores-confirm,
+  .dil-sheet-cta,
+  .odp-sheet-cta,
+  .pdp-bottomsheet-buy
+) {
+  border-radius: 24px;
+}
+
+/* address cards: EDIT shares the name's row (it had a row of its own above the name, which
+   left a blank band at the top of every card); the address line spans below */
+body.duo-device .address-picker-card-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+  row-gap: 4px;
+  align-items: center;
+}
+
+body.duo-device .address-picker-card-top {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+body.duo-device .address-picker-name {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+body.duo-device .address-picker-line {
+  grid-row: 2;
+  grid-column: 1 / -1;
+}
+
+/* =====================================================================
+   Open and Book: bottom sheets are popups (Figma "iPhone Duo / Sheets / Inner")
+   A floating card centred near the bottom of the app (8pt up, every corner rounded), grabber
+   on top, title on the left and the close as a glass circle on the right. In Book full screen the popup opens on
+   the right page only, so no sheet UI ever crosses the hinge (the left page just dims).
+   ===================================================================== */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(
+  .buy-now-sheet-backdrop,
+  .cod-switch-backdrop,
+  .upi-sheet-backdrop,
+  .dtr-stores-backdrop,
+  .payment-offers-backdrop,
+  .dil-sheet-backdrop,
+  .odp-sheet-backdrop
+) {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(
+  .buy-now-sheet,
+  .cod-switch-sheet,
+  .upi-sheet,
+  .dtr-stores-sheet,
+  .payment-offers-sheet,
+  .dil-sheet,
+  .odp-sheet
+) {
+  width: min(640px, calc(100% - 48px));
+  max-width: none;
+  margin: 0 auto 8px;
+  border-radius: 34px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* Book, full screen: the sheet takes the whole right page's width (Figma "Sheets / Inner -
+   Book"): from the hinge to 8pt short of the outer edge, anchored to the bottom edge, top
+   corners rounded. It is as tall as its content, growing up to just below the system status
+   at most. Nothing crosses the hinge; the left page only dims. */
+body.layout-duo[data-posture='book'][data-split='full'] {
+  /* 12pt below the status pill (25 + 86: time + signal, no camera on the inner display) */
+  --book-sheet-top: calc(25px + 86px + 12px);
+}
+
+body.layout-duo[data-posture='book'][data-split='full'] .app :is(
+  .buy-now-sheet-backdrop,
+  .cod-switch-backdrop,
+  .upi-sheet-backdrop,
+  .dtr-stores-backdrop,
+  .payment-offers-backdrop,
+  .dil-sheet-backdrop,
+  .odp-sheet-backdrop,
+  .address-picker-backdrop
+) {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+body.layout-duo[data-posture='book'][data-split='full'] .app :is(
+  .buy-now-sheet,
+  .cod-switch-sheet,
+  .upi-sheet,
+  .dtr-stores-sheet,
+  .payment-offers-sheet,
+  .dil-sheet,
+  .odp-sheet,
+  .address-picker-sheet
+) {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - var(--duo-hinge-x) - 8px);
+  height: auto;
+  max-height: calc(100% - var(--book-sheet-top));
+  margin: 0 8px 0 0;
+  border-radius: 34px 34px 0 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* when content fills the sheet to its cap, CTAs still sit at its foot */
+body.layout-duo[data-posture='book'][data-split='full'] .app :is(
+  .buy-now-sheet-cta,
+  .cod-switch-actions,
+  .upi-sheet-footer,
+  .dtr-stores-footer,
+  .payment-offers-close,
+  .dil-sheet-cta,
+  .odp-sheet-cta
+) {
+  margin-top: auto;
+}
+
+/* close: a 40pt glass circle at the right end of the title row */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.buy-now-sheet-close, .dtr-stores-close, .upi-sheet-close, .cod-switch-close) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .buy-now-sheet-close {
+  margin: -4px 0;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .cod-switch-close {
+  top: 16px;
+  right: 16px;
+}
+
+/* size pills in Duo sheets keep one line each; a row too long for a narrower popup scrolls */
+body.duo-device .buy-now-sheet-size-options {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+body.duo-device .buy-now-sheet-size-options::-webkit-scrollbar {
+  display: none;
+}
+
+body.duo-device .buy-now-sheet-size-options .pdp-vsku-pill {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* the address picker is a popup too in Open / Book (a full-height page only on Folded and
+   Stand), with its own grabber and a right-hand close; the title reads like the other popups */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .address-picker-backdrop {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .address-picker-sheet {
+  width: min(640px, calc(100% - 48px));
+  max-width: none;
+  min-height: 0;
+  max-height: calc(100% - 32px);
+  margin: 0 auto 8px;
+  padding: 12px 16px 20px;
+  border-radius: 34px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .address-picker-handle {
+  display: block;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .address-picker-close {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin: -4px 0;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .address-picker-title {
+  font: 600 16px/20px var(--font-mier);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* every Duo posture: a sheet's close is a 40pt Liquid Glass circle (same capsule material as
+   the rail and bar buttons), sitting at the right end of the title row */
+body.duo-device .app :is(.buy-now-sheet-close, .dtr-stores-close, .upi-sheet-close, .cod-switch-close, .address-picker-close) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+  color: var(--glass-ink, var(--grey-base));
+}
+
+body.duo-device .app .buy-now-sheet-close {
+  margin: -4px 0;
+}
+
+/* the address picker's own close stays hidden where the rail carries it (Folded, Stand) */
+body.layout-duo:is([data-posture='folded'], [data-posture='stand']) .app .address-picker-close {
+  display: none;
+}
+
+/* =====================================================================
+   Remaining overlays (from the overlay audit, 2026-10-08)
+   ===================================================================== */
+
+/* close buttons added for the Duo layouts only (payment offers, the pv=4 offer sheet, the
+   order switch sheet): hidden on the phone layouts, a glass circle at the sheet's top-right */
+.sheet-x {
+  display: none;
+}
+
+body.duo-device .app :is(.payment-offers-sheet, .dil-sheet, .odp-sheet) {
+  position: relative;
+}
+
+body.duo-device .app .sheet-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+  color: var(--glass-ink, var(--grey-base));
+  cursor: pointer;
+}
+
+body.duo-device .app :is(.payment-offers-sheet h3, .odp-sheet-title:not(.odp-sheet-title--center)) {
+  padding-right: 52px;
+}
+
+/* popups carry a grabber above the title row: the close drops to the title's line */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .sheet-x {
+  top: 20px;
+}
+
+/* Stand: in the right-hand column, level with the title, like the other sheet closes */
+body.layout-duo[data-posture='stand'] .app .sheet-x {
+  top: 28px;
+  right: calc(var(--duo-rail-w) - 28px - var(--stand-sheet-inset) - 20px);
+}
+
+/* ---- grabbers for the popups that have no handle element ---- */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.dtr-stores-sheet, .upi-sheet, .payment-offers-sheet, .dil-sheet, .wishlist-drawer)::before {
+  content: '';
+  display: block;
+  flex: none;
+  align-self: center;
+  width: 36px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 99px;
+  background: var(--grey-t3-divider);
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.payment-offers-sheet, .dil-sheet)::before {
+  margin: -2px auto 14px;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.payment-offers-sheet, .dil-sheet) {
+  padding-top: 12px;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-stores-head {
+  padding-top: 12px;
+}
+
+/* ---- UPI-only sheet: the close joins the logo + title row (it sat alone in a top bar) ---- */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .upi-sheet {
+  position: relative;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .upi-sheet-topbar {
+  min-height: 0;
+  height: 0;
+  padding: 0;
+  border-bottom: none;
+}
+
+/* centred on the 48pt logo row: 14 grabber + 16 body padding + 24 - 20 = 34 */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .upi-sheet-close {
+  position: absolute;
+  top: 34px;
+  right: 16px;
+  z-index: 1;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .upi-sheet-row {
+  align-items: center;
+  padding-right: 52px;
+}
+
+/* ---- Wishlist: a popup in Open / Book (it was a full-height drawer over the rail) ---- */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .wishlist-drawer-backdrop {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .wishlist-drawer {
+  width: min(640px, calc(100% - 48px));
+  max-width: none;
+  height: auto;
+  max-height: calc(100% - 32px);
+  margin: 0 auto 8px;
+  border-radius: 34px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .wishlist-drawer-header {
+  gap: 12px;
+  padding: 12px 16px 0;
+  border-bottom: none;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .wishlist-drawer-header h2 {
+  font: 600 16px/20px var(--font-mier);
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .wishlist-drawer-list {
+  min-height: 0;
+  padding: 12px 16px 16px;
+}
+
+/* Book full screen: the wishlist takes the right page like every other sheet */
+body.layout-duo[data-posture='book'][data-split='full'] .app .wishlist-drawer-backdrop {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+body.layout-duo[data-posture='book'][data-split='full'] .app .wishlist-drawer {
+  width: calc(100% - var(--duo-hinge-x) - 8px);
+  max-height: calc(100% - var(--book-sheet-top));
+  margin: 0 8px 0 0;
+  border-radius: 34px 34px 0 0;
+}
+
+/* its close is a glass circle in every Duo posture (the Duo sheet-close look) */
+body.duo-device .app .wishlist-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  margin: -4px 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--glass-fill-capsule, rgba(255, 255, 255, 0.6));
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  backdrop-filter: blur(var(--glass-blur-capsule, 6px));
+  box-shadow: var(--glass-shadow-capsule, 0 5px 20px rgba(0, 0, 0, 0.08));
+  color: var(--glass-ink, var(--grey-base));
+  font: 400 24px/1 var(--font-mier);
+}
+
+/* ---- Book full screen: toasts and the footer interrupt sit on the right page ---- */
+body.layout-duo[data-posture='book'][data-split='full'] .app .odp-toast {
+  left: calc(var(--duo-hinge-x) + (100% - var(--duo-hinge-x) - var(--duo-rail-w)) / 2);
+}
+
+body.layout-duo[data-posture='book'][data-split='full'] .app .dil-footbar {
+  left: calc(var(--duo-hinge-x) + 12px);
+  right: calc(var(--duo-rail-w) + 12px);
+  max-width: none;
+  margin: 0;
+}

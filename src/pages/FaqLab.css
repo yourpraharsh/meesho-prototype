@@ -1,0 +1,108 @@
+/* /faq-lab: its own full-width page, independent of the phone / Duo shell and body skins */
+.faq-lab {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: auto;
+  padding: 24px 24px 48px;
+  background: #f1f1f5;
+  box-sizing: border-box;
+  font-family: var(--font-mier);
+  color: var(--grey-base);
+}
+
+.faq-lab-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.faq-lab-title {
+  margin: 0;
+  font: 700 22px/28px var(--font-mier);
+}
+
+.faq-lab-sub {
+  margin: 4px 0 0;
+  font: 400 14px/20px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.faq-lab-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.faq-lab-toggle {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.faq-lab-toggle button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font: 600 14px/20px var(--font-mier);
+  color: var(--grey-t1);
+  cursor: pointer;
+}
+
+.faq-lab-toggle button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.faq-lab-toggle button.is-active {
+  background: var(--jamun-base);
+  color: var(--white);
+}
+
+.faq-lab-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 32px 24px;
+}
+
+.faq-lab-item {
+  margin: 0;
+  width: 390px;
+}
+
+.faq-lab-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+  font: 400 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.faq-lab-caption strong {
+  font: 600 16px/22px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.faq-lab-phone {
+  position: relative;
+  width: 390px;
+  height: 780px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: var(--white);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  transform: translateZ(0);
+}
+
+.faq-lab-phone .dtr-stores-sheet {
+  max-height: 92%;
+  animation: none;
+}

@@ -1,0 +1,152 @@
+/* Floating research control, pinned inside the app frame above the nav/footers */
+.ui-skin {
+  position: fixed;
+  left: min(calc(50% + 201px), calc(100% - 14px));
+  transform: translateX(-100%);
+  bottom: calc(104px + var(--safe-bottom, 0px));
+  z-index: 45;
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(28, 28, 30, 0.82);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.ui-skin-group {
+  display: inline-flex;
+}
+
+.ui-skin-btn {
+  min-width: 46px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  font: 700 12px/16px var(--font-mier);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.ui-skin-btn--on {
+  background: #fff;
+  color: #1c1c1e;
+}
+
+/* keep clear of taller bottom chrome: the address-first dock and the PDP out-of-stock toast */
+body:has(.pdp-oos-toast) .ui-skin,
+body.ui-ios:has(.pdp-oos-toast) .ui-skin {
+  bottom: calc(124px + var(--safe-bottom, 0px));
+}
+
+body:has(.review-shell-address-dock) .ui-skin,
+body.ui-ios:has(.review-shell-address-dock) .ui-skin {
+  bottom: calc(224px + var(--safe-bottom, 0px));
+}
+
+/* discount-lab footer-interrupt bar (bottom 92px + 56px tall) */
+body:has(.dil-footbar) .ui-skin,
+body.ui-ios:has(.dil-footbar) .ui-skin {
+  bottom: calc(160px + var(--safe-bottom, 0px));
+}
+
+/* ---- iPhone Duo: control bar above the device ---- */
+.ui-skin.ui-skin--duo {
+  top: 12px;
+  bottom: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 1000;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 22px;
+  background: rgba(28, 28, 30, 0.86);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.ui-skin-postures {
+  display: flex;
+  gap: 2px;
+}
+
+.ui-skin-posture {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 52px;
+  padding: 4px 6px 5px;
+  border: none;
+  border-radius: 14px;
+  background: none;
+  color: rgba(255, 255, 255, 0.62);
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.ui-skin-posture:hover {
+  color: #fff;
+}
+
+.ui-skin-posture--on {
+  background: #fff;
+  color: #1c1c1e;
+}
+
+.ui-skin-posture-label {
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 520px) {
+  .ui-skin-posture {
+    min-width: 40px;
+    padding: 3px 3px 4px;
+  }
+
+  .ui-skin-posture-label {
+    display: none;
+  }
+}
+
+.ui-skin-splits {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Duo: the split row hangs under the bar instead of growing it, so the bar (and the device
+   fitted below it) keeps one height in every posture; DuoDevice reserves this space */
+.ui-skin--duo .ui-skin-splits {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(28, 28, 30, 0.86);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.ui-skin-split {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  font: 600 11px/14px var(--font-mier);
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+}
+
+.ui-skin-split--on {
+  background: #fff;
+  color: #1c1c1e;
+}

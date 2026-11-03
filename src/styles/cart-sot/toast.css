@@ -1,0 +1,86 @@
+/* App-wide snackbar (Figma cart file utVjj3B1srPjlUd1kWDvGs · 1:2397 removed / 1:3167 wishlist):
+   344 wide at 360 (8px side margins), #333 fill, radius 4, padding 12 16, gap 8, Demi 13/16
+   white; the action is an outlined white button, Bold 13/16. */
+.app-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--toast-offset, 16px) + var(--safe-bottom, 0px));
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  width: calc(100% - 16px);
+  max-width: 414px;
+  min-height: 40px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background: #333333;
+  color: #fff;
+  font: 600 13px/16px var(--font-mier);
+  transform: translateX(-50%);
+  animation: app-toast-in 220ms ease-out both;
+  pointer-events: auto;
+}
+
+.app-toast-icon {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.app-toast-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.app-toast-action {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+  cursor: pointer;
+}
+
+@keyframes app-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-toast {
+    animation: none;
+  }
+}
+
+/* Duo Stand posture: end before the rail and camera band, like .pdp-oos-toast */
+body.layout-duo[data-posture='stand'] .app .app-toast {
+  left: 8px;
+  right: calc(var(--duo-rail-w) + 8px);
+  width: auto;
+  max-width: none;
+  transform: none;
+  animation-name: app-toast-in-stand;
+}
+
+@keyframes app-toast-in-stand {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

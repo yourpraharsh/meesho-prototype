@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback — react-router owns all routes (also mirrored in public/_redirects)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

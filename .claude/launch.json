@@ -1,0 +1,101 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 5173
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4173",
+        "--strictPort"
+      ],
+      "port": 4173
+    },
+    {
+      "name": "voucher-vault",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "/Users/praharsh.agrawal1/Downloads/voucher-vault",
+        "--",
+        "--port",
+        "5199",
+        "--strictPort"
+      ],
+      "port": 5199
+    },
+    {
+      "name": "preview-next",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "vite",
+        "preview",
+        "--outDir",
+        "/private/tmp/claude-502/-Users-praharsh-agrawal1-Downloads-Feed-UX-Proto-copy/4c36200c-9993-442c-a86d-cc5dbe8d1027/scratchpad/dist-check",
+        "--port",
+        "4174",
+        "--strictPort"
+      ],
+      "port": 4174
+    },
+    {
+      "name": "cart-proto",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "preview",
+        "--prefix",
+        "/Users/praharsh.agrawal1/Downloads/cart-proto",
+        "--",
+        "--port",
+        "4196",
+        "--strictPort"
+      ],
+      "port": 4196
+    },
+    {
+      "name": "insta-proto",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "preview",
+        "--prefix",
+        "/Users/praharsh.agrawal1/Downloads/insta-proto",
+        "--",
+        "--port",
+        "4197",
+        "--strictPort"
+      ],
+      "port": 4197
+    },
+    {
+      "name": "pages-check",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "vite",
+        "preview",
+        "--base",
+        "/feed-ux-proto/",
+        "--port",
+        "4175",
+        "--strictPort"
+      ],
+      "port": 4175,
+      "url": "http://localhost:4175"
+    }
+  ]
+}

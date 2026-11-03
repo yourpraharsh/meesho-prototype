@@ -1,0 +1,341 @@
+/* Figma BrowseX-Playground-2026 node 1730:5353 — Select Address sheet */
+
+.address-picker-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.address-picker-sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  max-height: 88vh;
+  padding: 12px 16px calc(16px + var(--safe-bottom, 0));
+  border-radius: 16px 16px 0 0;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.address-picker-handle {
+  width: 36px;
+  height: 4px;
+  margin: 0 auto 14px;
+  border-radius: 99px;
+  background: var(--grey-t3-divider);
+  flex-shrink: 0;
+}
+
+.address-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.address-picker-title {
+  margin: 0;
+  font: 600 16px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.address-picker-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: -4px -4px 0 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.address-picker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.address-picker-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid var(--grey-t3-divider);
+  border-radius: 10px;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+}
+
+.address-picker-card--selected {
+  border-color: var(--jamun-base);
+  border-width: 2px;
+  padding: 11px;
+}
+
+.address-picker-radio {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1.5px solid var(--grey-t2);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.address-picker-radio--selected {
+  border-color: var(--jamun-base);
+  box-shadow: inset 0 0 0 4px var(--jamun-base);
+}
+
+.address-picker-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.address-picker-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.address-picker-edit {
+  flex-shrink: 0;
+  font: 700 11px/14px var(--font-mier);
+  letter-spacing: 0.02em;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.address-picker-name {
+  font: 600 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.address-picker-line {
+  font: 400 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.address-picker-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1.5px dashed var(--jamun-base);
+  border-radius: 8px;
+  background: var(--white);
+  font: 600 14px/18px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.address-picker-add svg {
+  flex-shrink: 0;
+}
+
+.address-picker-cta {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Add / edit address form */
+
+.address-picker-form-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.address-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 20px;
+}
+
+.address-form-section-title {
+  margin: 0;
+  font: 700 16px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.address-form-divider {
+  height: 8px;
+  margin: 0 -16px 20px;
+  background: var(--grey-base);
+  flex-shrink: 0;
+}
+
+.address-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.address-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.address-form-label {
+  font: 400 12px/16px var(--font-mier);
+  color: var(--grey-t2);
+}
+
+.address-form-field--underline > input,
+.address-form-field--underline > textarea,
+.address-form-field--optional input {
+  width: 100%;
+  padding: 4px 0 8px;
+  border: none;
+  border-bottom: 1px solid var(--grey-t3-divider);
+  border-radius: 0;
+  background: transparent;
+  font: 400 15px/20px var(--font-mier);
+  color: var(--grey-base);
+  outline: none;
+}
+
+.address-form-field--underline > input:focus,
+.address-form-field--underline > textarea:focus,
+.address-form-field--optional input:focus {
+  border-bottom-color: var(--jamun-base);
+}
+
+.address-form-field--underline:focus-within .address-form-label {
+  color: var(--jamun-base);
+}
+
+.address-form-field--optional input::placeholder {
+  font: 400 13px/18px var(--font-mier);
+  color: var(--grey-t2);
+}
+
+.address-form-phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--grey-t3-divider);
+  padding-bottom: 8px;
+}
+
+.address-form-field--underline:focus-within .address-form-phone {
+  border-bottom-color: var(--jamun-base);
+}
+
+.address-form-phone-prefix {
+  flex-shrink: 0;
+  font: 400 15px/20px var(--font-mier);
+  color: var(--grey-t2);
+}
+
+.address-form-phone input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0 0;
+  border: none;
+  background: transparent;
+  font: 400 15px/20px var(--font-mier);
+  color: var(--grey-base);
+  outline: none;
+}
+
+.address-form-field--boxed textarea {
+  width: 100%;
+  min-height: 88px;
+  padding: 12px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  background: var(--white);
+  font: 400 14px/20px var(--font-mier);
+  color: var(--grey-base);
+  resize: vertical;
+  outline: none;
+}
+
+.address-form-field--boxed textarea:focus {
+  border-color: var(--jamun-base);
+}
+
+.address-form-field--boxed:focus-within .address-form-label {
+  color: var(--jamun-base);
+}
+
+.address-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  flex-shrink: 0;
+}
+
+.address-form-back {
+  flex: 0 0 auto;
+  padding: 14px 16px;
+  border: 1.5px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  background: var(--white);
+  font: 600 14px/18px var(--font-mier);
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.address-form-save {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.address-form-save:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

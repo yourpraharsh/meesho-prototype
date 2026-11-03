@@ -1,0 +1,63 @@
+/* Cart count badge on every cart icon (PDP app bar, Home header, Duo rail): a 16px Jamun
+   pill with a 2px white ring and white Demi 10/12 digits, riding the icon's top-right
+   corner. Its host button gets .cart-badge-host (position: relative). The badge is a
+   <span>, never an svg, so the iOS glass rules for `.pdp-actions svg *` leave it alone.
+   Positioned from the button's centre, so it lands on the same spot of a centred icon
+   whatever the button's tap area (36px PDP, 24px Home, 40px rail). */
+.cart-badge-host {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: calc(50% - 14px);
+  left: calc(50% + 2px);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  box-shadow: 0 0 0 2px var(--white);
+  color: var(--white);
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* set by CartBadge when the count changes on screen (keyed on the count, so it replays) */
+.cart-badge--pop {
+  animation: cart-badge-pop 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* iOS glass header circles: the badge sits on the circle's top-right edge, as on iOS
+   toolbar buttons, instead of on the 20px glyph inside (the Duo rail does the same in
+   DuoRail.css) */
+body.ui-ios :is(.home-actions, .pdp-actions) .cart-badge {
+  top: -3px;
+  right: -3px;
+  left: auto;
+}
+
+@keyframes cart-badge-pop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-badge--pop {
+    animation: none;
+  }
+}

@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon">
+<rect width="40" height="40" rx="8" fill="#F8F8FF"/>
+<g id="box">
+<path id="Rectangle 293030238" d="M12 18.9613C12 18.3537 12.2762 17.7791 12.7506 17.3995L16.4522 14.4383C16.8068 14.1546 17.2474 14 17.7016 14H27.2984C27.7526 14 28.1932 14.1546 28.5478 14.4383L32.2494 17.3995C32.7238 17.7791 33 18.3537 33 18.9612V33C33 34.1046 32.1046 35 31 35H14C12.8954 35 12 34.1046 12 33V18.9613Z" fill="#EB944C"/>
+<path id="Intersect" d="M27.298 14C27.7522 14 28.1934 14.1548 28.548 14.4385L32.2492 17.3994C32.6011 17.6809 32.8435 18.07 32.9455 18.5H12.0549C12.1568 18.0701 12.3984 17.6809 12.7502 17.3994L16.4523 14.4385C16.8069 14.1548 17.2473 14 17.7014 14H27.298Z" fill="#D88037"/>
+<path id="Rectangle 293030241" d="M21 14H24V18.5H21V14Z" fill="#A3591D"/>
+<g id="Subtract" opacity="0.7">
+</g>
+<rect id="Rectangle 293030244" opacity="0.4" x="24" y="29" width="7" height="4" rx="1" fill="#A3591D"/>
+<path id="Rectangle 293030242" opacity="0.7" d="M21 23L22.5 22L24 23V18.5H21V23Z" fill="#A3591D"/>
+</g>
+<g id="element">
+<circle id="Ellipse 843" cx="12" cy="12" r="9" fill="white"/>
+<path id="Ellipse 844" d="M19.5 12C19.5 16.1421 16.1421 19.5 12 19.5C7.85786 19.5 4.5 16.1421 4.5 12C4.5 7.85786 7.85786 4.5 12 4.5C16.1421 4.5 19.5 7.85786 19.5 12Z" fill="#038D63"/>
+</g>
+<path id="Vector 1223" d="M8 12L11 15L16 10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+</g>
+</svg>

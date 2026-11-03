@@ -1,0 +1,120 @@
+/* User-testing pincode gate — full-screen, shown before the app UI */
+
+.pincode-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--white);
+  overflow-y: auto;
+}
+
+.pincode-gate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.pincode-gate-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--jamun-t2);
+  margin-bottom: 14px;
+}
+
+.pincode-gate-title {
+  margin: 0 0 4px;
+  font: 700 20px/26px var(--font-mier);
+  color: var(--grey-base);
+  text-align: center;
+}
+
+.pincode-gate-sub {
+  margin: 0 0 20px;
+  font: 500 13.5px/18px var(--font-mier);
+  color: var(--grey-t1);
+  text-align: center;
+}
+
+.pincode-gate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.pincode-gate-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+  cursor: pointer;
+  text-align: left;
+}
+
+.pincode-gate-option:active {
+  border-color: var(--jamun-base);
+  background: rgba(159, 32, 137, 0.04);
+}
+
+.pincode-gate-pin {
+  font: 700 16px/20px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--grey-base);
+}
+
+.pincode-gate-meta {
+  flex: 1;
+  min-width: 0;
+  font: 500 12px/16px var(--font-mier);
+  color: var(--grey-t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Step 2 (payment habit): label above meta, chevron stays right */
+.pincode-gate-cohort {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pincode-gate-cohort .pincode-gate-pin {
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.pincode-gate-cohort .pincode-gate-meta {
+  white-space: normal;
+}
+
+.pincode-gate-chevron {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--grey-t2);
+}
+
+.pincode-gate-foot {
+  margin: 18px 0 0;
+  font: 500 11px/14px var(--font-mier);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey-t2);
+}

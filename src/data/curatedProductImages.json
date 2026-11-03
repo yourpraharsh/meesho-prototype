@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "generatedFor": "Cursor prototype",
+    "categoriesIncluded": [
+      "mens",
+      "kitchen_utility"
+    ],
+    "notes": [
+      "This JSON is built from your curated TSV rows (type,id,rnk,img1-4).",
+      "title/price/rating are null (not present in the list). Enrich via PDP API by productId if needed.",
+      "vsku arrays are placeholders for later."
+    ],
+    "counts": {
+      "productsIncluded": 5,
+      "mens": 4,
+      "kitchen_utility": 1
+    }
+  },
+  "products": [
+    {
+      "id": "380671574",
+      "category": "mens",
+      "subCategory": "shirts",
+      "rank": 1,
+      "title": null,
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/380671574/ptwrz.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/380671574/hm0pk.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "source": {
+        "type": "Shirts Men",
+        "rawImages": [
+          "https://images.meesho.com/images/products/380671574/ptwrz.jpg",
+          "https://images.meesho.com/images/products/380671574/hm0pk.jpg"
+        ]
+      }
+    },
+    {
+      "id": "42166122",
+      "category": "mens",
+      "subCategory": "shirts",
+      "rank": 7,
+      "title": null,
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/42166122/abexl.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/42166122/hzif8.jpg",
+          "https://images.meesho.com/images/products/42166122/7pmwf.jpg",
+          "https://images.meesho.com/images/products/42166122/o1kvn.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "source": {
+        "type": "Shirts Men",
+        "rawImages": [
+          "https://images.meesho.com/images/products/42166122/abexl.jpg",
+          "https://images.meesho.com/images/products/42166122/hzif8.jpg",
+          "https://images.meesho.com/images/products/42166122/7pmwf.jpg",
+          "https://images.meesho.com/images/products/42166122/o1kvn.jpg"
+        ]
+      }
+    },
+    {
+      "id": "42166121",
+      "category": "mens",
+      "subCategory": "shirts",
+      "rank": 8,
+      "title": null,
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/42166121/uuxm7.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/42166121/ktaf7.jpg",
+          "https://images.meesho.com/images/products/42166121/tuhfv.jpg",
+          "https://images.meesho.com/images/products/42166121/jl1ij.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "source": {
+        "type": "Shirts Men",
+        "rawImages": [
+          "https://images.meesho.com/images/products/42166121/uuxm7.jpg",
+          "https://images.meesho.com/images/products/42166121/ktaf7.jpg",
+          "https://images.meesho.com/images/products/42166121/tuhfv.jpg",
+          "https://images.meesho.com/images/products/42166121/jl1ij.jpg"
+        ]
+      }
+    },
+    {
+      "id": "4128468",
+      "category": "kitchen_utility",
+      "subCategory": "water_bottle",
+      "rank": 1,
+      "title": null,
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/4128468/1.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/4128468/2.jpg",
+          "https://images.meesho.com/images/products/4128468/3.jpg",
+          "https://images.meesho.com/images/products/4128468/4.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "source": {
+        "type": "Water Bottles",
+        "rawImages": [
+          "https://images.meesho.com/images/products/4128468/1.jpg",
+          "https://images.meesho.com/images/products/4128468/2.jpg",
+          "https://images.meesho.com/images/products/4128468/3.jpg",
+          "https://images.meesho.com/images/products/4128468/4.jpg"
+        ]
+      }
+    },
+    {
+      "id": "5037382",
+      "category": "mens",
+      "subCategory": "shoes",
+      "rank": 75,
+      "title": null,
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/5037382/1.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/5037382/2.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "source": {
+        "type": "Shoes",
+        "rawImages": [
+          "https://images.meesho.com/images/products/5037382/1.jpg",
+          "https://images.meesho.com/images/products/5037382/2.jpg"
+        ]
+      }
+    }
+  ]
+}

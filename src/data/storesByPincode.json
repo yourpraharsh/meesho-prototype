@@ -1,0 +1,1225 @@
+{
+  "440015": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SP184",
+        "name": "Swaymbhu Kirana and General Store",
+        "type": "Grocery Store",
+        "distanceM": 450,
+        "walk": "6 min walk",
+        "hours": "8:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.111603%2C79.074699",
+        "photo": "https://images.meesho.com/images/products-upload/1780324926085/4418117d.StoreImage.120204.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP181",
+        "name": "Dipak Kirana And Stores",
+        "type": "Grocery Store",
+        "distanceM": 459,
+        "walk": "6 min walk",
+        "hours": "9:30am-9pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1097201%2C79.0742341",
+        "photo": "https://images.meesho.com/images/products-upload/1780318476475/cc207677.StoreImage.125819.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP199",
+        "name": "Shree Saibaba Book Centre",
+        "type": "Stationery Store",
+        "distanceM": 514,
+        "walk": "6 min walk",
+        "hours": "10:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.114878%2C79.067877",
+        "photo": "https://images.meesho.com/images/products-upload/1781008711186/0242f3b4.StoreImage.130448.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP123",
+        "name": "Sharma dairy and daily needs",
+        "type": "Kirana Store",
+        "distanceM": 596,
+        "walk": "7 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/Z3piG2rgiefM7sH1A",
+        "photo": "https://images.meesho.com/images/products-upload/1756726976961/sharmadairy.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP203",
+        "name": "Dtdc Courier Khamala",
+        "type": "Courier Service",
+        "distanceM": 623,
+        "walk": "8 min walk",
+        "hours": "10am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.115840%2C79.068582",
+        "photo": "https://images.meesho.com/images/products-upload/1782128140728/df08389d.StoreImage.125937.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP180",
+        "name": "Sarvesh Gift",
+        "type": "Stationery Store",
+        "distanceM": 766,
+        "walk": "10 min walk",
+        "hours": "9:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1080493%2C79.0799801",
+        "photo": "https://images.meesho.com/images/products-upload/1779884998130/d9a467e7.StoreImage.121856.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP196",
+        "name": "Sairam Enterprises",
+        "type": "Xerox Shop",
+        "distanceM": 769,
+        "walk": "10 min walk",
+        "hours": "10:30am-8:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.108177%2C79.059925",
+        "photo": "https://images.meesho.com/images/products-upload/1781008704189/e8367508.StoreImage.130355.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP138",
+        "name": "Prabha mobile and general",
+        "type": "Kirana Store",
+        "distanceM": 859,
+        "walk": "11 min walk",
+        "hours": "10.30am-09.30pm",
+        "mapsHref": "https://maps.app.goo.gl/gd3eaRP6VfCHbZEf9",
+        "photo": "https://images.meesho.com/images/products-upload/1757510634042/prabha.jpg",
+        "trusted": true
+      }
+    ]
+  },
+  "440017": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SP188",
+        "name": "Noori Tailors",
+        "type": "Garment Store",
+        "distanceM": 295,
+        "walk": "4 min walk",
+        "hours": "12pm-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.172773%2C79.111713",
+        "photo": "https://images.meesho.com/images/products-upload/1780321697307/aea3581f.StoreImage.112920.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP182",
+        "name": "Aadil Fasion Store",
+        "type": "Garment Store",
+        "distanceM": 336,
+        "walk": "4 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1331928%2C79.126585",
+        "photo": "https://images.meesho.com/images/products-upload/1780324922157/4f0af5ac.StoreImage.103529.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP154",
+        "name": "Nandanwar setu kendra",
+        "type": "Kirana Store",
+        "distanceM": 351,
+        "walk": "4 min walk",
+        "hours": "10am-6pm",
+        "mapsHref": "https://maps.app.goo.gl/4Swc7uppQ9yi4Fbb8?g_st=aw",
+        "photo": "https://images.meesho.com/images/products-upload/1762327950952/NandanwarSetu_2_resized_v1762327948650.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP192",
+        "name": "Akshay Mobile Spare Parts",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 354,
+        "walk": "4 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.167174%2C79.100598",
+        "photo": "https://images.meesho.com/images/products-upload/1780903261876/0567ad53.StoreImage.130420.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP157",
+        "name": "Swara Agencies (The Mobile Store)",
+        "type": "Mobile Shop",
+        "distanceM": 513,
+        "walk": "6 min walk",
+        "hours": "10.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/jpPGwQrtnbT8z9BfA",
+        "photo": "https://images.meesho.com/images/products-upload/1763553713547/1.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP194",
+        "name": "Akshay Mobile Shop and Home Appliances",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 515,
+        "walk": "6 min walk",
+        "hours": "11am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.162120%2C79.114187",
+        "photo": "https://images.meesho.com/images/products-upload/1781008698848/0ad1318a.StoreImage.095256.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP200",
+        "name": "CSC Central Vaishali",
+        "type": "Govt Seva Kendra",
+        "distanceM": 516,
+        "walk": "6 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.169173%2C79.110860",
+        "photo": "https://images.meesho.com/images/products-upload/1781008713442/fbfef558.StoreImage.123257.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP156",
+        "name": "KPD Sells",
+        "type": "Kirana Store",
+        "distanceM": 524,
+        "walk": "7 min walk",
+        "hours": "09.00am-10.00pm",
+        "mapsHref": "https://maps.app.goo.gl/s96zA8aqJ82Nk8ih8",
+        "photo": "https://images.meesho.com/images/products-upload/1762864592599/KPDupdated.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP155",
+        "name": "Shree Sai Online service",
+        "type": "Online service",
+        "distanceM": 622,
+        "walk": "8 min walk",
+        "hours": "09.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/zocBmKBh5pEWGHGa8",
+        "photo": "https://images.meesho.com/images/products-upload/1762327950952/ShreeSai_3.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP202",
+        "name": "Govind Mobile Shop",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 659,
+        "walk": "8 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.161239%2C79.116470",
+        "photo": "https://images.meesho.com/images/products-upload/1782128138363/61b9e266.StoreImage.115411.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP168",
+        "name": "Shree Sai Mobile shop 2",
+        "type": "Mobile Shop",
+        "distanceM": 743,
+        "walk": "9 min walk",
+        "hours": "10.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/xgXbpzytbBoCo2LD9",
+        "photo": "https://images.meesho.com/images/products-upload/1766394991741/ShreeSaiMobile_resized_v1766394988919.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP27",
+        "name": "Gulzar medical store",
+        "type": "Medical store",
+        "distanceM": 799,
+        "walk": "10 min walk",
+        "hours": "11.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/oTQfESNGbvWzj4vQ8",
+        "photo": "https://images.meesho.com/images/marketing/1752587023082.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP195",
+        "name": "Fancy General Store",
+        "type": "Gift Store",
+        "distanceM": 816,
+        "walk": "10 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.157245%2C79.097163",
+        "photo": "https://images.meesho.com/images/products-upload/1781008701368/76991b37.StoreImage.094733.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP185",
+        "name": "Life Care Pathology Lab",
+        "type": "Pathology lab",
+        "distanceM": 856,
+        "walk": "11 min walk",
+        "hours": "11am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.159847%2C79.094488",
+        "photo": "https://images.meesho.com/images/products-upload/1780324929945/8141557d.StoreImage.132134.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP201",
+        "name": "Medline Medical Store",
+        "type": "Medicine Store",
+        "distanceM": 899,
+        "walk": "11 min walk",
+        "hours": "11am-6pm",
+        "mapsHref": "https://www.google.com/maps?q=21.142484%2C79.132627",
+        "photo": "https://images.meesho.com/images/products-upload/1782128135362/b305128d.StoreImage.155549.jpg",
+        "trusted": true
+      }
+    ]
+  },
+  "440018": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SPP20",
+        "name": "Priti mobile shop",
+        "type": "Mobile Shop",
+        "distanceM": 123,
+        "walk": "2 min walk",
+        "hours": "07.30am-10.00pm",
+        "mapsHref": "https://maps.app.goo.gl/SiRFXub3YWDoKsRH8?g_st=awb",
+        "photo": "https://images.meesho.com/images/marketing/1753780938855.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP160",
+        "name": "DTDC Courier Service",
+        "type": "DTDC courier service",
+        "distanceM": 153,
+        "walk": "2 min walk",
+        "hours": "10am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/1ZHKjNkafzSFiah28",
+        "photo": "https://images.meesho.com/images/products-upload/1764152143489/IMG-20251119-WA0027-MuzammilShadMohtashimAkhtar.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP182",
+        "name": "Aadil Fasion Store",
+        "type": "Garment Store",
+        "distanceM": 400,
+        "walk": "5 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1331928%2C79.126585",
+        "photo": "https://images.meesho.com/images/products-upload/1780324922157/4f0af5ac.StoreImage.103529.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP185",
+        "name": "Life Care Pathology Lab",
+        "type": "Pathology lab",
+        "distanceM": 409,
+        "walk": "5 min walk",
+        "hours": "11am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.159847%2C79.094488",
+        "photo": "https://images.meesho.com/images/products-upload/1780324929945/8141557d.StoreImage.132134.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP95",
+        "name": "Thakur daily needs",
+        "type": "Kirana Store",
+        "distanceM": 469,
+        "walk": "6 min walk",
+        "hours": "08.00am-08.00pm",
+        "mapsHref": "https://maps.app.goo.gl/sJZesBGmwxnSmaFg6",
+        "photo": "https://images.meesho.com/images/marketing/1754275639191.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SP195",
+        "name": "Fancy General Store",
+        "type": "Gift Store",
+        "distanceM": 472,
+        "walk": "6 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.157245%2C79.097163",
+        "photo": "https://images.meesho.com/images/products-upload/1781008701368/76991b37.StoreImage.094733.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP31",
+        "name": "Patel Wheel Alignment",
+        "type": "Workshop",
+        "distanceM": 511,
+        "walk": "6 min walk",
+        "hours": "11.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/zWE79jiEZbo7xRaC6",
+        "photo": "https://images.meesho.com/images/products-upload/1771915670183/PHOTO-2026-02-24-12-15-35.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP27",
+        "name": "Gulzar medical store",
+        "type": "Medical store",
+        "distanceM": 533,
+        "walk": "7 min walk",
+        "hours": "11.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/oTQfESNGbvWzj4vQ8",
+        "photo": "https://images.meesho.com/images/marketing/1752587023082.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP156",
+        "name": "KPD Sells",
+        "type": "Kirana Store",
+        "distanceM": 539,
+        "walk": "7 min walk",
+        "hours": "09.00am-10.00pm",
+        "mapsHref": "https://maps.app.goo.gl/s96zA8aqJ82Nk8ih8",
+        "photo": "https://images.meesho.com/images/products-upload/1762864592599/KPDupdated.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SPP40",
+        "name": "Liberty Optical",
+        "type": "Optical Shop",
+        "distanceM": 571,
+        "walk": "7 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/midnKqCj2dRRfBxcA",
+        "photo": "https://images.meesho.com/images/marketing/1752587315421.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SPP29",
+        "name": "Nehad Bakery And Daily Needs",
+        "type": "Restaurant",
+        "distanceM": 598,
+        "walk": "7 min walk",
+        "hours": "10am-6pm",
+        "mapsHref": "https://maps.app.goo.gl/AuZwsaMf12LKmEVc9?g_st=aw",
+        "photo": "https://images.meesho.com/images/products-upload/1759908928317/WhatsAppImage2025-06-24at11.54.28AM-MuzammilShadMohtashimAkhtar.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SPP25",
+        "name": "Priyansh stationary",
+        "type": "Stationery Shop",
+        "distanceM": 605,
+        "walk": "8 min walk",
+        "hours": "09.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/2NQ6nknPQQT6HqSY9",
+        "photo": "https://images.meesho.com/images/marketing/1752586736129.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP28",
+        "name": "SELFIE STUDIO",
+        "type": "SELFIE STUDIO",
+        "distanceM": 615,
+        "walk": "8 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/JZTewFtU8bw9tfF39?g_st=awb",
+        "photo": "https://images.meesho.com/images/marketing/1752587051745.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SP157",
+        "name": "Swara Agencies (The Mobile Store)",
+        "type": "Mobile Shop",
+        "distanceM": 650,
+        "walk": "8 min walk",
+        "hours": "10.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/jpPGwQrtnbT8z9BfA",
+        "photo": "https://images.meesho.com/images/products-upload/1763553713547/1.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP30",
+        "name": "R k bags",
+        "type": "Bags house",
+        "distanceM": 659,
+        "walk": "8 min walk",
+        "hours": "10.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/2spKh6ep1nkkrMgD6?g_st=aw",
+        "photo": "https://images.meesho.com/images/products-upload/1756385400671/RKBag.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP194",
+        "name": "Akshay Mobile Shop and Home Appliances",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 665,
+        "walk": "8 min walk",
+        "hours": "11am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.162120%2C79.114187",
+        "photo": "https://images.meesho.com/images/products-upload/1781008698848/0ad1318a.StoreImage.095256.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP02",
+        "name": "Rudra Kirana",
+        "type": "Kirana Store",
+        "distanceM": 679,
+        "walk": "8 min walk",
+        "hours": "06.00am-10.00pm",
+        "mapsHref": "https://maps.app.goo.gl/k4zVv7E37hdadUtZA?g_st=com.google.maps.preview.copy",
+        "photo": "https://images.meesho.com/images/marketing/1753182157294.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP114",
+        "name": "Chetan Electrical and repairing",
+        "type": "Electrical shop",
+        "distanceM": 690,
+        "walk": "9 min walk",
+        "hours": "09.00am-08.30pm",
+        "mapsHref": "https://maps.app.goo.gl/A76czLtCxXSJW22X8",
+        "photo": "https://images.meesho.com/images/marketing/1756114130392.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SPP26",
+        "name": "Dubey stationary and xerox",
+        "type": "Kirana Store",
+        "distanceM": 721,
+        "walk": "9 min walk",
+        "hours": "09.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/7z9xUCkq57y4o8nL7",
+        "photo": "https://images.meesho.com/images/marketing/1754051855507.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP155",
+        "name": "Shree Sai Online service",
+        "type": "Online service",
+        "distanceM": 817,
+        "walk": "10 min walk",
+        "hours": "09.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/zocBmKBh5pEWGHGa8",
+        "photo": "https://images.meesho.com/images/products-upload/1762327950952/ShreeSai_3.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP159",
+        "name": "Ganga electric",
+        "type": "Kirana Store",
+        "distanceM": 838,
+        "walk": "10 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/J6V48UkNwhhbgVLc8",
+        "photo": "https://images.meesho.com/images/products-upload/1763553713547/3.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP192",
+        "name": "Akshay Mobile Spare Parts",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 851,
+        "walk": "11 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.167174%2C79.100598",
+        "photo": "https://images.meesho.com/images/products-upload/1780903261876/0567ad53.StoreImage.130420.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP22",
+        "name": "Himganga corner",
+        "type": "Kirana Store",
+        "distanceM": 958,
+        "walk": "12 min walk",
+        "hours": "11.30am-08.00pm",
+        "mapsHref": "https://maps.app.goo.gl/QcqVqxhLyre2kGzV6",
+        "photo": "https://images.meesho.com/images/marketing/1752585652734.jpg",
+        "trusted": true
+      }
+    ]
+  },
+  "440022": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SPP30",
+        "name": "R k bags",
+        "type": "Bags house",
+        "distanceM": 225,
+        "walk": "3 min walk",
+        "hours": "10.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/2spKh6ep1nkkrMgD6?g_st=aw",
+        "photo": "https://images.meesho.com/images/products-upload/1756385400671/RKBag.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP189",
+        "name": "Shree Computer And Xerox",
+        "type": "Stationery Store",
+        "distanceM": 485,
+        "walk": "6 min walk",
+        "hours": "9:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.118241%2C79.053340",
+        "photo": "https://images.meesho.com/images/products-upload/1782128130347/32bcdc40.StoreImage.132120.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP191",
+        "name": "Shree Mobile Shop",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 540,
+        "walk": "7 min walk",
+        "hours": "9:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.119650%2C79.044132",
+        "photo": "https://images.meesho.com/images/products-upload/1780903257761/9b0851cd.StoreImage.141514.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP187",
+        "name": "Kanchan Boutique",
+        "type": "Garment Store",
+        "distanceM": 557,
+        "walk": "7 min walk",
+        "hours": "11:02am-10:02pm",
+        "mapsHref": "https://www.google.com/maps?q=21.117085%2C79.037745",
+        "photo": "https://images.meesho.com/images/products-upload/1780318482039/9868f8ca.StoreImage.123234.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP196",
+        "name": "Sairam Enterprises",
+        "type": "Xerox Shop",
+        "distanceM": 559,
+        "walk": "7 min walk",
+        "hours": "10:30am-8:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.108177%2C79.059925",
+        "photo": "https://images.meesho.com/images/products-upload/1781008704189/e8367508.StoreImage.130355.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP190",
+        "name": "Sandip Mobile",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 566,
+        "walk": "7 min walk",
+        "hours": "9:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.117651%2C79.046449",
+        "photo": "https://images.meesho.com/images/products-upload/1780903253628/b126b298.StoreImage.134837.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP198",
+        "name": "Nirmala General Steel And Repair",
+        "type": "Utentsils Store",
+        "distanceM": 674,
+        "walk": "8 min walk",
+        "hours": "10:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.110848%2C79.045098",
+        "photo": "https://images.meesho.com/images/products-upload/1781008709324/4d34b420.StoreImage.141556.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP159",
+        "name": "Ganga electric",
+        "type": "Kirana Store",
+        "distanceM": 741,
+        "walk": "9 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/J6V48UkNwhhbgVLc8",
+        "photo": "https://images.meesho.com/images/products-upload/1763553713547/3.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP27",
+        "name": "Gulzar medical store",
+        "type": "Medical store",
+        "distanceM": 823,
+        "walk": "10 min walk",
+        "hours": "11.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/oTQfESNGbvWzj4vQ8",
+        "photo": "https://images.meesho.com/images/marketing/1752587023082.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP28",
+        "name": "SELFIE STUDIO",
+        "type": "SELFIE STUDIO",
+        "distanceM": 842,
+        "walk": "11 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/JZTewFtU8bw9tfF39?g_st=awb",
+        "photo": "https://images.meesho.com/images/marketing/1752587051745.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SPP37",
+        "name": "Shree Swami Samarth gift and general stores",
+        "type": "Kirana Store",
+        "distanceM": 886,
+        "walk": "11 min walk",
+        "hours": "12.00pm-10.00pm",
+        "mapsHref": "https://maps.app.goo.gl/gtPC3wpdb3ya7fps8",
+        "photo": "https://images.meesho.com/images/products-upload/1757919018599/IMG20250626162841-RahulkumarPruthvirajGaundharya.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP203",
+        "name": "Dtdc Courier Khamala",
+        "type": "Courier Service",
+        "distanceM": 957,
+        "walk": "12 min walk",
+        "hours": "10am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.115840%2C79.068582",
+        "photo": "https://images.meesho.com/images/products-upload/1782128140728/df08389d.StoreImage.125937.jpg",
+        "trusted": true
+      }
+    ]
+  },
+  "440025": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SP183",
+        "name": "Purva Online Centre",
+        "type": "Govt Seva Kendra",
+        "distanceM": 162,
+        "walk": "2 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.121147%2C79.119475",
+        "photo": "https://images.meesho.com/images/products-upload/1780318837634/9b8b57da.StoreImage.121804.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP196",
+        "name": "Sairam Enterprises",
+        "type": "Xerox Shop",
+        "distanceM": 228,
+        "walk": "3 min walk",
+        "hours": "10:30am-8:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.108177%2C79.059925",
+        "photo": "https://images.meesho.com/images/products-upload/1781008704189/e8367508.StoreImage.130355.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP184",
+        "name": "Swaymbhu Kirana and General Store",
+        "type": "Grocery Store",
+        "distanceM": 607,
+        "walk": "8 min walk",
+        "hours": "8:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.111603%2C79.074699",
+        "photo": "https://images.meesho.com/images/products-upload/1780324926085/4418117d.StoreImage.120204.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP181",
+        "name": "Dipak Kirana And Stores",
+        "type": "Grocery Store",
+        "distanceM": 642,
+        "walk": "8 min walk",
+        "hours": "9:30am-9pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1097201%2C79.0742341",
+        "photo": "https://images.meesho.com/images/products-upload/1780318476475/cc207677.StoreImage.125819.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP203",
+        "name": "Dtdc Courier Khamala",
+        "type": "Courier Service",
+        "distanceM": 666,
+        "walk": "8 min walk",
+        "hours": "10am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.115840%2C79.068582",
+        "photo": "https://images.meesho.com/images/products-upload/1782128140728/df08389d.StoreImage.125937.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP199",
+        "name": "Shree Saibaba Book Centre",
+        "type": "Stationery Store",
+        "distanceM": 900,
+        "walk": "11 min walk",
+        "hours": "10:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.114878%2C79.067877",
+        "photo": "https://images.meesho.com/images/products-upload/1781008711186/0242f3b4.StoreImage.130448.jpg",
+        "trusted": true
+      }
+    ]
+  },
+  "440027": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SP185",
+        "name": "Life Care Pathology Lab",
+        "type": "Pathology lab",
+        "distanceM": 262,
+        "walk": "3 min walk",
+        "hours": "11am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.159847%2C79.094488",
+        "photo": "https://images.meesho.com/images/products-upload/1780324929945/8141557d.StoreImage.132134.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP182",
+        "name": "Aadil Fasion Store",
+        "type": "Garment Store",
+        "distanceM": 304,
+        "walk": "4 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1331928%2C79.126585",
+        "photo": "https://images.meesho.com/images/products-upload/1780324922157/4f0af5ac.StoreImage.103529.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP143",
+        "name": "Ashish Xerox and stationary",
+        "type": "Kirana Store",
+        "distanceM": 312,
+        "walk": "4 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/hcQm11fA61FpkHaD8",
+        "photo": "https://images.meesho.com/images/products-upload/1757922233532/IMG20250905172808-RahulkumarPruthvirajGaundharya1.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP173",
+        "name": "Manish Xerox and stationary",
+        "type": "Stationery Shop",
+        "distanceM": 327,
+        "walk": "4 min walk",
+        "hours": "9am-9pm",
+        "mapsHref": "https://maps.app.goo.gl/vL2p6seGGrGjF4dd8",
+        "photo": "https://images.meesho.com/images/products-upload/1770037097678/IMG20260202163620-RahulGaundharya_resized_v1770037095718.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP179",
+        "name": "Gunjan netcafe",
+        "type": "Stationery Shop",
+        "distanceM": 335,
+        "walk": "4 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://maps.app.goo.gl/Q1WrXmak79D42zNQ9",
+        "photo": "https://images.meesho.com/images/products-upload/1775643411074/WhatsAppImage2026-04-08at1.32.04PM_resized_v1775643409317.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SP166",
+        "name": "Prasanna diary and daily needs",
+        "type": "Kirana Store",
+        "distanceM": 341,
+        "walk": "4 min walk",
+        "hours": "09.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/qpVy6jCNF9HhqvaK9",
+        "photo": "https://images.meesho.com/images/products-upload/1765450295469/Prasana_resized_v1765450290401.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP137",
+        "name": "Vipin Xerox Center and Stationary",
+        "type": "Kirana Store",
+        "distanceM": 350,
+        "walk": "4 min walk",
+        "hours": "09.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/64PfYdi5Pc2p4LSJ6",
+        "photo": "https://images.meesho.com/images/products-upload/1757510634042/vipinxerox1.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP183",
+        "name": "Purva Online Centre",
+        "type": "Govt Seva Kendra",
+        "distanceM": 357,
+        "walk": "4 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.121147%2C79.119475",
+        "photo": "https://images.meesho.com/images/products-upload/1780318837634/9b8b57da.StoreImage.121804.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP165",
+        "name": "N S Mobile",
+        "type": "Kirana Store",
+        "distanceM": 367,
+        "walk": "5 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/9uHzuUn5ZGCeND8b8",
+        "photo": "https://images.meesho.com/images/products-upload/1765450295469/NSMobile_resized_v1765450289846.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP145",
+        "name": "Soubhagya Telecom",
+        "type": "Kirana Store",
+        "distanceM": 374,
+        "walk": "5 min walk",
+        "hours": "09.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/QfC1UUZpNM9giYT47",
+        "photo": "https://images.meesho.com/images/products-upload/1757922312412/IMG-20250908-WA0043-RahulkumarPruthvirajGaundharya1.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP123",
+        "name": "Sharma dairy and daily needs",
+        "type": "Kirana Store",
+        "distanceM": 386,
+        "walk": "5 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/Z3piG2rgiefM7sH1A",
+        "photo": "https://images.meesho.com/images/products-upload/1756726976961/sharmadairy.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP163",
+        "name": "Rakshit metals",
+        "type": "Kirana Store",
+        "distanceM": 386,
+        "walk": "5 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/HxiHdxHgTyA3QmAEA",
+        "photo": "https://images.meesho.com/images/products-upload/1765178907486/IMG20251205163834-RahulGaundharya_resized_v1765178901885.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP196",
+        "name": "Sairam Enterprises",
+        "type": "Xerox Shop",
+        "distanceM": 389,
+        "walk": "5 min walk",
+        "hours": "10:30am-8:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.108177%2C79.059925",
+        "photo": "https://images.meesho.com/images/products-upload/1781008704189/e8367508.StoreImage.130355.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP138",
+        "name": "Prabha mobile and general",
+        "type": "Kirana Store",
+        "distanceM": 397,
+        "walk": "5 min walk",
+        "hours": "10.30am-09.30pm",
+        "mapsHref": "https://maps.app.goo.gl/gd3eaRP6VfCHbZEf9",
+        "photo": "https://images.meesho.com/images/products-upload/1757510634042/prabha.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP184",
+        "name": "Swaymbhu Kirana and General Store",
+        "type": "Grocery Store",
+        "distanceM": 432,
+        "walk": "5 min walk",
+        "hours": "8:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.111603%2C79.074699",
+        "photo": "https://images.meesho.com/images/products-upload/1780324926085/4418117d.StoreImage.120204.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP135",
+        "name": "Shree balaji Xerox",
+        "type": "Kirana Store",
+        "distanceM": 440,
+        "walk": "6 min walk",
+        "hours": "09.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/GnHaStfRvpPpcCna7",
+        "photo": "https://images.meesho.com/images/products-upload/1757510634042/shreebalajixerox.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP195",
+        "name": "Fancy General Store",
+        "type": "Gift Store",
+        "distanceM": 467,
+        "walk": "6 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.157245%2C79.097163",
+        "photo": "https://images.meesho.com/images/products-upload/1781008701368/76991b37.StoreImage.094733.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP142",
+        "name": "Shubham kirana store",
+        "type": "Kirana Store",
+        "distanceM": 476,
+        "walk": "6 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/G2Z6ZuvX4QoMJXrb9",
+        "photo": "https://images.meesho.com/images/products-upload/1757922233532/ShubhamKirana.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP139",
+        "name": "CSC Center",
+        "type": "Internet cafe",
+        "distanceM": 492,
+        "walk": "6 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/wiLoahoKWivhFQxM9",
+        "photo": "https://images.meesho.com/images/products-upload/1757510634042/CSCinternetcafe1.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP181",
+        "name": "Dipak Kirana And Stores",
+        "type": "Grocery Store",
+        "distanceM": 500,
+        "walk": "6 min walk",
+        "hours": "9:30am-9pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1097201%2C79.0742341",
+        "photo": "https://images.meesho.com/images/products-upload/1780318476475/cc207677.StoreImage.125819.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP161",
+        "name": "Khayati fashion fusion",
+        "type": "Garment Shop",
+        "distanceM": 526,
+        "walk": "7 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/oxtoFa4myJnLGiaA8",
+        "photo": "https://images.meesho.com/images/products-upload/1764160657430/IMG20251105145236-RahulkumarPruthvirajGaundharya_resized_v1764160656441.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP31",
+        "name": "Patel Wheel Alignment",
+        "type": "Workshop",
+        "distanceM": 546,
+        "walk": "7 min walk",
+        "hours": "11.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/zWE79jiEZbo7xRaC6",
+        "photo": "https://images.meesho.com/images/products-upload/1771915670183/PHOTO-2026-02-24-12-15-35.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP140",
+        "name": "Medi Planet Medical",
+        "type": "Kirana Store",
+        "distanceM": 556,
+        "walk": "7 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/cLndVCz8iK9H3zRS9",
+        "photo": "https://images.meesho.com/images/products-upload/1757510634042/medipoint2.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP180",
+        "name": "Sarvesh Gift",
+        "type": "Stationery Store",
+        "distanceM": 582,
+        "walk": "7 min walk",
+        "hours": "9:30am-9:30pm",
+        "mapsHref": "https://www.google.com/maps?q=21.1080493%2C79.0799801",
+        "photo": "https://images.meesho.com/images/products-upload/1779884998130/d9a467e7.StoreImage.121856.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP146",
+        "name": "Perfect electronics",
+        "type": "Kirana Store",
+        "distanceM": 597,
+        "walk": "7 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/8v842nGC5Mw67JkA8",
+        "photo": "https://images.meesho.com/images/products-upload/1757677262169/Perfectstudio.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP171",
+        "name": "Shree shyam medical",
+        "type": "Medical Store",
+        "distanceM": 617,
+        "walk": "8 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/UHD1TkmjQoZpsJN48",
+        "photo": "https://images.meesho.com/images/products-upload/1767876814496/IMG20260106154655-RahulGaundharya_resized_v1767876808305.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP164",
+        "name": "Ashish xerox 2 omkar nagar",
+        "type": "Kirana Store",
+        "distanceM": 637,
+        "walk": "8 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/GQcFZ14zVgYtoMDQ9",
+        "photo": "https://images.meesho.com/images/products-upload/1765450295469/Ashishxerox_resized_v1765450290997.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP144",
+        "name": "Honey Photo Studio",
+        "type": "Kirana Store",
+        "distanceM": 656,
+        "walk": "8 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/SVjETYK8rpNXHUbk9",
+        "photo": "https://images.meesho.com/images/products-upload/1757675687774/honeystudio.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SP150",
+        "name": "Marshal Cyber hub",
+        "type": "Stationery Shop",
+        "distanceM": 669,
+        "walk": "8 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/Arp54L8KSeQQViuw5",
+        "photo": "https://images.meesho.com/images/products-upload/1760354001037/marshal_resized_v1760353994429.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP172",
+        "name": "Abcsc xerox and stationary shop",
+        "type": "Stationery Shop",
+        "distanceM": 680,
+        "walk": "9 min walk",
+        "hours": "10am-9pm",
+        "mapsHref": "https://maps.app.goo.gl/4muubPAKDN3YNP6g8",
+        "photo": "https://images.meesho.com/images/products-upload/1770034963500/IMG20260130163641-RahulGaundharya_resized_v1770034958282.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP178",
+        "name": "Kapil's Mobile",
+        "type": "Mobile Shop",
+        "distanceM": 718,
+        "walk": "9 min walk",
+        "hours": "10am-8pm",
+        "mapsHref": "https://maps.app.goo.gl/PDwiCtSsRbjj1GhJA?g_st=awb",
+        "photo": "https://images.meesho.com/images/products-upload/1775219177437/IMG20260313173125-RahulkumarPruthvirajGaundharya_resized_v1775219175074.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP127",
+        "name": "New One Super Jumbo Xerox & Stationery",
+        "type": "General Store",
+        "distanceM": 835,
+        "walk": "10 min walk",
+        "hours": null,
+        "mapsHref": null,
+        "photo": null,
+        "trusted": false
+      },
+      {
+        "id": "SP203",
+        "name": "Dtdc Courier Khamala",
+        "type": "Courier Service",
+        "distanceM": 861,
+        "walk": "11 min walk",
+        "hours": "10am-7pm",
+        "mapsHref": "https://www.google.com/maps?q=21.115840%2C79.068582",
+        "photo": "https://images.meesho.com/images/products-upload/1782128140728/df08389d.StoreImage.125937.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP130",
+        "name": "DTDC Omkar nagar",
+        "type": "Kirana Store",
+        "distanceM": 867,
+        "walk": "11 min walk",
+        "hours": null,
+        "mapsHref": "https://maps.app.goo.gl/81tqCAGnWTFR8o818?g_st=ipc",
+        "photo": "https://images.meesho.com/images/products-upload/1756903358422/DTDC.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP201",
+        "name": "Medline Medical Store",
+        "type": "Medicine Store",
+        "distanceM": 917,
+        "walk": "11 min walk",
+        "hours": "11am-6pm",
+        "mapsHref": "https://www.google.com/maps?q=21.142484%2C79.132627",
+        "photo": "https://images.meesho.com/images/products-upload/1782128135362/b305128d.StoreImage.155549.jpg",
+        "trusted": true
+      }
+    ]
+  },
+  "440032": {
+    "tat": 2,
+    "stores": [
+      {
+        "id": "SPP23",
+        "name": "Rupam watch and mobile center",
+        "type": "Mobile Shop",
+        "distanceM": 404,
+        "walk": "5 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/Q7mr2oSrxqFqf6vr7",
+        "photo": "https://images.meesho.com/images/marketing/1754893768724.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SPP22",
+        "name": "Himganga corner",
+        "type": "Kirana Store",
+        "distanceM": 490,
+        "walk": "6 min walk",
+        "hours": "11.30am-08.00pm",
+        "mapsHref": "https://maps.app.goo.gl/QcqVqxhLyre2kGzV6",
+        "photo": "https://images.meesho.com/images/marketing/1752585652734.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP30",
+        "name": "R k bags",
+        "type": "Bags house",
+        "distanceM": 528,
+        "walk": "7 min walk",
+        "hours": "10.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/2spKh6ep1nkkrMgD6?g_st=aw",
+        "photo": "https://images.meesho.com/images/products-upload/1756385400671/RKBag.JPG",
+        "trusted": true
+      },
+      {
+        "id": "SPP26",
+        "name": "Dubey stationary and xerox",
+        "type": "Kirana Store",
+        "distanceM": 635,
+        "walk": "8 min walk",
+        "hours": "09.00am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/7z9xUCkq57y4o8nL7",
+        "photo": "https://images.meesho.com/images/marketing/1754051855507.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP28",
+        "name": "SELFIE STUDIO",
+        "type": "SELFIE STUDIO",
+        "distanceM": 700,
+        "walk": "9 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/JZTewFtU8bw9tfF39?g_st=awb",
+        "photo": "https://images.meesho.com/images/marketing/1752587051745.jpeg",
+        "trusted": true
+      },
+      {
+        "id": "SPP27",
+        "name": "Gulzar medical store",
+        "type": "Medical store",
+        "distanceM": 740,
+        "walk": "9 min walk",
+        "hours": "11.00am-11.00pm",
+        "mapsHref": "https://maps.app.goo.gl/oTQfESNGbvWzj4vQ8",
+        "photo": "https://images.meesho.com/images/marketing/1752587023082.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP159",
+        "name": "Ganga electric",
+        "type": "Kirana Store",
+        "distanceM": 820,
+        "walk": "10 min walk",
+        "hours": "11am-7pm",
+        "mapsHref": "https://maps.app.goo.gl/J6V48UkNwhhbgVLc8",
+        "photo": "https://images.meesho.com/images/products-upload/1763553713547/3.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SPP25",
+        "name": "Priyansh stationary",
+        "type": "Stationery Shop",
+        "distanceM": 840,
+        "walk": "11 min walk",
+        "hours": "09.30am-09.00pm",
+        "mapsHref": "https://maps.app.goo.gl/2NQ6nknPQQT6HqSY9",
+        "photo": "https://images.meesho.com/images/marketing/1752586736129.jpg",
+        "trusted": true
+      },
+      {
+        "id": "SP204",
+        "name": "Riya Mobile Store",
+        "type": "Mobile and Recharge Store",
+        "distanceM": 879,
+        "walk": "11 min walk",
+        "hours": "11am-8pm",
+        "mapsHref": "https://www.google.com/maps?q=21.144591%2C79.122174",
+        "photo": "https://images.meesho.com/images/products-upload/1782390286913/10dfaa9b.StoreImage.132337.jpg",
+        "trusted": true
+      }
+    ]
+  }
+}

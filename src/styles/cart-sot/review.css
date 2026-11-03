@@ -1,0 +1,348 @@
+/* =====================================================================
+   Cart review (/cart/review) — Self-pickup v2 review for every cart item
+   The page is DeliveryTypeReview with `items` (root .dtr.dtr--cart) on top of the
+   Self-pickup v2 skin (styles/review-sot/review.css). Parts from the cart file
+   (Figma utVjj3B1srPjlUd1kWDvGs, review frame 1:949):
+     1:1190  stepper band (Cart done · Review current · Payment upcoming; Figma "4" → 3)
+     1:1097  compact item row (360 x 139)
+     1:1149  Price Details (N Products) + savings banner
+   Every selector is scoped under .dtr--cart, which only the cart review renders, so the
+   Buy Now review (/product/:id/review) is untouched.
+   Fonts: Figma "Mier B02 Book" = 400, "Demi" = 600, "Bold" = 700.
+   ===================================================================== */
+
+/* ------------------------------------------------------------- stepper band (1:1190) */
+/* Android only: the glass skin (and Duo, always ui-ios) shows GlassStepper / the STEP pill. */
+.dtr--cart .dtr-cstep {
+  display: none;
+}
+
+/* 48px white band; 1.5px Blue Base line x33 → x327 centred on the nodes (y16);
+   three 48px columns at x16 / x156 / x296, nodes 8px from the top, label under the node */
+body:not(.ui-ios) .dtr--cart .dtr-cstep {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 49px;
+  margin: 0;
+  padding: 8px 16px 0;
+  border-bottom: 1px solid var(--grey-t4-bg);
+  list-style: none;
+  background: var(--white);
+}
+
+body:not(.ui-ios) .dtr--cart .dtr-cstep::before {
+  content: '';
+  position: absolute;
+  top: 15.25px;
+  left: 33px;
+  right: 33px;
+  height: 1.5px;
+  background: var(--blue-base);
+}
+
+.dtr--cart .dtr-cstep-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+}
+
+/* 16px node; the exported 17.5px oval (stroke outside) sits at -0.75px under the number */
+.dtr--cart .dtr-cstep-node {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--blue-base);
+}
+
+.dtr--cart .dtr-cstep-node::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -0.75px;
+  background: url('../../assets/cart-sot/stepper-todo.svg') center / 17.5px 17.5px no-repeat;
+}
+
+.dtr--cart .dtr-cstep-step--done .dtr-cstep-node::before {
+  background-image: url('../../assets/cart-sot/stepper-done.svg');
+}
+
+/* Overline — Book 11/16, 2%; done step Grey T2, current and upcoming Grey Base */
+.dtr--cart .dtr-cstep-label {
+  width: 48px;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--grey-base);
+}
+
+.dtr--cart .dtr-cstep-step--done .dtr-cstep-label {
+  color: var(--grey-t2);
+}
+
+/* iOS: GlassStepper's connector is drawn for two steps (25% → 75%); three steps centre
+   their nodes at 1/6 and 5/6 of the row */
+body.ui-ios .dtr--cart .glass-stepper::before {
+  left: calc(100% / 6 + 10px);
+  right: calc(100% / 6 + 10px);
+}
+
+/* ------------------------------------------------------------ item row (1:1097, 139px) */
+/* white section, 12px padding; 115px image | 12px | details (top-aligned) */
+.dtr--cart .dtr-citem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 12px;
+}
+
+/* 115 x 115, radius 5 (Figma's #CECEDE stroke sits under the photo, so none shows) */
+.dtr--cart .dtr-citem-img {
+  flex: none;
+  display: block;
+  width: 115px;
+  height: 115px;
+  border-radius: 5px;
+  object-fit: cover;
+  background: var(--grey-t4-bg);
+}
+
+/* stack (info, 8, delivery) */
+.dtr--cart .dtr-citem-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.dtr--cart .dtr-citem-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* title, 4, price, 4, meta row */
+.dtr--cart .dtr-citem-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* Book 11/16, 1.2%, Grey Base, one line */
+.dtr--cart .dtr-citem-title {
+  overflow: hidden;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-base);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Subtitle1 — Demi 15/20, 0.1%, Grey Base */
+.dtr--cart .dtr-citem-price {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* 24px row: rating, 4, dot, 4, Size, 8, Qty */
+.dtr--cart .dtr-citem-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  min-width: 0;
+}
+
+.dtr--cart .dtr-citem-attr + .dtr-citem-attr {
+  margin-left: 4px;
+}
+
+/* rating pill: Green Base, fully rounded, 2/6 padding, Demi 13/16 white + 8px star */
+.dtr--cart .dtr-citem-rating {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+  height: 20px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: var(--green-base);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--white);
+}
+
+.dtr--cart .dtr-citem-rating > img {
+  flex: none;
+  display: block;
+  width: 8px;
+  height: 7.64px;
+  max-width: none;
+}
+
+.dtr--cart .dtr-citem-dot {
+  flex: none;
+  width: 4px;
+  height: 4px;
+  background: url('../../assets/cart-sot/item-dot.svg') center / 4px 4px no-repeat;
+}
+
+/* "Size:" Book 12/16 Grey Base, 2px, value Demi 12 (normal line height) */
+.dtr--cart .dtr-citem-attr {
+  flex: none;
+  font: 400 12px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+.dtr--cart .dtr-citem-attr > strong {
+  margin-left: 2px;
+  font: 600 12px/normal var(--font-mier);
+}
+
+/* 16px row: grey truck (16 x 11.478 at y2), 4, "Free Delivery by" Book 11/16 1.2% #333,
+   2, date in Bold */
+.dtr--cart .dtr-citem-eta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 16px;
+  min-width: 0;
+  margin: 0;
+}
+
+.dtr--cart .dtr-citem-truck {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: url('../../assets/cart-sot/item-truck.svg') 0 2px / 16px 11.478px no-repeat;
+}
+
+.dtr--cart .dtr-citem-eta-text {
+  overflow: hidden;
+  min-width: 0;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: #333333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dtr--cart .dtr-citem-eta-text > strong {
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------- Price Details (N Products) (1:1149) */
+/* heading at 16/16, 10px, 36px rows, inset divider, Order Total, 8, banner, 8 */
+.dtr--cart .dtr-cprice {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px 0 8px;
+}
+
+/* Subtitle1 — Demi 15/20, 0.1%, Grey Base */
+.dtr--cart .dtr-cprice-heading {
+  margin: 0 16px 10px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* Book 13/16, 0.25%: label Grey T1, value Grey Base right-aligned */
+.dtr--cart .dtr-cprice-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 8px 16px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+.dtr--cart .dtr-cprice-value {
+  flex: none;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+.dtr--cart .dtr-cprice-row--discount .dtr-cprice-value {
+  color: var(--green-base);
+}
+
+/* "Total Discount" link style: Green Base with the 0.8px dashed rule (Line 140) */
+.dtr--cart .dtr-cprice-link {
+  position: relative;
+  color: var(--green-base);
+}
+
+.dtr--cart .dtr-cprice-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2.4px;
+  height: 0.8px;
+  background: url('../../assets/cart-sot/cart-link-underline.svg') 0 0 / 82px 0.8px repeat-x;
+}
+
+/* 1px #CECEDE, 16px in from each side */
+.dtr--cart .dtr-cprice-divider {
+  height: 1px;
+  margin: 0 16px;
+  background: #cecede;
+}
+
+/* Demi 13/16, Grey Base both sides */
+.dtr--cart .dtr-cprice-row--total {
+  min-height: 32px;
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+/* savings banner: 40px, Green T2, radius 4, 16px insets; confetti, 4, Demi 13/16 Green Base */
+.dtr--cart .dtr-cprice-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  box-sizing: border-box;
+  min-height: 40px;
+  margin: 8px 16px 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: var(--green-t2);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--green-base);
+  text-align: center;
+}
+
+.dtr--cart .dtr-cprice-banner > img {
+  flex: none;
+  display: block;
+  width: 16px;
+  height: 16px;
+}

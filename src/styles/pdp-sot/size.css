@@ -1,0 +1,321 @@
+/* =====================================================================
+   PDP SoT: Size section + Sold by row
+   Figma fdR1rJfu0Yszfeb1Em0Hma, frame 13630:129956 (PDP, 360 wide, Meesho DS)
+   - Size Section ... 13630:130068  (white, 12px 16px, column gap 12)
+   - Sold by ........ 13630:130092  (white, 8px 16px, 52 tall)
+   Section separators in the SoT: 4px solid #EAEAF2 (--grey-t4-bg). Each section here
+   draws its OWN top separator, so the section above must not add a bottom one.
+   Every selector is scoped under .pdp. The Buy Now sheet reuses .pdp-vsku-* inside .pdp,
+   so the pill rules are scoped under .pdps-size (the PDP size block only).
+   Skin rules (body.ui-ios / body.duo-device / body.layout-duo) out-rank these and keep winning.
+   ===================================================================== */
+
+/* ---------- Size section (13630:130068) ---------- */
+
+/* Phone layout: the size block is the last in-flow child of .pdp-info (the CTA bar is
+   fixed), so it bleeds to the page edges over .pdp-info's 16px padding and draws its own
+   4px top separator. */
+.pdp .pdp-info .pdps-size {
+  margin: 16px -16px -16px;
+  padding: 12px 16px;
+  border-top: 4px solid var(--grey-t4-bg);
+  background: var(--white);
+}
+
+/* the separator below the size block belongs to the Sold by row */
+.pdp .pdp-info:has(> .pdps-size) {
+  border-bottom: none;
+}
+
+/* "Select Size": Headers/Headline6, Mier Bold 17/20, Grey/Base; 12px to the pills */
+.pdp .pdps-size .pdp-vsku-title {
+  margin: 0 0 12px;
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* pills wrap onto as many rows as needed (SoT "Sizes": flex-wrap, gap 12) */
+.pdp .pdps-size .pdp-vsku-options-wrap {
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.pdp .pdps-size .pdp-vsku-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  min-width: 0;
+  max-height: none;
+}
+
+/* pill + price underneath: column, gap 4, centred */
+.pdp .pdps-size .pdp-vsku-option-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Size Option: 36 tall, 20px side padding (Figma's 1px stroke sits inside the box, so
+   19px + 1px border here), radius 8, 1px Grey/Base border.
+   Label: Subtitles/Subtitle1, Mier Demi 15/20, letter-spacing 0.1%, #333 */
+.pdp .pdps-size .pdp-vsku-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 19px;
+  border: 1px solid var(--grey-base);
+  border-radius: 8px;
+  background: var(--white);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: #333333;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* selected: Jamun/T2 fill, Jamun/Base border + label */
+.pdp .pdps-size .pdp-vsku-pill.selected {
+  border-color: var(--jamun-base);
+  background: var(--jamun-t2);
+  color: var(--jamun-base);
+}
+
+/* unavailable in this selection: dashed Grey/T3 (#CECEDE) border, Grey/T1 label */
+.pdp .pdps-size .pdp-vsku-pill.oos {
+  border: 1px dashed #CECEDE;
+  background: var(--white);
+  color: var(--grey-t1);
+}
+
+/* the selected size is out of stock in this colour: keep the selection visible */
+.pdp .pdps-size .pdp-vsku-pill.oos.selected {
+  border-color: var(--jamun-base);
+  background: var(--jamun-t2);
+  color: var(--jamun-base);
+}
+
+/* not sold in any option: label crossed out in Grey/T2, no caption underneath */
+.pdp .pdps-size .pdp-vsku-pill.pdps-pill--crossed {
+  color: var(--grey-t2);
+  text-decoration: line-through;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+/* price under the pill: Caption/Caption1, Mier Book 13/16, letter-spacing 0.15%, Grey/T1 */
+.pdp .pdps-size .pdp-vsku-pill-price {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-t1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* price under the selected pill: Subtitles/Subtitle2, Mier Demi 13/16, Jamun/Base */
+.pdp .pdps-size .pdp-vsku-pill.selected + .pdp-vsku-pill-price {
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--jamun-base);
+}
+
+/* "2 Options" under a size sold only in other options: Caption1 (Book) in Jamun/Base */
+.pdp .pdps-size .pdp-vsku-pill-price.pdps-pill-options {
+  color: var(--jamun-base);
+}
+
+/* Size Chart row: 24 tall, 12px below the pills; Subtitle1 Demi 15/20 Grey/Base,
+   24px small icon button with the 12x7 "down" chevron on the right */
+.pdp .pdps-size-chart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  height: 24px;
+  margin: 12px 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+  text-align: left;
+  cursor: pointer;
+}
+
+/* MESH small icon button: 24x24, the 20px line icon centred, glyph 12x7 */
+.pdp .pdps-chevron-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.pdp .pdps-chevron-btn img {
+  display: block;
+  width: 12px;
+  height: 7px;
+}
+
+/* the Sold by row uses the same "down" glyph turned to point right */
+.pdp .pdps-chevron-btn--right img {
+  transform: rotate(-90deg);
+}
+
+/* ---------- Sold by (13630:130092) ---------- */
+
+/* white, 8px 16px, 52 tall, own 4px #EAEAF2 top separator, no bottom one */
+.pdp .pdp-supplier.pdps-soldby {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 16px;
+  border-top: 4px solid var(--grey-t4-bg);
+  border-bottom: none;
+  background: var(--white);
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+}
+
+/* web two-column PDP: the row heads the right column, nothing to separate it from */
+.pdp.pdp--web .pdp-supplier.pdps-soldby {
+  border-top: none;
+}
+
+.pdp .pdps-soldby .pdp-supplier-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* "Sold by" tag over a 28px store avatar; the tag overlaps the avatar by 6px */
+.pdp .pdps-soldby-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  isolation: isolate;
+}
+
+.pdp .pdps-soldby-tag {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -6px;
+  padding: 0 4px;
+  border-radius: 2px;
+  background: var(--blue-t2);
+  font: 600 8px/12px var(--font-mier);
+  letter-spacing: 0.096px;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+.pdp .pdps-soldby-avatar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 140px;
+  background: var(--blue-t2);
+}
+
+.pdp .pdps-soldby-avatar img {
+  display: block;
+  width: 16.1px;
+  height: 14.1px;
+}
+
+.pdp .pdps-soldby-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* seller name: Subtitles/Subtitle2, Mier Demi 13/16, Grey/Base */
+.pdp .pdps-soldby .pdp-supplier-name {
+  max-width: 100%;
+  overflow: hidden;
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* rating chip · dot · m Trusted: one 20px row, gap 4 */
+.pdp .pdps-soldby-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+}
+
+/* rating chip: white, 1px Lime/Base border, radius 20, 40x20 (Figma's 6px/2px padding
+   includes the inside stroke, so 5px/1px + 1px border here); Demi 13/16 Lime/Base */
+.pdp .pdps-soldby-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 5px;
+  border: 1px solid var(--lime-base);
+  border-radius: 20px;
+  background: var(--white);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--lime-base);
+  white-space: nowrap;
+}
+
+/* 8px filled star: the glyph is 8 x 7.64, top-aligned in an 8x8 box */
+.pdp .pdps-soldby-star {
+  display: block;
+  flex-shrink: 0;
+  width: 8px;
+  height: 7.64px;
+  margin-bottom: 0.36px;
+}
+
+.pdp .pdps-soldby-dot {
+  display: block;
+  flex-shrink: 0;
+  width: 4px;
+  height: 4px;
+}
+
+/* "Meesho Badges / M trusted": 40x14 clip, artwork 39.2 x 14.25 from the top-left */
+.pdp .pdps-soldby-trusted {
+  display: block;
+  flex-shrink: 0;
+  width: 40px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.pdp .pdps-soldby-trusted img {
+  display: block;
+  width: 39.2017px;
+  height: 14.2545px;
+}

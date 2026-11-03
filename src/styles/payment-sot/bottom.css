@@ -1,0 +1,137 @@
+/* =====================================================================
+   Payment SoT — bottom of the page (Figma fdR1rJfu0Yszfeb1Em0Hma, frames 167:26405 / 167:26572)
+   - "Reselling this order?" row ... 167:26487
+   - "Price Details" row ........... 167:26490
+   - Action bar / Info + 1 CTA ..... 167:26493
+   Section separators in the SoT: 8px of the page bg (#EAEAF2, --grey-t4-bg) between the
+   payment-method block and each row. Every selector is scoped under .payment-page.
+   The footer BAR chrome (padding / background / border) for body.ui-ios (glass) and
+   body.duo-device / body.layout-duo keeps winning: those rules out-rank everything here and
+   nothing here touches the button radius they set.
+   ===================================================================== */
+
+/* ---------- Rows under the payment methods (167:26487, 167:26490) ----------
+   8px separators. .payment-page-body already puts var(--review-section-gap) (4px) above this
+   group, so the group tops it up to 8px whatever that gap is set to. */
+.payment-page .pays-more-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: calc(8px - var(--review-section-gap, 4px));
+}
+
+/* white, 16px all round, label left + 20px icon right (52px tall) */
+.payment-page .pays-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 52px;
+  padding: 16px;
+  background: var(--white);
+  box-sizing: border-box;
+}
+
+/* Subtitles/Subtitle1 — Mier Demi 15/20, +0.1% tracking, Grey/Base */
+.payment-page .pays-row-label {
+  min-width: 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* "Line Icons / right chevron": 20x20 frame, 7x12 glyph at (7, 4), #666666 baked into the SVG */
+.payment-page .pays-row-icon {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.payment-page .pays-row-icon img {
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  width: 7px;
+  height: 12px;
+  max-width: none;
+}
+
+/* Price Details uses the same instance rotated 90deg (points down) */
+.payment-page .pays-row-icon--down {
+  transform: rotate(90deg);
+}
+
+/* ---------- Action bar / Info + 1 CTA (167:26493) ----------
+   Bar: white, 1px #CECEDE top stroke drawn INSIDE the 68px, content 12px from the top edge,
+   16px sides (bar chrome already lives on .payment-page-footer; only the 1px is trimmed so the
+   stroke + 11px = Figma's 12px — skin rules out-rank this). */
+.payment-page .payment-page-footer {
+  padding-top: 11px;
+}
+
+/* With the "Select a payment method to place order" nudge the Meesho bar is 92px
+   (11 + 1 + 16 + 8 + 44 + 12) but .payment-page-body reserves only 68px, which hid half of
+   the Price Details row. The glass skins (iOS / Duo) already reserve 104px. */
+body:not(.ui-ios) .payment-page:has(.payment-page-footer-nudge) .payment-page-body {
+  padding-bottom: calc(92px + var(--safe-bottom, 0px));
+}
+
+/* info column (left) + primary CTA (right), both 44px tall */
+.payment-page .pays-actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.payment-page .pays-actionbar-info {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* Headers/Headline6 — Mier Bold 17/20, Grey/Base */
+.payment-page .pays-actionbar-total {
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+/* Actions/Link — Mier Bold 13/16, uppercase, Jamun/Base */
+.payment-page .pays-actionbar-link {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--jamun-base);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Button: 158 of 328px (48.17%) at 360 wide, grows for a longer label ("Proceed To Payment").
+   Height 44, 12px inset, radius 4, Jamun/Base, Actions/Large Demi 15/20 — all already on
+   .review-shell-confirm; only the width model changes. */
+.payment-page .pays-actionbar .review-shell-confirm {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 48.17%;
+  min-height: 44px;
+  padding: 12px;
+  letter-spacing: 0.0225px;
+  white-space: nowrap;
+}

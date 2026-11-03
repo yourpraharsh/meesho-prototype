@@ -1,0 +1,139 @@
+/* Mier B02 — Meesho's typeface (files in public/fonts/mier). Three cuts cover every weight the
+   app asks for, so no weight is ever faked by the browser. Book is weight class 500 in the font
+   (Figma reports "Mier B02 Book" as 500, and the DS tokens body3/caption1/caption2 use 500), so
+   Book covers 100–500, Demi (600) 501–699 and Bold (700) 700–900. */
+@font-face {
+  font-family: 'Mier';
+  src: url('/fonts/mier/Mier_B02-Book.otf') format('opentype');
+  font-weight: 100 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mier';
+  src: url('/fonts/mier/Mier_B02-Demi.otf') format('opentype');
+  font-weight: 501 699;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mier';
+  src: url('/fonts/mier/Mier_B02-Bold.otf') format('opentype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Figma design tokens – Gen-AI-trials node 140:328 (do not change) */
+:root {
+  /* Grey */
+  --grey-base: #353543;
+  --grey-t1: #616173;
+  --grey-t2: #8B8BA3;
+  --grey-t3-divider: #DFDFDF;
+  --grey-t4-bg: #EAEAF2;
+  --grey-t5-subdued: #F8F8FF;
+  /* Jamun (primary accent) */
+  --jamun-base: #9F2089;
+  --jamun-primary: #60014A;
+  --jamun-t2: #FFE7FB;
+  /* Green */
+  --green-base: #038D63;
+  --green-t2: #D3F4EA;
+  /* Blue, Red, Orange, Yellow */
+  --blue-base: #5585F8;
+  --blue-t2: #E7EEFF;
+  --red-base: #E11900;
+  --orange-base: #EE7212;
+  --yellow-base: #F4B619;
+  --yellow-t1: #FFF4D7;
+  --lime-base: #23BB75;
+  --aam: #FF9D00;
+  /* Base */
+  --white: #FFFFFF;
+  /* Typography – Mier B02 used everywhere */
+  --font-sans: "Mier", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mier: var(--font-sans);
+  /* Figma type styles */
+  --headline6: 700 17px/20px var(--font-mier);
+  --headline3: 700 25px/28px var(--font-mier);
+  --headline2: 700 29px/36px var(--font-mier);
+  --body2: 400 15px/20px var(--font-mier);
+  --body2-strike: 500 15px/20px var(--font-mier);
+  --body3: 500 13px/16px var(--font-mier);
+  --caption1: 500 13px/16px var(--font-mier);
+  --caption2: 500 11px/16px var(--font-mier);
+  --subtitle1: 600 15px/20px var(--font-mier);
+  --subtitle2: 600 13px/16px var(--font-mier);
+  --link: 700 13px/16px var(--font-mier);
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  max-width: 430px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--grey-base);
+  background: var(--grey-t4-bg);
+  overflow-x: hidden;
+  letter-spacing: 0;
+}
+
+.app {
+  font-family: var(--font-sans);
+  min-height: 100%;
+  width: 100%;
+  background: var(--white);
+  position: relative;
+  box-shadow: 0 0 0 1px var(--grey-t3-divider);
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

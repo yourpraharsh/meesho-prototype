@@ -1,0 +1,630 @@
+/* =====================================================================
+   Review page (/product/:id/review) — Self-pickup v2 SoT
+   Figma H1GW5y6IAWYTrscEJHvRK4, section 3695:105372:
+     3695:106363  Steady State, first beat (Home selected, plain pickup card)
+     3695:106611 / 3695:106115 / 3695:107355
+                  Steady State with the green band (grow-in, #F2FFF1 flash, rest)
+     3822:22146   Selected State (pickup selected)
+   Markup: DeliveryTypeReview.jsx (dtr-*) + ReviewShell.css (review-shell-*), and the
+   spotlight treatment's band (dil-save-eyebrow, DiscountIdeasLoud.jsx).
+   Every selector is scoped under .dtr (the DeliveryTypeReview root), so nothing else
+   changes. Header and footer BAR chrome (padding, height, border, back icon) is
+   Android-only (body:not(.ui-ios)); the glass skin and Duo (always ui-ios) keep their
+   own bars, and the Duo 24px CTA pill is left to duoLayout.css.
+   Fonts: Figma "Mier B02 Book" = 400, "Demi" = 600, "Bold" = 700.
+   Figma measures from a card's outer edge; with a 1px border the CSS paddings
+   below are the Figma value minus 1.
+   ===================================================================== */
+
+/* ------------------------------------------------------------------ app bar (Appbar) */
+/* Back = "Line Icons / back" in a 24px button at x16; title Subtitle2.Caps
+   (Demi 13/16, 0.5%, uppercase, #353543) at x48, 8px after the button. */
+body:not(.ui-ios) .dtr .review-shell-back {
+  background: url('../../assets/review-sot/appbar-back.svg') center / 24px 24px no-repeat;
+}
+
+body:not(.ui-ios) .dtr .review-shell-back > svg {
+  display: none;
+}
+
+.dtr .review-shell-title {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0.005em;
+  color: var(--grey-base);
+}
+
+/* --------------------------------------------- "₹X OFF on this order" band (3695:107392) */
+/* 42px: white base + the exported scalloped gradient shape (416.48 x 40.46 at x -1.94);
+   text row 20px, 6.5px from the top, bottom-aligned, centred. */
+.dtr .dtr-offer {
+  align-items: flex-start;
+  min-height: 42px;
+  padding: 6.5px 16px 15.5px;
+  background:
+    url('../../assets/review-sot/offer-band.svg') -1.94px 0 / calc(100% + 56.48px) 40.46px no-repeat,
+    var(--white);
+}
+
+.dtr .dtr-offer::after {
+  display: none;
+}
+
+.dtr .dtr-offer-text {
+  align-items: flex-end;
+  gap: 4px;
+}
+
+/* Headline6 — Bold 17/20, Green Base */
+.dtr .dtr-offer-highlight {
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--green-base);
+}
+
+/* Book 13/16, 0.15%, #263238 */
+.dtr .dtr-offer-rest {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: #263238;
+}
+
+/* 1px of page grey between the band and the item row */
+.dtr .dtr-offer + .dtr-body {
+  margin-top: 1px;
+}
+
+/* ------------------------------------------------------------- item row (85px tall) */
+/* 56px image at (16,16), 12px to the copy, 13px under the image */
+.dtr .dtr-item {
+  gap: 12px;
+  padding: 16px 16px 13px;
+}
+
+.dtr .dtr-item-img {
+  border: 1px solid #cecede;
+  border-radius: 4px;
+}
+
+.dtr .dtr-item-body {
+  gap: 4px;
+}
+
+/* Demi 13/16, Grey Base */
+.dtr .dtr-item-title {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* Book 13/16, 0.25%, Grey Base; "Size • Qty" 8px either side of the 4px #CECEDE dot */
+.dtr .dtr-item-line {
+  gap: 8px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-base);
+}
+
+/* "right chevron" icon button, 24px, 16px from the right edge */
+.dtr .dtr-item-chevron {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url('../../assets/review-sot/chevron-right-grey.svg') center / 24px 24px no-repeat;
+}
+
+.dtr .dtr-item-chevron > svg {
+  display: none;
+}
+
+/* ------------------------------------------------ Select Delivery Type (484px block) */
+/* title at y12, ETA row y37 (20px), cards from y66; 18px under the last card */
+.dtr .dtr-delivery {
+  gap: 12px;
+  padding: 12px 16px 18px;
+}
+
+/* Subtitle1 — Demi 15/20, 0.1%, #333333 */
+.dtr .dtr-delivery-heading {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: #333333;
+}
+
+/* Book 13/16, 0.25%, Grey T1; date in Demi Grey Base; 20px icon box, 4px gap */
+.dtr .dtr-delivery-eta {
+  gap: 4px;
+  min-height: 20px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+.dtr .dtr-delivery-eta strong {
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+/* exported blue truck (Icon Colors/Blue T1 + T3), 16 x 11.48 at (2, 3.6) in the 20px box */
+.dtr .dtr-delivery-eta::before {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: url('../../assets/review-sot/eta-truck.svg') 2px 3.6px / 16px 11.478px no-repeat;
+}
+
+.dtr .dtr-delivery-eta > svg {
+  display: none;
+}
+
+/* vertical rhythm on the 12px flex gap: title→ETA 5, ETA→first card 9,
+   home→plain pickup card 16, home→green band 12 */
+.dtr .dtr-delivery-heading + .dtr-delivery-eta {
+  margin-top: -7px;
+}
+
+.dtr .dtr-delivery-eta + .dtr-card {
+  margin-top: -3px;
+}
+
+.dtr .dtr-delivery > .dtr-card + .dtr-card {
+  margin-top: 4px;
+}
+
+.dtr .dtr-delivery > .dtr-card + .dtr-card.dil-spot-card:has(.dil-save-eyebrow--in) {
+  margin-top: 0;
+}
+
+/* ---------------------------------------------------------- delivery cards ("Pay Online Card") */
+/* 8px radius, 1px stroke: Jamun when selected; unselected home #EAEAF2,
+   unselected plain pickup #CECEDE (3695:106363). Kept at single-class weight (:where)
+   so the pickup-lab variants' own card frames (.dtr-card.dil-*) still win. */
+:where(.dtr .dtr-delivery) .dtr-card {
+  border: 1px solid #cecede;
+  border-radius: 8px;
+}
+
+:where(.dtr .dtr-delivery) > .dtr-card:where(:first-of-type) {
+  border-color: var(--grey-t4-bg);
+}
+
+:where(.dtr .dtr-delivery) .dtr-card--selected {
+  border: 1px solid var(--jamun-base);
+}
+
+/* head row: price column | 4px | label (flex) | radio; right inset 14 */
+.dtr .dtr-card-head {
+  gap: 4px;
+  padding: 20.5px 14px 16px 11px;
+}
+
+/* home card head (divider at y58): content centred on y32.7 */
+.dtr .dtr-delivery > .dtr-card:first-of-type > .dtr-card-head {
+  padding-top: 13.5px;
+  padding-bottom: 7.5px;
+}
+
+/* price column: 12px to the dashed 35.45px divider (Vector 941, #CECEDE) at x73 */
+.dtr .dtr-card-price {
+  position: relative;
+  justify-content: center;
+  gap: 0;
+  min-width: 61px;
+  min-height: 36px;
+  padding-right: 12px;
+  border-right: 0;
+}
+
+.dtr .dtr-card-price::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -0.5px;
+  width: 1px;
+  height: 35.9436px;
+  background: url('../../assets/review-sot/card-price-divider-v.svg') center / 1px 35.9436px no-repeat;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Headline5 — Bold 19/24, Grey Base */
+.dtr .dtr-card-amount {
+  font: 700 19px/24px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* pickup price block (the 1.14x "price" component): strike Demi 11.4/13.68 1.2% Grey T1,
+   price Bold 19.38/22.8 Green Base, lines overlapping by 1.76px; strike top at y18.7 */
+.dtr .dtr-card-price--pickup {
+  justify-content: flex-start;
+}
+
+.dtr .dtr-card-price--pickup::after {
+  top: calc(50% + 2px);
+}
+
+.dtr .dtr-card-mrp {
+  margin-top: -2.8px;
+  font: 600 11.4px/13.68px var(--font-mier);
+  letter-spacing: 0.1368px;
+  color: var(--grey-t1);
+  text-decoration: line-through;
+}
+
+.dtr .dtr-card-amount--save {
+  margin-top: -1.76px;
+  font: 700 19.38px/22.8px var(--font-mier);
+  color: var(--green-base);
+}
+
+/* Subtitle1 — Demi 15/20, 0.1%, Grey Base */
+.dtr .dtr-card-label {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* radio = "Line Icons / check", 20px: Jamun disc + white tick when on,
+   white disc + 1px #616173 ring when off (exported from the frames) */
+.dtr .dtr-radio {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: url('../../assets/review-sot/radio-off.svg') center / 20px 20px no-repeat;
+}
+
+.dtr .dtr-radio--on {
+  background-image: url('../../assets/review-sot/check-on.svg');
+}
+
+.dtr .dtr-radio--on > svg {
+  display: none;
+}
+
+/* "Div": 1px #EAEAF2, x12 → 312 */
+.dtr .dtr-card-divider {
+  margin: 0 15px 0 11px;
+  background: var(--grey-t4-bg);
+}
+
+/* address row: text at (13, 68), "Change" right edge at x309; 94px card */
+.dtr .dtr-card-address {
+  gap: 11px;
+  padding: 9px 18px 9px 12px;
+}
+
+/* Demi 13/16, Grey T1 */
+.dtr .dtr-card-address-line {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t1);
+}
+
+/* Demi 13/16, Jamun */
+.dtr .dtr-card-change {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--jamun-base);
+}
+
+/* ------------------------------------------------------------- store block ("71") */
+/* 10px under the divider, 4px vertical padding, photo | 8px | details, centred */
+.dtr .dtr-delivery .dtr-store {
+  align-items: center;
+  gap: 8px;
+  padding: 14px 11px 4px;
+}
+
+/* 108 x 125 photo, 0.5px #CECEDE stroke, 8px radius */
+.dtr .dtr-delivery .dtr-store-photo {
+  width: 108px;
+  min-height: 125px;
+  border: 0.5px solid #cecede;
+  border-radius: 8px;
+}
+
+/* name, 8, Store tag, 8, meta rows (4 apart), 8, actions */
+.dtr .dtr-delivery .dtr-store-body {
+  gap: 8px;
+}
+
+/* Subtitle1 — Demi 15/20, 0.1%, Grey Base */
+.dtr .dtr-delivery .dtr-store-name {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* Body3 — Book 13/16, 0.25%, Grey T1; 16px icon bubble, 4px gap */
+.dtr .dtr-delivery .dtr-store-meta {
+  gap: 4px;
+  min-height: 16px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+.dtr .dtr-delivery .dtr-store-meta + .dtr-store-meta {
+  margin-top: -4px;
+}
+
+.dtr .dtr-delivery .dtr-store-meta > svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* the meta icon bubble: 16px, Blue Base @10% fill, 0.2px Blue Base @20% stroke */
+.dtr .dtr-meta-icon {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 0.2px solid rgba(85, 133, 248, 0.2);
+  border-radius: 50%;
+  background: rgba(85, 133, 248, 0.1);
+}
+
+.dtr .dtr-meta-icon > img {
+  position: absolute;
+  top: -0.2px;
+  left: -0.2px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  max-width: none;
+}
+
+/* See Map / Call Store: equal halves, 30px, #F8F8FF fill, 1px #EAEAF2, radius 8,
+   8/4 padding, 16px icon, 4px gap, Demi 13/16 Grey Base */
+.dtr .dtr-delivery .dtr-store-actions {
+  width: 100%;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.dtr .dtr-delivery .dtr-store-action {
+  flex: 1 1 0;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 30px;
+  padding: 4px 8px;
+  border: 1px solid var(--grey-t4-bg);
+  border-radius: 8px;
+  background: var(--grey-t5-subdued);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.dtr .dtr-action-icon {
+  flex: none;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* the "See More Stores" sheet keeps its own (narrower) action buttons: 14px glyphs there */
+.dtr .dtr-stores-sheet .dtr-action-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* second divider: 8px under the store row, x14 → 314 */
+.dtr .dtr-delivery .dtr-card-body > .dtr-card-divider:not(:first-child) {
+  margin: 8px 13px 0;
+}
+
+/* SEE MORE STORES — Bold 13/16, 0.25%, Jamun + 24px "right chevron" (Jamun);
+   8px under the divider, 24px row, 6.5px above the card edge */
+.dtr .dtr-more-stores {
+  gap: 0;
+  min-height: 24px;
+  margin: 8px 0 5.5px;
+  padding: 0;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--jamun-base);
+}
+
+.dtr .dtr-more-stores > svg {
+  display: none;
+}
+
+.dtr .dtr-more-stores::after {
+  content: '';
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background: url('../../assets/review-sot/chevron-right-jamun.svg') center / 24px 24px no-repeat;
+}
+
+/* ------------------------------------------- green band on the pickup card (FTUX variant) */
+/* Band 3695:107513: Green Base, 8px top radius, label Demi 15/20 0.1% white (cap top at 8);
+   the card (1px stroke, 8px radius) sits 28px under the band top and overlaps its last 6px,
+   so the band shows round the card's top corners. Stroke: Green Base at rest (107355),
+   Jamun once pickup is selected (3822:22146, band 30px); #F2FFF1 fill on the flash (106115).
+   The band rides the card's top edge (-1px margins over the stroke); its ::after "lip" draws
+   the card's top edge and the head moves up under the lip (-7px). */
+.dtr .dtr-card.dil-spot-card {
+  --sot-frame: #cecede;
+  overflow: visible;
+  border-color: var(--sot-frame);
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.3s ease,
+    transform 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out,
+    margin-top 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-spot-card:has(.dil-save-eyebrow--in) {
+  --sot-frame: var(--green-base);
+}
+
+.dtr .dtr-delivery .dtr-card.dil-spot-card.dtr-card--selected {
+  --sot-frame: var(--jamun-base);
+  border-color: var(--sot-frame);
+}
+
+.dtr .dtr-card.dil-spot-card:has(.dil-spot-eyebrow--reveal),
+.dtr .dtr-card.dil-spot-card:has(.dil-spot-eyebrow--flash) {
+  --dil-panel: #f2fff1;
+  background-color: #f2fff1;
+}
+
+.dtr .dtr-card.dil-spot-card .dil-save-eyebrow {
+  margin: 0 -1px;
+  border-radius: 8px 8px 0 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--white);
+  transition:
+    max-height 0.5s ease-in-out,
+    padding 0.5s ease-in-out,
+    margin 0.5s ease-in-out,
+    opacity 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-spot-card .dil-save-eyebrow--in {
+  max-height: 64px;
+  margin: -1px -1px -7px;
+  padding: 3px 12px 0;
+}
+
+.dtr .dtr-card.dil-spot-card .dil-save-eyebrow::after {
+  box-sizing: border-box;
+  height: 8px;
+  margin: 5px -12px 0;
+  border: 1px solid var(--sot-frame);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.3s ease;
+}
+
+/* Selected State: band 30px, head 2px higher (card 264 tall) */
+.dtr .dtr-card.dil-spot-card.dtr-card--selected .dil-save-eyebrow--in::after {
+  margin-top: 7px;
+}
+
+.dtr .dtr-card.dil-spot-card.dtr-card--selected:has(.dil-save-eyebrow--in) > .dtr-card-head {
+  padding-top: 18.5px;
+}
+
+/* …while the price block stays put (strike top still at y18.7) */
+.dtr .dtr-card.dil-spot-card.dtr-card--selected:has(.dil-save-eyebrow--in) .dtr-card-mrp {
+  margin-top: -0.8px;
+}
+
+/* the band carries the saving, so the in-card Save chip steps aside on band cards in every
+   phase — no SoT frame has it, including the first beat before the band slides up (3695:106363:
+   strike at y18.7, label at y29.5). Hiding it only once the band is in made the head jump 6px. */
+.dtr .dtr-card.dil-spot-card .dtr-card-price--pickup > .dtr-card-save-chip {
+  display: none;
+}
+
+/* ------------------------------------------------------------ Price Details row (card/price) */
+/* 52px: Subtitle1 label | ₹ Subtitle1 + 8 + 24px chevron (down), 16px insets */
+.dtr .review-shell-price-details {
+  padding: 0;
+}
+
+.dtr .review-shell-price-details:has(.review-shell-price-breakdown) {
+  padding-bottom: 8px;
+}
+
+.dtr .review-shell-price-summary {
+  min-height: 52px;
+  padding: 14px 16px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+.dtr .review-shell-price-summary-right {
+  gap: 8px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+.dtr .review-shell-price-summary-right > svg {
+  display: none;
+}
+
+.dtr .review-shell-price-summary-right::after {
+  content: '';
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background: url('../../assets/review-sot/chevron-down.svg') center / 24px 24px no-repeat;
+  transition: transform 0.2s ease;
+}
+
+.dtr .review-shell-price-summary[aria-expanded='true'] .review-shell-price-summary-right::after {
+  transform: rotate(180deg);
+}
+
+/* --------------------------------------------------------------- footer (Bottom Nav) */
+/* bar chrome — Android only: 65px, white, 1px #EAEAF2 top stroke, CTA 10.9px from the top */
+body:not(.ui-ios) .dtr .dtr-footer {
+  gap: 16px;
+  min-height: 65px;
+  padding: 10px 15px calc(11px + var(--safe-bottom, 0px)) 16px;
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+/* price row (20px), 5px, VIEW PRICE DETAILS */
+.dtr .dtr-footer-left {
+  gap: 5px;
+}
+
+.dtr .dtr-footer-price-row {
+  gap: 6px;
+}
+
+/* Headline6 — Bold 17/20, Grey Base */
+.dtr .dtr-footer-price {
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* ₹X OFF chip: 20px, 2/4 padding, 2px radius, #D3F4EA → white, Demi 13/16 Green Base */
+.dtr .dtr-footer-off-chip {
+  padding: 2px 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--green-t2) 0%, var(--white) 100%);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--green-base);
+}
+
+/* Bold 13/16, uppercase, Jamun */
+.dtr .dtr-footer-view-details {
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--jamun-base);
+}
+
+/* Continue: 159 x 44, Jamun, Demi 15/20 0.15% white, 12px side padding */
+.dtr .dtr-footer-continue {
+  min-width: 159px;
+  min-height: 44px;
+  padding: 12px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0225px;
+  color: var(--white);
+}
+
+/* 4px radius except on Duo, whose footer CTAs are 24px pills (duoLayout.css) */
+body:not(.duo-device):not(.layout-duo) .dtr .dtr-footer-continue {
+  border-radius: 4px;
+}

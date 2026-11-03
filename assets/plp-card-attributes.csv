@@ -1,0 +1,15 @@
+categoryId,group,pack_options,attribute_options,title_keywords
+mens_shirts,fashion,Pack of 2|Pack of 3,Cotton|Polyester|Linen|Rayon Blend|Denim|Oxford Cotton|Regular Fit|Slim Fit,cotton|linen|polyester|denim|rayon|regular|slim
+women_kurti,fashion,,Rayon|Cotton|Silk Blend|Georgette|Chiffon|Crepe|Round Neck|Printed|A-Line,cotton|rayon|silk|georgette|chiffon|crepe|printed|round neck|a-line|floral
+women_saree,fashion,,Silk|Cotton|Georgette|Chiffon|Banarasi|Art Silk|With Blouse|Printed,silk|cotton|georgette|chiffon|banarasi|printed|blouse|designer
+lod_top_bottom_sets,fashion,,Rayon|Cotton|Polyester Blend|Georgette|Crepe|Printed|Casual,cotton|rayon|polyester|georgette|crepe|printed|casual|trendy
+women_top_bottom_sets,fashion,,Rayon|Cotton|Polyester Blend|Georgette|Crepe|Printed|Casual,cotton|rayon|polyester|georgette|crepe|printed|casual|trendy
+mens_shoes,footwear,,PU Leather|Canvas|Mesh|Synthetic|Slip-On,leather|canvas|mesh|synthetic
+beauty_lipstick,beauty,Pack of 2|Pack of 3,Matte|Long Stay|Velvet|Non-Transfer|Liquid|Crayon,matte|velvet|liquid|crayon|long stay|non-transfer|transfer
+beauty_shampoo,fmcg,Pack of 2|Pack of 3,180ml|340ml|650ml|1L|Anti-Dandruff|Intense Repair|Hair Fall Control,repair|dandruff|fall|smooth|herbal|keratin
+beauty_hair_oil,fmcg,Pack of 2|Pack of 3,100ml|200ml|500ml|Hair Growth|Onion|Coconut|Almond,onion|coconut|almond|growth|amla
+baby_diaper,baby,Pack of 40|Pack of 56|Pack of 64|Pack of 72|Pack of 80,Small|Medium|Large|XL|Newborn|Pants,small|medium|large|newborn|pants
+kitchen_water_bottle,kitchen,,750ml|1L|1.25L|2L|Insulated|BPA Free,750|1l|1.25|2 litre|insulated|bpa
+kitchen_cooker,kitchen,,2L|3L|5L|Aluminium|Non-Stick|Induction,2l|3l|5l|aluminium|non-stick|induction
+kitchen_cooker_volume,kitchen,,3L|5L|Stainless Steel|Hard Anodized,3l|5l|stainless|anodized
+home_bedsheets,home,,Single|Double|Queen|King|180 TC|210 TC,single|double|queen|king|cotton|microfiber

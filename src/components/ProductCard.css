@@ -1,0 +1,1283 @@
+/* Simplify cards V04–V06 — Figma 88:32110, 88:38412, 92:19175 */
+.product-card--floor .product-card-link,
+.product-card--floor-deals .product-card-link,
+.product-card--floor-tags .product-card-link,
+.product-card--tile-layers .product-card-link {
+  padding-bottom: 0;
+}
+
+.product-card-image-wrap--simplify {
+  aspect-ratio: 4 / 5;
+}
+
+/* Rating pill — fully rounded, shared across all PLP card variants */
+.product-card {
+  --plp-rating-pill-h: 20px;
+}
+
+.product-card-floor-rating-pill,
+.product-card-layer-rating-pill,
+.product-card-rating-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  box-sizing: border-box;
+  height: var(--plp-rating-pill-h);
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--green-base);
+  font: 600 11px/12px var(--font-mier);
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.product-card-floor-rating-pill svg,
+.product-card-layer-rating-pill svg,
+.product-card-rating-pill svg {
+  width: 10px;
+  height: 10px;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+/* V04 — image floor */
+.product-card-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 8px 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(22, 22, 34, 0.5) 50%,
+    rgba(18, 18, 28, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+.product-card-floor-price {
+  font: 700 18px/22px var(--font-mier);
+  color: var(--white);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.product-card-floor-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.product-card-floor-rating-count {
+  font: 500 11px/14px var(--font-mier);
+  color: var(--white);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+/* V07 — same row as V04 floor, on white tile body */
+.product-card-floor--on-tile {
+  position: static;
+  pointer-events: auto;
+  background: transparent;
+  padding: 8px;
+}
+
+.product-card-floor--on-tile .product-card-floor-price {
+  color: var(--grey-base);
+  text-shadow: none;
+}
+
+.product-card-floor--on-tile .product-card-floor-rating-count {
+  color: var(--grey-t2);
+}
+
+.product-card-image-timer {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(238, 114, 18, 0.92);
+  font: 600 10px/12px var(--font-mier);
+  color: var(--white);
+  z-index: 1;
+}
+
+/* V05/V06 — card body (not on image) */
+.product-card-simplify-body {
+  --plp-layer-chip-h: 20px;
+  background: var(--white);
+}
+
+/* Shared layer row — single line (floor + one extra), no wrap */
+.product-card-layer {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.product-card-layer-floor-group,
+.product-card-layer-chip {
+  position: relative;
+  z-index: 1;
+}
+
+.product-card-layer-floor-group {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.product-card-layer--price,
+.product-card-layer--quality {
+  min-height: calc(var(--plp-layer-chip-h) + 12px);
+}
+
+.product-card-layer--price {
+  --layer-pad-block-start: 6px;
+  --layer-pad-block-end: 2px;
+  padding: var(--layer-pad-block-start) 8px var(--layer-pad-block-end);
+}
+
+.product-card-layer--quality {
+  --layer-pad-block-start: 4px;
+  --layer-pad-block-end: 8px;
+  padding: var(--layer-pad-block-start) 8px var(--layer-pad-block-end);
+}
+
+/* Price layer slots — compact for single-row tile */
+.product-card-simplify-body .product-card-layer-final-price {
+  font: 700 15px/18px var(--font-mier);
+  color: var(--grey-base);
+  flex-shrink: 0;
+}
+
+.product-card-layer-mrp {
+  font: 500 11px/14px var(--font-mier);
+  color: var(--grey-t2);
+  text-decoration: line-through;
+  flex-shrink: 0;
+}
+
+.product-card-layer-discount {
+  font: 500 11px/14px var(--font-mier);
+  color: var(--green-base);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.product-card-layer-rating-count {
+  font: 500 11px/14px var(--font-mier);
+  color: var(--grey-t2);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Layer chips — Figma refs: combo 92:21005, trusted 88:25566, UPI 88:25316, gold 88:24923 */
+.product-card-layer-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: var(--plp-layer-chip-h);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.product-card-layer-chip--combo {
+  margin-left: auto;
+  gap: 1px;
+  padding: 0 5px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #c44d00 0%, #e85d04 55%, #f07a12 100%);
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.18px;
+}
+
+.product-card-layer-chip-combo-bold {
+  font-weight: 800;
+  color: var(--white);
+}
+
+.product-card-layer-chip-combo-soft {
+  font-weight: 500;
+  color: #fffbde;
+  letter-spacing: 0.27px;
+}
+
+/* Row washes — vertically aligned to chip row (not layer box center) */
+.product-card-layer--price.product-card-layer--has-upi::after,
+.product-card-layer--quality.product-card-layer--has-gold::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  height: var(--layer-wash-h, var(--plp-layer-chip-h));
+  top: calc(
+    var(--layer-pad-block-start) +
+      (100% - var(--layer-pad-block-start) - var(--layer-pad-block-end) - var(--plp-layer-chip-h)) /
+        2 +
+      (var(--plp-layer-chip-h) - var(--layer-wash-h, var(--plp-layer-chip-h))) / 2
+  );
+  transform: none;
+  border-radius: var(--layer-wash-h, var(--plp-layer-chip-h));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* UPI — row wash behind discount → tag (88:25316) */
+.product-card-layer--price.product-card-layer--has-upi::after {
+  left: 28%;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 141, 99, 0) 0%,
+    rgba(3, 141, 99, 0.08) 28%,
+    rgba(3, 141, 99, 0.22) 55%,
+    rgba(3, 141, 99, 0.3) 100%
+  );
+}
+
+.product-card-layer-chip--upi {
+  margin-left: auto;
+  align-self: center;
+  padding: 0 10px;
+  background: transparent;
+  font: 600 10px/1 var(--font-mier);
+  line-height: var(--plp-layer-chip-h);
+  color: var(--grey-base);
+  letter-spacing: 0.12px;
+}
+
+/* Gold — row wash behind rating count → pill (88:24923); +2px vs pill */
+.product-card-layer--quality.product-card-layer--has-gold::after {
+  --layer-wash-h: calc(var(--plp-layer-chip-h) + 2px);
+  left: 22%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 209, 130, 0) 0%,
+    rgba(255, 209, 130, 0.15) 30%,
+    rgba(255, 209, 130, 0.35) 60%,
+    rgba(255, 209, 130, 0.5) 100%
+  );
+}
+
+.product-card-layer-chip--gst {
+  margin-left: auto;
+  height: auto;
+  min-height: var(--plp-layer-chip-h);
+  padding: 0 0 0 4px;
+  background: transparent;
+  color: var(--red-base);
+  font: 600 10px/12px var(--font-mier);
+}
+
+/* m-Trusted — Figma 88:25566 SVG badge */
+.product-card-layer-chip--trusted {
+  margin-left: auto;
+  padding: 0;
+  height: 16px;
+  background: transparent;
+  border: none;
+}
+
+.product-card-layer-chip--trusted svg {
+  display: block;
+  width: 44px;
+  height: 16px;
+}
+
+/* Gold — brown pill sits on row wash */
+.product-card-layer-chip--gold {
+  margin-left: auto;
+  padding: 0;
+  background: transparent;
+}
+
+.product-card-layer-gold-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: var(--plp-layer-chip-h);
+  padding: 0 8px 0 5px;
+  box-sizing: border-box;
+  border-radius: calc(var(--plp-layer-chip-h) / 2);
+  background: #3f1f11;
+  font: 600 10px/12px var(--font-mier);
+  color: var(--yellow-base);
+}
+
+.product-card-layer-gold-jewel {
+  display: inline-flex;
+  align-items: center;
+  font-size: 8px;
+  line-height: 1;
+  color: #ffd182;
+}
+
+/* ── Optimized VD card (Figma 801:32972) ── */
+.product-card--optimized {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+  gap: 2px;
+  isolation: isolate;
+  position: relative;
+  box-sizing: border-box;
+  background: var(--white);
+  overflow: visible;
+}
+
+.product-card-media {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.product-card--optimized .product-card-media {
+  width: 100%;
+}
+
+.product-card--optimized .product-card-image-link {
+  width: 100%;
+}
+
+.product-card-image-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card--optimized .product-card-image-wrap {
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: #f0f0f0;
+}
+
+.product-card-wishlist--optimized {
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.product-card-wishlist--optimized svg {
+  width: 16px;
+  height: 16px;
+}
+
+.product-card-consideration {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  padding: 2px 8px;
+  border: 0.8px solid var(--white);
+  border-radius: 8px;
+  background: var(--grey-base);
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.product-card--optimized .product-card-media > .product-card-consideration {
+  position: absolute;
+  left: 11px;
+  bottom: 10px;
+  top: auto;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 37px;
+  height: 16px;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 8px;
+  background: var(--grey-base);
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.product-card-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}
+
+.product-card--optimized .product-card-tile {
+  width: 100%;
+  padding: 4px 8px 8px;
+  box-sizing: border-box;
+  background: var(--white);
+}
+
+.product-card-tile-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card-comprehension {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-height: 0;
+}
+
+.product-card-comprehension-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.product-card-legacy-title {
+  margin: 0;
+  height: 16px;
+  font: 600 10px/16px var(--font-mier);
+  color: var(--grey-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.product-card-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  box-sizing: border-box;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.06px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.product-card-chip--ad {
+  padding: 2px 6px;
+  border: 0.6px solid rgba(139, 139, 163, 0.1);
+  border-radius: 8px;
+  color: var(--grey-t2);
+  background: var(--white);
+}
+
+.product-card-chip--mall {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1px;
+  height: 18px;
+  padding: 1px 4px 1px 3px;
+  border: 1px solid #f3edff;
+  border-radius: 11px;
+  background: #6b3cda;
+  color: #ffffff;
+  flex-shrink: 0;
+  font: 600 10px/16px var(--font-mier);
+  box-sizing: border-box;
+}
+
+.product-card-chip-mall-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+}
+
+.product-card-chip-mall-icon-svg {
+  display: block;
+  width: 10px;
+  height: 10px;
+  flex: none;
+}
+
+.product-card-chip-mall-label {
+  flex: none;
+  font: 600 10px/16px var(--font-mier);
+  color: #ffffff;
+  letter-spacing: 0;
+}
+
+.product-card-chip--brand,
+.product-card-chip--meta {
+  padding: 2px 4px;
+  border-radius: 8px;
+  background: #f3f3f6;
+  color: var(--grey-base);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Selection tag — leading title chip (Bengaluru LoD). Jamun accent. */
+.product-card-chip--selection {
+  gap: 2.5px;
+  height: 18px;
+  padding: 1px 5px 1px 4px;
+  border: 1px solid rgba(159, 32, 137, 0.16);
+  border-radius: 11px;
+  background: rgba(159, 32, 137, 0.08);
+  color: var(--jamun-base);
+  font: 600 10px/16px var(--font-mier);
+  letter-spacing: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card-chip-selection-dot {
+  flex: none;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--jamun-base);
+}
+
+/* "New" — relocated from the image overlay into the title chips. */
+.product-card-chip--new {
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: var(--grey-base);
+  color: var(--white);
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+}
+
+.product-card-price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-card-price-row1 {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+  width: 100%;
+}
+
+.product-card-price-floor {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.product-card-price-floor--has-offer .product-card-price-discount {
+  margin-right: 0;
+}
+
+.product-card-price-floor--price-drop-inline .product-card-price-mrp,
+.product-card-price-floor--less-today .product-card-price-mrp,
+.product-card-price-floor--upi .product-card-price-mrp {
+  font: 400 10px/16px var(--font-mier);
+  letter-spacing: 0.12px;
+}
+
+.product-card-price-final {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+  flex-shrink: 0;
+}
+
+.product-card-price-mrp {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t2);
+  text-decoration: line-through;
+  flex-shrink: 0;
+}
+
+.product-card-price-discount {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: #0f926a;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Figma 796:12401 — inline ₹X off (Book 10px, Green discount tone) */
+.product-card-price-amount-off {
+  font: 400 10px/16px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: #0f926a;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Prominent inline Price Drop badge — solid green + down arrow (per design). */
+.product-card-price-drop-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 6px;
+  background: var(--green-base);
+  font: 700 10px/16px var(--font-mier);
+  letter-spacing: 0.2px;
+  color: var(--white);
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(3, 141, 99, 0.35);
+}
+
+.product-card-price-drop-arrow {
+  display: block;
+  flex: none;
+  color: var(--white);
+}
+
+/* Compact inline Price Drop pill — light green, shares the price row (some cards). */
+.product-card-price-drop-soft {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background: rgba(3, 141, 99, 0.12);
+  font: 600 10px/16px var(--font-mier);
+  letter-spacing: 0.1px;
+  color: #0f926a;
+  white-space: nowrap;
+}
+
+.product-card-price-tag {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Figma 770:1253 — inline UPI after ₹X off (Bold 10px uppercase, green discount tone) */
+.product-card-price-tag--upi {
+  font: 700 10px/12px var(--font-mier);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #0f926a;
+}
+
+.product-card-price-tag--sale {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  height: 16px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(200, 0, 9, 0) 0%, rgba(254, 239, 152, 0.3) 100%), #c80009;
+}
+
+.product-card-price-tag-sale-label {
+  font-family: Inter, var(--font-mier), sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 11px;
+  text-transform: uppercase;
+  color: #feef98;
+}
+
+.product-card-price-tag-sale-bolt {
+  display: block;
+  flex: none;
+  width: 7px;
+  height: 9px;
+}
+
+.product-card-price-tag--combo {
+  gap: 1px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #c44d00 0%, #e85d04 55%, #f07a12 100%);
+  font-size: 9px;
+  line-height: 16px;
+}
+
+.product-card-price-tag-combo-bold {
+  font-weight: 800;
+  color: var(--white);
+}
+
+.product-card-price-tag-combo-soft {
+  font-weight: 500;
+  color: #fffbde;
+}
+
+.product-card-price-row2 {
+  display: flex;
+  align-items: center;
+}
+
+.product-card-price-row2--price-drop {
+  min-height: 16px;
+}
+
+.product-card-price-drop-row {
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background: rgba(3, 141, 99, 0.12);
+  font: 600 10px/16px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: #038d63;
+  white-space: nowrap;
+}
+
+/* Figma 796:12325 — icon row + Less today */
+.product-card-price-row2--less-today {
+  gap: 4px;
+  width: 100%;
+}
+
+.product-card-less-today-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  transform: scaleY(-1);
+}
+
+.product-card-less-today-icon-img {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.product-card-less-today-label {
+  font: 600 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: #038d63;
+  white-space: nowrap;
+}
+
+.product-card-deal-timer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex: none;
+  gap: 4px;
+  height: 16px;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 0.4px solid var(--orange-base);
+  background: var(--white);
+  font: 600 11px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--orange-base);
+  white-space: nowrap;
+}
+
+.product-card-deal-timer-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  margin-top: 2px;
+  font-size: 8px;
+  line-height: 1;
+}
+
+/* Figma 812:33661 / 812:33655 — Less today & lowest price (Green/Base, Caption2 Demi) */
+.product-card-price-consideration {
+  font: 600 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--green-base);
+}
+
+/* Legacy row-2 price drop text — superseded by inline variant (796:12469) */
+.product-card-price-consideration--price_drop {
+  font: 400 10px/normal var(--font-mier);
+  letter-spacing: 0.3px;
+  color: #0f926a;
+}
+
+.product-card-quality-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  min-height: 20px;
+}
+
+.product-card-quality-floor {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.product-card-rating-count {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t2);
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card--optimized .product-card-rating-pill {
+  height: 20px;
+  padding: 2px 6px;
+  gap: 4px;
+  border-radius: 12px;
+  font: 600 13px/16px var(--font-mier);
+}
+
+.product-card--optimized .product-card-rating-count {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  color: var(--grey-t2);
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card-quality-tag {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.product-card-quality-tags {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.product-card-quality-tags .product-card-quality-tag {
+  margin-left: 0;
+}
+
+/* Quality tags — shared pill shape; each family carries its own poppy colour + glow
+   so it stands out against the green rating / price signals around it. */
+.product-card-quality-tag--less-returned.product-card-quality-tag--pill,
+.product-card-quality-tag--top-quality.product-card-quality-tag--pill,
+.product-card-quality-tag--social.product-card-quality-tag--pill {
+  gap: 3px;
+  height: 20px;
+  padding: 2px 7px 2px 4px;
+  border-radius: 10px;
+  border: 0.8px solid transparent;
+  flex: 0 1 auto;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+/* Top Quality — amber / honey (dark text for contrast) */
+.product-card-quality-tag--top-quality.product-card-quality-tag--pill {
+  background: linear-gradient(135deg, #fff3d4 0%, #ffe1a0 100%);
+  border-color: rgba(150, 100, 0, 0.45);
+  color: #6b4700;
+  box-shadow: 0 1px 5px rgba(201, 145, 0, 0.28);
+}
+
+/* 96% keep it — teal / mint (dark text for contrast) */
+.product-card-quality-tag--less-returned.product-card-quality-tag--pill {
+  background: linear-gradient(135deg, #d6f5ee 0%, #b4ecdd 100%);
+  border-color: rgba(7, 92, 80, 0.42);
+  color: #05564b;
+  box-shadow: 0 1px 5px rgba(11, 122, 107, 0.22);
+}
+
+/* Purchase velocity (sold / bought / purchased) — coral (dark text for contrast) */
+.product-card-quality-tag--social-velocity.product-card-quality-tag--pill {
+  background: linear-gradient(135deg, #ffe7d7 0%, #ffcdb0 100%);
+  border-color: rgba(156, 63, 8, 0.42);
+  color: #963c07;
+  box-shadow: 0 1px 5px rgba(214, 96, 15, 0.24);
+}
+
+/* Image reviews (photos) — blue / periwinkle (dark text for contrast) */
+.product-card-quality-tag--social-photos.product-card-quality-tag--pill {
+  background: linear-gradient(135deg, #e4ebff 0%, #ccdcff 100%);
+  border-color: rgba(28, 70, 176, 0.4);
+  color: #193d9e;
+  box-shadow: 0 1px 5px rgba(37, 99, 235, 0.22);
+}
+
+.product-card-quality-tag--less-returned,
+.product-card-quality-tag--top-quality {
+  flex: 0 1 auto;
+  flex-shrink: 0;
+  min-width: 0;
+  max-width: none;
+}
+
+.product-card-quality-tag-label--less-returned,
+.product-card-quality-tag-label--top-quality {
+  font: 700 9px/11px var(--font-mier);
+  letter-spacing: 0.04px;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.product-card-quality-tag--trusted svg {
+  display: block;
+  width: 44px;
+  height: 16px;
+}
+
+.product-card-quality-tag--text {
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--jamun-base);
+  white-space: nowrap;
+}
+
+.product-card-quality-tag--pill {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8px;
+  height: 18px;
+  padding: 3.6px;
+  border-radius: 7.2px;
+  background: #f3f3f6;
+  flex: none;
+  box-sizing: border-box;
+}
+
+.product-card-quality-social-icon-wrap {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-quality-social-icon {
+  display: block;
+  width: 10px;
+  height: 10px;
+  flex: none;
+}
+
+.product-card-quality-tag-label--social {
+  font: 700 9px/11px var(--font-mier);
+  letter-spacing: 0.04px;
+  color: inherit;
+  white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card-quality-keep-pill-icon-wrap {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-quality-keep-pill-icon {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+
+.product-card-quality-tag-label {
+  flex: none;
+  font: 600 9px/11px var(--font-mier);
+  letter-spacing: 0.012em;
+  color: #616173;
+  white-space: nowrap;
+}
+
+.product-card-quality-top-quality-star-svg {
+  display: block;
+  flex: none;
+  width: 9.57px;
+  height: 9.57px;
+}
+
+.product-card-quality-gold-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 20px;
+  padding: 0 8px 0 5px;
+  border-radius: 10px;
+  background: #3f1f11;
+  font: 600 10px/12px var(--font-mier);
+  color: var(--yellow-base);
+}
+
+.product-card-quality-gold-jewel {
+  font-size: 8px;
+  color: #ffd182;
+}
+
+.product-card-delivery-block {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.product-card-delivery-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex-wrap: nowrap;
+  height: 16px;
+}
+
+.product-card-fast-logo-img {
+  display: block;
+  width: 57px;
+  height: 14px;
+  flex: none;
+}
+
+.product-card-delivery-text {
+  font: 500 11px/16px var(--font-mier);
+  color: var(--grey-t2);
+  white-space: nowrap;
+}
+
+.product-card-delivery-text strong {
+  font-weight: 700;
+  color: var(--grey-base);
+}
+
+.product-card-buy-now {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 28px;
+  margin-top: 0;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--grey-base);
+  border-radius: 4px;
+  background: var(--white);
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+  color: var(--grey-base);
+  text-decoration: none;
+}
+
+.product-card-buy-now:active {
+  opacity: 0.85;
+}
+
+
+/* =====================================================================
+   Design SoT PLP card (Design SoT Apr '24, node 167:19004)
+   One title line (brand bold + what it is), price on a UPI strip, a COD line, rating;
+   Mall and the deal timer ride the image's bottom edge as badges.
+   ===================================================================== */
+.product-card--optimized {
+  gap: 0;
+}
+
+.product-card--optimized .product-card-wishlist--optimized {
+  top: 8px;
+  right: 13px;
+  /* SoT 24px disc at 80% white (Home.css's legacy 28px / 90% .product-card-wishlist must not win) */
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.product-card--optimized .product-card-tile {
+  padding: 12px 8px 8px;
+}
+
+.product-card--optimized .product-card-tile-link {
+  gap: 4px;
+}
+
+.product-card-sot-title {
+  margin: 0;
+  height: 16px;
+  overflow: hidden;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t1);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product-card-sot-title strong {
+  font-weight: 700;
+}
+
+.product-card-sot-ad {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 0 4px;
+  border: 0.6px solid var(--grey-t3-divider);
+  border-radius: 4px;
+  font: 600 9px/12px var(--font-mier);
+  color: var(--grey-t2);
+  vertical-align: 1px;
+}
+
+.product-card--optimized .product-card-price-block {
+  gap: 2px;
+}
+
+/* UPI price: a strip fading in from the left with "UPI" at its end (SoT gradient) */
+.product-card--optimized .product-card-price-floor--upi {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 20px;
+  padding-right: 4px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: linear-gradient(90deg, rgba(3, 141, 99, 0) 22.726%, rgba(3, 141, 99, 0.3) 146.62%);
+}
+
+.product-card--optimized .product-card-price-floor--upi .product-card-price-tag--upi {
+  margin-left: auto;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  text-transform: none;
+  color: var(--grey-base);
+}
+
+.product-card-sot-cod {
+  margin: 0;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t1);
+  white-space: nowrap;
+}
+
+.product-card-sot-cod strong {
+  font-weight: 700;
+}
+
+/* badges straddle the image's bottom edge: the fill sits 8px over and 8px under it, and the
+   2px white ring (an OUTSIDE stroke in the SoT) adds 2px on every side */
+.product-card-sot-badges {
+  position: absolute;
+  left: 8px;
+  bottom: -10px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.product-card-sot-promo {
+  position: absolute;
+  right: 8px;
+  bottom: -10px;
+  z-index: 3;
+  display: flex;
+  border: 2px solid var(--white);
+  border-radius: 99px;
+  pointer-events: none;
+}
+
+.product-card-sot-promo:has(.product-card-price-tag--combo) {
+  border-radius: 4px;
+}
+
+.product-card-sot-mall {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 6px 0 4px;
+  border: 2px solid var(--white);
+  border-radius: 99px;
+  background: #6625ff;
+  font: 700 11px/16px var(--font-mier);
+  color: var(--white);
+}
+
+.product-card-sot-mall img {
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+.product-card-sot-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border: 2px solid var(--white);
+  border-radius: 8px;
+  background: #ffe8cd;
+  font: 600 10px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--orange-base);
+  white-space: nowrap;
+}
+
+.product-card-sot-timer img {
+  display: block;
+  width: 12px;
+  height: 12px;
+}

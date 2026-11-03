@@ -1,0 +1,264 @@
+/* =====================================================================
+   PDP SoT — bottom of the page (Figma fdR1rJfu0Yszfeb1Em0Hma, frame 13630:129956)
+   - Delivery row ............ 13630:130369
+   - Value markers ........... 13630:130374
+   - People Also Viewed title  13630:130425
+   - Action bar (CTA) ........ 13630:130413
+   Section separators in the SoT: 4px solid #EAEAF2 (--grey-t4-bg). Each section here
+   draws its OWN top separator, so the section above must not add a bottom one.
+   Every selector is scoped under .pdp. Skin rules (body.ui-ios / body.duo-device /
+   body.layout-duo) have higher specificity and keep winning.
+   ===================================================================== */
+
+/* ---------- Delivery row (13630:130369) ----------
+   white, 12px 16px, info column (gap 4) + outlined Change button, centred */
+.pdp .pdp-delivery-address-row,
+.pdp .pdp-fast-delivery-band {
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 4px solid var(--grey-t4-bg);
+  border-bottom: none;
+}
+
+.pdp .pdp-delivery-address-row,
+.pdp .pdp-fast-delivery-band__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pdp .pdps-delivery__info,
+.pdp .pdp-fast-delivery-band__copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* "Free Delivery by <b>Sunday, 12 Jun</b>" — Paragraph/Body2 Book 15/20, Grey/Base */
+.pdp .pdp-delivery-address-row__text.pdps-delivery__eta,
+.pdp .pdp-fast-delivery-band__eta {
+  flex: none;
+  max-width: 100%;
+  margin: 0;
+  font: 400 15px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdp .pdp-delivery-address-row__free {
+  color: inherit;
+}
+
+.pdp .pdp-delivery-address-row__text.pdps-delivery__eta strong,
+.pdp .pdp-fast-delivery-band__eta strong {
+  font-weight: 700;
+  color: var(--grey-base);
+}
+
+/* "at 6B, Surya Apartments...560103" — Book 15/20, Grey/T1 */
+.pdp .pdps-delivery__address,
+.pdp .pdp-fast-delivery-band__address {
+  max-width: 100%;
+  margin: 0;
+  font: 400 15px/20px var(--font-mier);
+  color: var(--grey-t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Change — outlined Jamun, 36px tall (Figma 73x36, 12px side inset incl. 1px stroke),
+   radius 4, Actions/Large Demi 15/20 */
+.pdp .pdp-delivery-address-row__change,
+.pdp .pdp-fast-delivery-band__change {
+  flex: none;
+  min-width: 0;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 11px;
+  border: 1px solid var(--jamun-base);
+  border-radius: 4px;
+  background: var(--white);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0225px;
+  color: var(--jamun-base);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pdp .pdp-delivery-address-row__change:active,
+.pdp .pdp-fast-delivery-band__change:active {
+  opacity: 0.85;
+}
+
+/* ---------- Value markers (13630:130374) ----------
+   three equal columns, 1x40 #CECEDE dividers, items centred, no outer padding */
+.pdp .pdps-value-markers {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border-top: 4px solid var(--grey-t4-bg);
+}
+
+.pdp .pdps-value-marker {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+}
+
+.pdp .pdps-value-marker__icon {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* illustration boxes measured from the Figma insets inside the 32px icon frame */
+.pdp .pdps-value-marker__img {
+  position: absolute;
+  left: 2px;
+  width: 28px;
+  max-width: none;
+}
+
+.pdp .pdps-value-marker__img--cod {
+  top: 5px;
+  height: 22.755px;
+}
+
+.pdp .pdps-value-marker__img--returns {
+  top: 4px;
+  height: 24.309px;
+}
+
+.pdp .pdps-value-marker__img--lowest-price {
+  top: 2px;
+  height: 28px;
+}
+
+/* Caption/Caption2 — Book 11/16, 1.2% tracking, Grey/Base, centred */
+.pdp .pdps-value-marker__label {
+  width: 100%;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-base);
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.pdp .pdps-value-marker__divider {
+  flex: none;
+  width: 1px;
+  height: 40px;
+  border-radius: 0.5px;
+  background: #CECEDE;
+}
+
+/* ---------- People Also Viewed (13630:130424 / 13630:130425) ----------
+   title row 12px from the top, 16px side padding, Bold 17/20 Grey/Base, 16px to the cards.
+   The Duo web layout (.pdp--web) keeps its own spacing/title rules. */
+.pdp:not(.pdp--web) .pdp-also-viewed {
+  padding-top: 12px;
+  border-top: 4px solid var(--grey-t4-bg);
+}
+
+.pdp .pdps-pav-title {
+  margin: 0 0 16px;
+  padding: 0 16px;
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--grey-base);
+}
+
+/* ---------- Action bar (13630:130413) ----------
+   white, 1px #CECEDE top stroke, 12px 16px, gap 12; two 44px buttons, radius 4.
+   body.ui-ios (glass) and body.duo-device rules out-rank these and keep their treatment. */
+.pdp .pdp-cta-wrap {
+  gap: 12px;
+  padding: 12px 16px;
+  padding-bottom: calc(12px + var(--safe-bottom, 0px));
+  background: var(--white);
+  border-top: 1px solid #CECEDE;
+  box-shadow: none;
+}
+
+.pdp .pdp-cta-wrap .pdp-add-to-cart,
+.pdp .pdp-cta-wrap .pdp-buy-now {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0225px;
+  white-space: nowrap;
+}
+
+/* outlined: 1px stroke + 11px = Figma's 12px inset */
+.pdp .pdp-cta-wrap .pdp-add-to-cart {
+  gap: 4px;
+  padding: 0 11px;
+  border: 1px solid var(--jamun-base);
+  background: var(--white);
+  color: var(--jamun-base);
+}
+
+.pdp .pdp-cta-wrap .pdp-buy-now {
+  gap: 8px;
+  padding: 0 12px;
+  border: none;
+  background: var(--jamun-base);
+  color: var(--white);
+}
+
+.pdp .pdps-cta-icon {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart glyph: 20x18 sitting at the bottom of its 20px frame (inset 10% 0 0 0) */
+.pdp .pdps-cta-icon--cart img {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 18px;
+  max-width: none;
+}
+
+/* Duo web PDP (Open / Book full): the CTA bar is a flex item of the screen-tall left column;
+   the glass skin's min-height: 0 lets the taller SoT info + size blocks squeeze it until the
+   pills overlap 'Size Chart' and fall off the screen. Keep its full height instead (the column
+   scrolls and the bar stays pinned to its bottom). */
+.pdp.pdp--web .pdp-web-left .pdp-cta-wrap {
+  flex-shrink: 0;
+}
+
+/* Buy Now glyph: 18x14 centred in a 20px frame */
+.pdp .pdps-cta-icon--buy img {
+  width: 18px;
+  height: 14px;
+  max-width: none;
+}

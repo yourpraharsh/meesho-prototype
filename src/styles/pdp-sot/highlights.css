@@ -1,0 +1,360 @@
+/* =====================================================================
+   PDP SoT — Product Highlights + You Might Also Like
+   (Figma fdR1rJfu0Yszfeb1Em0Hma, frame 13630:129956)
+   - Product Highlights ...... 13630:130114 (360 x 168)
+   - You Might Also Like ..... 13630:130147 (360 x 287)
+   Section separators in the SoT: 4px solid #EAEAF2 (--grey-t4-bg). Each section here
+   draws its OWN top separator, so the section above must not add a bottom one.
+   Every selector is scoped under .pdp; new classes use the "pdps-" prefix.
+   ===================================================================== */
+
+/* ---------- Product Highlights (13630:130114) ----------
+   white, 12px 16px, column gap 12: header / 2-col key-value rows / footer */
+.pdp .pdps-hl {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 4px solid var(--grey-t4-bg);
+  border-bottom: none;
+}
+
+/* Header: "Product Highlights" (Headers/Headline6) + COPY link (Actions/Link) */
+.pdp .pdps-hl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 20px;
+}
+
+.pdp .pdps-hl-title {
+  margin: 0;
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.pdp .pdps-hl-copy {
+  flex: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+/* Key/value rows: two equal columns (156 + 16 gap + 156 at 328), 12px between rows */
+.pdp .pdps-hl .pdp-specs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px 16px;
+}
+
+.pdp .pdps-hl .pdp-specs-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+/* Label — Caption/Caption2: Book 11/16, +1.2%, Grey/T1 */
+.pdp .pdps-hl .pdp-specs-key {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t1);
+}
+
+/* Value — Paragraph/Body3: Book 13/16, +0.25%, Grey/Base */
+.pdp .pdps-hl .pdp-specs-value {
+  max-width: 100%;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-base);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+/* Footer: "Additional Details" (Subtitles/Subtitle1) + 24px icon button with the down chevron */
+.pdp .pdps-hl .pdp-more-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 24px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+  text-align: left;
+  cursor: pointer;
+}
+
+.pdp .pdps-hl-chevron {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.pdp .pdps-hl-chevron img {
+  display: block;
+  width: 12px;
+  height: 7px;
+  max-width: none;
+}
+
+/* ---------- You Might Also Like (13630:130147) ----------
+   white, 12px 16px, column gap 12: header / horizontal card carousel */
+.pdp .pdps-yml {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 4px solid var(--grey-t4-bg);
+  border-bottom: none;
+}
+
+.pdp .pdps-yml-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 20px;
+}
+
+.pdp .pdps-yml-title {
+  margin: 0;
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* "Ad" label — 1px #CECEDE outline, radius 2, 4px side padding (incl. stroke), 16px tall;
+   Caption/Caption3.1: Book 10/16, Grey/T1 */
+.pdp .pdps-yml-ad {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 16px;
+  padding: 0 3px;
+  border: 1px solid #cecede;
+  border-radius: 2px;
+  font: 400 10px/14px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t1);
+}
+
+/* Carousel: bleeds to the screen edges, 16px lead-in, 8px between cards, 16px tail */
+.pdp .pdps-yml-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 -16px;
+  padding: 0 0 0 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scroll-padding-left: 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pdp .pdps-yml-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* trailing 16px (8 gap + 8 spacer) — padding-right is unreliable in flex scrollers */
+.pdp .pdps-yml-row::after {
+  content: '';
+  flex: 0 0 8px;
+  height: 1px;
+}
+
+/* Card: 150 wide, 1px #CECEDE outline, radius 4, white; image 150 square + 80 info = 231 */
+.pdp .pdps-yml-card {
+  position: relative;
+  flex: 0 0 150px;
+  width: 150px;
+  box-sizing: border-box;
+  border: 1px solid #cecede;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--white);
+  scroll-snap-align: start;
+}
+
+.pdp .pdps-yml-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* content-box so the photo stays a full 148 square (150 minus the card's 1px sides) and the
+   1px #EAEAF2 rule sits under it: 1 + 148 + 1 + 80 + 1 = 231, as in the SoT */
+.pdp .pdps-yml-media {
+  position: relative;
+  box-sizing: content-box;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-t4-bg);
+}
+
+.pdp .pdps-yml-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Product Info: 8px padding, column gap 4 — name / price / rating */
+.pdp .pdps-yml-info {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 8px;
+  background: var(--white);
+}
+
+/* Name — Caption/Caption2: Book 11/16, +1.2%, Grey/T1, one line with ellipsis */
+.pdp .pdps-yml-name {
+  height: 16px;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t1);
+}
+
+/* Price row — gap 4, centred */
+.pdp .pdps-yml-price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Subtitles/Subtitle1: Demi 15/20, +0.1%, Grey/Base */
+.pdp .pdps-yml-final {
+  flex: none;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+  color: var(--grey-base);
+}
+
+/* Caption2 struck through, Grey/T2 */
+.pdp .pdps-yml-mrp {
+  flex: none;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t2);
+  text-decoration: line-through;
+}
+
+/* Caption2, Grey/Base */
+.pdp .pdps-yml-off {
+  flex: none;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-base);
+}
+
+/* Rating row — 20 tall, gap 4: green chip + count */
+.pdp .pdps-yml-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+}
+
+/* Rating chip — Green/Base pill, 20 tall, 6px sides, gap 4; Subtitles/Subtitle2 Demi 13/16 white */
+.pdp .pdps-yml-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--green-base);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--white);
+}
+
+.pdp .pdps-yml-chip img {
+  display: block;
+  width: 8px;
+  height: 7.638px;
+  max-width: none;
+}
+
+/* Count — Overline: Book 11/16, +2%, Grey/T2 */
+.pdp .pdps-yml-count {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  color: var(--grey-t2);
+  white-space: nowrap;
+}
+
+/* Favourite button — 24 circle, 80% white, top/right 8, 16px icon box (heart 13.33 x 12) */
+.pdp .pdps-yml-wish {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 4px;
+  border: none;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.pdp .pdps-yml-wish img {
+  display: block;
+  width: 13.333px;
+  height: 12px;
+  max-width: none;
+}
+
+/* wishlisted: the app's filled heart (same 24-box glyph as the PDP header), red like the
+   rest of the PDP's selected hearts; a 16px box draws the heart at 13.3 x 12 */
+.pdp .pdps-yml-wish svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: var(--red-base);
+}

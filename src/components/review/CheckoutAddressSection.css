@@ -1,0 +1,165 @@
+/* Shared checkout address — Figma payment + inline review (1766:17073) */
+
+.checkout-address-section {
+  padding: 14px 16px 16px;
+  background: var(--white);
+  border-top: 1px solid var(--grey-t3-divider);
+  border-bottom: 1px solid var(--grey-t3-divider);
+}
+
+.checkout-address-section--has-delivery {
+  position: relative;
+  padding-top: 44px;
+}
+
+.checkout-address-section--payment {
+  border: none;
+}
+
+.checkout-address-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.checkout-address-head h3 {
+  margin: 0;
+  flex: 1;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.checkout-address-change-link {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: 600 12px/16px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.checkout-address-name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 6px;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.checkout-address-name span:first-child {
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+.checkout-address-name span:last-child {
+  font-weight: 500;
+  color: var(--grey-t1);
+}
+
+.checkout-address-sep {
+  display: inline-flex;
+  align-items: center;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dfdfdf;
+  font-size: 0;
+  color: transparent;
+  overflow: hidden;
+}
+
+.checkout-address-line {
+  margin: 0 0 6px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+}
+
+.checkout-address-section--payment .checkout-address-line {
+  margin-bottom: 0;
+}
+
+.checkout-address-confirmed {
+  margin: 8px 0 0;
+  font: 600 12px/16px var(--font-mier);
+  color: var(--green-base);
+}
+
+.checkout-address-btn {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid var(--jamun-base);
+  border-radius: 4px;
+  background: var(--white);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.review-shell-section.checkout-address-section {
+  margin: 0;
+}
+
+/* V1 inline address — Figma Frame 1116600340 */
+.review-shell-address-inline.checkout-address-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  border: none;
+}
+
+.review-shell-address-inline.checkout-address-section--has-delivery {
+  padding-top: 44px;
+}
+
+.review-shell-address-inline .checkout-address-head {
+  margin-bottom: 0;
+}
+
+.review-shell-address-inline .checkout-address-line {
+  margin-bottom: 0;
+}
+
+.review-shell-address-inline .checkout-address-btn {
+  margin-top: 6px;
+}
+
+/* V3 — payment-inline address (Figma 1766:17321 / Frame 1116600340) */
+.review-shell-address-v3.checkout-address-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  border: none;
+}
+
+.review-shell-address-v3.checkout-address-section--has-delivery {
+  padding-top: 44px;
+}
+
+.review-shell-address-v3 .checkout-address-head {
+  margin-bottom: 0;
+}
+
+.review-shell-address-v3 .checkout-address-head h3 {
+  flex: none;
+}
+
+.review-shell-address-v3 .checkout-address-name,
+.review-shell-address-v3 .checkout-address-line {
+  margin: 0;
+}
+
+.review-shell-address-v3 .checkout-address-btn {
+  width: 100%;
+  margin-top: 0;
+}
+

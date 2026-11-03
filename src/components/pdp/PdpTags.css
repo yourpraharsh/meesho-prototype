@@ -1,0 +1,256 @@
+.pdp-title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pdp-tags-mall-pill {
+  flex-shrink: 0;
+}
+
+.pdp-tags {
+  margin-top: 8px;
+}
+
+.pdp-tags-price-row1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+.pdp-tags-price-row1 .pdp-price {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+.pdp-tags-price-row1 .pdp-mrp {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+}
+
+.pdp-tags-price-row1 .pdp-discount {
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: #0f926a;
+}
+
+.pdp-tags-price-row2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.pdp-tags-less-today-row {
+  gap: 4px;
+}
+
+.pdp-price-drop-from {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 99px;
+  background: #0f926a;
+  font: 600 11px/16px var(--font-mier);
+  letter-spacing: 0.02em;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.pdp-price-drop-from-icon {
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.pdp-tags-deal-timer-row {
+  flex-wrap: wrap;
+}
+
+.pdp-tags-deal-timer-prefix {
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.pdp-tags-deal-timer-pill {
+  height: 18px;
+  font-size: 12px;
+}
+
+.pdp-tags-cod {
+  margin: 6px 0 0;
+  font: 600 14px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.pdp-tags-delivery {
+  margin-top: 6px;
+}
+
+.pdp-tags-delivery-text {
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.pdp-tags-quality-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 24px;
+}
+
+.pdp-tags-quality-row .pdp-rating-chip {
+  margin-top: 0;
+  height: 24px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+
+.pdp-tags-quality-floor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.pdp-tags-quality-row .pdp-rating-extra {
+  margin-left: 0;
+  line-height: 24px;
+}
+
+.pdp-tags-quality-tag {
+  margin-left: auto;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.pdp-tags-quality-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.pdp-tags-quality-tags .pdp-tags-quality-tag {
+  margin-left: 0;
+}
+
+/* Match rating pill height (24px); poppy per-family colours carried from ProductCard.css. */
+.pdp-tags-quality-row .product-card-quality-tag--pill.product-card-quality-tag--less-returned,
+.pdp-tags-quality-row .product-card-quality-tag--pill.product-card-quality-tag--top-quality,
+.pdp-tags-quality-row .product-card-quality-tag--pill.product-card-quality-tag--social {
+  height: 24px;
+  padding: 2px 9px 2px 6px;
+  border-radius: 12px;
+  gap: 4px;
+  max-width: none;
+}
+
+.pdp-tags-quality-row .product-card-quality-tag-label--top-quality,
+.pdp-tags-quality-row .product-card-quality-tag-label--social {
+  font: 700 11px/13px var(--font-mier);
+  color: inherit;
+}
+
+.pdp-tags-quality-row .product-card-quality-social-icon {
+  width: 13px;
+  height: 13px;
+}
+
+.pdp-tags-quality-row .product-card-quality-top-quality-star-svg {
+  width: 12px;
+  height: 12px;
+}
+
+.pdp-tags-quality-row .product-card-quality-keep-pill-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.pdp-tags-quality-row .product-card-quality-tag-label--less-returned {
+  font: 600 10px/12px var(--font-mier);
+  color: inherit;
+  max-width: none;
+}
+
+.pdp-tags-quality-row .product-card-quality-gold-inner,
+.pdp-tags-quality-row .pdp-tags-gold-inner {
+  height: 24px;
+  padding: 0 10px 0 6px;
+  border-radius: 12px;
+  font: 600 11px/14px var(--font-mier);
+}
+
+.pdp-tags-gold-inner {
+  height: 24px;
+  font-size: 11px;
+}
+
+.pdp-tags-quality-row .product-card-quality-tag-label--less-returned,
+.pdp-tags-less-returned-label {
+  font-size: 11px;
+  font-weight: 700;
+  max-width: 160px;
+}
+
+/* Selection / New chips on the PDP title — scaled up to sit beside the title. */
+.pdp-tags-selection-chip {
+  height: 22px;
+  padding: 1px 9px 1px 7px;
+  gap: 4px;
+  font: 700 12px/16px var(--font-mier);
+  flex-shrink: 0;
+  /* PDP has room — show the full label, never truncate. */
+  max-width: none;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.pdp-tags-selection-chip .product-card-chip-selection-dot {
+  width: 5px;
+  height: 5px;
+}
+
+.pdp-tags-new-chip {
+  height: 22px;
+  padding: 2px 8px;
+  font: 700 11px/16px var(--font-mier);
+  flex-shrink: 0;
+}
+
+/* Prominent Price Drop badge scaled for PDP. */
+.pdp-price-drop-inline {
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 7px;
+  font: 700 12px/16px var(--font-mier);
+  gap: 4px;
+}
+
+.pdp-tags .plp-marker--sale,
+.pdp-tags .plp-marker--combo {
+  transform: scale(1.08);
+  transform-origin: left center;
+}
+
+.pdp-tags .plp-marker-upi-amt,
+.pdp-tags .plp-marker-upi-label {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.pdp-tags .plp-marker--consideration,
+.pdp-tags .plp-marker-less-today-label {
+  font-size: 13px;
+  line-height: 18px;
+}

@@ -1,0 +1,138 @@
+import { useEffect, useMemo, useState } from 'react'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
+import { CART_ADDRESS_KEY, useCart } from '../context/CartContext'
+import { computeCartOrder } from '../utils/computeCartOrder'
+import { scrollRootTo } from '../utils/scrollRoot'
+import { getDeliveryEtaForPin } from '../utils/checkoutConfig'
+import { getUserPaymentCohort } from '../utils/userPaymentProfile'
+import { REVIEW_VARIANT } from '../constants/reviewVariants'
+import DeliveryTypeReview from '../components/review/DeliveryTypeReview'
+import { DELIVERY_TYPE } from '../utils/deliveryTypes'
+import { getPickupVariantById, getPickupVariantForProduct } from '../utils/pickupVariants'
+import { isCodTestUser } from '../utils/testPincode'
+import AddressPicker from '../components/review/AddressPicker'
+import { useCheckoutAddress } from '../components/review/useCheckoutAddress'
+import '../components/review/ReviewShell.css'
+import '../components/review/PaymentMethodSection.css'
+import '../components/review/UnifiedCheckoutV4.css'
+import '../components/review/PaymentPage.css'
+/* Self-pickup v2 review screen (Figma H1GW5y6IAWYTrscEJHvRK4 · 3695:105372) */
+import '../styles/review-sot/review.css'
+/* Cart parts on top: stepper, compact item rows, Price Details (cart file utVjj3B1srPjlUd1kWDvGs · 1:949) */
+import '../styles/cart-sot/review.css'
+
+/**
+ * Cart review route (/cart/review): the Self-pickup v2 delivery-type review (same as the
+ * Buy Now default) for every cart line. Store pickup applies to the whole order — one store,
+ * and pickup savings are computed once on the cart total.
+ */
+export default function CartReview() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [searchParams] = useSearchParams()
+  const { items, delivery, setDelivery } = useCart()
+
+  const order = useMemo(() => computeCartOrder(items), [items])
+  const lines = order.lines
+  const firstProduct = lines[0]?.product ?? null
+
+  const cohort = getUserPaymentCohort(searchParams.get('cohort'), firstProduct?.categoryId)
+
+  /* starts on the choice made here before (back to the cart and in again, or payment's Back);
+     every change is remembered with the cart */
+  const [deliveryTypeId, setDeliveryTypeIdState] = useState(
+    () => location.state?.deliveryTypeId ?? delivery.deliveryTypeId ?? DELIVERY_TYPE.HOME,
+  )
+  const setDeliveryTypeId = (id) => {
+    setDeliveryTypeIdState(id)
+    setDelivery({ deliveryTypeId: id })
+  }
+  const initialStoreId = location.state?.storeId ?? delivery.storeId ?? null
+  /* payment's Back can bring a different choice (its COD switch moves pickup to home): the
+     remembered choice follows it */
+  useEffect(() => {
+    const { deliveryTypeId: stateType, storeId: stateStore } = location.state ?? {}
+    if (stateType) setDelivery({ deliveryTypeId: stateType, ...(stateStore ? { storeId: stateStore } : {}) })
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- on arrival only
+  }, [])
+
+  const {
+    address,
+    showPicker,
+    setShowPicker,
+    selectAddress,
+    saveAddress,
+    addresses,
+    addressId,
+  } = useCheckoutAddress('home', { persistKey: CART_ADDRESS_KEY })
+
+  const deliveryEta = getDeliveryEtaForPin(address.pin)
+
+  /* opens at its top, not at the cart's scroll position */
+  useEffect(() => {
+    scrollRootTo(0)
+  }, [])
+
+  /* Nothing to review (empty cart, or products no longer found) → back to the cart. */
+  useEffect(() => {
+    if (lines.length === 0) navigate({ pathname: '/cart', search: location.search }, { replace: true })
+  }, [lines.length, navigate, location.search])
+
+  if (lines.length === 0) return null
+
+  const handleBack = () => {
+    navigate({ pathname: '/cart', search: location.search })
+  }
+
+  const goToPaymentStep = ({ storeId = null } = {}) => {
+    navigate(
+      { pathname: '/cart/payment', search: location.search },
+      {
+        state: {
+          cohort,
+          reviewVariant: REVIEW_VARIANT.CLARITY,
+          /* Every payment entry re-applies the delivery-type rule —
+             pickup → pay-online default, home → nothing selected. No carry-over. */
+          paymentMethodId: null,
+          deliveryTypeId,
+          storeId,
+        },
+      },
+    )
+  }
+
+  /* Pickup-anytime lab: ?pv=1..8 overrides; otherwise the first cart item's variant.
+     COD-cohort testers see the plain card — their education is the UPI-only strip. */
+  const pickupVariant = isCodTestUser()
+    ? null
+    : getPickupVariantById(searchParams.get('pv')) ??
+      getPickupVariantForProduct(firstProduct.product_id ?? firstProduct.id)
+
+  return (
+    <div className="review-page">
+      <DeliveryTypeReview
+        items={lines}
+        order={order}
+        deliveryEta={deliveryEta}
+        address={address}
+        deliveryTypeId={deliveryTypeId}
+        onSelectDeliveryType={setDeliveryTypeId}
+        onBack={handleBack}
+        onChangeAddress={() => setShowPicker(true)}
+        onContinue={goToPaymentStep}
+        pickupVariant={pickupVariant}
+        initialStoreId={initialStoreId}
+        onStoreChange={(id) => setDelivery({ storeId: id })}
+      />
+      {showPicker && (
+        <AddressPicker
+          addresses={addresses}
+          selectedId={addressId}
+          onSelect={selectAddress}
+          onSaveAddress={saveAddress}
+          onClose={() => setShowPicker(false)}
+        />
+      )}
+    </div>
+  )
+}

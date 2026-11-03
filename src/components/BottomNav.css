@@ -1,0 +1,68 @@
+/* App bottom nav — fixed to the viewport bottom, five equal tabs */
+
+/* Constrained to the app frame (#root is centred at max 430px), like .dtr-footer */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  box-sizing: border-box;
+  z-index: 30;
+  display: flex;
+  gap: 7px;
+  height: calc(56px + var(--safe-bottom, 0px));
+  padding: 0 16px var(--safe-bottom, 0px);
+  background: var(--white);
+  border-top: 1px solid #d9a6d0; /* SoT divider: Jamun T1 */
+}
+
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  gap: 0;
+  padding: 5px 0 0; /* icon top sits 6px under the bar edge, as in the SoT */
+  border: none;
+  background: none;
+  color: var(--grey-t1);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav-item--static {
+  cursor: default;
+}
+
+.bottom-nav-item svg {
+  display: block;
+  flex: none;
+  width: 26px;
+  height: 26px;
+}
+
+.bottom-nav-label {
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t1);
+  white-space: nowrap;
+}
+
+.bottom-nav-item--active .bottom-nav-label {
+  color: var(--grey-base);
+}
+
+/* minimized-state button — only the iOS skin ever shows it */
+.bottom-nav-fab,
+.bottom-nav-wash {
+  display: none;
+}
+
+/* room for the nav on pages that carry it */
+.has-bottom-nav {
+  padding-bottom: calc(68px + var(--safe-bottom, 0px)) !important;
+}

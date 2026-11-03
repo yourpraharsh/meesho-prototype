@@ -1,0 +1,122 @@
+/* Figma delivery ribbon — node 1804:5569. Band only; no full-width blue strip. */
+
+.delivery-ribbon-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.delivery-ribbon {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.delivery-ribbon-band {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 36px;
+  padding: 4px 10px;
+  box-sizing: border-box;
+  background: #ecf1ff;
+  border-radius: 0 0 4px 4px;
+  white-space: nowrap;
+  box-shadow:
+    0 2px 8px rgba(85, 133, 248, 0.2),
+    0 1px 4px rgba(53, 53, 67, 0.12);
+}
+
+.delivery-ribbon-band::before,
+.delivery-ribbon-band::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.delivery-ribbon-band::before {
+  left: -4px;
+  border-width: 4px 4px 0 0;
+  border-color: #b8c9f5 transparent transparent transparent;
+}
+
+.delivery-ribbon-band::after {
+  right: -4px;
+  border-width: 4px 0 0 4px;
+  border-color: #b8c9f5 transparent transparent transparent;
+}
+
+.delivery-ribbon-text {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.delivery-ribbon-text strong {
+  font-weight: 700;
+}
+
+.delivery-ribbon-band svg {
+  flex-shrink: 0;
+}
+
+/* V1 — ribbon tucked on product card (left-aligned) */
+.delivery-ribbon--product {
+  position: absolute;
+  top: -8px;
+  left: 48px;
+  z-index: 3;
+  width: min(296px, calc(100% - 8px));
+}
+
+.delivery-ribbon--product .delivery-ribbon-band {
+  width: 100%;
+}
+
+.delivery-ribbon--product .delivery-ribbon-band::before {
+  left: 0;
+}
+
+.delivery-ribbon--product .delivery-ribbon-band::after {
+  right: 0;
+}
+
+/* V2/V3 address + dock — ribbon centered at section top */
+.delivery-ribbon--address .delivery-ribbon-band,
+.delivery-ribbon--dock .delivery-ribbon-band {
+  gap: 8px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.checkout-address-section--has-delivery,
+.review-shell-address-dock-panel--has-delivery {
+  position: relative;
+  padding-top: 44px;
+}
+
+.checkout-address-section--has-delivery .delivery-ribbon-slot,
+.review-shell-address-dock-panel--has-delivery .delivery-ribbon-slot {
+  top: 0;
+}
+
+.review-shell-address-inline.checkout-address-section--has-delivery,
+.review-shell-address-v3.checkout-address-section--has-delivery {
+  padding-top: 44px;
+}
+
+.review-v4-address.checkout-address-section--has-delivery {
+  padding-top: 44px;
+}

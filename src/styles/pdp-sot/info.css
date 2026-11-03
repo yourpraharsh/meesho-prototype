@@ -1,0 +1,347 @@
+/* PDP SoT — "Product Details Container" (Design SoT Apr '24, node 13630:130021).
+   Title + Wishlist/Share, price row, UPI offer pill, COD price, Free Delivery, deal timer,
+   rating chip. Imported after ProductDetails.css and the PDP component CSS; every selector is
+   scoped under .pdp so nothing outside the product page changes.
+
+   SoT layout: one column, 8px between every line. The title and the price sit in a left
+   column; Wishlist / Share sit top-right beside them (8px gutter). .pdps-info is that column:
+   a 2-column grid where the title row and the tag stack are flattened (display: contents) so
+   the price row lands in column 1 under the title while the actions span both rows. */
+
+/* phone layout: the info block opens 12px below the card edge / the similar-products strip */
+.pdp:not(.pdp--web) > .pdp-info {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* SoT: 12px under the rating line, then the next section's own 4px #EAEAF2 separator
+   (Main Container ends at y780; the size section's separator is y780-783) */
+.pdp:not(.pdp--web) > .pdp-info > .pdps-size {
+  margin-top: 12px;
+  margin-bottom: -12px;
+}
+
+/* no size block: the Sold by row draws the 4px separator, so no extra 1px divider here */
+.pdp:not(.pdp--web) > .pdp-info:not(:has(> .pdps-size)) {
+  border-bottom: none;
+}
+
+.pdp .pdps-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 8px;
+  row-gap: 8px;
+  align-items: start;
+}
+
+.pdp .pdps-info > .pdp-title-row,
+.pdp .pdps-info > .pdp-tags {
+  display: contents;
+}
+
+/* every line below the title spans the full width ... */
+.pdp .pdps-info > *,
+.pdp .pdps-info > .pdp-tags > * {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+/* ... except the title and the price, which share the left column with the actions */
+.pdp .pdps-info .pdp-title-wrap {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.pdp .pdps-info .pdp-wish-share {
+  grid-column: 2;
+  grid-row: span 2;
+}
+
+.pdp .pdps-info > .pdp-tags > .pdp-tags-price-row1 {
+  grid-column: 1;
+}
+
+/* ---- Title (Paragraph/Body2: Book 15/20, Grey/T1) ---- */
+.pdp .pdps-info .pdp-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font: 400 15px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t1);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ---- Wishlist / Share (16px icon, 4px, Caption1 Book 13/16 Grey/Base; 16px apart) ---- */
+.pdp .pdps-info .pdp-wish-share {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.pdp .pdps-info .pdp-wish-share-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 0;
+}
+
+.pdp .pdps-info .pdp-wish-share-label {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-base);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pdp .pdps-info .pdps-action-icon {
+  display: block;
+  flex: none;
+  max-width: none;
+}
+
+/* SoT glyph boxes inside the 16 x 16 icon frame */
+.pdp .pdps-info .pdps-action-icon--wishlist {
+  width: 16px;
+  height: 14.4px;
+  margin: 0.8px 0;
+}
+
+.pdp .pdps-info .pdps-action-icon--share {
+  width: 14.4px;
+  height: 16px;
+  margin: 0 0.8px;
+}
+
+/* wishlisted state keeps the app's filled heart, sized to the SoT 16px icon frame */
+.pdp .pdps-info .pdp-wish-share-btn svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* ---- Price row: ₹264 (Headline3 Bold 25/28) · 305 (Body2 strike, Grey/T2) · 13% off (Body2) · info 12px; 4px gaps ---- */
+.pdp .pdps-info .pdp-tags-price-row1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+
+.pdp .pdps-info .pdp-tags-price-row1 .product-card-price-floor {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 4px;
+  overflow: visible;
+  min-height: 0;
+}
+
+.pdp .pdps-info .pdp-tags-price-row1 .pdp-price {
+  font: 700 25px/28px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.pdp .pdps-info .pdp-tags-price-row1 .pdp-mrp {
+  font: 400 15px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-t2);
+  text-decoration: line-through;
+}
+
+.pdp .pdps-info .pdp-tags-price-row1 .pdp-discount {
+  font: 400 15px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.pdp .pdps-info .pdps-price-info {
+  display: block;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  max-width: none;
+}
+
+/* ---- UPI Offer pill: 36px, 6px padding, 8px gap, 8px radius, Grey/T4 70% → 0% gradient ---- */
+.pdp .pdps-info .pdps-upi-offer {
+  position: relative;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  max-width: 100%;
+  padding: 6px;
+  border-radius: 8px;
+  background: linear-gradient(to right, rgba(234, 234, 242, 0.7), rgba(234, 234, 242, 0));
+}
+
+/* notch pointing up at the price: SoT 18px box at (25, -10); triangle inset 11.11% / 14.82% / 25% */
+.pdp .pdps-info .pdps-upi-offer-notch {
+  position: absolute;
+  left: 27.67px;
+  top: -8px;
+  width: 12.67px;
+  height: 11.5px;
+  max-width: none;
+  pointer-events: none;
+}
+
+.pdp .pdps-info .pdps-upi-offer-icon {
+  display: block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  max-width: none;
+}
+
+.pdp .pdps-info .pdps-upi-offer-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  color: var(--grey-t1);
+  white-space: nowrap;
+}
+
+/* Subtitle1: Demi 15/20, 0.1% */
+.pdp .pdps-info .pdps-upi-offer-title {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+/* Subtitle2: Demi 13/16 */
+.pdp .pdps-info .pdps-upi-offer-sub {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+}
+
+/* ---- "₹287 with COD": Bold + Book 15/20, Grey/Base ---- */
+.pdp .pdps-info .pdp-tags-cod {
+  font: 400 15px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.pdp .pdps-info .pdps-cod-amount {
+  font-weight: 700;
+}
+
+/* ---- "Free Delivery": Body3 Book 13/16, 0.25% ---- */
+.pdp .pdps-info .pdps-free-delivery {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-base);
+}
+
+/* ---- "Daily Deals End in" + countdown (Orange/T1 bg, Orange/Base text, 2px radius) ---- */
+.pdp .pdps-info .pdp-tags-deal-timer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.pdp .pdps-info .pdp-tags-deal-timer-prefix {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-base);
+}
+
+.pdp .pdps-info .pdp-tags-deal-timer-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: auto;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 2px;
+  background: #ffe8cd;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--orange-base);
+  font-variant-numeric: tabular-nums;
+}
+
+.pdp .pdps-info .pdps-deal-timer-icon {
+  display: block;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  max-width: none;
+}
+
+/* ---- Price-consideration rows (Price Drop / lowest price) keep their markers, 8px rhythm ---- */
+.pdp .pdps-info .pdp-tags-less-today-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---- Rating: Green/Base chip (Demi 13/16 white, 8px star, 6px x 2px, 12px radius) + (count) Caption2 ---- */
+.pdp .pdps-info .pdp-tags-quality-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.pdp .pdps-info .pdp-tags-quality-floor {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.pdp .pdps-info .pdp-tags-quality-row .pdp-rating-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: auto;
+  margin: 0;
+  padding: 2px 6px;
+  border-radius: 12px;
+  background: var(--green-base);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--white);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.pdp .pdps-info .pdps-rating-star {
+  display: block;
+  flex: none;
+  width: 8px;
+  height: 7.64px;
+  max-width: none;
+}
+
+.pdp .pdps-info .pdp-tags-quality-row .pdp-rating-extra {
+  margin: 0;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t2);
+  white-space: nowrap;
+}
+
+/* Gold / m-Trusted stay at the right end of the rating line, matched to the 20px chip
+   (flex wrapper so the inline badge adds no line-box height to the 20px row) */
+.pdp .pdps-info .pdp-tags-quality-row .pdp-tags-quality-tag {
+  display: flex;
+  align-items: center;
+}
+
+.pdp .pdps-info .pdp-tags-quality-row .pdp-tags-gold-inner {
+  height: 20px;
+  border-radius: 12px;
+}

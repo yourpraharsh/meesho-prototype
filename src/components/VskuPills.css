@@ -1,0 +1,91 @@
+/* Shared VSKU option pills — PDP inline + Buy Now sheet */
+
+.pdp-vsku-options-wrap {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+
+.pdp-vsku-options-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.pdp-vsku-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  min-width: min-content;
+  align-content: flex-start;
+  max-height: 142px;
+}
+
+.pdp-vsku-option-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pdp-vsku-pill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px 8px;
+  border: 2px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  font: var(--body3);
+  color: var(--grey-base);
+  min-width: 64px;
+  min-height: 44px;
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pdp-vsku-pill-price {
+  font: var(--caption2);
+  color: var(--grey-base);
+}
+
+.pdp-vsku-pill .badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font: var(--caption2);
+  font-weight: 600;
+  color: var(--white);
+  background: var(--green-base);
+  white-space: nowrap;
+}
+
+.pdp-vsku-pill.selected {
+  border-color: var(--jamun-base);
+  background: var(--jamun-t2);
+}
+
+.pdp-vsku-pill.oos {
+  border-color: var(--grey-t3-divider);
+  background: var(--grey-t4-bg);
+}
+
+.pdp-vsku-pill:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--grey-t3-divider);
+  background: var(--grey-t4-bg);
+}
+
+.pdp-vsku-pill-price.oos {
+  color: var(--grey-t2);
+  text-decoration: line-through;
+}

@@ -1,0 +1,1824 @@
+/* Self-pickup v2 review — Figma 779:50287 ("REVIEW YOUR ORDER").
+   Reuses review-shell header/price/footer tokens; dtr-* covers the new zones. */
+
+/* ── Offer band with scalloped bottom edge ── */
+.dtr-offer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 35px;
+  padding: 6px 16px 10px;
+  background: linear-gradient(90deg, var(--green-t2) 0%, #f2fdf9 49.45%, var(--green-t2) 100%);
+}
+
+.dtr-offer::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 6px;
+  background-image: radial-gradient(circle at 6px 0, var(--green-t2) 4.5px, transparent 5px);
+  background-size: 12px 6px;
+  background-repeat: repeat-x;
+}
+
+.dtr-offer-text {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+}
+
+.dtr-offer-highlight {
+  font: 700 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--green-base);
+}
+
+.dtr-offer-rest {
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: #263238;
+}
+
+.dtr-body {
+  margin-top: calc(var(--review-section-gap, 4px) + 5px);
+  padding-bottom: calc(84px + var(--safe-bottom, 0));
+}
+
+.dtr {
+  --review-section-gap: 4px;
+}
+
+/* ── Item card ── */
+.dtr-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: var(--white);
+  cursor: pointer;
+  text-align: left;
+}
+
+.dtr-item-img {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid var(--grey-t4-bg);
+  object-fit: cover;
+  background: var(--grey-t4-bg);
+}
+
+.dtr-item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dtr-item-title {
+  font: 600 14px/18px var(--font-mier);
+  color: var(--grey-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dtr-item-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+}
+
+.dtr-item-chevron {
+  color: var(--grey-t2);
+  flex-shrink: 0;
+}
+
+/* ── Select Delivery Type ── */
+.dtr-delivery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 16px;
+}
+
+.dtr-delivery-heading {
+  margin: 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.dtr-delivery-eta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: -6px 0 0;
+  font: 500 12px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.dtr-delivery-eta strong {
+  font-weight: 700;
+  color: var(--grey-base);
+}
+
+.dtr-delivery-eta svg {
+  flex-shrink: 0;
+}
+
+/* ── Delivery type cards ── */
+.dtr-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.dtr-card--selected {
+  border: 1.5px solid var(--jamun-base);
+}
+
+.dtr-card:focus-visible {
+  outline: 2px solid var(--blue-base);
+  outline-offset: 2px;
+}
+
+.dtr-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.dtr-card-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  min-width: 56px;
+  padding-right: 12px;
+  border-right: 1px solid var(--grey-t3-divider);
+}
+
+.dtr-card-amount {
+  font: 700 17px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dtr-card-amount--save {
+  color: var(--green-base);
+}
+
+.dtr-card-mrp {
+  font: 500 11px/14px var(--font-mier);
+  color: var(--grey-t2);
+  text-decoration: line-through;
+}
+
+.dtr-card-save-chip {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--green-t2);
+  font: 600 10px/14px var(--font-mier);
+  color: var(--green-base);
+  white-space: nowrap;
+}
+
+/* Shared eyebrow shimmer — a skewed gloss streak sweeps the strip, then rests */
+.dtr-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.dtr-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: 0;
+  width: 56px;
+  transform: translateX(-80px) skewX(-20deg);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  animation: dtr-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes dtr-shimmer {
+  0% {
+    transform: translateX(-80px) skewX(-20deg);
+  }
+  80%,
+  100% {
+    transform: translateX(440px) skewX(-20deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dtr-shimmer::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Selling-collapsed variant: pill sits on its own line under the label */
+.dtr-card-sublabel {
+  display: block;
+}
+
+/* Quiet-pricing variants: the save chip rides inline after the option label */
+.dtr-card-save-chip--inline {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 4px;
+  font-size: 9px;
+  letter-spacing: 0;
+  vertical-align: 2px;
+}
+
+.dtr-card-label {
+  flex: 1;
+  min-width: 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.001em;
+  color: var(--grey-base);
+}
+
+.dtr-radio {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--grey-t2);
+  border-radius: 50%;
+  background: var(--white);
+  box-sizing: border-box;
+}
+
+.dtr-radio--on {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.dtr-radio--on svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.dtr-card-divider {
+  height: 1px;
+  margin: 0 14px;
+  background: var(--grey-t4-bg);
+}
+
+.dtr-card-address {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.dtr-card-address-line {
+  flex: 1;
+  min-width: 0;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0025em;
+  color: var(--grey-t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dtr-card-change {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: 700 13px/16px var(--font-mier);
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+/* ── Store block ── */
+.dtr-store {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+}
+
+/* Photo runs the full card height — top of the name to the bottom of the CTAs. */
+.dtr-store-photo {
+  flex-shrink: 0;
+  width: 112px;
+  align-self: stretch;
+  height: auto;
+  min-height: 88px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--grey-t4-bg);
+}
+
+.dtr-store-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.dtr-store-name {
+  margin: 0;
+  font: 700 15px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+/* Official m-store badge asset — rendered at its native 46x16 proportions */
+.dtr-store-badge {
+  display: block;
+  height: 16px;
+  width: auto;
+}
+
+.dtr-store-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font: 500 12px/15px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.dtr-store-meta svg {
+  flex-shrink: 0;
+}
+
+.dtr-store-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.dtr-store-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 7px 10px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  background: var(--grey-t5-subdued);
+  font: 600 12px/15px var(--font-mier);
+  color: var(--grey-base);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dtr-more-stores {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.dtr-more-stores .review-shell-chevron {
+  color: var(--jamun-base);
+}
+
+/* ── Sticky footer: price + view details | Continue ── */
+.dtr-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  max-width: 430px;
+  z-index: 30;
+  min-height: 68px;
+  padding: 10px 16px calc(10px + var(--safe-bottom, 0));
+  background: var(--white);
+  border-top: 1px solid #cecede;
+  box-sizing: border-box;
+}
+
+.dtr-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dtr-footer-price-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dtr-footer-price {
+  font: 700 17px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dtr-footer-off-chip {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--green-t2);
+  font: 600 11px/14px var(--font-mier);
+  color: var(--green-base);
+  white-space: nowrap;
+}
+
+.dtr-footer-view-details {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: 700 11px/14px var(--font-mier);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.dtr-footer-continue {
+  flex-shrink: 0;
+  min-width: 148px;
+  min-height: 44px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* "See More Stores" bottom sheet — Self-pickup v2 store picker */
+.dtr-stores-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(23, 23, 33, 0.55);
+}
+
+.dtr-stores-sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  max-height: 82vh;
+  border-radius: 16px 16px 0 0;
+  background: var(--white);
+  box-sizing: border-box;
+  animation: dtr-stores-rise 0.22s ease-out;
+}
+
+@keyframes dtr-stores-rise {
+  from {
+    transform: translateY(24px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dtr-stores-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--grey-t4-bg);
+}
+
+.dtr-stores-title {
+  margin: 0;
+  font: 700 14px/18px var(--font-mier);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey-base);
+}
+
+/* Address context strip — "Showing stores near …" */
+.dtr-stores-addr {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: var(--grey-t5-subdued);
+  border-bottom: 1px solid var(--grey-t4-bg);
+  color: var(--grey-t2);
+}
+
+.dtr-stores-addr-text {
+  flex: 1;
+  min-width: 0;
+  font: 500 13px/17px var(--font-mier);
+  color: var(--grey-t1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dtr-stores-addr-text strong {
+  font-weight: 600;
+  color: var(--grey-base);
+}
+
+/* Trust strip — centered, hairline above the list */
+.dtr-stores-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--grey-t4-bg);
+  font: 500 12.5px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.dtr-stores-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.dtr-stores-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  overflow-y: auto;
+}
+
+/* Radio-select store rows — selected gets the jamun outline like delivery cards */
+.dtr-store-option {
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.dtr-store-option--selected {
+  border: 1.5px solid var(--jamun-base);
+}
+
+.dtr-store-option:focus-visible {
+  outline: 2px solid var(--blue-base);
+  outline-offset: 2px;
+}
+
+.dtr-store-radio-col {
+  display: flex;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* Sticky commit CTA */
+.dtr-stores-footer {
+  padding: 12px 16px calc(12px + var(--safe-bottom, 0));
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+.dtr-stores-confirm {
+  width: 100%;
+  min-height: 46px;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: var(--jamun-base);
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.0015em;
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* ---------- Call Store → store FAQ sheet ----------
+   Same shell as the store picker (dtr-stores-*), so skins and Duo postures place it like the
+   other self-pickup sheets; only the FAQ list and the footer are its own. */
+button.dtr-store-action {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* opened from the store list, it sits on top of it */
+.dtr-faq-backdrop {
+  z-index: 61;
+}
+
+/* one row per question, all visible: icon · question (bold) · short answer · one-line detail */
+.dtr-stores-list.dtr-faq-list {
+  gap: 0;
+  margin: 0;
+  padding: 2px 16px 4px;
+  list-style: none;
+}
+
+.dtr-faq-item {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+.dtr-faq-item + .dtr-faq-item {
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+/* icon tile: as tall as the row's text (so every row reads as one unit), the multi-tone
+   informative icon centred in it, as drawn */
+.dtr-faq-icon {
+  display: flex;
+  flex: none;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  min-height: 56px;
+  border-radius: 14px;
+  background: #eef3ff;
+}
+
+.dtr-faq-icon img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* "OTP" as the icon: Icon Blue T1 on Icon Blue T4, like a code box */
+.dtr-faq-icon-text {
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: #dbe6ff;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0.06em;
+  color: #3a66cf;
+}
+
+/* a row with its own CTA: text takes the free width, the CTA sits right */
+.dtr-faq-item--action .dtr-faq-text {
+  flex: 1 1 auto;
+}
+
+.dtr-faq-action {
+  display: flex;
+  flex: none;
+  align-self: center;
+  margin-left: auto;
+}
+
+.dtr-faq-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* every line is one line (the copy is written to fit a 360px phone), so every row is the
+   same height; anything longer, such as a long store name, ends in an ellipsis */
+.dtr-faq-text p {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* P0 question · P1 answer · P2 supporting line */
+.dtr-faq-text .dtr-faq-q {
+  font: 600 14px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.dtr-faq-text .dtr-faq-lead {
+  margin-top: 2px;
+  font: 400 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dtr-faq-text .dtr-faq-detail {
+  margin-top: 2px;
+  font: 400 12px/16px var(--font-mier);
+  letter-spacing: 0.002em;
+  color: var(--grey-t1);
+}
+
+/* secondary (outline) CTA under the store's name */
+.dtr-faq-map {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--jamun-base);
+  border-radius: 8px;
+  background: var(--white);
+  box-sizing: border-box;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--jamun-base);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dtr-faq-map-icon {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--jamun-base);
+  -webkit-mask: var(--faq-icon) center / contain no-repeat;
+  mask: var(--faq-icon) center / contain no-repeat;
+}
+
+/* Duo: CTAs are pills on every posture */
+body.duo-device .app .dtr-faq-map {
+  border-radius: 999px;
+}
+
+/* ?faq=video / image: the store pickup story (or a still from it) on top of the answers (956 × 512) */
+.dtr-faq-video {
+  margin: 12px 0 2px;
+}
+
+.dtr-faq-video video,
+.dtr-faq-video img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 956 / 512;
+  border-radius: 12px;
+  background: #ead0e6;
+  object-fit: cover;
+}
+
+/* ?faq=image / video / video-accordion: the story (still or video) is part of the sheet, not a
+   card in it. No title or store row: the sheet opens on the story, edge to edge, below a cream
+   margin (the story's own background), its top dissolving into that cream and its bottom into
+   the white the answers sit on. The close floats on top. */
+.dtr-faq-sheet--scene {
+  --faq-scene-cream: #fffaef;
+  position: relative;
+  /* cream behind everything above the list (incl. the Duo popups' grabber); white below */
+  background:
+    linear-gradient(var(--faq-scene-cream), var(--faq-scene-cream)) top / 100% 50% no-repeat,
+    var(--white);
+}
+
+.dtr-faq-sheet--scene .dtr-stores-head {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  justify-content: flex-end;
+  padding: 12px;
+  border-bottom: none;
+  pointer-events: none;
+}
+
+/* kept for screen readers: it still names the dialog */
+.dtr-faq-sheet--scene .dtr-stores-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* a white circle so the X reads over the scene (Duo turns it into its glass circle) */
+.dtr-faq-sheet--scene .dtr-stores-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  pointer-events: auto;
+}
+
+/* the scene reaches the sheet's rounded top corners */
+.dtr-stores-list.dtr-faq-list--scene {
+  padding-top: 0;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: var(--white);
+}
+
+.dtr-faq-list--scene .dtr-faq-scene {
+  /* cream margin above the scene; below it the cream → white wash runs on under the first
+     answer (the negative margin lets that row sit on the tail of the gradient) */
+  margin: 0 -16px -56px;
+  padding: 24px 0 56px;
+  background: linear-gradient(180deg, var(--faq-scene-cream) 0%, var(--faq-scene-cream) 40%, var(--white) 100%);
+}
+
+.dtr-faq-list--scene .dtr-faq-scene :is(img, video) {
+  max-height: 260px; /* wide sheets (Duo Open / Book) crop rather than grow */
+  border-radius: 0;
+  background: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 56%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 56%, transparent 100%);
+}
+
+/* the still trims the empty cream on the left (where the story's caption was), so the people lead */
+.dtr-faq-list--scene .dtr-faq-scene img {
+  aspect-ratio: 840 / 512;
+  object-position: 100% 20%;
+}
+
+/* the video keeps its captions (left and centre), so it stays whole and fades out only below them */
+.dtr-faq-list--scene .dtr-faq-scene video {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 66%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 12%, #000 66%, transparent 100%);
+}
+
+/* reduced motion shows the player's controls: keep them out of the bottom fade */
+.dtr-faq-list--scene .dtr-faq-scene--controls video {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 12%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 12%);
+}
+
+/* Stand: the screen is short, so the scene stays a band and the answers get the room */
+body.layout-duo[data-posture='stand'] .app .dtr-faq-list--scene .dtr-faq-scene {
+  margin-bottom: -32px;
+  padding: 12px 0 32px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-list--scene .dtr-faq-scene :is(img, video) {
+  max-height: 150px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-list--scene .dtr-faq-scene img {
+  object-position: 100% 50%; /* the slice keeps the shopper and the shopkeeper's faces */
+}
+
+/* ?faq=accordion: icon · question · chevron; tapping a row opens its answer right under the
+   question, in the same text column (as in a plain row), and closes any other */
+.dtr-faq-item.dtr-faq-item--accordion {
+  --faq-tile: 48px;
+  position: relative;            /* the toggle's full-row tap area is measured against the row */
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 0;               /* shut: 12 + 48 + 12 = 72 */
+}
+
+.dtr-faq-item--accordion .dtr-faq-icon {
+  align-self: flex-start;        /* pinned to the row top in both states */
+  width: var(--faq-tile);
+  height: var(--faq-tile);
+  min-height: var(--faq-tile);
+  border-radius: 12px;
+}
+
+.dtr-faq-item--accordion .dtr-faq-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+/* min-height = the tile: shut, the question centres on the tile; open, question + answer
+   outgrow it, so the question lines up with the tile top and the answer follows 4px under it.
+   Keep it unpositioned: the toggle's ::after must measure against the li. */
+.dtr-faq-acc-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: var(--faq-tile);
+}
+
+.dtr-faq-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* the whole row taps: tile, gaps, padding, question, chevron (8px into the list's 16px gutter) */
+.dtr-faq-toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0 -8px;
+  border-radius: 12px;
+}
+
+.dtr-faq-toggle:focus-visible {
+  outline: none;
+}
+
+.dtr-faq-toggle:focus-visible::after {
+  outline: 2px solid var(--blue-base);
+  outline-offset: -2px;
+}
+
+/* P0, same as the plain variant; never changes on open */
+.dtr-faq-toggle .dtr-faq-q {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 600 14px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* affordance, not content: sits below P2 */
+.dtr-faq-chevron {
+  display: block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: -1px 0;                /* a one-line question's button stays 22px, not 24 */
+  background: var(--grey-t2);
+  -webkit-mask: var(--faq-icon) center / contain no-repeat;
+  mask: var(--faq-icon) center / contain no-repeat;
+  transition: transform 0.22s ease;
+}
+
+.dtr-faq-item--accordion.is-open .dtr-faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* the answer slides open (0fr -> 1fr). It sits above the row's tap layer, so its text can be
+   selected and See Map stays its own target; while shut it is out of the tab order and a11y tree */
+.dtr-faq-answer {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease;
+}
+
+.dtr-faq-item--accordion.is-open .dtr-faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.dtr-faq-answer-inner {
+  min-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0s linear 0.22s;
+}
+
+.dtr-faq-item--accordion.is-open .dtr-faq-answer-inner {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* 4px question -> answer (plain variant); 4px + the row's 12px = 16px under the detail.
+   Both sit inside the clipped track, so a shut row keeps none of it. */
+.dtr-faq-answer-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.dtr-faq-item--accordion.is-open .dtr-faq-answer-body {
+  opacity: 1;
+  transition: opacity 0.16s ease 0.06s;
+}
+
+.dtr-faq-answer-body .dtr-faq-text {
+  flex: 1 1 auto;
+}
+
+/* P1 400 13/18 grey-base and P2 400 12/16 grey-t1 (margin-top 2px) come from the shared
+   .dtr-faq-text rules; only the lead's top margin is dropped */
+.dtr-faq-answer-body .dtr-faq-text .dtr-faq-lead {
+  margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dtr-faq-answer,
+  .dtr-faq-answer-inner,
+  .dtr-faq-answer-body,
+  .dtr-faq-chevron {
+    transition: none;
+  }
+}
+
+/* Open full screen: the popup is wide enough for two columns of answers */
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-stores-list.dtr-faq-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+}
+
+/* the accordion's rows are short, so it stays one column: an open answer gets the full width */
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-stores-list.dtr-faq-list--accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-stores-list.dtr-faq-list--accordion .dtr-faq-item + .dtr-faq-item {
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-item + .dtr-faq-item {
+  border-top: none;
+}
+
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-item:nth-child(n + 3) {
+  border-top: 1px solid var(--grey-t4-bg);
+}
+
+/* with the story first: it spans both columns, and the answer rows start one child later */
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-video {
+  grid-column: 1 / -1;
+}
+
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-list--video .dtr-faq-item:nth-child(3) {
+  border-top: none;
+}
+
+/* "Still have questions?" + Call Store (jamun; never disabled: while the store is closed a tap explains) */
+.dtr-faq-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dtr-faq-still {
+  margin: 0;
+  font: 600 14px/20px var(--font-mier);
+  color: var(--grey-base);
+  text-align: center;
+}
+
+.dtr-faq-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* the exported call glyph is dark: white on the jamun CTA */
+.dtr .dtr-faq-sheet .dtr-faq-call .dtr-action-icon,
+.dtr-faq-sheet .dtr-faq-call .dtr-action-icon {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+/* focus moves into the sheet on open (for screen readers); no ring on the sheet itself */
+.dtr-faq-sheet:focus {
+  outline: none;
+}
+
+/* ---------- store closed for calls: the sheet says so first ----------
+   Three ways to show it (?closedUi=header|strip|card, header by default). All share the same copy:
+   P0 "Store is closed now" · P1 "You can call [tomorrow] from 8:30 AM" (the time in Demi).
+   All three use a dark band, because no other part of any version is dark: a pale one blended into
+   the cream media and the white answers. The opening time is the one warm accent in it. */
+.dtr-faq-sheet--closed {
+  --faq-closed-bg: var(--grey-base);
+  --faq-closed-sub: rgba(255, 255, 255, 0.8);
+  --faq-closed-time: var(--yellow-base);
+}
+
+.dtr-faq-status p {
+  margin: 0;
+  color: var(--white);
+}
+
+.dtr-faq-status-icon {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.dtr-faq-status-icon img {
+  display: block;
+  object-fit: contain;
+}
+
+.dtr-faq-status-text {
+  min-width: 0;
+}
+
+.dtr-faq-status .dtr-faq-status-p1 {
+  color: var(--faq-closed-sub);
+}
+
+.dtr-faq-status-p1 b {
+  font-weight: 600;
+  color: var(--faq-closed-time);
+}
+
+/* a line can only break before "from", never inside the time */
+.dtr-faq-when {
+  white-space: nowrap;
+}
+
+/* A · the header becomes the status: the first and largest thing, and it never scrolls away */
+.dtr-stores-head.dtr-faq-head--closed {
+  flex: none; /* never squashed by a short sheet (Duo Stand) */
+  align-items: center;
+  gap: 8px;
+  padding: 20px 12px 20px 16px;
+  border-bottom: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: var(--faq-closed-bg);
+}
+
+.dtr-faq-head--closed .dtr-stores-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* a white circle so the X reads on the dark band (Duo keeps its glass circle) */
+.dtr-faq-head--closed .dtr-stores-close {
+  flex: none;
+  align-self: flex-start;
+  width: 32px;
+  height: 32px;
+  margin: -6px 0 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.dtr-faq-status--header,
+.dtr-faq-status--card {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dtr-faq-status--header .dtr-faq-status-icon,
+.dtr-faq-status--card .dtr-faq-status-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.dtr-faq-status--header .dtr-faq-status-icon img,
+.dtr-faq-status--card .dtr-faq-status-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+/* A is the largest of the three: it is the sheet's title */
+.dtr-faq-status--header .dtr-faq-status-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+
+.dtr-faq-status--header .dtr-faq-status-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.dtr-faq-status--header .dtr-faq-status-p0 {
+  font: 700 20px/24px var(--font-mier);
+}
+
+.dtr-faq-status--card .dtr-faq-status-p0 {
+  font: var(--headline6);
+}
+
+.dtr-faq-status--header .dtr-faq-status-p1,
+.dtr-faq-status--card .dtr-faq-status-p1 {
+  margin-top: 4px;
+  font: 400 14px/20px var(--font-mier);
+}
+
+/* media layouts: the header joins the flow above the media, with the X in it */
+.dtr-faq-sheet--scene .dtr-stores-head.dtr-faq-head--closed {
+  position: static;
+  justify-content: flex-start;
+  pointer-events: auto;
+}
+
+.dtr-faq-sheet--closed-header .dtr-stores-list.dtr-faq-list--scene {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dtr-faq-sheet--closed-header .dtr-faq-list--scene .dtr-faq-scene {
+  padding-top: 12px;
+}
+
+/* hero (default) · the status is the sheet's hero: big, centred, with nothing beside it, on a
+   warm wash that fades into the answers. The time sits in an outlined chip. While closed the
+   only action is Okay, so the footer has no "Still have questions?". */
+.dtr-faq-sheet--closed-hero {
+  position: relative; /* the close's containing block */
+}
+
+.dtr-stores-head.dtr-faq-head--hero {
+  display: block;
+  flex: none;
+  padding: 28px 16px 20px;
+  border-bottom: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: linear-gradient(var(--yellow-t1), var(--white));
+  text-align: center;
+}
+
+.dtr-faq-head--hero .dtr-stores-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* a white circle in the top corner, clear of the centred status (Duo keeps its glass circle) */
+.dtr-faq-head--hero .dtr-stores-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  pointer-events: auto;
+}
+
+.dtr-faq-status--hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dtr-faq-status--hero .dtr-faq-status-icon {
+  width: 77px;
+  height: 77px;
+  margin-bottom: 14px;
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.dtr-faq-status--hero .dtr-faq-status-icon img {
+  width: 36px;
+  height: 36px;
+}
+
+/* the store's doors slide shut (3.2s loop): lit doorway → the leaves close over it and the light
+   goes out, a small squash as they meet, the store dims → hold → the light comes back behind the
+   leaves, which fade away */
+.dtr-faq-shop {
+  display: block;
+  width: 53px;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  animation: dtr-faq-shop-thud 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.dtr-faq-shop-body {
+  animation: dtr-faq-shop-dim 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.dtr-faq-shop-light {
+  animation: dtr-faq-shop-light 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.dtr-faq-shop-leaf {
+  animation: 3.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.dtr-faq-shop-leaf--l {
+  animation-name: dtr-faq-door-l;
+}
+
+.dtr-faq-shop-leaf--r {
+  animation-name: dtr-faq-door-r;
+}
+
+@keyframes dtr-faq-door-l {
+  0%,
+  14% {
+    transform: translateX(-2.8px);
+    opacity: 1;
+  }
+  40%,
+  88% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  96% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-2.8px);
+    opacity: 0;
+  }
+}
+
+@keyframes dtr-faq-door-r {
+  0%,
+  14% {
+    transform: translateX(2.8px);
+    opacity: 1;
+  }
+  40%,
+  88% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  96% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(2.8px);
+    opacity: 0;
+  }
+}
+
+/* the light stays on until the leaves all but meet, and comes back behind them before they fade */
+@keyframes dtr-faq-shop-light {
+  0%,
+  30% {
+    opacity: 1;
+  }
+  42%,
+  82% {
+    opacity: 0;
+  }
+  86%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dtr-faq-shop-dim {
+  0%,
+  20% {
+    opacity: 0.8;
+  }
+  44%,
+  86% {
+    opacity: 0.5;
+  }
+  96%,
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes dtr-faq-shop-thud {
+  0%,
+  38% {
+    transform: scale(1);
+  }
+  43% {
+    transform: scale(1.04, 0.95);
+  }
+  50%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dtr-faq-status--hero .dtr-faq-status-p0 {
+  font: 700 24px/28px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dtr-faq-status--hero .dtr-faq-status-p1 {
+  margin-top: 6px;
+  font: 400 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dtr-faq-status--hero .dtr-faq-status-p1 b {
+  padding: 1px 6px;
+  border: 1px solid var(--yellow-base);
+  border-radius: 6px;
+  background: var(--white);
+  font-weight: 700;
+  color: var(--jamun-primary);
+}
+
+/* media layouts: the status sits on the scene's cream, and the story follows it */
+.dtr-faq-sheet--scene .dtr-stores-head.dtr-faq-head--hero {
+  position: static;
+  padding-bottom: 12px;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.dtr-faq-sheet--closed-hero .dtr-stores-list.dtr-faq-list--scene {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dtr-faq-sheet--closed-hero .dtr-faq-list--scene .dtr-faq-scene {
+  padding-top: 4px;
+}
+
+/* B · a slim notice above everything; the rest of the sheet is exactly the daytime one */
+.dtr-faq-status--strip {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: var(--faq-closed-bg);
+}
+
+.dtr-faq-status--strip .dtr-faq-status-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.dtr-faq-status--strip .dtr-faq-status-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+.dtr-faq-status--strip p {
+  font: 400 13px/18px var(--font-mier);
+}
+
+.dtr-faq-status--strip .dtr-faq-status-p0 {
+  font-weight: 600;
+}
+
+/* media layouts: clear the floating X (12 inset + 32 + 12) */
+.dtr-faq-sheet--scene .dtr-faq-status--strip {
+  padding-right: 56px;
+}
+
+.dtr-faq-sheet--closed-strip .dtr-stores-list.dtr-faq-list--scene {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dtr-faq-sheet--closed-strip .dtr-faq-list--scene .dtr-faq-scene {
+  padding-top: 8px;
+}
+
+/* C · a card, first in the list, that hands over to the answers ("Till then, find answers below.") */
+.dtr-faq-status-row {
+  padding: 12px 0 4px;
+  list-style: none;
+}
+
+.dtr-faq-status--card {
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--faq-closed-bg);
+}
+
+.dtr-faq-status--card .dtr-faq-status-p2 {
+  margin-top: 4px;
+  font: 400 12px/16px var(--font-mier);
+  letter-spacing: 0.002em;
+  color: var(--faq-closed-sub);
+}
+
+/* media layouts: a full-bleed cream row above the media, the card clear of the floating X */
+.dtr-faq-list--scene .dtr-faq-status-row {
+  margin: 0 -16px;
+  padding: 16px 56px 4px 16px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background: var(--faq-scene-cream);
+}
+
+.dtr-faq-sheet--closed-card .dtr-faq-list--scene .dtr-faq-scene {
+  padding-top: 4px;
+}
+
+/* a closed tap: the note takes "Still have questions?"'s place and the status nudges */
+.dtr-faq-still-slot {
+  display: flex;
+  justify-content: center;
+}
+
+.dtr-faq-tapnote {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--yellow-t1);
+  text-align: left;
+  animation: dtr-faq-note-in 160ms ease-out;
+}
+
+.dtr-faq-tapnote img {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+}
+
+.dtr-faq-tapnote p {
+  margin: 0;
+  font: 400 13px/18px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.dtr-faq-tapnote p:first-child,
+.dtr-faq-tapnote b {
+  font-weight: 600;
+}
+
+body.duo-device .app .dtr-faq-tapnote {
+  border-radius: 12px;
+}
+
+@keyframes dtr-faq-note-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.dtr-faq-status-icon.is-nudged {
+  animation: dtr-faq-tick 450ms ease-in-out;
+}
+
+@keyframes dtr-faq-tick {
+  30% {
+    transform: rotate(-10deg) scale(1.12);
+  }
+  65% {
+    transform: rotate(8deg) scale(1.06);
+  }
+}
+
+.dtr-faq-status-p1 b.is-nudged {
+  border-radius: 4px;
+  animation: dtr-faq-mark 900ms ease-out;
+}
+
+/* the time is already yellow on the dark band: a light wash behind it, not a yellow one */
+@keyframes dtr-faq-mark {
+  25% {
+    background-color: rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* Duo Open / Book popups: the grabber sits on the status colour, clipped to the popup's corners */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-sheet--closed {
+  overflow: clip;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.dtr-faq-sheet--closed-header, .dtr-faq-sheet--closed-strip) {
+  background: linear-gradient(var(--faq-closed-bg), var(--faq-closed-bg)) top / 100% 24px no-repeat, var(--white);
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.dtr-faq-sheet--closed-header, .dtr-faq-sheet--closed-strip).dtr-faq-sheet--scene {
+  background:
+    linear-gradient(var(--faq-closed-bg), var(--faq-closed-bg)) top / 100% 24px no-repeat,
+    linear-gradient(var(--faq-scene-cream), var(--faq-scene-cream)) top / 100% 50% no-repeat,
+    var(--white);
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app :is(.dtr-faq-sheet--closed-header, .dtr-faq-sheet--closed-strip)::before {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-sheet--closed-hero:not(.dtr-faq-sheet--scene) {
+  background: linear-gradient(var(--yellow-t1), var(--yellow-t1)) top / 100% 24px no-repeat, var(--white);
+}
+
+/* the popup's grabber is above the status: the close drops to clear it */
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-head--hero .dtr-stores-close {
+  top: 20px;
+  right: 16px;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-stores-head.dtr-faq-head--closed {
+  padding: 12px 16px 16px 24px;
+  border-radius: 0;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-head--closed .dtr-stores-close {
+  align-self: center;
+  margin: 0;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-status--strip {
+  padding: 10px 24px;
+  border-radius: 0;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-sheet--scene .dtr-faq-status--strip {
+  padding-right: 68px;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .dtr-faq-list--scene .dtr-faq-status-row {
+  padding-right: 68px;
+}
+
+/* Duo Open full screen (two columns): the card spans both; the answers start one child later */
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-status-row {
+  grid-column: 1 / -1;
+}
+
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-list--closed:not(.dtr-faq-list--accordion) .dtr-faq-item:nth-child(3) {
+  border-top: none;
+}
+
+body.layout-duo[data-posture='landscape'][data-split='full'] .app .dtr-faq-list--closed.dtr-faq-list--video:not(.dtr-faq-list--accordion) .dtr-faq-item:nth-child(4) {
+  border-top: none;
+}
+
+/* Duo Stand: the status is a rounded tile in the content column; the X stays on the rail axis */
+body.layout-duo[data-posture='stand'] .app .dtr-stores-head.dtr-faq-head--closed {
+  min-height: auto;
+  margin: 0 12px 4px;
+  padding: 12px;
+  border-radius: 20px;
+}
+
+/* Stand (short sheet): the hero becomes one row, the 58px tile beside the two lines */
+body.layout-duo[data-posture='stand'] .app .dtr-stores-head.dtr-faq-head--hero {
+  min-height: auto;
+  margin: 0 12px 4px;
+  padding: 12px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-sheet--scene .dtr-stores-head.dtr-faq-head--hero {
+  margin: 0;
+  padding: 8px 16px 4px;
+  border-radius: 0;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--hero {
+  flex-direction: row;
+  gap: 12px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--hero .dtr-faq-status-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0;
+  border-radius: 17px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--hero .dtr-faq-status-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-shop {
+  width: 38px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--hero .dtr-faq-status-p0 {
+  font: 700 20px/24px var(--font-mier);
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--hero .dtr-faq-status-p1 {
+  margin-top: 4px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--strip {
+  min-height: 0;
+  margin: 0 12px 4px;
+  padding: 8px 12px;
+  border-radius: 16px;
+}
+
+body.layout-duo[data-posture='stand'] .app :is(.dtr-faq-status--header, .dtr-faq-status--card) .dtr-faq-status-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+
+body.layout-duo[data-posture='stand'] .app :is(.dtr-faq-status--header, .dtr-faq-status--card) .dtr-faq-status-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+body.layout-duo[data-posture='stand'] .app :is(.dtr-faq-status--header, .dtr-faq-status--card) .dtr-faq-status-p1 {
+  font: 400 13px/18px var(--font-mier);
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status--card {
+  padding: 10px;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-status-p2 {
+  display: none;
+}
+
+body.layout-duo[data-posture='stand'] .app .dtr-faq-list--scene .dtr-faq-status-row {
+  padding: 8px 16px 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dtr-faq-tapnote,
+  .dtr-faq-status-icon.is-nudged,
+  .dtr-faq-status-p1 b.is-nudged,
+  .dtr-faq-shop,
+  .dtr-faq-shop-body {
+    animation: none;
+  }
+
+  /* the doors stay shut, the light off */
+  .dtr-faq-shop-leaf {
+    animation: none;
+  }
+
+  .dtr-faq-shop-light {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dtr-stores-sheet {
+    animation: none;
+  }
+
+}

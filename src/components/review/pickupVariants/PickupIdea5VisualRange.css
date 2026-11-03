@@ -1,0 +1,206 @@
+/* Idea 5 — "Day/night hours timeline" (pi5-): morning→night gradient band over
+   a 3-day relative timeline inside the pickup card. */
+
+/* Scalable alt — full-bleed below the option row, hairline before the store */
+.pi5-panel {
+  border-bottom: 1px solid var(--grey-t4-bg);
+  background: var(--white);
+}
+
+/* 5B — band + timeline as the pickup card's eyebrow (card clips the corners) */
+.pi5-eyebrow {
+  border-bottom: 1px solid var(--grey-t4-bg);
+  background: var(--white);
+}
+
+.pi5-eyebrow .pi5-timeline {
+  padding: 12px 14px 10px;
+}
+
+/* Morning → night gradient: warm sunrise on the left, deep night on the right */
+.pi5-band {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: linear-gradient(
+    90deg,
+    #fdf2cd 0%,
+    #f3ecd8 28%,
+    #dbe4ee 55%,
+    #6a7a9d 80%,
+    #33405e 100%
+  );
+}
+
+/* Shimmer — a skewed gloss streak sweeps the band, then rests between passes */
+.pi5-band::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: 0;
+  width: 56px;
+  transform: translateX(-80px) skewX(-20deg);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  animation: pi5-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes pi5-shimmer {
+  0% {
+    transform: translateX(-80px) skewX(-20deg);
+  }
+  80%,
+  100% {
+    transform: translateX(440px) skewX(-20deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi5-band::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.pi5-band-edge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.pi5-band-time {
+  font: 700 10px/13px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #6b5a1e;
+}
+
+.pi5-band-edge--moon .pi5-band-time {
+  color: var(--white);
+}
+
+/* Chip riding the band — white pill; stroke and text carry the same
+   day→night gradient as the strip behind it (amber → deep navy) */
+.pi5-band-chip {
+  flex-shrink: 0;
+  margin: 0 6px;
+  padding: 4px 13px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--white), var(--white)) padding-box,
+    linear-gradient(90deg, #e8b41c 0%, #b3a06a 35%, #6a7a9d 70%, #33405e 100%) border-box;
+  font: 600 12.5px/17px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pi5-band-chip-text {
+  background: linear-gradient(90deg, #c79312 0%, #8d825e 35%, #5b6b92 70%, #33405e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.pi5-eyebrow--band-only .pi5-band {
+  padding: 9px 12px;
+}
+
+.pi5-band-arc {
+  flex: 1;
+  min-width: 0;
+  font: 700 10px/13px var(--font-mier);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #3d4a68;
+}
+
+/* 3-day relative timeline — track with check-marked day nodes, deliberately
+   non-interactive. Grid of 3 centered columns keeps every label centered
+   under its node; the line runs between the first and last column centers. */
+.pi5-timeline {
+  padding: 10px 10px 11px;
+}
+
+.pi5-timeline-caption {
+  margin: 0 0 9px;
+  font: 600 11.5px/15px var(--font-mier);
+  text-align: center;
+  color: var(--grey-base);
+}
+
+.pi5-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pi5-track-line {
+  position: absolute;
+  /* from the center of column 1 to the center of column 3 */
+  left: calc(100% / 6);
+  right: calc(100% / 6);
+  top: 8px;
+  height: 2px;
+  transform: translateY(-50%);
+  border-radius: 1px;
+  background: var(--green-t2);
+}
+
+.pi5-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pi5-node-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+}
+
+.pi5-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--green-base);
+}
+
+.pi5-node--first {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 0 3px var(--green-t2);
+}
+
+.pi5-label {
+  font: 600 10.5px/14px var(--font-mier);
+  white-space: nowrap;
+  text-align: center;
+  color: var(--grey-t1);
+}
+
+.pi5-label--first {
+  font-weight: 700;
+}

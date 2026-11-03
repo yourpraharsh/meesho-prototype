@@ -1,0 +1,813 @@
+/* =====================================================================
+   Order Details Page — the plain ODP's design language
+   Figma Self-pickup v2 (H1GW5y6IAWYTrscEJHvRK4), frame 3996:8524 "ODP":
+     ODP - Header 3996:8531   app bar, 56px, HELP link
+     card/ODP_v2 3996:8526    product card
+     timeline card 4 3996:8527  status title · timeline · footer block
+     ODP - Delivery 3996:8528 address card
+     card/price 3996:8529     price card + payment messaging
+   White cards on Grey T4 with 6px gutters, Subtitle1 / Subtitle2 / Body3 type, one
+   footer-block pattern (divider · Body3 · LINK). The store-pickup ODP reuses the same
+   pieces: its store card is the Delivery Address card with the store inside it.
+   Loaded after OrderDetails.css; the app bar is Android-only (the Liquid Glass skin and
+   the Duo layouts keep their own bar). Mier B02: Book 500, Demi 600, Bold 700.
+   ===================================================================== */
+
+/* ---------- page: white cards, 6px Grey T4 gutters ---------- */
+.odp > .odp-section {
+  margin-top: 6px;
+}
+
+body:not(.ui-ios) .odp > .odp-header + .odp-section {
+  margin-top: 0;
+}
+
+/* ---------- app bar (Android) ---------- */
+body:not(.ui-ios) .odp-header {
+  gap: 8px;
+  height: calc(56px + var(--safe-top, 0px));
+  padding: var(--safe-top, 0px) 16px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--grey-t3-divider);
+}
+
+body:not(.ui-ios) .odp-back {
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.odp-appbar-back {
+  display: block;
+  width: 8px;
+  height: 16px;
+  max-width: none;
+}
+
+/* Subtitle2.Caps — Demi 13/16, 0.5% */
+body:not(.ui-ios) .odp-title {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+}
+
+/* help icon (20) · 6 · HELP (Actions/Link) */
+body:not(.ui-ios) .odp-help {
+  gap: 6px;
+  padding: 0;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+}
+
+.odp-help-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- links: Actions/Link — Bold 13/16, Jamun, caps ---------- */
+.odp .odp-link {
+  padding: 0;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+}
+
+/* ---------- product card (card/ODP_v2) ---------- */
+.odp .odp-product {
+  position: relative;
+  align-items: stretch;
+  gap: 8px;
+  padding: 16px 16px 12px;
+}
+
+.odp .odp-product-media {
+  width: 76px;
+  height: 76px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--grey-t2);
+}
+
+.odp .odp-product-img {
+  border-radius: 0;
+}
+
+/* program icon: blue pill, 1px white ring, the Mall wordmark */
+.odp .odp-mall-chip {
+  left: 2px;
+  bottom: 3px;
+  display: flex;
+  align-items: center;
+  padding: 3px 4px 3px 6px;
+  border: 1px solid var(--white);
+  border-radius: 12px;
+  background: #2354e5;
+}
+
+.odp .odp-mall-chip img {
+  display: block;
+  width: 24px;
+  height: 10px;
+}
+
+/* image count: 20x16 white tab (top-left radius 4), Caption2 */
+.odp .odp-qty-tag {
+  width: 20px;
+  height: 16px;
+  padding: 0;
+  border-radius: 0;
+  background: url('../../assets/odp-sot/image-count.svg') no-repeat 0 0 / 20px 16px;
+  font: 500 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  text-align: center;
+  color: var(--grey-t1);
+}
+
+/* details: top (order no + title) and bottom (properties) split the 76px height */
+.odp .odp-product-body {
+  justify-content: space-between;
+  gap: 0;
+}
+
+/* Subtitle1 */
+.odp .odp-order-no {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+/* Subtitle2, 212px wide so it clears the chevron */
+.odp .odp-product-title {
+  max-width: 212px;
+  margin-top: 2px;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+/* Body3, Grey T2 */
+.odp .odp-product-line {
+  margin-top: 2px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t2);
+}
+
+.odp .odp-product-title + .odp-product-line {
+  margin-top: auto;
+}
+
+.odp .odp-dot {
+  flex: none;
+  width: 4px;
+  height: 16px;
+  margin: 0 4px;
+  border-radius: 0;
+  background: url('../../assets/odp-sot/dot.svg') no-repeat 0 0 / 4px 16px;
+}
+
+/* chevron icon button, centred on the order-no + title block */
+.odp .odp-chevron {
+  position: absolute;
+  top: 23px;
+  right: 16px;
+  display: flex;
+}
+
+.odp .odp-chevron img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* ---------- status card (timeline card 4) ---------- */
+.odp .odp-status {
+  padding: 0;
+}
+
+/* title: 40px icon · 4 · copy */
+.odp .odp-status-head {
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 16px;
+}
+
+.odp-status-icon {
+  display: block;
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+/* Subtitle1 / Subtitle2 Grey T1 */
+.odp .odp-status-title {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+.odp .odp-status-sub {
+  margin-top: 4px;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+/* ideas that sit inside the status card keep the 16px gutter */
+.odp .odp-status > .odp-idea {
+  margin: 0 16px;
+}
+
+/* ---- timeline: mark centres sit 12px in from the card's 16px gutter ---- */
+.odp .odp-track {
+  height: 24px;
+  margin: 44px 28px 0;
+}
+
+/* a two-line tooltip (store pickup) needs the full 140px timeline block */
+.odp .odp-track--pickup {
+  margin-top: 64px;
+}
+
+/* 2px track from under the first disc to under the last */
+.odp .odp-line {
+  left: -9px;
+  right: -9px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--grey-t3-divider);
+}
+
+.odp .odp-line--done {
+  right: auto;
+  width: calc(12% + 9px);
+  background: var(--green-base);
+}
+
+.odp .odp-line--done-missed {
+  width: calc(70.2% + 9px);
+}
+
+.odp .odp-line--done-pickup {
+  width: calc(74% + 9px);
+}
+
+/* Ordered · Shipped · Out for Delivery · Delivery (Figma x 12 / 85.5 / 225.5 / 316 of 328) */
+.odp .odp-node--2 {
+  left: 24.2%;
+}
+
+.odp .odp-node--3 {
+  left: 70.2%;
+}
+
+.odp .odp-truck {
+  left: 12%;
+}
+
+.odp .odp-truck--pickup {
+  left: 74%;
+}
+
+.odp-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.odp-mark::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: 1.5px solid var(--white);
+  border-radius: 12px;
+  background: var(--grey-t3-divider);
+}
+
+.odp-mark--done::before {
+  background: var(--green-base);
+}
+
+.odp-mark img {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+/* the lorry tile (progress/position5) */
+.odp-lorry {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.odp-lorry img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.odp-lorry-body {
+  left: 2px;
+  top: 3.2px;
+  width: 10.4px;
+  height: 8px;
+}
+
+.odp-lorry-cab {
+  left: 2px;
+  top: 5.6px;
+  width: 16px;
+  height: 7.234px;
+}
+
+.odp-lorry-wheel {
+  top: 11.2px;
+  width: 3.2px;
+  height: 3.2px;
+}
+
+.odp-lorry-wheel--back {
+  left: 3.6px;
+}
+
+.odp-lorry-wheel--front {
+  left: 13.2px;
+}
+
+/* tooltip: Grey Base, radius 12, 8/12 padding, status dot · 8 · Body3 white; the arrowhead
+   points at the lorry 4px above it */
+.odp .odp-tooltip {
+  bottom: 31px;
+  width: max-content; /* near the track's end it must not shrink to the space left */
+  left: 12%;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--grey-base);
+  transform: translateX(-50%);
+  filter: drop-shadow(0 1px 2px rgba(97, 97, 115, 0.14)) drop-shadow(0 1px 4px rgba(97, 97, 115, 0.2));
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+}
+
+.odp .odp-tooltip::after {
+  left: 50%;
+  top: 100%;
+  bottom: auto;
+  width: 36px;
+  height: 7px;
+  border: 0;
+  transform: translateX(-50%) scaleY(-1);
+  background: url('../../assets/odp-sot/tooltip-arrowhead.svg') no-repeat 0 0 / 36px 7px;
+}
+
+.odp .odp-tooltip-dot {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* home: the lorry sits near the start, so the bubble hangs right of it (arrow 44px in)
+   instead of running off the card */
+.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed) {
+  transform: translateX(-44px);
+}
+
+.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed)::after {
+  left: 44px;
+}
+
+/* a missed attempt points at Out for Delivery and keeps its red status dot */
+.odp .odp-tooltip--missed {
+  left: 70.2%;
+}
+
+.odp .odp-tooltip--missed .odp-tooltip-dot {
+  border-radius: 50%;
+  background: var(--red-base);
+  box-shadow: inset 0 0 0 4px #ffe5e5;
+  object-position: -999px 0;
+}
+
+/* store pickup: city over a View Details link, both beside the dot */
+.odp .odp-tooltip--pickup {
+  left: 74%;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 8px 12px;
+  transform: translateX(-50%);
+}
+
+.odp .odp-tooltip--pickup::after {
+  left: 50%;
+  right: auto;
+}
+
+.odp .odp-tooltip-row {
+  gap: 8px;
+}
+
+.odp .odp-tooltip-link {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  padding: 0;
+  border: 0;
+  font: inherit;
+}
+
+.odp-tooltip-link-text {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+  font: 600 13px/16px var(--font-mier);
+}
+
+.odp-tooltip-link img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* step labels: Subtitle2 over Body3; Grey Base when reached, Grey T2 ahead;
+   first left-aligned, last right-aligned, the rest centred under their marks */
+.odp .odp-steps {
+  position: relative;
+  display: block;
+  height: 48px; /* two 16px lines + 2 gap, then the block's 14px bottom */
+  margin: 6px 28px 0;
+  padding-bottom: 14px;
+}
+
+.odp .odp-step {
+  position: absolute;
+  top: 0;
+  gap: 2px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-t2);
+  white-space: nowrap;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.odp .odp-step b,
+.odp .odp-step--done b {
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.odp .odp-step--done {
+  color: var(--grey-base);
+}
+
+.odp .odp-step:first-child {
+  left: -12px;
+  text-align: left;
+  transform: none;
+}
+
+.odp .odp-steps > .odp-step:nth-child(2) {
+  left: 24.2%;
+}
+
+.odp .odp-steps > .odp-step:nth-child(3) {
+  left: 70.2%;
+}
+
+.odp .odp-steps--pickup > .odp-step:nth-child(2) {
+  left: 50%;
+}
+
+.odp .odp-steps > .odp-step.odp-step--end {
+  left: auto;
+  right: -12px;
+  text-align: right;
+  transform: none;
+}
+
+/* ---------- footer block: divider · Body3 Grey T1 · LINK ---------- */
+.odp .odp-cancel {
+  gap: 8px;
+  padding: 12px 16px;
+}
+
+/* under the status card it is the card's own footer (Divider/Full) */
+.odp .odp-status + .odp-cancel {
+  margin-top: 0;
+  border-top: 1px solid var(--grey-t3-divider);
+}
+
+.odp .odp-cancel-text {
+  flex: 1;
+  min-width: 0;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+/* before shipping: an outlined small button in the same slot */
+.odp .odp-cancel-btn {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--jamun-base);
+  border-radius: 4px;
+  font: 600 13px/16px var(--font-mier);
+}
+
+/* ---------- address card (ODP - Delivery) ---------- */
+.odp .odp-address,
+.odp .odp-store-section {
+  padding: 16px 16px 12px;
+}
+
+.odp .odp-address-head {
+  gap: 8px;
+}
+
+/* 20px pin · 4 · Subtitle1 */
+.odp .odp-address-title {
+  flex: 1;
+  min-width: 0;
+  gap: 4px;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+.odp-address-icon {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* Body3 Grey T1 — name, address, phone */
+.odp .odp-address-body {
+  margin-top: 12px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+/* ---------- store pickup: the store inside the address card ---------- */
+.odp-store-sub {
+  margin: 4px 0 0;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+.odp .odp-store {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.odp .odp-store-photo {
+  width: 92px;
+  height: auto;
+  min-height: 94px;
+  border: 0.5px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.odp .odp-store-body {
+  gap: 4px;
+}
+
+/* Subtitle1 */
+.odp .odp-store-name {
+  margin: 0;
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+/* Body3 Grey T1 behind a 16px blue bubble (as on the review page) */
+.odp .odp-store-meta {
+  gap: 4px;
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+}
+
+.odp-meta-icon {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 0.2px solid rgba(85, 133, 248, 0.2);
+  border-radius: 50%;
+  background: rgba(85, 133, 248, 0.1);
+}
+
+.odp-meta-icon > img {
+  position: absolute;
+  top: -0.2px;
+  left: -0.2px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  max-width: none;
+}
+
+/* See Map / Call Store: 30px, #F8F8FF, 1px Grey T4, radius 8, Demi 13/16 */
+.odp .odp-store-actions {
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.odp .odp-store-action {
+  flex: 1 1 0;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 160px;
+  height: 30px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  border: 1px solid var(--grey-t4-bg);
+  border-radius: 8px;
+  background: var(--grey-t5-subdued);
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-action-icon {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+/* "See how to pickup your order" is the card's footer block */
+.odp .odp-howto {
+  gap: 8px;
+  margin: 12px -16px -12px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--grey-t3-divider);
+}
+
+/* ---------- price card (card/price) ---------- */
+.odp .odp-price {
+  padding: 12px 16px;
+}
+
+.odp .odp-price-row {
+  margin-bottom: 0;
+}
+
+.odp .odp-price-row + .odp-price-row {
+  margin-top: 4px;
+}
+
+/* Subtitle1 */
+.odp .odp-price-title,
+.odp .odp-price-total {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+/* Subtitle2: Grey T1 + Green Base */
+.odp .odp-price-saved {
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-t1);
+}
+
+.odp .odp-price-saved b {
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+/* messaging: #F8F8FF, radius 8, 12px inset; 16px icon · 8 · Subtitle2 · Subtitle1 amount */
+.odp .odp-pay-card {
+  margin-top: 12px;
+  border-radius: 8px;
+  background: var(--grey-t5-subdued);
+}
+
+.odp .odp-pay-row {
+  gap: 8px;
+  padding: 12px;
+}
+
+.odp .odp-pay-label {
+  gap: 8px;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.odp-pay-icon,
+.odp .odp-pay-label svg {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.odp .odp-pay-amount {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+/* ---------- switch-to-pickup ideas: same type scale and buttons ---------- */
+.odp .odp-idea-primary,
+.odp .odp-sticky-cta,
+.odp .odp-sheet-cta {
+  border-radius: 8px;
+  font: 600 15px/20px var(--font-mier);
+}
+
+.odp .odp-idea-primary {
+  min-height: 40px;
+  padding: 10px 16px;
+}
+
+.odp .odp-idea-choice {
+  min-height: 40px;
+  border-width: 1px;
+  border-radius: 8px;
+  font: 600 13px/16px var(--font-mier);
+}
+
+.odp .odp-idea-inline,
+.odp .odp-idea-count {
+  border-radius: 8px;
+}
+
+.odp .odp-idea-inline-copy,
+.odp .odp-idea-count-copy,
+.odp .odp-idea-question-ok {
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+}
+
+.odp .odp-idea-inline-copy strong,
+.odp .odp-idea-count-copy strong {
+  font-weight: 600;
+}
+
+.odp .odp-idea-banner {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top-color: var(--grey-t3-divider);
+}
+
+.odp .odp-idea-banner-eyebrow,
+.odp .odp-idea-question-title,
+.odp .odp-idea-banner-title,
+.odp .odp-sheet-store-name {
+  font: 600 15px/20px var(--font-mier);
+  letter-spacing: 0.015px;
+}
+
+.odp .odp-idea-banner-meta,
+.odp .odp-idea-reveal-title,
+.odp .odp-sheet-store-meta,
+.odp .odp-toggle-address {
+  font: 500 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+}
+
+.odp .odp-idea-banner-img,
+.odp .odp-sheet-store-img {
+  border-radius: 8px;
+}
+
+.odp .odp-toggle-card {
+  border-width: 1px;
+  border-radius: 8px;
+}
+
+.odp .odp-toggle-head {
+  font: 600 13px/16px var(--font-mier);
+}
+
+.odp .odp-sticky-text {
+  font: 600 13px/16px var(--font-mier);
+}
+
+.odp .odp-sheet-title {
+  font: 600 17px/22px var(--font-mier);
+}
+
+.odp .odp-sheet-sub,
+.odp .odp-sheet-refund {
+  font: 500 13px/18px var(--font-mier);
+  letter-spacing: 0.0325px;
+}
+
+.odp .odp-sheet-store,
+.odp .odp-sheet-refund {
+  border-radius: 8px;
+}

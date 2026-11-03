@@ -1,0 +1,58 @@
+.delivery-promise-row {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.delivery-promise-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex-wrap: nowrap;
+  background: transparent;
+}
+
+.delivery-promise-fast-logo {
+  display: block;
+  width: 57px;
+  height: 14px;
+  flex: none;
+}
+
+.delivery-promise-truck-icon {
+  display: block;
+  width: 27px;
+  height: 14px;
+  flex: none;
+}
+
+.delivery-promise-text {
+  font: 500 11px/16px var(--font-mier);
+  color: var(--grey-t2);
+  white-space: nowrap;
+}
+
+.delivery-promise-text strong {
+  font-weight: 700;
+  color: var(--grey-base);
+}
+
+/* PDP — slightly larger, always transparent (no fast-tag bg) */
+.delivery-promise-row--pdp {
+  margin-top: 10px;
+}
+
+.delivery-promise-row--pdp .delivery-promise-text {
+  font: 500 13px/18px var(--font-mier);
+}
+
+.delivery-promise-row--pdp .delivery-promise-fast-logo {
+  width: 57px;
+  height: 16px;
+}
+
+.delivery-promise-row--pdp .delivery-promise-truck-icon {
+  width: 27px;
+  height: 16px;
+}

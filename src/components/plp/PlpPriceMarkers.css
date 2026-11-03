@@ -1,0 +1,151 @@
+/* PLP price markers — shared between ProductCard and Review price breakdown */
+
+.plp-marker {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.plp-marker--upi {
+  gap: 4px;
+}
+
+.plp-marker-upi-amt {
+  font: 400 10px/16px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: #0f926a;
+  white-space: nowrap;
+}
+
+.plp-marker-upi-label {
+  font: 700 10px/12px var(--font-mier);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #0f926a;
+}
+
+.plp-marker--sale {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  height: 16px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(200, 0, 9, 0) 0%, rgba(254, 239, 152, 0.3) 100%), #c80009;
+}
+
+.plp-marker-sale-label {
+  font-family: Inter, var(--font-mier), sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 11px;
+  text-transform: uppercase;
+  color: #feef98;
+}
+
+.plp-marker-sale-bolt {
+  display: block;
+  flex: none;
+  width: 7px;
+  height: 9px;
+}
+
+.plp-marker--combo {
+  gap: 1px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #c44d00 0%, #e85d04 55%, #f07a12 100%);
+  font-size: 9px;
+  line-height: 16px;
+}
+
+.plp-marker-combo-bold {
+  font-weight: 800;
+  color: var(--white);
+}
+
+.plp-marker-combo-soft {
+  font-weight: 500;
+  color: #fffbde;
+}
+
+.plp-marker--deal-timer {
+  gap: 4px;
+  height: 16px;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 0.4px solid var(--orange-base);
+  background: var(--white);
+  font: 600 11px/12px var(--font-mier);
+  letter-spacing: 0.12px;
+  color: var(--orange-base);
+  white-space: nowrap;
+}
+
+.plp-marker-deal-timer-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  font-size: 8px;
+  line-height: 1;
+}
+
+.plp-marker--price-drop {
+  font: 400 10px/normal var(--font-mier);
+  letter-spacing: 0.3px;
+  color: #0f926a;
+}
+
+.plp-marker--consideration {
+  font: 600 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--green-base);
+}
+
+.plp-marker--less-today {
+  gap: 4px;
+}
+
+.plp-marker-less-today-icon-wrap {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  transform: scaleY(-1);
+}
+
+.plp-marker-less-today-icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.plp-marker-less-today-label {
+  font: 600 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: #038d63;
+  white-space: nowrap;
+}
+
+.plp-marker--return-offer {
+  font: 600 12px/16px var(--font-mier);
+  color: var(--green-base);
+}
+
+.plp-marker--plain,
+.plp-marker--sale-text {
+  font: 500 13px/18px var(--font-mier);
+  color: var(--grey-t1);
+}

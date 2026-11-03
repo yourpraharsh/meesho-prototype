@@ -1,0 +1,2998 @@
+{
+  "meta": {
+    "source": "query_result_2026-02-11T11_16_31.402405Z.csv",
+    "filteredCategories": [
+      "mens",
+      "kitchen_utility"
+    ],
+    "counts": {
+      "total_rows_in_csv": 200,
+      "matched_rows": 80,
+      "mens": 40,
+      "kitchen_utility": 40
+    },
+    "detectedColumns": {
+      "id": "product_Id",
+      "title": null,
+      "category": "category",
+      "price": null,
+      "mrp": null,
+      "discount": null,
+      "rating": null,
+      "ratingCount": null,
+      "imagePrimary": null,
+      "imageCandidates": [
+        "img1",
+        "img2",
+        "img3",
+        "img4"
+      ]
+    },
+    "cursorNotes": [
+      "images.hero/gallery are URLs if present in CSV; otherwise use /assets/<productId>/hero_default.png after you add PNGs.",
+      "vsku.* arrays are placeholders. If your CSV has variant columns, share them and I’ll auto-populate visual/functional/valueLed."
+    ]
+  },
+  "products": [
+    {
+      "id": "55545107",
+      "category": "mens",
+      "title": "Product 55545107",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/55545107/gwwom.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/55545107/fzljd.jpg",
+          "https://images.meesho.com/images/products/55545107/jm3uw.jpg",
+          "https://images.meesho.com/images/products/55545107/gstow.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 55545107,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/55545107/gwwom.jpg",
+        "img2": "https://images.meesho.com/images/products/55545107/fzljd.jpg",
+        "img3": "https://images.meesho.com/images/products/55545107/jm3uw.jpg",
+        "img4": "https://images.meesho.com/images/products/55545107/gstow.jpg",
+        "rnk": 1
+      }
+    },
+    {
+      "id": "51067827",
+      "category": "mens",
+      "title": "Product 51067827",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/51067827/lfu0h.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/51067827/ip2d0.jpg",
+          "https://images.meesho.com/images/products/51067827/zeghk.jpg",
+          "https://images.meesho.com/images/products/51067827/vpcgp.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 51067827,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/51067827/lfu0h.jpg",
+        "img2": "https://images.meesho.com/images/products/51067827/ip2d0.jpg",
+        "img3": "https://images.meesho.com/images/products/51067827/zeghk.jpg",
+        "img4": "https://images.meesho.com/images/products/51067827/vpcgp.jpg",
+        "rnk": 2
+      }
+    },
+    {
+      "id": "47220519",
+      "category": "mens",
+      "title": "Product 47220519",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/47220519/v3r0s.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/47220519/ymisi.jpg",
+          "https://images.meesho.com/images/products/47220519/a9je5.jpg",
+          "https://images.meesho.com/images/products/47220519/t5vnq.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 47220519,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/47220519/v3r0s.jpg",
+        "img2": "https://images.meesho.com/images/products/47220519/ymisi.jpg",
+        "img3": "https://images.meesho.com/images/products/47220519/a9je5.jpg",
+        "img4": "https://images.meesho.com/images/products/47220519/t5vnq.jpg",
+        "rnk": 3
+      }
+    },
+    {
+      "id": "46908581",
+      "category": "mens",
+      "title": "Product 46908581",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/46908581/gfj6k.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/46908581/ma049.jpg",
+          "https://images.meesho.com/images/products/46908581/iuixl.jpg",
+          "https://images.meesho.com/images/products/46908581/y7ls8.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 46908581,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/46908581/gfj6k.jpg",
+        "img2": "https://images.meesho.com/images/products/46908581/ma049.jpg",
+        "img3": "https://images.meesho.com/images/products/46908581/iuixl.jpg",
+        "img4": "https://images.meesho.com/images/products/46908581/y7ls8.jpg",
+        "rnk": 4
+      }
+    },
+    {
+      "id": "51339891",
+      "category": "mens",
+      "title": "Product 51339891",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/51339891/2prg8.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/51339891/fjidq.jpg",
+          "https://images.meesho.com/images/products/51339891/spd8p.jpg",
+          "https://images.meesho.com/images/products/51339891/zo2hx.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 51339891,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/51339891/2prg8.jpg",
+        "img2": "https://images.meesho.com/images/products/51339891/fjidq.jpg",
+        "img3": "https://images.meesho.com/images/products/51339891/spd8p.jpg",
+        "img4": "https://images.meesho.com/images/products/51339891/zo2hx.jpg",
+        "rnk": 5
+      }
+    },
+    {
+      "id": "53029388",
+      "category": "mens",
+      "title": "Product 53029388",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/53029388/5yfpo.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/53029388/1rtnq.jpg",
+          "https://images.meesho.com/images/products/53029388/jqh1v.jpg",
+          "https://images.meesho.com/images/products/53029388/ucmrg.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 53029388,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/53029388/5yfpo.jpg",
+        "img2": "https://images.meesho.com/images/products/53029388/1rtnq.jpg",
+        "img3": "https://images.meesho.com/images/products/53029388/jqh1v.jpg",
+        "img4": "https://images.meesho.com/images/products/53029388/ucmrg.jpg",
+        "rnk": 6
+      }
+    },
+    {
+      "id": "52968887",
+      "category": "mens",
+      "title": "Product 52968887",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/52968887/lzogl.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/52968887/ifcyh.jpg",
+          "https://images.meesho.com/images/products/52968887/z2rxs.jpg",
+          "https://images.meesho.com/images/products/52968887/nrouy.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 52968887,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/52968887/lzogl.jpg",
+        "img2": "https://images.meesho.com/images/products/52968887/ifcyh.jpg",
+        "img3": "https://images.meesho.com/images/products/52968887/z2rxs.jpg",
+        "img4": "https://images.meesho.com/images/products/52968887/nrouy.jpg",
+        "rnk": 7
+      }
+    },
+    {
+      "id": "50707889",
+      "category": "mens",
+      "title": "Product 50707889",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/50707889/orp9b.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/50707889/vvmgo.jpg",
+          "https://images.meesho.com/images/products/50707889/py07w.jpg",
+          "https://images.meesho.com/images/products/50707889/2uw1y.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 50707889,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/50707889/orp9b.jpg",
+        "img2": "https://images.meesho.com/images/products/50707889/vvmgo.jpg",
+        "img3": "https://images.meesho.com/images/products/50707889/py07w.jpg",
+        "img4": "https://images.meesho.com/images/products/50707889/2uw1y.jpg",
+        "rnk": 8
+      }
+    },
+    {
+      "id": "46254433",
+      "category": "mens",
+      "title": "Product 46254433",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/46254433/yx9hk.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/46254433/zqyak.jpg",
+          "https://images.meesho.com/images/products/46254433/30voy.jpg",
+          "https://images.meesho.com/images/products/46254433/a8ree.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 46254433,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/46254433/yx9hk.jpg",
+        "img2": "https://images.meesho.com/images/products/46254433/zqyak.jpg",
+        "img3": "https://images.meesho.com/images/products/46254433/30voy.jpg",
+        "img4": "https://images.meesho.com/images/products/46254433/a8ree.jpg",
+        "rnk": 9
+      }
+    },
+    {
+      "id": "48077490",
+      "category": "mens",
+      "title": "Product 48077490",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48077490/b1tx1.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48077490/nd4b7.jpg",
+          "https://images.meesho.com/images/products/48077490/2ijhw.jpg",
+          "https://images.meesho.com/images/products/48077490/w2kil.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48077490,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48077490/b1tx1.jpg",
+        "img2": "https://images.meesho.com/images/products/48077490/nd4b7.jpg",
+        "img3": "https://images.meesho.com/images/products/48077490/2ijhw.jpg",
+        "img4": "https://images.meesho.com/images/products/48077490/w2kil.jpg",
+        "rnk": 10
+      }
+    },
+    {
+      "id": "55906162",
+      "category": "mens",
+      "title": "Product 55906162",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/55906162/lsnpp.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/55906162/ebnjg.jpg",
+          "https://images.meesho.com/images/products/55906162/k2obj.jpg",
+          "https://images.meesho.com/images/products/55906162/wxyqu.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 55906162,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/55906162/lsnpp.jpg",
+        "img2": "https://images.meesho.com/images/products/55906162/ebnjg.jpg",
+        "img3": "https://images.meesho.com/images/products/55906162/k2obj.jpg",
+        "img4": "https://images.meesho.com/images/products/55906162/wxyqu.jpg",
+        "rnk": 11
+      }
+    },
+    {
+      "id": "53253579",
+      "category": "mens",
+      "title": "Product 53253579",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/53253579/jmxb3.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/53253579/r4zhu.jpg",
+          "https://images.meesho.com/images/products/53253579/64bdc.jpg",
+          "https://images.meesho.com/images/products/53253579/ny25v.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 53253579,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/53253579/jmxb3.jpg",
+        "img2": "https://images.meesho.com/images/products/53253579/r4zhu.jpg",
+        "img3": "https://images.meesho.com/images/products/53253579/64bdc.jpg",
+        "img4": "https://images.meesho.com/images/products/53253579/ny25v.jpg",
+        "rnk": 12
+      }
+    },
+    {
+      "id": "51837766",
+      "category": "mens",
+      "title": "Product 51837766",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/51837766/1ngdg.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/51837766/tnogy.jpg",
+          "https://images.meesho.com/images/products/51837766/yudl9.jpg",
+          "https://images.meesho.com/images/products/51837766/dpvps.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 51837766,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/51837766/1ngdg.jpg",
+        "img2": "https://images.meesho.com/images/products/51837766/tnogy.jpg",
+        "img3": "https://images.meesho.com/images/products/51837766/yudl9.jpg",
+        "img4": "https://images.meesho.com/images/products/51837766/dpvps.jpg",
+        "rnk": 13
+      }
+    },
+    {
+      "id": "46899715",
+      "category": "mens",
+      "title": "Product 46899715",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/46899715/kvlcd.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/46899715/rak7l.jpg",
+          "https://images.meesho.com/images/products/46899715/wvhie.jpg",
+          "https://images.meesho.com/images/products/46899715/3kn7h.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 46899715,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/46899715/kvlcd.jpg",
+        "img2": "https://images.meesho.com/images/products/46899715/rak7l.jpg",
+        "img3": "https://images.meesho.com/images/products/46899715/wvhie.jpg",
+        "img4": "https://images.meesho.com/images/products/46899715/3kn7h.jpg",
+        "rnk": 14
+      }
+    },
+    {
+      "id": "48897175",
+      "category": "mens",
+      "title": "Product 48897175",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48897175/ycphy.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48897175/albpo.jpg",
+          "https://images.meesho.com/images/products/48897175/nz19l.jpg",
+          "https://images.meesho.com/images/products/48897175/i2msu.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48897175,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48897175/ycphy.jpg",
+        "img2": "https://images.meesho.com/images/products/48897175/albpo.jpg",
+        "img3": "https://images.meesho.com/images/products/48897175/nz19l.jpg",
+        "img4": "https://images.meesho.com/images/products/48897175/i2msu.jpg",
+        "rnk": 15
+      }
+    },
+    {
+      "id": "55533674",
+      "category": "mens",
+      "title": "Product 55533674",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/55533674/pxs7b.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/55533674/9vohz.jpg",
+          "https://images.meesho.com/images/products/55533674/v2src.jpg",
+          "https://images.meesho.com/images/products/55533674/zakhr.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 55533674,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/55533674/pxs7b.jpg",
+        "img2": "https://images.meesho.com/images/products/55533674/9vohz.jpg",
+        "img3": "https://images.meesho.com/images/products/55533674/v2src.jpg",
+        "img4": "https://images.meesho.com/images/products/55533674/zakhr.jpg",
+        "rnk": 16
+      }
+    },
+    {
+      "id": "54863129",
+      "category": "mens",
+      "title": "Product 54863129",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/54863129/oqshd.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/54863129/2bt58.jpg",
+          "https://images.meesho.com/images/products/54863129/ubweg.jpg",
+          "https://images.meesho.com/images/products/54863129/aoyin.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 54863129,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/54863129/oqshd.jpg",
+        "img2": "https://images.meesho.com/images/products/54863129/2bt58.jpg",
+        "img3": "https://images.meesho.com/images/products/54863129/ubweg.jpg",
+        "img4": "https://images.meesho.com/images/products/54863129/aoyin.jpg",
+        "rnk": 17
+      }
+    },
+    {
+      "id": "48301070",
+      "category": "mens",
+      "title": "Product 48301070",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48301070/iswph.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48301070/ekwom.jpg",
+          "https://images.meesho.com/images/products/48301070/pguq4.jpg",
+          "https://images.meesho.com/images/products/48301070/lxpa2.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48301070,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48301070/iswph.jpg",
+        "img2": "https://images.meesho.com/images/products/48301070/ekwom.jpg",
+        "img3": "https://images.meesho.com/images/products/48301070/pguq4.jpg",
+        "img4": "https://images.meesho.com/images/products/48301070/lxpa2.jpg",
+        "rnk": 18
+      }
+    },
+    {
+      "id": "55800319",
+      "category": "mens",
+      "title": "Product 55800319",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/55800319/xo1pk.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/55800319/v2m3t.jpg",
+          "https://images.meesho.com/images/products/55800319/xvcrh.jpg",
+          "https://images.meesho.com/images/products/55800319/rmcj3.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 55800319,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/55800319/xo1pk.jpg",
+        "img2": "https://images.meesho.com/images/products/55800319/v2m3t.jpg",
+        "img3": "https://images.meesho.com/images/products/55800319/xvcrh.jpg",
+        "img4": "https://images.meesho.com/images/products/55800319/rmcj3.jpg",
+        "rnk": 19
+      }
+    },
+    {
+      "id": "48332024",
+      "category": "mens",
+      "title": "Product 48332024",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48332024/lnmbk.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48332024/cxdkk.jpg",
+          "https://images.meesho.com/images/products/48332024/nxdnf.jpg",
+          "https://images.meesho.com/images/products/48332024/00wum.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48332024,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48332024/lnmbk.jpg",
+        "img2": "https://images.meesho.com/images/products/48332024/cxdkk.jpg",
+        "img3": "https://images.meesho.com/images/products/48332024/nxdnf.jpg",
+        "img4": "https://images.meesho.com/images/products/48332024/00wum.jpg",
+        "rnk": 20
+      }
+    },
+    {
+      "id": "47101593",
+      "category": "mens",
+      "title": "Product 47101593",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/47101593/c8env.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/47101593/7xanb.jpg",
+          "https://images.meesho.com/images/products/47101593/luds5.jpg",
+          "https://images.meesho.com/images/products/47101593/1vsy5.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 47101593,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/47101593/c8env.jpg",
+        "img2": "https://images.meesho.com/images/products/47101593/7xanb.jpg",
+        "img3": "https://images.meesho.com/images/products/47101593/luds5.jpg",
+        "img4": "https://images.meesho.com/images/products/47101593/1vsy5.jpg",
+        "rnk": 21
+      }
+    },
+    {
+      "id": "47370087",
+      "category": "mens",
+      "title": "Product 47370087",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/47370087/5ykmy.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/47370087/dochm.jpg",
+          "https://images.meesho.com/images/products/47370087/mhusy.jpg",
+          "https://images.meesho.com/images/products/47370087/q2x8r.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 47370087,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/47370087/5ykmy.jpg",
+        "img2": "https://images.meesho.com/images/products/47370087/dochm.jpg",
+        "img3": "https://images.meesho.com/images/products/47370087/mhusy.jpg",
+        "img4": "https://images.meesho.com/images/products/47370087/q2x8r.jpg",
+        "rnk": 22
+      }
+    },
+    {
+      "id": "46867799",
+      "category": "mens",
+      "title": "Product 46867799",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/46867799/e0cdc.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/46867799/6yco9.jpg",
+          "https://images.meesho.com/images/products/46867799/lv6wi.jpg",
+          "https://images.meesho.com/images/products/46867799/djlvv.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 46867799,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/46867799/e0cdc.jpg",
+        "img2": "https://images.meesho.com/images/products/46867799/6yco9.jpg",
+        "img3": "https://images.meesho.com/images/products/46867799/lv6wi.jpg",
+        "img4": "https://images.meesho.com/images/products/46867799/djlvv.jpg",
+        "rnk": 23
+      }
+    },
+    {
+      "id": "53619827",
+      "category": "mens",
+      "title": "Product 53619827",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/53619827/apr6x.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/53619827/avzhe.jpg",
+          "https://images.meesho.com/images/products/53619827/ccieo.jpg",
+          "https://images.meesho.com/images/products/53619827/t3wav.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 53619827,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/53619827/apr6x.jpg",
+        "img2": "https://images.meesho.com/images/products/53619827/avzhe.jpg",
+        "img3": "https://images.meesho.com/images/products/53619827/ccieo.jpg",
+        "img4": "https://images.meesho.com/images/products/53619827/t3wav.jpg",
+        "rnk": 24
+      }
+    },
+    {
+      "id": "46867608",
+      "category": "mens",
+      "title": "Product 46867608",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/46867608/gwkg9.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/46867608/hu60m.jpg",
+          "https://images.meesho.com/images/products/46867608/yyo5m.jpg",
+          "https://images.meesho.com/images/products/46867608/vvzpx.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 46867608,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/46867608/gwkg9.jpg",
+        "img2": "https://images.meesho.com/images/products/46867608/hu60m.jpg",
+        "img3": "https://images.meesho.com/images/products/46867608/yyo5m.jpg",
+        "img4": "https://images.meesho.com/images/products/46867608/vvzpx.jpg",
+        "rnk": 25
+      }
+    },
+    {
+      "id": "50796823",
+      "category": "mens",
+      "title": "Product 50796823",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/50796823/8arfq.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/50796823/hdmm8.jpg",
+          "https://images.meesho.com/images/products/50796823/9q6ok.jpg",
+          "https://images.meesho.com/images/products/50796823/pbuyy.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 50796823,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/50796823/8arfq.jpg",
+        "img2": "https://images.meesho.com/images/products/50796823/hdmm8.jpg",
+        "img3": "https://images.meesho.com/images/products/50796823/9q6ok.jpg",
+        "img4": "https://images.meesho.com/images/products/50796823/pbuyy.jpg",
+        "rnk": 26
+      }
+    },
+    {
+      "id": "50151095",
+      "category": "mens",
+      "title": "Product 50151095",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/50151095/avzyp.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/50151095/yqf6y.jpg",
+          "https://images.meesho.com/images/products/50151095/j4wji.jpg",
+          "https://images.meesho.com/images/products/50151095/oj3aw.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 50151095,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/50151095/avzyp.jpg",
+        "img2": "https://images.meesho.com/images/products/50151095/yqf6y.jpg",
+        "img3": "https://images.meesho.com/images/products/50151095/j4wji.jpg",
+        "img4": "https://images.meesho.com/images/products/50151095/oj3aw.jpg",
+        "rnk": 27
+      }
+    },
+    {
+      "id": "48566851",
+      "category": "mens",
+      "title": "Product 48566851",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48566851/h0r0l.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48566851/5aufr.jpg",
+          "https://images.meesho.com/images/products/48566851/pqfa7.jpg",
+          "https://images.meesho.com/images/products/48566851/g0ydl.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48566851,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48566851/h0r0l.jpg",
+        "img2": "https://images.meesho.com/images/products/48566851/5aufr.jpg",
+        "img3": "https://images.meesho.com/images/products/48566851/pqfa7.jpg",
+        "img4": "https://images.meesho.com/images/products/48566851/g0ydl.jpg",
+        "rnk": 28
+      }
+    },
+    {
+      "id": "48378308",
+      "category": "mens",
+      "title": "Product 48378308",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48378308/ulgur.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48378308/zkqok.jpg",
+          "https://images.meesho.com/images/products/48378308/gxf1t.jpg",
+          "https://images.meesho.com/images/products/48378308/tpn9f.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48378308,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48378308/ulgur.jpg",
+        "img2": "https://images.meesho.com/images/products/48378308/zkqok.jpg",
+        "img3": "https://images.meesho.com/images/products/48378308/gxf1t.jpg",
+        "img4": "https://images.meesho.com/images/products/48378308/tpn9f.jpg",
+        "rnk": 29
+      }
+    },
+    {
+      "id": "48111271",
+      "category": "mens",
+      "title": "Product 48111271",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48111271/ggbsa.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48111271/sbe6a.jpg",
+          "https://images.meesho.com/images/products/48111271/jdrgi.jpg",
+          "https://images.meesho.com/images/products/48111271/p6sju.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48111271,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48111271/ggbsa.jpg",
+        "img2": "https://images.meesho.com/images/products/48111271/sbe6a.jpg",
+        "img3": "https://images.meesho.com/images/products/48111271/jdrgi.jpg",
+        "img4": "https://images.meesho.com/images/products/48111271/p6sju.jpg",
+        "rnk": 30
+      }
+    },
+    {
+      "id": "49080672",
+      "category": "mens",
+      "title": "Product 49080672",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/49080672/qpkkv.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/49080672/t9uoj.jpg",
+          "https://images.meesho.com/images/products/49080672/xha6o.jpg",
+          "https://images.meesho.com/images/products/49080672/lk8mr.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 49080672,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/49080672/qpkkv.jpg",
+        "img2": "https://images.meesho.com/images/products/49080672/t9uoj.jpg",
+        "img3": "https://images.meesho.com/images/products/49080672/xha6o.jpg",
+        "img4": "https://images.meesho.com/images/products/49080672/lk8mr.jpg",
+        "rnk": 31
+      }
+    },
+    {
+      "id": "51951008",
+      "category": "mens",
+      "title": "Product 51951008",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/51951008/cdjfo.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/51951008/27p1i.jpg",
+          "https://images.meesho.com/images/products/51951008/knoam.jpg",
+          "https://images.meesho.com/images/products/51951008/denae.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 51951008,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/51951008/cdjfo.jpg",
+        "img2": "https://images.meesho.com/images/products/51951008/27p1i.jpg",
+        "img3": "https://images.meesho.com/images/products/51951008/knoam.jpg",
+        "img4": "https://images.meesho.com/images/products/51951008/denae.jpg",
+        "rnk": 32
+      }
+    },
+    {
+      "id": "51031491",
+      "category": "mens",
+      "title": "Product 51031491",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/51031491/hk6q1.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/51031491/zyzbt.jpg",
+          "https://images.meesho.com/images/products/51031491/mjl7y.jpg",
+          "https://images.meesho.com/images/products/51031491/1edkc.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 51031491,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/51031491/hk6q1.jpg",
+        "img2": "https://images.meesho.com/images/products/51031491/zyzbt.jpg",
+        "img3": "https://images.meesho.com/images/products/51031491/mjl7y.jpg",
+        "img4": "https://images.meesho.com/images/products/51031491/1edkc.jpg",
+        "rnk": 33
+      }
+    },
+    {
+      "id": "47533545",
+      "category": "mens",
+      "title": "Product 47533545",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/47533545/utjjj.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/47533545/xufbf.jpg",
+          "https://images.meesho.com/images/products/47533545/johny.jpg",
+          "https://images.meesho.com/images/products/47533545/susve.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 47533545,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/47533545/utjjj.jpg",
+        "img2": "https://images.meesho.com/images/products/47533545/xufbf.jpg",
+        "img3": "https://images.meesho.com/images/products/47533545/johny.jpg",
+        "img4": "https://images.meesho.com/images/products/47533545/susve.jpg",
+        "rnk": 34
+      }
+    },
+    {
+      "id": "50409170",
+      "category": "mens",
+      "title": "Product 50409170",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/50409170/kzqe7.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/50409170/rz8ui.jpg",
+          "https://images.meesho.com/images/products/50409170/iycmk.jpg",
+          "https://images.meesho.com/images/products/50409170/gq5tc.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 50409170,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/50409170/kzqe7.jpg",
+        "img2": "https://images.meesho.com/images/products/50409170/rz8ui.jpg",
+        "img3": "https://images.meesho.com/images/products/50409170/iycmk.jpg",
+        "img4": "https://images.meesho.com/images/products/50409170/gq5tc.jpg",
+        "rnk": 35
+      }
+    },
+    {
+      "id": "49427930",
+      "category": "mens",
+      "title": "Product 49427930",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/49427930/tscyw.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/49427930/iqkmv.jpg",
+          "https://images.meesho.com/images/products/49427930/e6zys.jpg",
+          "https://images.meesho.com/images/products/49427930/rodhl.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 49427930,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/49427930/tscyw.jpg",
+        "img2": "https://images.meesho.com/images/products/49427930/iqkmv.jpg",
+        "img3": "https://images.meesho.com/images/products/49427930/e6zys.jpg",
+        "img4": "https://images.meesho.com/images/products/49427930/rodhl.jpg",
+        "rnk": 36
+      }
+    },
+    {
+      "id": "50194898",
+      "category": "mens",
+      "title": "Product 50194898",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/50194898/mh52z.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/50194898/ybama.jpg",
+          "https://images.meesho.com/images/products/50194898/ntzjb.jpg",
+          "https://images.meesho.com/images/products/50194898/2c5j0.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 50194898,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/50194898/mh52z.jpg",
+        "img2": "https://images.meesho.com/images/products/50194898/ybama.jpg",
+        "img3": "https://images.meesho.com/images/products/50194898/ntzjb.jpg",
+        "img4": "https://images.meesho.com/images/products/50194898/2c5j0.jpg",
+        "rnk": 37
+      }
+    },
+    {
+      "id": "54645127",
+      "category": "mens",
+      "title": "Product 54645127",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/54645127/yvxyj.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/54645127/r6vdb.jpg",
+          "https://images.meesho.com/images/products/54645127/zmvez.jpg",
+          "https://images.meesho.com/images/products/54645127/zp9tx.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 54645127,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/54645127/yvxyj.jpg",
+        "img2": "https://images.meesho.com/images/products/54645127/r6vdb.jpg",
+        "img3": "https://images.meesho.com/images/products/54645127/zmvez.jpg",
+        "img4": "https://images.meesho.com/images/products/54645127/zp9tx.jpg",
+        "rnk": 38
+      }
+    },
+    {
+      "id": "48399911",
+      "category": "mens",
+      "title": "Product 48399911",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48399911/sbvgt.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48399911/kzfin.jpg",
+          "https://images.meesho.com/images/products/48399911/sbhme.jpg",
+          "https://images.meesho.com/images/products/48399911/mcxaj.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48399911,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48399911/sbvgt.jpg",
+        "img2": "https://images.meesho.com/images/products/48399911/kzfin.jpg",
+        "img3": "https://images.meesho.com/images/products/48399911/sbhme.jpg",
+        "img4": "https://images.meesho.com/images/products/48399911/mcxaj.jpg",
+        "rnk": 39
+      }
+    },
+    {
+      "id": "48277002",
+      "category": "mens",
+      "title": "Product 48277002",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/48277002/ijgle.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/48277002/dvwy4.jpg",
+          "https://images.meesho.com/images/products/48277002/grbrx.jpg",
+          "https://images.meesho.com/images/products/48277002/ymmcq.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 48277002,
+        "category": "Men",
+        "img1": "https://images.meesho.com/images/products/48277002/ijgle.jpg",
+        "img2": "https://images.meesho.com/images/products/48277002/dvwy4.jpg",
+        "img3": "https://images.meesho.com/images/products/48277002/grbrx.jpg",
+        "img4": "https://images.meesho.com/images/products/48277002/ymmcq.jpg",
+        "rnk": 40
+      }
+    },
+    {
+      "id": "473059043",
+      "category": "kitchen_utility",
+      "title": "Product 473059043",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/473059043/rm8fa.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/473059043/jup3b.jpg",
+          "https://images.meesho.com/images/products/473059043/8qukl.jpg",
+          "https://images.meesho.com/images/products/473059043/3omsc.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 473059043,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/473059043/rm8fa.jpg",
+        "img2": "https://images.meesho.com/images/products/473059043/jup3b.jpg",
+        "img3": "https://images.meesho.com/images/products/473059043/8qukl.jpg",
+        "img4": "https://images.meesho.com/images/products/473059043/3omsc.jpg",
+        "rnk": 1
+      }
+    },
+    {
+      "id": "474262488",
+      "category": "kitchen_utility",
+      "title": "Product 474262488",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/474262488/fx8qg.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/474262488/rl5su.jpg",
+          "https://images.meesho.com/images/products/474262488/bgdnb.jpg",
+          "https://images.meesho.com/images/products/474262488/eepcf.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 474262488,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/474262488/fx8qg.jpg",
+        "img2": "https://images.meesho.com/images/products/474262488/rl5su.jpg",
+        "img3": "https://images.meesho.com/images/products/474262488/bgdnb.jpg",
+        "img4": "https://images.meesho.com/images/products/474262488/eepcf.jpg",
+        "rnk": 2
+      }
+    },
+    {
+      "id": "472022672",
+      "category": "kitchen_utility",
+      "title": "Product 472022672",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/472022672/1uhyy.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/472022672/p1pfr.jpg",
+          "https://images.meesho.com/images/products/472022672/hbc1s.jpg",
+          "https://images.meesho.com/images/products/472022672/csojb.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 472022672,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/472022672/1uhyy.jpg",
+        "img2": "https://images.meesho.com/images/products/472022672/p1pfr.jpg",
+        "img3": "https://images.meesho.com/images/products/472022672/hbc1s.jpg",
+        "img4": "https://images.meesho.com/images/products/472022672/csojb.jpg",
+        "rnk": 3
+      }
+    },
+    {
+      "id": "475042306",
+      "category": "kitchen_utility",
+      "title": "Product 475042306",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/475042306/7b9dj.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/475042306/rqau4.jpg",
+          "https://images.meesho.com/images/products/475042306/iviyo.jpg",
+          "https://images.meesho.com/images/products/475042306/qqy7k.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 475042306,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/475042306/7b9dj.jpg",
+        "img2": "https://images.meesho.com/images/products/475042306/rqau4.jpg",
+        "img3": "https://images.meesho.com/images/products/475042306/iviyo.jpg",
+        "img4": "https://images.meesho.com/images/products/475042306/qqy7k.jpg",
+        "rnk": 4
+      }
+    },
+    {
+      "id": "475791007",
+      "category": "kitchen_utility",
+      "title": "Product 475791007",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/475791007/la59m.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/475791007/qctvy.jpg",
+          "https://images.meesho.com/images/products/475791007/yjaek.jpg",
+          "https://images.meesho.com/images/products/475791007/t12lr.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 475791007,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/475791007/la59m.jpg",
+        "img2": "https://images.meesho.com/images/products/475791007/qctvy.jpg",
+        "img3": "https://images.meesho.com/images/products/475791007/yjaek.jpg",
+        "img4": "https://images.meesho.com/images/products/475791007/t12lr.jpg",
+        "rnk": 5
+      }
+    },
+    {
+      "id": "472844989",
+      "category": "kitchen_utility",
+      "title": "Product 472844989",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/472844989/x0d2r.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/472844989/1dr5t.jpg",
+          "https://images.meesho.com/images/products/472844989/6cuiu.jpg",
+          "https://images.meesho.com/images/products/472844989/aanqa.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 472844989,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/472844989/x0d2r.jpg",
+        "img2": "https://images.meesho.com/images/products/472844989/1dr5t.jpg",
+        "img3": "https://images.meesho.com/images/products/472844989/6cuiu.jpg",
+        "img4": "https://images.meesho.com/images/products/472844989/aanqa.jpg",
+        "rnk": 6
+      }
+    },
+    {
+      "id": "460947609",
+      "category": "kitchen_utility",
+      "title": "Product 460947609",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/460947609/etwdt.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/460947609/cef4q.jpg",
+          "https://images.meesho.com/images/products/460947609/v4iub.jpg",
+          "https://images.meesho.com/images/products/460947609/bjqqx.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 460947609,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/460947609/etwdt.jpg",
+        "img2": "https://images.meesho.com/images/products/460947609/cef4q.jpg",
+        "img3": "https://images.meesho.com/images/products/460947609/v4iub.jpg",
+        "img4": "https://images.meesho.com/images/products/460947609/bjqqx.jpg",
+        "rnk": 7
+      }
+    },
+    {
+      "id": "470404934",
+      "category": "kitchen_utility",
+      "title": "Product 470404934",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/470404934/pjgoj.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/470404934/dwolz.jpg",
+          "https://images.meesho.com/images/products/470404934/qi3bo.jpg",
+          "https://images.meesho.com/images/products/470404934/alfns.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 470404934,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/470404934/pjgoj.jpg",
+        "img2": "https://images.meesho.com/images/products/470404934/dwolz.jpg",
+        "img3": "https://images.meesho.com/images/products/470404934/qi3bo.jpg",
+        "img4": "https://images.meesho.com/images/products/470404934/alfns.jpg",
+        "rnk": 8
+      }
+    },
+    {
+      "id": "468662557",
+      "category": "kitchen_utility",
+      "title": "Product 468662557",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/468662557/9ciq4.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/468662557/93jre.jpg",
+          "https://images.meesho.com/images/products/468662557/f1xty.jpg",
+          "https://images.meesho.com/images/products/468662557/afr6i.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 468662557,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/468662557/9ciq4.jpg",
+        "img2": "https://images.meesho.com/images/products/468662557/93jre.jpg",
+        "img3": "https://images.meesho.com/images/products/468662557/f1xty.jpg",
+        "img4": "https://images.meesho.com/images/products/468662557/afr6i.jpg",
+        "rnk": 9
+      }
+    },
+    {
+      "id": "482200836",
+      "category": "kitchen_utility",
+      "title": "Product 482200836",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/482200836/oprdg.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/482200836/hyybe.jpg",
+          "https://images.meesho.com/images/products/482200836/ggthb.jpg",
+          "https://images.meesho.com/images/products/482200836/q4ndf.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 482200836,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/482200836/oprdg.jpg",
+        "img2": "https://images.meesho.com/images/products/482200836/hyybe.jpg",
+        "img3": "https://images.meesho.com/images/products/482200836/ggthb.jpg",
+        "img4": "https://images.meesho.com/images/products/482200836/q4ndf.jpg",
+        "rnk": 10
+      }
+    },
+    {
+      "id": "467037431",
+      "category": "kitchen_utility",
+      "title": "Product 467037431",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/467037431/zhdmx.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/467037431/auwlk.jpg",
+          "https://images.meesho.com/images/products/467037431/rfxqb.jpg",
+          "https://images.meesho.com/images/products/467037431/s35ao.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 467037431,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/467037431/zhdmx.jpg",
+        "img2": "https://images.meesho.com/images/products/467037431/auwlk.jpg",
+        "img3": "https://images.meesho.com/images/products/467037431/rfxqb.jpg",
+        "img4": "https://images.meesho.com/images/products/467037431/s35ao.jpg",
+        "rnk": 11
+      }
+    },
+    {
+      "id": "473749720",
+      "category": "kitchen_utility",
+      "title": "Product 473749720",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/473749720/wmvbk.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/473749720/vgeh6.jpg",
+          "https://images.meesho.com/images/products/473749720/v6nn7.jpg",
+          "https://images.meesho.com/images/products/473749720/rgwmw.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 473749720,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/473749720/wmvbk.jpg",
+        "img2": "https://images.meesho.com/images/products/473749720/vgeh6.jpg",
+        "img3": "https://images.meesho.com/images/products/473749720/v6nn7.jpg",
+        "img4": "https://images.meesho.com/images/products/473749720/rgwmw.jpg",
+        "rnk": 12
+      }
+    },
+    {
+      "id": "477414816",
+      "category": "kitchen_utility",
+      "title": "Product 477414816",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/477414816/twh18.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/477414816/o1xkw.jpg",
+          "https://images.meesho.com/images/products/477414816/ubcq6.jpg",
+          "https://images.meesho.com/images/products/477414816/hpnej.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 477414816,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/477414816/twh18.jpg",
+        "img2": "https://images.meesho.com/images/products/477414816/o1xkw.jpg",
+        "img3": "https://images.meesho.com/images/products/477414816/ubcq6.jpg",
+        "img4": "https://images.meesho.com/images/products/477414816/hpnej.jpg",
+        "rnk": 13
+      }
+    },
+    {
+      "id": "471812928",
+      "category": "kitchen_utility",
+      "title": "Product 471812928",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/471812928/cd0si.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/471812928/igzhv.jpg",
+          "https://images.meesho.com/images/products/471812928/pmkf6.jpg",
+          "https://images.meesho.com/images/products/471812928/nfurw.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 471812928,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/471812928/cd0si.jpg",
+        "img2": "https://images.meesho.com/images/products/471812928/igzhv.jpg",
+        "img3": "https://images.meesho.com/images/products/471812928/pmkf6.jpg",
+        "img4": "https://images.meesho.com/images/products/471812928/nfurw.jpg",
+        "rnk": 14
+      }
+    },
+    {
+      "id": "467450997",
+      "category": "kitchen_utility",
+      "title": "Product 467450997",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/467450997/da2jx.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/467450997/3byl1.jpg",
+          "https://images.meesho.com/images/products/467450997/lnrer.jpg",
+          "https://images.meesho.com/images/products/467450997/tvhx0.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 467450997,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/467450997/da2jx.jpg",
+        "img2": "https://images.meesho.com/images/products/467450997/3byl1.jpg",
+        "img3": "https://images.meesho.com/images/products/467450997/lnrer.jpg",
+        "img4": "https://images.meesho.com/images/products/467450997/tvhx0.jpg",
+        "rnk": 15
+      }
+    },
+    {
+      "id": "471786344",
+      "category": "kitchen_utility",
+      "title": "Product 471786344",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/471786344/rmz8w.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/471786344/qfdxn.jpg",
+          "https://images.meesho.com/images/products/471786344/gvwmr.jpg",
+          "https://images.meesho.com/images/products/471786344/qe8h1.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 471786344,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/471786344/rmz8w.jpg",
+        "img2": "https://images.meesho.com/images/products/471786344/qfdxn.jpg",
+        "img3": "https://images.meesho.com/images/products/471786344/gvwmr.jpg",
+        "img4": "https://images.meesho.com/images/products/471786344/qe8h1.jpg",
+        "rnk": 16
+      }
+    },
+    {
+      "id": "462376902",
+      "category": "kitchen_utility",
+      "title": "Product 462376902",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/462376902/9tavo.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/462376902/xf8i1.jpg",
+          "https://images.meesho.com/images/products/462376902/mvwsk.jpg",
+          "https://images.meesho.com/images/products/462376902/ymi3a.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 462376902,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/462376902/9tavo.jpg",
+        "img2": "https://images.meesho.com/images/products/462376902/xf8i1.jpg",
+        "img3": "https://images.meesho.com/images/products/462376902/mvwsk.jpg",
+        "img4": "https://images.meesho.com/images/products/462376902/ymi3a.jpg",
+        "rnk": 17
+      }
+    },
+    {
+      "id": "474295312",
+      "category": "kitchen_utility",
+      "title": "Product 474295312",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/474295312/gtu36.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/474295312/iexgk.jpg",
+          "https://images.meesho.com/images/products/474295312/ogpyn.jpg",
+          "https://images.meesho.com/images/products/474295312/60fqf.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 474295312,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/474295312/gtu36.jpg",
+        "img2": "https://images.meesho.com/images/products/474295312/iexgk.jpg",
+        "img3": "https://images.meesho.com/images/products/474295312/ogpyn.jpg",
+        "img4": "https://images.meesho.com/images/products/474295312/60fqf.jpg",
+        "rnk": 18
+      }
+    },
+    {
+      "id": "466573932",
+      "category": "kitchen_utility",
+      "title": "Product 466573932",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/466573932/wwl29.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/466573932/jseiv.jpg",
+          "https://images.meesho.com/images/products/466573932/ru3u7.jpg",
+          "https://images.meesho.com/images/products/466573932/t197c.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 466573932,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/466573932/wwl29.jpg",
+        "img2": "https://images.meesho.com/images/products/466573932/jseiv.jpg",
+        "img3": "https://images.meesho.com/images/products/466573932/ru3u7.jpg",
+        "img4": "https://images.meesho.com/images/products/466573932/t197c.jpg",
+        "rnk": 19
+      }
+    },
+    {
+      "id": "478576900",
+      "category": "kitchen_utility",
+      "title": "Product 478576900",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/478576900/f4rvi.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/478576900/sfmc7.jpg",
+          "https://images.meesho.com/images/products/478576900/deala.jpg",
+          "https://images.meesho.com/images/products/478576900/nak4u.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 478576900,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/478576900/f4rvi.jpg",
+        "img2": "https://images.meesho.com/images/products/478576900/sfmc7.jpg",
+        "img3": "https://images.meesho.com/images/products/478576900/deala.jpg",
+        "img4": "https://images.meesho.com/images/products/478576900/nak4u.jpg",
+        "rnk": 20
+      }
+    },
+    {
+      "id": "468049020",
+      "category": "kitchen_utility",
+      "title": "Product 468049020",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/468049020/4obpe.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/468049020/lml90.jpg",
+          "https://images.meesho.com/images/products/468049020/hngrt.jpg",
+          "https://images.meesho.com/images/products/468049020/o9z2r.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 468049020,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/468049020/4obpe.jpg",
+        "img2": "https://images.meesho.com/images/products/468049020/lml90.jpg",
+        "img3": "https://images.meesho.com/images/products/468049020/hngrt.jpg",
+        "img4": "https://images.meesho.com/images/products/468049020/o9z2r.jpg",
+        "rnk": 21
+      }
+    },
+    {
+      "id": "467125742",
+      "category": "kitchen_utility",
+      "title": "Product 467125742",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/467125742/baltd.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/467125742/d6ciz.jpg",
+          "https://images.meesho.com/images/products/467125742/t6pvp.jpg",
+          "https://images.meesho.com/images/products/467125742/fcgp7.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 467125742,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/467125742/baltd.jpg",
+        "img2": "https://images.meesho.com/images/products/467125742/d6ciz.jpg",
+        "img3": "https://images.meesho.com/images/products/467125742/t6pvp.jpg",
+        "img4": "https://images.meesho.com/images/products/467125742/fcgp7.jpg",
+        "rnk": 22
+      }
+    },
+    {
+      "id": "461058823",
+      "category": "kitchen_utility",
+      "title": "Product 461058823",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/461058823/rakwk.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/461058823/5ybxx.jpg",
+          "https://images.meesho.com/images/products/461058823/7sz2j.jpg",
+          "https://images.meesho.com/images/products/461058823/0hvvh.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 461058823,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/461058823/rakwk.jpg",
+        "img2": "https://images.meesho.com/images/products/461058823/5ybxx.jpg",
+        "img3": "https://images.meesho.com/images/products/461058823/7sz2j.jpg",
+        "img4": "https://images.meesho.com/images/products/461058823/0hvvh.jpg",
+        "rnk": 23
+      }
+    },
+    {
+      "id": "479217261",
+      "category": "kitchen_utility",
+      "title": "Product 479217261",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/479217261/ospff.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/479217261/mupva.jpg",
+          "https://images.meesho.com/images/products/479217261/b9dwq.jpg",
+          "https://images.meesho.com/images/products/479217261/7tych.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 479217261,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/479217261/ospff.jpg",
+        "img2": "https://images.meesho.com/images/products/479217261/mupva.jpg",
+        "img3": "https://images.meesho.com/images/products/479217261/b9dwq.jpg",
+        "img4": "https://images.meesho.com/images/products/479217261/7tych.jpg",
+        "rnk": 24
+      }
+    },
+    {
+      "id": "474757932",
+      "category": "kitchen_utility",
+      "title": "Product 474757932",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/474757932/w7fez.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/474757932/lo0zv.jpg",
+          "https://images.meesho.com/images/products/474757932/iwuox.jpg",
+          "https://images.meesho.com/images/products/474757932/tqnr9.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 474757932,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/474757932/w7fez.jpg",
+        "img2": "https://images.meesho.com/images/products/474757932/lo0zv.jpg",
+        "img3": "https://images.meesho.com/images/products/474757932/iwuox.jpg",
+        "img4": "https://images.meesho.com/images/products/474757932/tqnr9.jpg",
+        "rnk": 25
+      }
+    },
+    {
+      "id": "475955708",
+      "category": "kitchen_utility",
+      "title": "Product 475955708",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/475955708/cpsb0.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/475955708/wxksj.jpg",
+          "https://images.meesho.com/images/products/475955708/4npy8.jpg",
+          "https://images.meesho.com/images/products/475955708/ga142.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 475955708,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/475955708/cpsb0.jpg",
+        "img2": "https://images.meesho.com/images/products/475955708/wxksj.jpg",
+        "img3": "https://images.meesho.com/images/products/475955708/4npy8.jpg",
+        "img4": "https://images.meesho.com/images/products/475955708/ga142.jpg",
+        "rnk": 26
+      }
+    },
+    {
+      "id": "481789811",
+      "category": "kitchen_utility",
+      "title": "Product 481789811",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/481789811/budmn.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/481789811/tkb1g.jpg",
+          "https://images.meesho.com/images/products/481789811/jqbtk.jpg",
+          "https://images.meesho.com/images/products/481789811/1ybph.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 481789811,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/481789811/budmn.jpg",
+        "img2": "https://images.meesho.com/images/products/481789811/tkb1g.jpg",
+        "img3": "https://images.meesho.com/images/products/481789811/jqbtk.jpg",
+        "img4": "https://images.meesho.com/images/products/481789811/1ybph.jpg",
+        "rnk": 27
+      }
+    },
+    {
+      "id": "467154951",
+      "category": "kitchen_utility",
+      "title": "Product 467154951",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/467154951/2xscu.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/467154951/z9aho.jpg",
+          "https://images.meesho.com/images/products/467154951/l8x7n.jpg",
+          "https://images.meesho.com/images/products/467154951/dcm1h.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 467154951,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/467154951/2xscu.jpg",
+        "img2": "https://images.meesho.com/images/products/467154951/z9aho.jpg",
+        "img3": "https://images.meesho.com/images/products/467154951/l8x7n.jpg",
+        "img4": "https://images.meesho.com/images/products/467154951/dcm1h.jpg",
+        "rnk": 28
+      }
+    },
+    {
+      "id": "471640339",
+      "category": "kitchen_utility",
+      "title": "Product 471640339",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/471640339/d8iqu.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/471640339/nij6e.jpg",
+          "https://images.meesho.com/images/products/471640339/pqeje.jpg",
+          "https://images.meesho.com/images/products/471640339/ronwn.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 471640339,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/471640339/d8iqu.jpg",
+        "img2": "https://images.meesho.com/images/products/471640339/nij6e.jpg",
+        "img3": "https://images.meesho.com/images/products/471640339/pqeje.jpg",
+        "img4": "https://images.meesho.com/images/products/471640339/ronwn.jpg",
+        "rnk": 29
+      }
+    },
+    {
+      "id": "466913699",
+      "category": "kitchen_utility",
+      "title": "Product 466913699",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/466913699/cagep.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/466913699/mhcov.jpg",
+          "https://images.meesho.com/images/products/466913699/cdolt.jpg",
+          "https://images.meesho.com/images/products/466913699/jethe.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 466913699,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/466913699/cagep.jpg",
+        "img2": "https://images.meesho.com/images/products/466913699/mhcov.jpg",
+        "img3": "https://images.meesho.com/images/products/466913699/cdolt.jpg",
+        "img4": "https://images.meesho.com/images/products/466913699/jethe.jpg",
+        "rnk": 30
+      }
+    },
+    {
+      "id": "464092189",
+      "category": "kitchen_utility",
+      "title": "Product 464092189",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/464092189/dngh3.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/464092189/7oi0p.jpg",
+          "https://images.meesho.com/images/products/464092189/ztcay.jpg",
+          "https://images.meesho.com/images/products/464092189/mmdif.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 464092189,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/464092189/dngh3.jpg",
+        "img2": "https://images.meesho.com/images/products/464092189/7oi0p.jpg",
+        "img3": "https://images.meesho.com/images/products/464092189/ztcay.jpg",
+        "img4": "https://images.meesho.com/images/products/464092189/mmdif.jpg",
+        "rnk": 31
+      }
+    },
+    {
+      "id": "461119789",
+      "category": "kitchen_utility",
+      "title": "Product 461119789",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/461119789/lbpxa.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/461119789/rtqmp.jpg",
+          "https://images.meesho.com/images/products/461119789/utszr.jpg",
+          "https://images.meesho.com/images/products/461119789/slcmp.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 461119789,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/461119789/lbpxa.jpg",
+        "img2": "https://images.meesho.com/images/products/461119789/rtqmp.jpg",
+        "img3": "https://images.meesho.com/images/products/461119789/utszr.jpg",
+        "img4": "https://images.meesho.com/images/products/461119789/slcmp.jpg",
+        "rnk": 32
+      }
+    },
+    {
+      "id": "475485187",
+      "category": "kitchen_utility",
+      "title": "Product 475485187",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/475485187/1ysom.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/475485187/1t3pi.jpg",
+          "https://images.meesho.com/images/products/475485187/lugxz.jpg",
+          "https://images.meesho.com/images/products/475485187/qkbih.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 475485187,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/475485187/1ysom.jpg",
+        "img2": "https://images.meesho.com/images/products/475485187/1t3pi.jpg",
+        "img3": "https://images.meesho.com/images/products/475485187/lugxz.jpg",
+        "img4": "https://images.meesho.com/images/products/475485187/qkbih.jpg",
+        "rnk": 33
+      }
+    },
+    {
+      "id": "478582847",
+      "category": "kitchen_utility",
+      "title": "Product 478582847",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/478582847/zisht.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/478582847/p1uoh.jpg",
+          "https://images.meesho.com/images/products/478582847/z1jmx.jpg",
+          "https://images.meesho.com/images/products/478582847/zl2hg.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 478582847,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/478582847/zisht.jpg",
+        "img2": "https://images.meesho.com/images/products/478582847/p1uoh.jpg",
+        "img3": "https://images.meesho.com/images/products/478582847/z1jmx.jpg",
+        "img4": "https://images.meesho.com/images/products/478582847/zl2hg.jpg",
+        "rnk": 34
+      }
+    },
+    {
+      "id": "467876644",
+      "category": "kitchen_utility",
+      "title": "Product 467876644",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/467876644/p1cgt.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/467876644/lwfbb.jpg",
+          "https://images.meesho.com/images/products/467876644/yojix.jpg",
+          "https://images.meesho.com/images/products/467876644/nxfoy.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 467876644,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/467876644/p1cgt.jpg",
+        "img2": "https://images.meesho.com/images/products/467876644/lwfbb.jpg",
+        "img3": "https://images.meesho.com/images/products/467876644/yojix.jpg",
+        "img4": "https://images.meesho.com/images/products/467876644/nxfoy.jpg",
+        "rnk": 35
+      }
+    },
+    {
+      "id": "466252669",
+      "category": "kitchen_utility",
+      "title": "Product 466252669",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/466252669/c5dxq.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/466252669/bgy28.jpg",
+          "https://images.meesho.com/images/products/466252669/hllos.jpg",
+          "https://images.meesho.com/images/products/466252669/9pgqi.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 466252669,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/466252669/c5dxq.jpg",
+        "img2": "https://images.meesho.com/images/products/466252669/bgy28.jpg",
+        "img3": "https://images.meesho.com/images/products/466252669/hllos.jpg",
+        "img4": "https://images.meesho.com/images/products/466252669/9pgqi.jpg",
+        "rnk": 36
+      }
+    },
+    {
+      "id": "461384373",
+      "category": "kitchen_utility",
+      "title": "Product 461384373",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/461384373/behus.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/461384373/ai8pf.jpg",
+          "https://images.meesho.com/images/products/461384373/2he1o.jpg",
+          "https://images.meesho.com/images/products/461384373/qwsku.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 461384373,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/461384373/behus.jpg",
+        "img2": "https://images.meesho.com/images/products/461384373/ai8pf.jpg",
+        "img3": "https://images.meesho.com/images/products/461384373/2he1o.jpg",
+        "img4": "https://images.meesho.com/images/products/461384373/qwsku.jpg",
+        "rnk": 37
+      }
+    },
+    {
+      "id": "461692342",
+      "category": "kitchen_utility",
+      "title": "Product 461692342",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/461692342/agonw.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/461692342/owdva.jpg",
+          "https://images.meesho.com/images/products/461692342/gzv5m.jpg",
+          "https://images.meesho.com/images/products/461692342/stbkd.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 461692342,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/461692342/agonw.jpg",
+        "img2": "https://images.meesho.com/images/products/461692342/owdva.jpg",
+        "img3": "https://images.meesho.com/images/products/461692342/gzv5m.jpg",
+        "img4": "https://images.meesho.com/images/products/461692342/stbkd.jpg",
+        "rnk": 38
+      }
+    },
+    {
+      "id": "468487153",
+      "category": "kitchen_utility",
+      "title": "Product 468487153",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/468487153/dqpmf.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/468487153/hxjv0.jpg",
+          "https://images.meesho.com/images/products/468487153/laitx.jpg",
+          "https://images.meesho.com/images/products/468487153/ksdpc.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 468487153,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/468487153/dqpmf.jpg",
+        "img2": "https://images.meesho.com/images/products/468487153/hxjv0.jpg",
+        "img3": "https://images.meesho.com/images/products/468487153/laitx.jpg",
+        "img4": "https://images.meesho.com/images/products/468487153/ksdpc.jpg",
+        "rnk": 39
+      }
+    },
+    {
+      "id": "460920059",
+      "category": "kitchen_utility",
+      "title": "Product 460920059",
+      "price_summary": {
+        "price": null,
+        "mrp": null,
+        "discountPercent": null
+      },
+      "rating": {
+        "value": null,
+        "count": null
+      },
+      "images": {
+        "hero": "https://images.meesho.com/images/products/460920059/subvn.jpg",
+        "gallery": [
+          "https://images.meesho.com/images/products/460920059/o9vzk.jpg",
+          "https://images.meesho.com/images/products/460920059/bgigm.jpg",
+          "https://images.meesho.com/images/products/460920059/z0zhe.jpg"
+        ]
+      },
+      "highlights": [],
+      "vsku": {
+        "visual": [],
+        "functional": [],
+        "valueLed": []
+      },
+      "raw": {
+        "product_Id": 460920059,
+        "category": "Kitchen Utility",
+        "img1": "https://images.meesho.com/images/products/460920059/subvn.jpg",
+        "img2": "https://images.meesho.com/images/products/460920059/o9vzk.jpg",
+        "img3": "https://images.meesho.com/images/products/460920059/bgigm.jpg",
+        "img4": "https://images.meesho.com/images/products/460920059/z0zhe.jpg",
+        "rnk": 40
+      }
+    }
+  ]
+}

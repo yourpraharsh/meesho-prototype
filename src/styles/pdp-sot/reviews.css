@@ -1,0 +1,577 @@
+/* =====================================================================
+   PDP SoT — Customer Ratings & Reviews
+   Figma fdR1rJfu0Yszfeb1Em0Hma, frame 13630:129956 ("PDP"), node 13630:130214
+   (360 x 597 in the SoT; laid out fluid here, 16px side padding).
+
+   Section separator in the SoT: 4px solid #EAEAF2 (--grey-t4-bg) above AND below
+   this section. Same convention as the other pdp-sot files: each section draws its
+   OWN top separator, so this section does not draw a bottom one (the delivery row
+   below draws the 4px top separator on that shared edge).
+
+   Typography: Mier B02 — Book = 400, Demi = 600, Bold = 700.
+   Every selector is scoped under .pdp; skin rules (body.ui-ios / body.duo-device /
+   body.layout-duo) are not touched.
+   ===================================================================== */
+
+/* ---------- Section shell (13630:130214) ----------
+   white, padding 12px 16px, column with 12px gaps:
+   title · content · 1px divider · VIEW ALL REVIEWS */
+.pdp .pdp-reviews-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  border-top: 4px solid var(--grey-t4-bg);
+  border-bottom: none;
+}
+
+/* "Customer Ratings & Reviews" — Headers/Headline6, Bold 17/20, Gray Base */
+.pdp .pdp-reviews-section h3 {
+  margin: 0;
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+/* Content (13630:130216): overview group, then the review cards — 20px apart */
+.pdp .pdps-reviews-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* Overview group (13630:130217): summary row · tag chips · real photos — 16px apart */
+.pdp .pdps-reviews-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ---------- Summary row (13630:130218): rating box (88) + 19px + bars (fluid) ---------- */
+.pdp .pdp-reviews-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 19px;
+}
+
+/* Ratings Summary box (13630:130219): 88 x 100, 1px #DFDFDF, radius 8, clipped */
+.pdp .pdp-reviews-summary {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  min-width: 88px;
+  height: 100px;
+  padding: 0;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+/* Green head (13630:130220): 52px tall, bleeds over the box's 1px border on top/left/right.
+   Inner "Rating" row: 10px from the left, 9px from the top, value and star space-between. */
+.pdp .pdp-reviews-big-chip {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+  height: 52px;
+  margin: -1px -1px 0;
+  padding: 9px 10px 0;
+  background: var(--green-base);
+  border-radius: 0;
+  font: 700 29px/36px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--white);
+}
+
+/* star (13630:130223): 20 x 20, white, centred on the 36px value line */
+.pdp .pdps-reviews-big-star {
+  display: block;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 8px;
+}
+
+/* "499 Ratings / 30 Reviews" (13630:130225): Book 11/16, +0.22px, Grey T2, centred,
+   8px under the green head (box: 52 head + 8 + 32 text + 8 = 100) */
+.pdp .pdp-reviews-meta {
+  margin-top: 8px;
+  padding: 0 6px;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  color: var(--grey-t2);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Rating bars (13630:130226): 5 rows x 16px, 4px apart.
+   Columns: label 56 · 5px · bar (fluid; 132 at 360) · count (right-aligned, 28 at 360). */
+.pdp .pdp-reviews-bars {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) minmax(28px, max-content);
+  grid-auto-rows: 16px;
+  row-gap: 4px;
+  column-gap: 0;
+  align-items: center;
+}
+
+.pdp .pdp-reviews-bar-row {
+  display: contents;
+  margin: 0;
+}
+
+/* Caption2: Book 11/16, +0.132px, Grey T1 */
+.pdp .pdp-reviews-bar-label,
+.pdp .pdp-reviews-bar-count {
+  min-width: 0;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.132px;
+  color: var(--grey-t1);
+  white-space: nowrap;
+}
+
+.pdp .pdp-reviews-bar-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdp .pdp-reviews-bar-count {
+  text-align: right;
+}
+
+/* bar (13630:130229 …): 4px track #EAEAF2, radius 2 */
+.pdp .pdp-reviews-bar-track {
+  flex: none;
+  max-width: none;
+  height: 4px;
+  margin-left: 5px;
+  border-radius: 2px;
+  background: var(--grey-t4-bg);
+  overflow: hidden;
+}
+
+.pdp .pdp-reviews-bar-fill {
+  display: block;
+  height: 4px;
+  min-width: 4px;
+  border-radius: 2px;
+}
+
+/* SoT highlight colours, top → bottom:
+   Very Good #038D63 · Good #23BB75 · Ok-Ok #F4B619 · Bad #EE7212 · Very Bad #E11900 */
+.pdp .pdp-reviews-bar-row:nth-child(1) .pdp-reviews-bar-fill { background: var(--green-base); }
+.pdp .pdp-reviews-bar-row:nth-child(2) .pdp-reviews-bar-fill { background: var(--lime-base); }
+.pdp .pdp-reviews-bar-row:nth-child(3) .pdp-reviews-bar-fill { background: var(--yellow-base); }
+.pdp .pdp-reviews-bar-row:nth-child(4) .pdp-reviews-bar-fill { background: var(--orange-base); }
+.pdp .pdp-reviews-bar-row:nth-child(5) .pdp-reviews-bar-fill { background: var(--red-base); }
+
+/* ---------- Review tag chips (13630:130257) ----------
+   wrap, 8px row gap / 4px column gap; chip 32 tall, 8px padding, radius 16,
+   icon 14 + 4px gap; Subtitle2 Demi 13/16, Gray Base, capitalised */
+.pdp .pdp-reviews-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 4px;
+  margin: 0;
+}
+
+.pdp .pdp-reviews-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 32px;
+  padding: 8px;
+  border: 0;
+  border-radius: 16px;
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0.065px;
+  color: var(--grey-base);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.pdp .pdp-reviews-tag.green {
+  background: var(--green-t2);
+  color: var(--grey-base);
+}
+
+.pdp .pdp-reviews-tag.yellow {
+  background: var(--yellow-t1);
+  color: var(--grey-base);
+  letter-spacing: 0;
+}
+
+.pdp .pdp-reviews-tag.red {
+  background: #FFDAD6;
+  color: var(--grey-base);
+}
+
+.pdp .pdps-reviews-tag-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+
+/* ic_cross art is 14.3 x 14 and sits 0.3px left of its 14px frame in the SoT */
+.pdp .pdps-reviews-tag-icon--cross {
+  width: 14.3047px;
+  margin-left: -0.3047px;
+}
+
+/* ---------- Real Photos (13630:130268): label, 8px, 60px tiles 6px apart ---------- */
+.pdp .pdps-reviews-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* "Real Photos (9)" — Subtitle2 Demi 13/16, Gray Base */
+.pdp .pdp-reviews-photos-label {
+  margin: 0;
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+}
+
+.pdp .pdp-reviews-photos-scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pdp .pdps-reviews-media,
+.pdp .pdp-reviews-photo-more {
+  position: relative;
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 3.064px;
+  background: var(--grey-t4-bg);
+  overflow: hidden;
+}
+
+.pdp .pdp-reviews-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grey-t4-bg);
+  object-fit: cover;
+}
+
+/* "More Media" tile: photo under a 50% black scrim, "+5 / more" Bold, white, centred */
+.pdp .pdp-reviews-photo-more {
+  display: block;
+  padding: 0;
+  color: var(--white);
+}
+
+.pdp .pdp-reviews-photo-more::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.pdp .pdps-reviews-more-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.532px;
+  font-family: var(--font-mier);
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pdp .pdps-reviews-more-count {
+  font-size: 16.087px;
+  line-height: 18.385px;
+}
+
+.pdp .pdps-reviews-more-label {
+  font-size: 13.023px;
+  line-height: 15.321px;
+}
+
+/* ---------- Review card (13630:130284 / 13630:130297) ----------
+   main column (header · content · actions, 8px apart); a card with photos puts the
+   62px media pair on the right, 16px away, vertically centred */
+.pdp .pdp-review-card,
+.pdp .pdp-review-card:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  border-top: none;
+}
+
+.pdp .pdps-review-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* Review Header (13630:130285): [chip 4px label] 8px dot 8px date, centred, 20 tall */
+.pdp .pdp-review-card-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+
+.pdp .pdps-review-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+/* Rating chip (Mesh Rating, value 4): 32 x 20 pill, Lime Base, Demi 13/16 white + 8px star */
+.pdp .pdp-review-card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 32px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--lime-base);
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--white);
+}
+
+/* chip colour follows the star value on the same scale as the bars */
+.pdp .pdp-review-card-badge.pdps-review-chip--s5 { background: var(--green-base); }
+.pdp .pdp-review-card-badge.pdps-review-chip--s4 { background: var(--lime-base); }
+.pdp .pdp-review-card-badge.pdps-review-chip--s3 { background: var(--yellow-base); }
+.pdp .pdp-review-card-badge.pdps-review-chip--s2 { background: var(--orange-base); }
+.pdp .pdp-review-card-badge.pdps-review-chip--s1 { background: var(--red-base); }
+
+.pdp .pdps-review-chip-star {
+  display: block;
+  flex: 0 0 auto;
+  width: 7.9936px;
+  height: 7.63786px;
+}
+
+/* "Good" — Subtitle2 Demi 13/16, Gray Base */
+.pdp .pdps-review-label {
+  font: 600 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--grey-base);
+  white-space: nowrap;
+}
+
+/* Ellipse 807: 4px, #D9D9D9 */
+.pdp .pdps-review-dot {
+  display: block;
+  flex: 0 0 auto;
+  width: 4px;
+  height: 4px;
+}
+
+/* "12 May 2021" — Caption1 Book 13/16, +0.0195px, Grey T2 */
+.pdp .pdp-review-card-date {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-t2);
+  white-space: nowrap;
+}
+
+/* Review Content (13630:130291): text, 2px, author */
+.pdp .pdps-review-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Body3 Book 13/16, +0.0325px, #333333 */
+.pdp .pdp-review-card-text {
+  margin: 0;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: #333333;
+  overflow-wrap: anywhere;
+}
+
+.pdp .pdps-review-read-more {
+  color: var(--jamun-base);
+}
+
+/* "~Priya Rao" — Book 11/16, +0.22px, #666666 */
+.pdp .pdp-review-card-author {
+  flex-shrink: 0;
+  font: 400 11px/16px var(--font-mier);
+  letter-spacing: 0.22px;
+  color: #666666;
+  white-space: nowrap;
+}
+
+/* Review Actions (13630:130294): 2px padding, 16px icon, 4px, "Helpful (50)" Book 13/16 Grey T1 */
+.pdp .pdp-review-card-helpful {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 2px;
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0325px;
+  color: var(--grey-t1);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pdp .pdps-review-helpful-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.pdp .pdps-review-helpful-icon img {
+  display: block;
+  width: 16px;
+  height: 14.4px;
+}
+
+/* Review Media (13630:130311): two 62px tiles, 2px apart, radius 4 */
+.pdp .pdps-review-media {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.pdp .pdps-review-media-tile {
+  position: relative;
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  border-radius: 4px;
+  background: var(--grey-t4-bg);
+  overflow: hidden;
+}
+
+.pdp .pdps-review-media-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+/* last tile: rgba(58,58,58,0.74) scrim + "+5 / more" Bold white */
+.pdp .pdps-review-media-tile--more::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(58, 58, 58, 0.74);
+}
+
+.pdp .pdps-review-media-tile--more .pdps-reviews-more-text {
+  gap: 1.704px;
+}
+
+.pdp .pdps-review-media-tile--more .pdps-reviews-more-count {
+  font-size: 17.893px;
+  line-height: 20.449px;
+}
+
+.pdp .pdps-review-media-tile--more .pdps-reviews-more-label {
+  font-size: 14.485px;
+  line-height: 17.041px;
+}
+
+/* ---------- Divider (13630:130320): 1px #EAEAF2, full content width ---------- */
+.pdp .pdps-reviews-divider {
+  flex: 0 0 auto;
+  height: 1px;
+  background: var(--grey-t4-bg);
+}
+
+/* ---------- VIEW ALL REVIEWS (13630:130321) ----------
+   Actions/Link Bold 13/16, Jamun, uppercase; 4px; 16px Jamun circle with a 12px white chevron */
+.pdp .pdp-view-all-reviews {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font: 700 13px/16px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--jamun-base);
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pdp .pdp-view-all-reviews:hover {
+  color: var(--jamun-base);
+  text-decoration: none;
+}
+
+.pdp .pdps-reviews-viewall-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 20px;
+  background: var(--jamun-base);
+}
+
+.pdp .pdps-reviews-viewall-icon img {
+  display: block;
+  width: 4.2px;
+  height: 7.2px;
+}
