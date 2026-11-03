@@ -122,11 +122,6 @@ body.layout-duo .home-header .home-search-wrap {
   margin-top: 0;
 }
 
-body.layout-duo .home--search {
-  padding-top: calc(92px + var(--safe-top, 0px));
-  --home-sticky-header-h: calc(92px + var(--safe-top, 0px));
-}
-
 /* ---- top bars: titles sit left, single row ---- */
 body.layout-duo .olp-title,
 body.layout-duo .odp-title,
@@ -434,7 +429,7 @@ body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-hea
   padding-right: var(--duo-status-w);
 }
 
-body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) :is(.home-header--collapsed, .home-header--search) .home-search-wrap {
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .home-header--collapsed .home-search-wrap {
   margin-right: var(--duo-status-w);
 }
 

@@ -1,0 +1,140 @@
+/* =====================================================================
+   Search results (/search?q=): Home's feed layout without the tab bar. One sticky block
+   holds the single header row (back · keyword in the search bar · wishlist · cart) and the
+   sort / filter row, so on the iOS skin both rows sit on ONE sheet of glass.
+   The search bar, actions and toolbar reuse Home's classes, so each skin styles them as
+   it styles Home (Home.css, glassNav.css).
+   ===================================================================== */
+.srp {
+  min-height: 100%;
+  padding-bottom: calc(24px + var(--safe-bottom, 0px));
+}
+
+.srp-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  isolation: isolate;
+  background: var(--white);
+}
+
+.srp-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: calc(8px + var(--safe-top, 0px)) 16px 8px;
+}
+
+.srp-back {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.srp-back svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* the bar is a button showing the keyword: tapping it reopens the search sheet */
+.srp .srp-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.srp-search-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--grey-base);
+}
+
+.srp-actions {
+  flex: none;
+}
+
+/* the sort / filter row rides inside the sticky block, not on its own sticky offset */
+.srp .srp-toolbar {
+  position: static;
+}
+
+.srp-more {
+  margin: 0;
+  padding: 16px 16px 8px;
+  border-top: 8px solid var(--grey-t4-bg);
+  font: 600 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+/* ---------- iOS skin: glass bar with the pink wash, capsules, chips on the same glass ---------- */
+body.ui-ios .srp-top {
+  background: var(--glass-fill-pill);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+}
+
+body.ui-ios .srp-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(704px 100% at 50% 0%, rgba(159, 32, 137, 0.36) 0%, rgba(159, 32, 137, 0) 100%);
+}
+
+body.ui-ios .srp-header {
+  gap: 8px;
+  padding: var(--glass-inset-top) var(--glass-inset-x) 8px;
+}
+
+body.ui-ios .srp-back {
+  width: var(--glass-capsule-size);
+  height: var(--glass-capsule-size);
+  border-radius: 50%;
+  background: var(--glass-fill-capsule);
+  -webkit-backdrop-filter: blur(var(--glass-blur-capsule));
+  backdrop-filter: blur(var(--glass-blur-capsule));
+  box-shadow: var(--glass-shadow-capsule);
+  color: var(--glass-ink);
+}
+
+/* inside the blurred bar the pill's and capsules' own blur is redundant */
+body.ui-ios .srp-top :is(.srp-search, .srp-back, .srp-actions button) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+body.ui-ios .srp .srp-toolbar {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* ---------- iPhone Duo ---------- */
+/* rail postures: back, wishlist and cart are in the rail; the bar ends before it */
+body.layout-duo .srp-back {
+  display: none;
+}
+
+body.layout-duo .srp-header,
+body.layout-duo .srp .srp-toolbar {
+  padding-right: calc(var(--duo-rail-w) + 16px);
+}
+
+/* Portrait / Laptop: the status sits top-right */
+body.duo-device:is([data-posture='portrait'], [data-posture='laptop']) .srp-header {
+  padding-right: calc(var(--glass-inset-x, 16px) + var(--duo-status-w));
+}

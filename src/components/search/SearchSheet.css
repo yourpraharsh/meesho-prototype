@@ -1,0 +1,234 @@
+/* =====================================================================
+   Search sheet: full-screen search with the field, suggestions and (on a desktop preview)
+   the drawn OS keyboard. Android: Meesho search screen (white bar, back arrow, outlined
+   field). iOS: the Figma "Search Landing" band (opaque grey, glass pill with the back
+   arrow inside). Always mounted; hidden until opened.
+   ===================================================================== */
+.search-sheet {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  background: var(--white);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 160ms ease, transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.search-sheet--open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+/* ---- the bar ---- */
+.search-sheet-bar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: calc(8px + var(--safe-top, 0px)) 16px 8px;
+  border-bottom: 1px solid var(--grey-t3-divider);
+}
+
+.search-sheet-field {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.search-sheet-back {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.search-sheet-back svg {
+  width: 24px;
+  height: 24px;
+}
+
+.search-sheet-clear {
+  flex: none;
+  color: var(--grey-t2);
+}
+
+.search-sheet-clear svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* the field's native clear "x" would double ours */
+.search-sheet .home-search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+body.ui-ios .search-sheet-bar {
+  padding: var(--glass-inset-top) var(--glass-inset-x) 16px;
+  border-bottom: 4px solid var(--grey-t4-bg);
+  background: var(--glass-wash);
+}
+
+/* ---- suggestions / popular searches ---- */
+.search-sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.search-suggest {
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.search-suggest-row {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 8px 0 16px;
+}
+
+.search-suggest-main {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  font: 400 15px/20px var(--font-mier);
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+.search-suggest-main svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--grey-t2);
+}
+
+.search-suggest-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.search-suggest-text b {
+  font-weight: 600;
+}
+
+.search-suggest-fill {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+  font: 400 18px/1 var(--font-mier);
+  color: var(--grey-t2);
+  cursor: pointer;
+}
+
+.search-popular {
+  padding: 16px;
+}
+
+.search-popular-title {
+  margin: 0 0 12px;
+  font: 600 15px/20px var(--font-mier);
+  color: var(--grey-base);
+}
+
+.search-popular-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-popular-chip {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #cecede;
+  border-radius: 16px;
+  background: var(--white);
+  font: 400 13px/16px var(--font-mier);
+  color: var(--grey-base);
+  cursor: pointer;
+}
+
+/* ---- the keyboard dock ---- */
+.search-sheet-kb {
+  flex: none;
+}
+
+/* =====================================================================
+   iPhone Duo: the sheet fills whichever display is on; the keyboard takes the same
+   treatment as a bottom sheet in each posture (duoLayout.css "sheets"):
+   Open → a floating card near the bottom · Book → the right page only ·
+   Stand → 8pt in from the sides, its keys clear of the camera column.
+   ===================================================================== */
+/* like the Duo sheets, the search sheet sits over the rail and the status */
+body.duo-device .app .search-sheet {
+  max-width: none;
+}
+
+body.layout-duo:is([data-posture='landscape'], [data-posture='book']) .app .search-sheet-kb {
+  width: min(640px, calc(100% - 48px));
+  margin: 0 auto 8px;
+  border-radius: 34px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* a floating card is not at the screen's edge: no home-indicator strip inside it */
+body.layout-duo[data-posture='landscape'] .app .search-sheet-kb .soft-kb-safe,
+body.layout-duo[data-posture='book']:not([data-split='full']) .app .search-sheet-kb .soft-kb-safe {
+  height: 8px;
+}
+
+body.layout-duo[data-posture='landscape'] .app .search-sheet-kb .soft-kb-bar,
+body.layout-duo[data-posture='book']:not([data-split='full']) .app .search-sheet-kb .soft-kb-bar {
+  display: none;
+}
+
+body.layout-duo[data-posture='book'][data-split='full'] .app .search-sheet-kb {
+  width: calc(100% - var(--duo-hinge-x) - 8px);
+  margin: 0 8px 0 auto;
+  border-radius: 34px 34px 0 0;
+  box-shadow: none;
+}
+
+body.layout-duo[data-posture='stand'] .app .search-sheet-kb {
+  margin: 0 var(--stand-sheet-inset, 8px);
+  padding-right: var(--stand-sheet-col);
+  border-radius: 34px 34px 0 0;
+  overflow: hidden;
+  background: var(--soft-kb-bg, #d1d3d9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-sheet {
+    transition: none;
+  }
+}

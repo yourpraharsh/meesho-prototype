@@ -1,0 +1,212 @@
+/* Simulated phone keyboard — in-flow block, last child of the search view's flex column.
+   Everything is scoped under .soft-kb. */
+
+.soft-kb {
+  /* Shared metrics; each skin overrides */
+  --kb-gap: 6px; /* between keys in a row */
+  --kb-row-gap: 11px;
+  --kb-key-h: 42px;
+  --kb-radius: 8px;
+  --kb-side: 1.3; /* shift / backspace width, in letter keys */
+
+  flex: none;
+  width: 100%;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Rows are capped so keys stop growing on wide screens (930px Duo) and stay centred */
+.soft-kb .soft-kb-rows {
+  /* One letter key: a tenth of the row after nine gaps (resolved against each row) */
+  --kw: calc((100% - 9 * var(--kb-gap)) / 10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kb-row-gap);
+  width: 100%;
+  max-width: calc(10 * 64px + 9 * var(--kb-gap));
+  margin: 0 auto;
+}
+
+.soft-kb .soft-kb-row {
+  display: flex;
+  justify-content: center; /* row 2's nine keys sit half a key in, like a real keyboard */
+  gap: var(--kb-gap);
+}
+.soft-kb .soft-kb-row--split {
+  justify-content: space-between;
+}
+
+/* Row 3's middle group spans seven letter keys; its keys share that width */
+.soft-kb .soft-kb-mid {
+  display: flex;
+  gap: var(--kb-gap);
+  flex: none;
+  width: calc(7 * var(--kw) + 6 * var(--kb-gap));
+}
+
+/* ---- Keys ---- */
+.soft-kb .soft-kb-key {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: var(--kw);
+  min-width: 0;
+  height: var(--kb-key-h);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--kb-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+}
+.soft-kb .soft-kb-mid .soft-kb-key {
+  flex: 1 1 0;
+  width: auto;
+}
+.soft-kb .soft-kb-key--side {
+  width: calc(var(--kb-side) * var(--kw));
+  font-size: 20px;
+}
+.soft-kb .soft-kb-key--text {
+  font-size: 16px;
+}
+.soft-kb .soft-kb-key--space {
+  flex: 1 1 0;
+  width: auto;
+}
+.soft-kb .soft-kb-key svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Home indicator / gesture pill strip under the keys */
+.soft-kb .soft-kb-safe {
+  display: flex;
+  justify-content: center;
+}
+.soft-kb .soft-kb-bar {
+  display: block;
+  border-radius: 100px;
+}
+
+/* ================= iOS (17 / 26 light) ================= */
+.soft-kb--ios {
+  padding: 8px 3px 0;
+  background: #d1d3d9;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 22px;
+}
+.soft-kb--ios .soft-kb-key {
+  background: #fff;
+  box-shadow: 0 1px 0 #898a8d;
+}
+.soft-kb--ios .soft-kb-key:active {
+  background: #abb0ba;
+}
+.soft-kb--ios .soft-kb-key--fn {
+  background: #abb0ba;
+}
+.soft-kb--ios .soft-kb-key--fn:active,
+.soft-kb--ios .soft-kb-key--on {
+  background: #fff;
+}
+/* 123 / ABC and search are each about 2.5 letter keys, space takes the rest */
+.soft-kb--ios .soft-kb-key--layer,
+.soft-kb--ios .soft-kb-key--enter {
+  width: calc(2.5 * var(--kw) + var(--kb-gap));
+  font-size: 16px;
+}
+.soft-kb--ios .soft-kb-key--space {
+  font-size: 16px;
+}
+.soft-kb--ios .soft-kb-key--enter {
+  background: #007aff;
+  color: #fff;
+}
+.soft-kb--ios .soft-kb-key--enter:active {
+  background: #0062cc;
+}
+.soft-kb--ios .soft-kb-safe {
+  height: 34px;
+  align-items: flex-end;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+.soft-kb--ios .soft-kb-bar {
+  width: 134px;
+  height: 5px;
+  background: #000;
+}
+
+/* ================= Android (Gboard light) ================= */
+.soft-kb--android {
+  --kb-row-gap: 10px;
+  --kb-key-h: 46px;
+  --kb-radius: 6px;
+  --kb-side: 1.5;
+
+  padding: 8px 4px 0;
+  background: #edeff2;
+  color: #1f1f1f;
+  font-family: Roboto, 'Google Sans', system-ui, sans-serif;
+  font-size: 22px;
+}
+.soft-kb--android .soft-kb-key {
+  background: #fff;
+}
+.soft-kb--android .soft-kb-key:active {
+  background: #dde1e7;
+}
+.soft-kb--android .soft-kb-key--fn {
+  background: #d3d7de;
+}
+.soft-kb--android .soft-kb-key--fn:active {
+  background: #bcc2cc;
+}
+.soft-kb--android .soft-kb-key--on {
+  background: #d3e3fd;
+  color: #041e49;
+}
+.soft-kb--android .soft-kb-key--layer,
+.soft-kb--android .soft-kb-key--enter {
+  width: calc(1.5 * var(--kw));
+}
+.soft-kb--android .soft-kb-key--layer,
+.soft-kb--android .soft-kb-key--text {
+  font-size: 15px;
+  font-weight: 500;
+}
+.soft-kb--android .soft-kb-key--enter {
+  border-radius: 100px;
+  background: #0b57d0;
+  color: #fff;
+}
+.soft-kb--android .soft-kb-key--enter:active {
+  background: #0842a0;
+}
+.soft-kb--android .soft-kb-space-hint {
+  font-size: 13px;
+  color: #5f6368;
+}
+.soft-kb--android .soft-kb-safe {
+  height: 24px;
+  margin-top: 8px;
+  align-items: center;
+}
+.soft-kb--android .soft-kb-bar {
+  width: 108px;
+  height: 4px;
+  background: #1f1f1f;
+  opacity: 0.6;
+}

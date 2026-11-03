@@ -514,54 +514,6 @@ body.ui-ios .home-search-mic--listening {
   50% { box-shadow: var(--glass-shadow-capsule), 0 0 0 8px rgba(159, 32, 137, 0); }
 }
 
-/* search-focused band (Figma "Search Landing"): opaque grey, pill row only, no divider */
-body.ui-ios .home-header--search {
-  padding: var(--glass-inset-top) var(--glass-inset-x) 16px;
-  background-color: var(--glass-wash);
-  border-bottom: 4px solid var(--grey-t4-bg); /* the 4px slot before the list */
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  pointer-events: auto;
-}
-
-body.ui-ios .home-header--search::before {
-  opacity: 0;
-}
-
-/* scrolled search results: back on the collapsed bar's glass and pink wash (as Duo had) */
-body.ui-ios .home-header--collapsed.home-header--search {
-  background-color: var(--glass-fill-pill);
-  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
-  backdrop-filter: blur(var(--glass-blur-bar));
-}
-
-body.ui-ios .home-header--collapsed.home-header--search::before {
-  opacity: 1;
-}
-
-body.ui-ios .home-header--search .home-header-row {
-  max-height: 0;
-  min-height: 0;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-  clip-path: inset(0);
-  transition: max-height 220ms var(--glass-ease), opacity 160ms ease, margin 220ms var(--glass-ease), visibility 0s 220ms;
-}
-
-body.ui-ios .home-header--search .home-search-wrap {
-  margin-top: 0;
-}
-
-body.ui-ios .home-header--search .home-search-divider {
-  display: none;
-}
-
-body.ui-ios .home--search {
-  padding-top: calc(92px + var(--safe-top, 0px));
-  --home-sticky-header-h: calc(92px + var(--safe-top, 0px));
-}
-
 /* inside a blurred bar the children's own blur is redundant (and costly) */
 body.ui-ios .home-header :is(.home-search, .home-search-mic, .home-actions button) {
   -webkit-backdrop-filter: none;

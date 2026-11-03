@@ -9,6 +9,7 @@ import { PriceDropVariantProvider } from './context/PriceDropVariantContext'
 import { CohortProvider } from './context/CohortContext'
 import PincodeGate from './components/PincodeGate'
 import Home from './pages/Home'
+import SearchResults from './pages/SearchResults'
 import ProductDetails from './pages/ProductDetails'
 import ReviewOrder from './pages/ReviewOrder'
 import PaymentOrder from './pages/PaymentOrder'
@@ -71,6 +72,7 @@ export default function App() {
               <div className="app-scroll">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/search" element={<SearchResults />} />
                 <Route path="/plp-lab" element={<PlpCardLab />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/product/:id/review" element={<ReviewOrder />} />

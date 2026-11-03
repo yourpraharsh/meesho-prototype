@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
-import { Link, useSearchParams, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const HOME_SCROLL_KEY = 'homeScrollPosition'
 import { getProductsForGrid, getProductById } from '../data/products'
@@ -14,6 +14,7 @@ import { useCommittedPosture, useCommittedSplit, useUiLayout, useUiTheme } from 
 import { getScrollY, onRootScroll, scrollRootTo } from '../utils/scrollRoot'
 import { useScrollChrome } from '../hooks/useScrollChrome'
 import { useRailActions } from '../context/RailContext'
+import SearchSheet from '../components/search/SearchSheet'
 import { HeartFilledIcon, HeartIcon } from '../components/ProductCard'
 import { buildMixedFeed, buildCohortFeed } from '../utils/cohortFeed'
 import { rememberFeedPosition } from '../utils/pickupVariants'
@@ -56,19 +57,14 @@ const FilterIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
 )
 
-const SEARCH_PARAM = 'q'
-
 export default function Home() {
   const location = useLocation()
+  const navigate = useNavigate()
   const returnTo = location.pathname + location.search
-  const [searchParams, setSearchParams] = useSearchParams()
-  const searchQuery = searchParams.get(SEARCH_PARAM) ?? ''
-  const setSearchQuery = (value) => {
-    const next = new URLSearchParams(searchParams)
-    if (value?.trim()) next.set(SEARCH_PARAM, value)
-    else next.delete(SEARCH_PARAM)
-    setSearchParams(next, { replace: true })
-  }
+  /* the bar opens the search sheet; a submitted search shows on its own page (/search) */
+  const searchSheetRef = useRef(null)
+  const openSearch = () => searchSheetRef.current?.open('')
+  const goToSearch = useCallback((term) => navigate(`/search?q=${encodeURIComponent(term)}`), [navigate])
   const [isListening, setIsListening] = useState(false)
   const [interimText, setInterimText] = useState('')
   const recognitionRef = useRef(null)
@@ -101,7 +97,7 @@ export default function Home() {
         }
         setInterimText(interim || final)
         if (final) {
-          setSearchQuery(final)
+          goToSearch(final)
           setIsListening(false)
           setInterimText('')
         }
@@ -127,7 +123,7 @@ export default function Home() {
     } else {
       launchRecognition()
     }
-  }, [isListening, setSearchQuery])
+  }, [isListening, goToSearch])
 
   const [wishlistOpen, setWishlistOpen] = useState(() => Boolean(location.state?.openWishlist))
   const { has, toggle } = useWishlist()
@@ -138,23 +134,11 @@ export default function Home() {
     () => (cohortId == null ? mixedFeed : buildCohortFeed(allProducts, cohortId)),
     [allProducts, cohortId, mixedFeed],
   )
-  const list = useMemo(() => {
-    const q = searchQuery.trim().toLowerCase()
-    if (!q) return cohortFeed
-    return cohortFeed.filter(
-      (p) =>
-        p.title.toLowerCase().includes(q) ||
-        (p.category && p.category.toLowerCase().includes(q)) ||
-        (p.categoryId && p.categoryId.toLowerCase().includes(q))
-    )
-  }, [searchQuery, cohortFeed])
-
   const saveHomeScroll = () => {
     sessionStorage.setItem(HOME_SCROLL_KEY, String(getScrollY()))
   }
 
   /* cart icon (header + Duo rail): opens the cart; the feed position comes back on return */
-  const navigate = useNavigate()
   const { count: cartCount } = useCart()
   const goToCart = () => {
     saveHomeScroll()
@@ -201,8 +185,8 @@ export default function Home() {
     check()
     const off = onRootScroll(schedule)
     window.addEventListener('resize', schedule)
-    /* the feed also moves without a scroll: entering / leaving search animates the page's
-       top padding (150px ↔ 92px on the phone), so follow the page's own size too */
+    /* the feed also moves without a scroll (a cohort's tag row appearing, images settling),
+       so follow the page's own size too */
     const ro = new ResizeObserver(schedule)
     if (homeRef.current) ro.observe(homeRef.current, { box: 'border-box' })
     return () => {
@@ -245,20 +229,10 @@ export default function Home() {
       })
     })
   }, [])
-  /* search-focused header band (Figma "Search Landing"): focus or a typed query */
-  const [searchFocused, setSearchFocused] = useState(false)
-  const searchInputRef = useRef(null)
-  const isSearchActive = isIos && (searchFocused || searchQuery.trim().length > 0)
-  const exitSearch = () => {
-    setSearchQuery('')
-    setSearchFocused(false)
-    searchInputRef.current?.blur()
-  }
-
   return (
     <div
       ref={homeRef}
-      className={`home has-bottom-nav${isSearchActive ? ' home--search' : ''}${toolbarDocked && collapseSettled ? ' home--toolbar-docked' : ''}`}
+      className={`home has-bottom-nav${toolbarDocked && collapseSettled ? ' home--toolbar-docked' : ''}`}
     >
       {isListening && (
         <div className="voice-modal-overlay" onClick={() => recognitionRef.current?.stop()}>
@@ -275,7 +249,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      <header className={`home-header${isIos && chrome.collapsed ? ' home-header--collapsed' : ''}${isSearchActive ? ' home-header--search' : ''}`}>
+      <header className={`home-header${isIos && chrome.collapsed ? ' home-header--collapsed' : ''}`}>
         <div className="home-header-row">
           {/* Entry to the user-testing flow: pincode → COD/non-COD cohort */}
           <button type="button" className="home-user" onClick={openTestGate}>
@@ -295,22 +269,15 @@ export default function Home() {
         </div>
         <div className="home-search-wrap">
           <div className="home-search">
-            {isSearchActive ? (
-              <button type="button" className="home-search-back" aria-label="Back" onMouseDown={(e) => e.preventDefault()} onClick={exitSearch}>
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden><path d="M10 17L5 12L9.99996 7M5 12H19" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" /></svg>
-              </button>
-            ) : (
-              <SearchIcon />
-            )}
+            <SearchIcon />
+            {/* a trigger only: focusing it opens the sheet, whose own field takes the typing */}
             <input
-              ref={searchInputRef}
-              onFocus={isIos ? () => setSearchFocused(true) : undefined}
-              onBlur={isIos ? () => setSearchFocused(false) : undefined}
+              readOnly
+              onFocus={openSearch}
+              onClick={openSearch}
               type="search"
               className="home-search-input"
               placeholder={isIos ? 'Search for ‘Kurtis’' : "Search for 'kurtis'"}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
               aria-label="Search products"
             />
             {!isIos && (
@@ -341,10 +308,7 @@ export default function Home() {
                 type="button"
                 className={`home-cat-item${isActive ? ' home-cat-item--active' : ''}`}
                 aria-pressed={isActive}
-                onClick={() => {
-                  setSearchQuery('')
-                  setCohortId(isActive ? null : item.cohortId)
-                }}
+                onClick={() => setCohortId(isActive ? null : item.cohortId)}
               >
                 <div className="home-cat-icon-wrap">
                   <img
@@ -401,7 +365,7 @@ export default function Home() {
       <ProductCardGrid
         columns={feedColumns}
         className="home-grid"
-        products={list}
+        products={cohortFeed}
         returnTo={returnTo}
         onNavigate={(product, index) => {
           saveHomeScroll()
@@ -416,11 +380,12 @@ export default function Home() {
         <WishlistDrawer returnTo={returnTo} onClose={() => setWishlistOpen(false)} />
       )}
       <BottomNav active="home" />
+      <SearchSheet ref={searchSheetRef} onSubmit={goToSearch} />
     </div>
   )
 }
 
-function WishlistDrawer({ onClose, returnTo }) {
+export function WishlistDrawer({ onClose, returnTo }) {
   const { wishlistIds, toggle, has } = useWishlist()
   const IMAGE_FALLBACK = 'https://placehold.co/400x400/e2e8f0/64748b?text=Product'
   return (
