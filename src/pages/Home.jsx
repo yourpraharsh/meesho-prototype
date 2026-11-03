@@ -40,10 +40,6 @@ const CameraIcon = () => (
 const CartIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
 )
-/* line bell (notifications) and the Meesho coin, drawn in the same style as the icons above */
-const BellIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-)
 const PinIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
 )
@@ -165,7 +161,7 @@ export default function Home() {
     navigate('/cart', { state: { returnTo } })
   }
 
-  /* iOS skin: header collapses to the search row and the tab bar minimizes on scroll */
+  /* iOS skin: header collapses to the search row on scroll; the tab bar always stays full */
   const [uiTheme] = useUiTheme()
   const isIos = uiTheme === 'ios'
   const [uiLayout] = useUiLayout()
@@ -236,8 +232,7 @@ export default function Home() {
     { id: 'cart', icon: 'cart', label: 'Cart', badge: cartCount, onClick: goToCart },
   ])
 
-  /* Restore the feed position when coming back from a PDP; the programmatic jump must
-     not read as a downward swipe, so the chrome run is re-seeded right after it. */
+  /* Restore the feed position when coming back from a PDP */
   useEffect(() => {
     const saved = sessionStorage.getItem(HOME_SCROLL_KEY)
     if (saved === null) return
@@ -247,10 +242,8 @@ export default function Home() {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         scrollRootTo(y)
-        chrome.expand()
       })
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   /* search-focused header band (Figma "Search Landing"): focus or a typed query */
   const [searchFocused, setSearchFocused] = useState(false)
@@ -292,10 +285,8 @@ export default function Home() {
             </span>
           </button>
           <div className="home-actions">
-            {/* Android: wishlist · notifications · cart (line icons); the iOS glass bar keeps search · wishlist · cart */}
-            {isIos && <button type="button" aria-label="Search"><SearchIcon /></button>}
+            {/* wishlist · cart on both skins (line icons on Android, glass capsules on iOS) */}
             <button type="button" className="home-header-wishlist" aria-label="Wishlist" onClick={() => setWishlistOpen(true)}><HeartIcon /></button>
-            {!isIos && <button type="button" className="home-header-bell" aria-label="Notifications"><BellIcon /></button>}
             <button type="button" className="cart-badge-host" aria-label={cartAriaLabel(cartCount)} onClick={goToCart}>
               <CartIcon />
               <CartBadge count={cartCount} />
@@ -424,7 +415,7 @@ export default function Home() {
       {wishlistOpen && (
         <WishlistDrawer returnTo={returnTo} onClose={() => setWishlistOpen(false)} />
       )}
-      <BottomNav active="home" minimized={isIos && chrome.minimized} onExpand={chrome.expand} />
+      <BottomNav active="home" />
     </div>
   )
 }

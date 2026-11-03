@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import { useRailActions } from '../../context/RailContext'
-import GlassStepper from '../GlassStepper'
 import { Link } from 'react-router-dom'
 import { getHeroImageForProduct } from '../../data/categoryProductImages'
 import { ReviewDiscountMarker } from '../plp/PlpPriceMarkers'
@@ -189,7 +188,6 @@ export default function ReviewShell({
         ) : (
           <span className="review-shell-step-spacer" aria-hidden />
         )}
-        <GlassStepper current={1} />
       </header>
 
       {offerParts && (

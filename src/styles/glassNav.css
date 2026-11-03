@@ -788,14 +788,37 @@ body.ui-ios .review-shell-footer,
 body.ui-ios .dtr-footer,
 body.ui-ios .review-v4-footer,
 body.ui-ios .payment-page-footer,
-body.ui-ios .odp-sticky {
+body.ui-ios .odp-sticky,
+body.ui-ios .cart-page .cart-footer {
   min-height: 0;
   padding: 12px 24px max(12px, var(--safe-bottom, 0px));
+  background: transparent; /* the glass is the ::before below, so its top edge can fade */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-top: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+/* the glass starts 12px above the bar and ramps in over 24px, so the page meets no hard
+   line; it is full strength by the buttons' top edge (the bar's 12px top padding) */
+body.ui-ios .pdp-cta-wrap::before,
+body.ui-ios .review-shell-footer::before,
+body.ui-ios .dtr-footer::before,
+body.ui-ios .review-v4-footer::before,
+body.ui-ios .payment-page-footer::before,
+body.ui-ios .odp-sticky::before,
+body.ui-ios .cart-page .cart-footer::before {
+  content: '';
+  position: absolute;
+  inset: -12px 0 0;
+  z-index: -1;
+  pointer-events: none;
   background: var(--glass-fill-footer);
   -webkit-backdrop-filter: blur(var(--glass-blur-bar));
   backdrop-filter: blur(var(--glass-blur-bar));
-  border-top: none;
-  box-shadow: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24px);
+  mask-image: linear-gradient(180deg, transparent 0, #000 24px);
 }
 
 /* the outlined button lets the glass show through (Figma 758:34175) */

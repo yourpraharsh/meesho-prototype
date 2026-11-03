@@ -18,7 +18,7 @@ import './DeliveryTypeReview.css'
 
 const IMAGE_FALLBACK = 'https://placehold.co/400x400/e2e8f0/64748b?text=Product'
 
-/** Cart checkout steps (cart review = step 2). The Buy Now flow keeps GlassStepper's Review · Payment. */
+/** Cart checkout steps (cart review = step 2). The Buy Now flow shows no GlassStepper. */
 const CART_STEPS = ['Cart', 'Review', 'Payment']
 const CART_STEP_CURRENT = 2
 
@@ -214,11 +214,7 @@ export default function DeliveryTypeReview({
             {isCart ? `${CART_STEP_CURRENT}/${CART_STEPS.length}` : '1/2'}
           </span>
         </span>
-        {isCart ? (
-          <GlassStepper steps={CART_STEPS} current={CART_STEP_CURRENT} />
-        ) : (
-          <GlassStepper current={1} />
-        )}
+        {isCart && <GlassStepper steps={CART_STEPS} current={CART_STEP_CURRENT} />}
       </header>
       {isCart && <CartStepper />}
 

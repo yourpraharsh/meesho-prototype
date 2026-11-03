@@ -736,16 +736,7 @@ body.ui-ios .cart-page .cart-body {
   cursor: pointer;
 }
 
-/* glass CTA bar on the iOS skin (as body.ui-ios .dtr-footer in glassNav.css) */
-body.ui-ios .cart-page .cart-footer {
-  min-height: 0;
-  padding: 12px 24px max(12px, var(--safe-bottom, 0px));
-  background: var(--glass-fill-footer);
-  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
-  backdrop-filter: blur(var(--glass-blur-bar));
-  border-top: none;
-  box-shadow: none;
-}
+/* glass CTA bar on the iOS skin: shared with the other footers in glassNav.css */
 
 /* Duo: fill whichever display is on (duoDevice.css phone-width caps) */
 body.duo-device .app .cart-page .cart-footer {

@@ -329,6 +329,7 @@ export default function PaymentOrder({ cart = false }) {
         onBack={handleBack}
         qrSeed={qrSeed}
         steps={cart ? CART_STEPS : undefined}
+        glassStepper={cart}
         footer={
           <>
             {(needsPayOnlineInstrument || !paymentMethodId) && (

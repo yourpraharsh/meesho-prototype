@@ -15,7 +15,6 @@ import V4CheckoutAddress from './V4CheckoutAddress'
 import PaymentBrandIcon from './PaymentBrandIcon'
 import { PaymentMethodCard } from './PaymentMethodCards'
 import { ReviewConfirmButton } from './ReviewShell'
-import GlassStepper from '../GlassStepper'
 import './UnifiedCheckoutV4.css'
 import './PaymentMethodSection.css'
 import './PaymentPage.css'
@@ -191,7 +190,6 @@ export default function UnifiedCheckoutV4({
             <h1 className="review-v4-title">Review Order</h1>
           <span className="glass-nav-spacer" aria-hidden />
         </div>
-        <GlassStepper current={1} />
       </header>
 
       {offerParts && (

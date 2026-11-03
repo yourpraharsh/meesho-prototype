@@ -386,6 +386,8 @@ export default function PaymentPage({
   qrSeed,
   footer,
   steps = PAYS_STEPS,
+  /* iOS glass stepper: cart flow only (Cart · Review · Payment); Buy Now shows none */
+  glassStepper = false,
 }) {
   useRailActions([{ id: 'back', icon: 'back', label: 'Back', onClick: onBack }])
   const isPrepaidV3 = layout === 'prepaid-v3'
@@ -419,7 +421,7 @@ export default function PaymentPage({
           <span className="payment-page-step-label">Step</span>
           <span className="payment-page-step-value">{`${stepCount}/${stepCount}`}</span>
         </span>
-        <GlassStepper current={stepCount} steps={steps} />
+        {glassStepper && <GlassStepper current={stepCount} steps={steps} />}
         <SkinText
           ios={null}
           android={
