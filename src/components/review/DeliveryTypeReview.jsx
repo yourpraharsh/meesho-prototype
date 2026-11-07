@@ -18,7 +18,7 @@ import './DeliveryTypeReview.css'
 
 const IMAGE_FALLBACK = 'https://placehold.co/400x400/e2e8f0/64748b?text=Product'
 
-/** Cart checkout steps (cart review = step 2). The Buy Now flow shows no GlassStepper. */
+/** Cart checkout steps (cart review = step 2). The Buy Now flow shows no step progress. */
 const CART_STEPS = ['Cart', 'Review', 'Payment']
 const CART_STEP_CURRENT = 2
 
@@ -208,13 +208,16 @@ export default function DeliveryTypeReview({
           <span className="glass-nav-spacer" aria-hidden />
         </div>
         <span className="review-shell-step-spacer" aria-hidden />
-        <span className="review-shell-step review-shell-step--duo">
-          <span className="review-shell-step-label">Step</span>
-          <span className="review-shell-step-value">
-            {isCart ? `${CART_STEP_CURRENT}/${CART_STEPS.length}` : '1/2'}
-          </span>
-        </span>
-        {isCart && <GlassStepper steps={CART_STEPS} current={CART_STEP_CURRENT} />}
+        {/* step progress rides the cart flow only; Buy Now shows none on any skin */}
+        {isCart && (
+          <>
+            <span className="review-shell-step review-shell-step--duo">
+              <span className="review-shell-step-label">Step</span>
+              <span className="review-shell-step-value">{`${CART_STEP_CURRENT}/${CART_STEPS.length}`}</span>
+            </span>
+            <GlassStepper steps={CART_STEPS} current={CART_STEP_CURRENT} />
+          </>
+        )}
       </header>
       {isCart && <CartStepper />}
 

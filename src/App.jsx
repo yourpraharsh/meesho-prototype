@@ -25,6 +25,7 @@ import DuoRail from './components/DuoRail'
 import DuoDevice from './components/DuoDevice'
 import { RailProvider } from './context/RailContext'
 import './styles/glassNav.css'
+import './styles/offer-band.css'
 import './styles/duoLayout.css'
 
 /* inside the Duo cover stand-in: follow the live app's page and scroll when asked, then say

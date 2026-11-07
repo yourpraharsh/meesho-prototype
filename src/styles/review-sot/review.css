@@ -34,20 +34,8 @@ body:not(.ui-ios) .dtr .review-shell-back > svg {
 }
 
 /* --------------------------------------------- "₹X OFF on this order" band (3695:107392) */
-/* 42px: white base + the exported scalloped gradient shape (416.48 x 40.46 at x -1.94);
+/* 42px band with the scalloped edge: shared with every checkout page (styles/offer-band.css);
    text row 20px, 6.5px from the top, bottom-aligned, centred. */
-.dtr .dtr-offer {
-  align-items: flex-start;
-  min-height: 42px;
-  padding: 6.5px 16px 15.5px;
-  background:
-    url('../../assets/review-sot/offer-band.svg') -1.94px 0 / calc(100% + 56.48px) 40.46px no-repeat,
-    var(--white);
-}
-
-.dtr .dtr-offer::after {
-  display: none;
-}
 
 .dtr .dtr-offer-text {
   align-items: flex-end;

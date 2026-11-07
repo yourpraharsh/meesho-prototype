@@ -159,7 +159,6 @@ export default function ReviewOrder() {
       <div className="review-page">
         <ReviewShell
           title="CHECK ADDRESS"
-          step="1/2"
           layout="address-first"
           deliveryEta={deliveryEta}
           product={product}
@@ -195,7 +194,6 @@ export default function ReviewOrder() {
       <div className="review-page">
         <ReviewShell
           title={<SkinText ios="REVIEW YOUR ORDER" android="REVIEW ORDER" />}
-          step="1/2"
           layout="payment-inline"
           cohort={cohort}
           offerLabel={offerLabel}
@@ -267,7 +265,6 @@ export default function ReviewOrder() {
       <div className="review-page">
         <ReviewShell
           title={<SkinText ios="REVIEW YOUR ORDER" android="REVIEW ORDER" />}
-          step="1/2"
           layout="clarity"
           deliveryEta={deliveryEta}
           product={product}

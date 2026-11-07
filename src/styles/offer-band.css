@@ -1,0 +1,68 @@
+/* =====================================================================
+   "₹X OFF on this order" band — one look on every checkout page: the review (every
+   variant) and the payment page. Figma 3695:107392: 42px on white, the mint gradient with
+   a scalloped bottom edge (10px waves, 5px deep) and a faint green rim under the waves.
+   The waves are a CSS mask rather than a stretched export, so at any width (phone, Duo)
+   they repeat evenly and the band ends on whole waves at both edges.
+   (Specificity 0,2,1+ so it wins over each page's own band rules.)
+   ===================================================================== */
+body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop) {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 42px;
+  padding: 6.5px 16px 15.5px;
+  background: var(--white);
+}
+
+/* the gradient (::before) and, 1px lower beneath it, the rim (::after), both cut to the waves */
+body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop)::before,
+body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop)::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 1.5px;
+  height: auto;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - 5px) no-repeat,
+    radial-gradient(5px 5px at 50% 0, #000 96%, transparent 100%) bottom / 10px 5px round no-repeat;
+  mask:
+    linear-gradient(#000 0 0) top / 100% calc(100% - 5px) no-repeat,
+    radial-gradient(5px 5px at 50% 0, #000 96%, transparent 100%) bottom / 10px 5px round no-repeat;
+}
+
+body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop)::before {
+  z-index: -1;
+  background: linear-gradient(90deg, #d3f4ea 0%, #eefbf7 23.6%, #feffff 43.4%, #fff 50%, #f5fdfa 65.1%, #d3f4ea 100%);
+}
+
+body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop)::after {
+  z-index: -2;
+  top: 1px;
+  bottom: 0.5px;
+  background: rgba(82, 190, 157, 0.35);
+}
+
+/* text row: Headline6 Bold 17/20 Green Base, then Book 13/16 #263238, bottom-aligned */
+body :is(.review-shell-offer-scallop-text, .review-v4-offer-scallop-text, .payment-page-offer-scallop-text) {
+  align-items: flex-end;
+  gap: 4px;
+}
+
+body :is(.review-shell-offer-highlight, .review-v4-offer-highlight, .payment-page-offer-highlight) {
+  font: 700 17px/20px var(--font-mier);
+  letter-spacing: 0;
+  color: var(--green-base);
+}
+
+body :is(.review-shell-offer-rest, .review-v4-offer-rest, .payment-page-offer-rest) {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: #263238;
+}

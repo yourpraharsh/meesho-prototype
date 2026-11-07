@@ -386,8 +386,9 @@ export default function PaymentPage({
   qrSeed,
   footer,
   steps = PAYS_STEPS,
-  /* iOS glass stepper: cart flow only (Cart · Review · Payment); Buy Now shows none */
-  glassStepper = false,
+  /* step progress (Android stepper row, iOS glass stepper, Duo STEP pill): cart flow only
+     (Cart · Review · Payment); Buy Now shows none */
+  showSteps = false,
 }) {
   useRailActions([{ id: 'back', icon: 'back', label: 'Back', onClick: onBack }])
   const isPrepaidV3 = layout === 'prepaid-v3'
@@ -417,37 +418,41 @@ export default function PaymentPage({
           <h1 className="payment-page-title"><SkinText ios="Review Your Order" android="Payment Method" /></h1>
           <span className="glass-nav-spacer" aria-hidden />
         </div>
-        <span className="payment-page-step">
-          <span className="payment-page-step-label">Step</span>
-          <span className="payment-page-step-value">{`${stepCount}/${stepCount}`}</span>
-        </span>
-        {glassStepper && <GlassStepper current={stepCount} steps={steps} />}
+        {showSteps && (
+          <span className="payment-page-step">
+            <span className="payment-page-step-label">Step</span>
+            <span className="payment-page-step-value">{`${stepCount}/${stepCount}`}</span>
+          </span>
+        )}
+        {showSteps && <GlassStepper current={stepCount} steps={steps} />}
         <SkinText
           ios={null}
           android={
-            <ol
-              className={`pays-stepper${stepCount === 3 ? ' pays-stepper--3' : ''}`}
-              aria-label={`Step ${stepCount} of ${stepCount}`}
-            >
-              {steps.map((label, i) =>
-                i < stepCount - 1 ? (
-                  <li key={label} className="pays-stepper-step pays-stepper-step--done">
-                    <span className="pays-stepper-node">
-                      <img src={paysStepDone} alt="" />
-                    </span>
-                    <span className="pays-stepper-label">{label}</span>
-                  </li>
-                ) : (
-                  <li key={label} className="pays-stepper-step pays-stepper-step--current" aria-current="step">
-                    <span className="pays-stepper-node">
-                      <img src={paysStepCurrent} alt="" />
-                      <span className="pays-stepper-num">{stepCount}</span>
-                    </span>
-                    <span className="pays-stepper-label">{label}</span>
-                  </li>
-                ),
-              )}
-            </ol>
+            showSteps ? (
+              <ol
+                className={`pays-stepper${stepCount === 3 ? ' pays-stepper--3' : ''}`}
+                aria-label={`Step ${stepCount} of ${stepCount}`}
+              >
+                {steps.map((label, i) =>
+                  i < stepCount - 1 ? (
+                    <li key={label} className="pays-stepper-step pays-stepper-step--done">
+                      <span className="pays-stepper-node">
+                        <img src={paysStepDone} alt="" />
+                      </span>
+                      <span className="pays-stepper-label">{label}</span>
+                    </li>
+                  ) : (
+                    <li key={label} className="pays-stepper-step pays-stepper-step--current" aria-current="step">
+                      <span className="pays-stepper-node">
+                        <img src={paysStepCurrent} alt="" />
+                        <span className="pays-stepper-num">{stepCount}</span>
+                      </span>
+                      <span className="pays-stepper-label">{label}</span>
+                    </li>
+                  ),
+                )}
+              </ol>
+            ) : null
           }
         />
       </header>
