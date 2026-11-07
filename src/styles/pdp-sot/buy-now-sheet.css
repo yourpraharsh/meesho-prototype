@@ -49,6 +49,21 @@ body.duo-device .buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-options {
   gap: 4px;
 }
 
+/* a size's own price under it (shown when sizes are priced differently), styled as on the
+   PDP: Body3 Grey T1, the selected size's price Subtitle2 Demi in Jamun */
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill-price {
+  font: 400 13px/16px var(--font-mier);
+  letter-spacing: 0.0195px;
+  color: var(--grey-t1);
+  white-space: nowrap;
+}
+
+.buy-now-sheet .buy-now-sheet-size-options .pdp-vsku-pill.selected + .pdp-vsku-pill-price {
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--jamun-base);
+}
+
 /* Size Option: 36 tall, one line, 20px side padding (Figma's 1px stroke sits inside the box,
    so 19px + 1px border here), radius 8, 1px Grey/Base border, white.
    Label: Subtitles/Subtitle1, Mier Demi 15/20, letter-spacing 0.1%, #333 */

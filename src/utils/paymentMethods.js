@@ -128,6 +128,9 @@ export function buildExtendedPaymentRows(paymentOptions) {
 
 /** Resolve payable for any payment selection key. */
 export function getPayableForSelection(paymentOptions, selectionId) {
+  /* nothing chosen yet: the order total the size sheet and review already showed (the
+     online price) — the price only moves once a method that changes it is picked */
+  if (!selectionId) return paymentOptions.pay_online.payable
   if (paymentOptions[selectionId]) return paymentOptions[selectionId].payable
   const extended = buildExtendedPaymentRows(paymentOptions)
   const all = [...extended.lastUsed, ...extended.upiApps, ...extended.cards]

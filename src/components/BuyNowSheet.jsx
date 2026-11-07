@@ -70,6 +70,20 @@ export default function BuyNowSheet({
   )
 
   const sizeOptionId = functionalLayer ? sheetSelectedOptions[functionalLayer.axis_id] : null
+  /* sizes priced differently: each size shows its own price under it, at the return type
+     chosen below, so it matches the return card, the review and the payment total */
+  const sizePrices = useMemo(() => {
+    if (!functionalLayer?.options?.length) return null
+    const prices = new Map(
+      functionalLayer.options.map((opt) => [
+        opt.option_id,
+        computeOrder(product, { ...sheetSelectedOptions, [functionalLayer.axis_id]: opt.option_id }, returnTypeId)
+          .orderTotal,
+      ]),
+    )
+    const sold = [...prices].filter(([id]) => !oosOptionIds?.has(id)).map(([, price]) => price)
+    return new Set(sold).size > 1 ? prices : null
+  }, [functionalLayer, product, sheetSelectedOptions, returnTypeId, oosOptionIds])
   const canConfirm = isBuyNowSizeSelectionValid(functionalLayer, sheetSelectedOptions, oosOptionIds)
 
   const sheetTitle = functionalLayer
@@ -127,6 +141,9 @@ export default function BuyNowSheet({
                       >
                         {opt.label}
                       </button>
+                      {sizePrices && !isOos && (
+                        <span className="pdp-vsku-pill-price">₹{sizePrices.get(opt.option_id)}</span>
+                      )}
                     </div>
                   )
                 })}
