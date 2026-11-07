@@ -107,7 +107,7 @@ export default function PaymentOrder({ cart = false }) {
 
   /**
    * With pickup active, online methods price on the store-discounted order while
-   * COD prices on home delivery (Figma 2094:109461) — each card carries its note.
+   * COD prices on home delivery (Figma 2094:109461) and says so in its note.
    */
   const paymentOptions = useMemo(() => {
     if (!order) return null
@@ -125,7 +125,6 @@ export default function PaymentOrder({ cart = false }) {
         ...options.pay_online,
         compareAt: codPayable,
         savingsVsCod: Math.max(0, codPayable - options.pay_online.payable),
-        note: { tone: 'good', text: 'Store Pickup + UPI Discount applied' },
       },
     }
   }, [order, baseOrder, paymentCohort, isPickup])
