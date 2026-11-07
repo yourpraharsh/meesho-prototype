@@ -1,12 +1,14 @@
 /* =====================================================================
    "₹X OFF on this order" band — one look on every checkout page: the review (every
    variant) and the payment page. Figma 3695:107392: 42px on white, the mint gradient with
-   a scalloped bottom edge (10px waves, 5px deep) and a faint green rim under the waves.
+   a scalloped bottom edge (--wave-w wide, --wave-h deep) and a faint green rim under it.
    The waves are a CSS mask rather than a stretched export, so at any width (phone, Duo)
    they repeat evenly and the band ends on whole waves at both edges.
    (Specificity 0,2,1+ so it wins over each page's own band rules.)
    ===================================================================== */
 body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop) {
+  --wave-w: 18px;
+  --wave-h: 7px;
   position: relative;
   isolation: isolate;
   display: flex;
@@ -30,11 +32,11 @@ body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop,
   height: auto;
   pointer-events: none;
   -webkit-mask:
-    linear-gradient(#000 0 0) top / 100% calc(100% - 5px) no-repeat,
-    radial-gradient(5px 5px at 50% 0, #000 96%, transparent 100%) bottom / 10px 5px round no-repeat;
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--wave-h)) no-repeat,
+    radial-gradient(calc(var(--wave-w) / 2) var(--wave-h) at 50% 0, #000 96%, transparent 100%) bottom / var(--wave-w) var(--wave-h) round no-repeat;
   mask:
-    linear-gradient(#000 0 0) top / 100% calc(100% - 5px) no-repeat,
-    radial-gradient(5px 5px at 50% 0, #000 96%, transparent 100%) bottom / 10px 5px round no-repeat;
+    linear-gradient(#000 0 0) top / 100% calc(100% - var(--wave-h)) no-repeat,
+    radial-gradient(calc(var(--wave-w) / 2) var(--wave-h) at 50% 0, #000 96%, transparent 100%) bottom / var(--wave-w) var(--wave-h) round no-repeat;
 }
 
 body :is(.dtr .dtr-offer, .review-shell-offer-scallop, .review-v4-offer-scallop, .payment-page-offer-scallop)::before {
