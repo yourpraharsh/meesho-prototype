@@ -352,6 +352,37 @@ function MissedDelivery({ store, eta, onOpen }) {
   )
 }
 
+/* out for delivery: the OTP said out loud at the door, with a small copy */
+function DeliveryOtpCard({ otp }) {
+  const [copied, setCopied] = useState(false)
+  useEffect(() => {
+    if (!copied) return undefined
+    const t = window.setTimeout(() => setCopied(false), 2000)
+    return () => window.clearTimeout(t)
+  }, [copied])
+  const copy = async () => {
+    try {
+      await navigator.clipboard?.writeText(otp)
+    } catch {
+      /* clipboard blocked: the code is on screen anyway */
+    }
+    setCopied(true)
+  }
+  return (
+    <section className="odp-section odp-otp-card" aria-label="Delivery OTP">
+      <div className="odp-otp-card-text">
+        <p className="odp-otp-card-title">
+          Delivery OTP is <b className="odp-otp">{otp}</b>
+        </p>
+        <p className="odp-otp-card-sub">Share it with the delivery partner at your door</p>
+      </div>
+      <button type="button" className="odp-link odp-otp-card-copy" onClick={copy} aria-live="polite">
+        {copied ? 'Copied' : 'Copy'}
+      </button>
+    </section>
+  )
+}
+
 /* 8 · time pressure: truck leaving + hourglass */
 function Countdown({ eta, onOpen }) {
   const [left, setLeft] = useState(5 * 3600 + 20 * 60)
@@ -748,6 +779,8 @@ export default function OrderDetails() {
               </button>
             )}
           </section>
+
+          {outForDelivery && <DeliveryOtpCard otp={deliveryOtp(order)} />}
 
           {idea === 'deliver-to-toggle' ? (
             <DeliverToToggle store={store} savings={savings} address={address} state={state} onOpen={openSheet} />
