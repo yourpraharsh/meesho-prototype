@@ -266,6 +266,11 @@ body:not(.ui-ios) .odp-help {
   left: 74%;
 }
 
+/* out for delivery: the lorry stands on the Out for Delivery stop */
+.odp .odp-truck--ofd {
+  left: 70.2%;
+}
+
 .odp-mark {
   position: relative;
   display: flex;
@@ -381,12 +386,28 @@ body:not(.ui-ios) .odp-help {
 
 /* home: the lorry sits near the start, so the bubble hangs right of it (arrow 44px in)
    instead of running off the card */
-.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed) {
+.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed):not(.odp-tooltip--otp) {
   transform: translateX(-44px);
 }
 
-.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed)::after {
+.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed):not(.odp-tooltip--otp)::after {
   left: 44px;
+}
+
+/* out for delivery: the bubble carries the delivery OTP; the lorry is near the track's end,
+   so the bubble hangs left of it (arrow 44px in from its right edge) */
+.odp .odp-tooltip--otp {
+  left: 70.2%;
+  transform: translateX(calc(-100% + 44px));
+}
+
+.odp .odp-tooltip--otp::after {
+  left: calc(100% - 44px);
+}
+
+.odp .odp-otp {
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 /* a missed attempt points at Out for Delivery and keeps its red status dot */

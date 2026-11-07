@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import BottomNav from '../components/BottomNav'
-import { getOrdersForListing, shortEta } from '../utils/orders'
+import { deliveryOtp, getOrdersForListing, isOutForDelivery, shortEta } from '../utils/orders'
 import { DELIVERY_TYPE } from '../utils/deliveryTypes'
 import './OrderListing.css'
 
@@ -56,6 +56,7 @@ export default function OrderListing() {
       <ul className="olp-list">
         {orders.map((order) => {
           const isPickup = order.deliveryTypeId === DELIVERY_TYPE.PICKUP
+          const outForDelivery = isOutForDelivery(order)
           return (
             <li key={order.id}>
               <button
@@ -73,11 +74,18 @@ export default function OrderListing() {
                   }}
                 />
                 <span className="olp-card-body">
-                  <span className="olp-card-status">Order Placed</span>
-                  <span className="olp-card-eta">
-                    {isPickup ? 'Store pickup by ' : 'Delivery by '}
-                    {shortEta(order.etaLabel)}
-                  </span>
+                  <span className="olp-card-status">{outForDelivery ? 'Out for Delivery' : 'Order Placed'}</span>
+                  {outForDelivery ? (
+                    /* the OTP to give the delivery partner, right on the card */
+                    <span className="olp-card-eta">
+                      Delivery OTP <b className="olp-otp">{deliveryOtp(order)}</b>
+                    </span>
+                  ) : (
+                    <span className="olp-card-eta">
+                      {isPickup ? 'Store pickup by ' : 'Delivery by '}
+                      {shortEta(order.etaLabel)}
+                    </span>
+                  )}
                   <span className="olp-card-meta">
                     {order.sizeLabel && (
                       <>

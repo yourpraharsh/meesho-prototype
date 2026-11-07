@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRailActions } from '../context/RailContext'
 import { scrollRootTo } from '../utils/scrollRoot'
 import { useNavigate, useParams } from 'react-router-dom'
-import { etaDay, getOrderById, orderNumber, shortDate, shortEta, updateOrder } from '../utils/orders'
+import { deliveryOtp, etaDay, getOrderById, isOutForDelivery, orderNumber, shortDate, shortEta, updateOrder } from '../utils/orders'
 import { DELIVERY_TYPE, getPickupSavings, getPickupStores, PICKUP_HOLD_DAYS } from '../utils/deliveryTypes'
 import { getReturnTypeById } from '../utils/checkoutConfig'
 import { parseHoursRange } from '../utils/pickupVariants'
@@ -516,6 +516,9 @@ export default function OrderDetails() {
     store?.mapsHref ?? `https://www.google.com/maps/search/${encodeURIComponent(`${store?.name} ${store?.landmark}`)}`
   const idea = !isPickup && !isCod ? order.switchIdea : null
   const missed = idea === 'missed-delivery'
+  /* out for delivery today: the lorry stands at its stop and its bubble carries the OTP */
+  const outForDelivery = !missed && isOutForDelivery(order)
+  const shipped = missed || outForDelivery
   const openSheet = () => setSheetOpen(true)
 
   const confirmSwitch = () => {
@@ -678,8 +681,10 @@ export default function OrderDetails() {
             <div className="odp-status-head">
               <StatusIcon />
               <div>
-                <p className="odp-status-title">{missed ? 'Delivery attempted' : 'Order Placed'}</p>
-                <p className="odp-status-sub">{missed ? 'No one was home today' : `Delivery by ${shortEta(order.etaLabel)}`}</p>
+                <p className="odp-status-title">{missed ? 'Delivery attempted' : outForDelivery ? 'Out for Delivery' : 'Order Placed'}</p>
+                <p className="odp-status-sub">
+                  {missed ? 'No one was home today' : outForDelivery ? 'Arriving today' : `Delivery by ${shortEta(order.etaLabel)}`}
+                </p>
               </div>
             </div>
 
@@ -687,16 +692,21 @@ export default function OrderDetails() {
             {idea === 'countdown' && <Countdown eta={eta} onOpen={openSheet} />}
 
             <div className="odp-track">
-              <span className={`odp-tooltip${missed ? ' odp-tooltip--missed' : ''}`}>
+              <span className={`odp-tooltip${missed ? ' odp-tooltip--missed' : ''}${outForDelivery ? ' odp-tooltip--otp' : ''}`}>
                 <img className="odp-tooltip-dot" src={tooltipStatusSrc} alt="" aria-hidden />
-                {missed ? 'We missed you' : 'Shipping Soon!'}
+                {missed ? 'We missed you' : outForDelivery ? (
+                  <>
+                    Delivery OTP <b className="odp-otp">{deliveryOtp(order)}</b>
+                  </>
+                ) : 'Shipping Soon!'}
               </span>
               <span className="odp-line" aria-hidden />
-              <span className={`odp-line odp-line--done${missed ? ' odp-line--done-missed' : ''}`} aria-hidden />
+              <span className={`odp-line odp-line--done${shipped ? ' odp-line--done-missed' : ''}`} aria-hidden />
               <span className="odp-node odp-node--1"><CheckNode done /></span>
-              {!missed && <span className="odp-truck" aria-hidden><TruckIcon /></span>}
-              <span className="odp-node odp-node--2"><CheckNode done={missed} /></span>
-              <span className="odp-node odp-node--3"><CheckNode done={missed} /></span>
+              {!missed && <span className={`odp-truck${outForDelivery ? ' odp-truck--ofd' : ''}`} aria-hidden><TruckIcon /></span>}
+              <span className="odp-node odp-node--2"><CheckNode done={shipped} /></span>
+              {/* the lorry stands on the Out for Delivery stop itself */}
+              {!outForDelivery && <span className="odp-node odp-node--3"><CheckNode done={missed} /></span>}
               <span className="odp-node odp-node--4"><CheckNode /></span>
             </div>
 
@@ -705,17 +715,17 @@ export default function OrderDetails() {
                 <b>Ordered</b>
                 <span>{shortDate(order.placedAt)}</span>
               </span>
-              <span className={`odp-step${missed ? ' odp-step--done' : ''}`}>
+              <span className={`odp-step${shipped ? ' odp-step--done' : ''}`}>
                 <b>Shipped</b>
                 <span>{shortDate(order.placedAt, 2)}</span>
               </span>
-              <span className={`odp-step${missed ? ' odp-step--done' : ''}`}>
+              <span className={`odp-step${shipped ? ' odp-step--done' : ''}`}>
                 <b>Out for Delivery</b>
-                <span>{missed ? 'Today' : '----'}</span>
+                <span>{shipped ? 'Today' : '----'}</span>
               </span>
               <span className="odp-step odp-step--end">
                 <b>Delivery</b>
-                <span>{missed ? 'Re-attempt' : eta}</span>
+                <span>{missed ? 'Re-attempt' : outForDelivery ? 'Today' : eta}</span>
               </span>
             </div>
           </section>
@@ -726,9 +736,9 @@ export default function OrderDetails() {
 
           <section className="odp-section odp-cancel">
             <span className="odp-cancel-text">
-              {missed ? 'Cancellation not available post shipping' : 'Cancellation available till shipping'}
+              {shipped ? 'Cancellation not available post shipping' : 'Cancellation available till shipping'}
             </span>
-            {missed ? (
+            {shipped ? (
               <button type="button" className="odp-link">
                 Know More
               </button>

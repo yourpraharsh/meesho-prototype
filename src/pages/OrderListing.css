@@ -118,6 +118,17 @@
   color: var(--grey-t1);
 }
 
+/* delivery OTP: the code in a quiet tile so it reads as something to say out loud */
+.olp-otp {
+  margin-left: 8px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: var(--grey-t4-bg);
+  font: 700 15px/20px var(--font-mier);
+  letter-spacing: 2px;
+  color: var(--grey-base);
+}
+
 .olp-dot {
   width: 4px;
   height: 4px;

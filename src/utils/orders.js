@@ -27,6 +27,15 @@ export const SWITCH_IDEAS = [
   'compare', // 9 icon-first Home vs Store comparison
 ]
 
+/* Idea: the first sample order is out for delivery and shows its delivery OTP on the OLP
+   card's line and on the ODP's truck (false → every order is back to "Order Placed") */
+const DELIVERY_OTP_IDEA = true
+
+export const ORDER_STATUS = {
+  PLACED: 'placed',
+  OUT_FOR_DELIVERY: 'out-for-delivery',
+}
+
 /* Off: the ODP switch-to-pickup lab is retired, so every order shows the plain ODP */
 const SWITCH_IDEAS_ENABLED = false
 const switchIdeaAt = (i) => (SWITCH_IDEAS_ENABLED ? SWITCH_IDEAS[i % SWITCH_IDEAS.length] : null)
@@ -110,9 +119,21 @@ export function getSampleOrders() {
     paymentMethodId: 'pay_online',
     deliveryTypeId: DELIVERY_TYPE.HOME,
     etaLabel: eta,
+    status: DELIVERY_OTP_IDEA && i === 0 ? ORDER_STATUS.OUT_FOR_DELIVERY : ORDER_STATUS.PLACED,
     placedAt: Date.now() - i * 3600000,
   }))
   return sampleCache
+}
+
+/** On the way to the door today (a store-pickup order never is). */
+export const isOutForDelivery = (order) =>
+  order?.status === ORDER_STATUS.OUT_FOR_DELIVERY && order.deliveryTypeId !== DELIVERY_TYPE.PICKUP
+
+/** Stable 4-digit delivery OTP derived from the order id (never starts with 0). */
+export function deliveryOtp(order) {
+  let hash = 7
+  for (const ch of String(order?.id ?? '')) hash = (hash * 131 + ch.charCodeAt(0)) >>> 0
+  return String(1000 + (hash % 9000))
 }
 
 /** Orders to list: real ones from this session first, then the six samples. */
