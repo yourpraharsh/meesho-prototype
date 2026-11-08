@@ -14,6 +14,8 @@ const REGISTRY = {
   '1-spotlight': { cardTreatment: DIL.treatmentSpotlight },
   '2-save-flash': { cardTreatment: DIL.treatmentSaveFlash },
   '3-spotlight-collapsed': { cardTreatment: DIL.treatmentSpotlightCollapsed },
+  /* not a lab arm: the cart review's default (Self-pickup v2 "Steady State") */
+  steady: { cardTreatment: DIL.treatmentSteady },
   /* 4–14 (offer sheet, swing tag, banners, scratch card, countdown, confetti…) removed */
 }
 

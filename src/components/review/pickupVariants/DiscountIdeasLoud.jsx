@@ -199,6 +199,59 @@ export const treatmentSaveFlash = {
   PickupEyebrow: SaveFlashEyebrow,
 }
 
+/* ---- Steady State (cart review, every landing) ----
+   Self-pickup v2, section 3695:105372, row "Steady State" — its prototype, frame by frame:
+     rest   3695:106363  plain pickup card (no band, grey stroke)      holds 0.3s
+     band   3695:106611  T1 0.5s: the "₹X OFF" band grows out of the card's top edge and
+                         the stroke turns Green Base; the body stays white  holds 0.3s
+     flash  3695:106115  T2 0.2s: the body flashes #F2FFF1                  holds 0.2s
+     done   3695:107355  T3 0.5s: back to white; band and green stroke stay
+   Every hand-off is Smart Animate, ease in-out; the durations live in review.css. No quota and
+   no dim — it plays on every landing. A tap anywhere jumps to the final state (the tap still
+   does its job); reduced motion lands on it directly. */
+const STEADY_BEATS = { rest: ['band', 300], band: ['flash', 500 + 300], flash: ['done', 200 + 200] }
+
+const prefersReducedMotion = () => {
+  try {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  } catch {
+    return false
+  }
+}
+
+function SteadyEyebrow({ pickupSavings, isPickup }) {
+  /* landing with pickup already chosen (Back from Payment, a remembered cart choice) shows the
+     selected state straight away — the beats start from Home selected. Read once, on mount. */
+  const [phase, setPhase] = useState(() => (isPickup || prefersReducedMotion() ? 'done' : 'rest'))
+
+  useEffect(() => {
+    const beat = STEADY_BEATS[phase]
+    if (!beat) return undefined
+    const t = window.setTimeout(() => setPhase(beat[0]), beat[1])
+    return () => window.clearTimeout(t)
+  }, [phase])
+
+  useEffect(() => {
+    if (phase === 'done') return undefined
+    const finish = () => setPhase('done')
+    window.addEventListener('pointerdown', finish, true)
+    return () => window.removeEventListener('pointerdown', finish, true)
+  }, [phase])
+
+  return (
+    <div className={`dil-spot-eyebrow dil-spot-eyebrow--${phase}`}>
+      <div className={`dil-save-eyebrow${phase === 'rest' ? '' : ' dil-save-eyebrow--in'}`}>
+        ₹{pickupSavings} OFF
+      </div>
+    </div>
+  )
+}
+
+export const treatmentSteady = {
+  pickupCardClass: 'dil-spot-card dil-steady-card',
+  PickupEyebrow: SteadyEyebrow,
+}
+
 /* ---- 2. Fly-in OFF banner ---- */
 
 export function FlyInBanner({ pickupSavings }) {

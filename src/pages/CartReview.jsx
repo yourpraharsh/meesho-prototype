@@ -8,7 +8,7 @@ import { getUserPaymentCohort } from '../utils/userPaymentProfile'
 import { REVIEW_VARIANT } from '../constants/reviewVariants'
 import DeliveryTypeReview from '../components/review/DeliveryTypeReview'
 import { DELIVERY_TYPE } from '../utils/deliveryTypes'
-import { getPickupVariantById, getPickupVariantForProduct } from '../utils/pickupVariants'
+import { STEADY_STATE_VARIANT, getPickupVariantById } from '../utils/pickupVariants'
 import { isCodTestUser } from '../utils/testPincode'
 import AddressPicker from '../components/review/AddressPicker'
 import { useCheckoutAddress } from '../components/review/useCheckoutAddress'
@@ -101,12 +101,12 @@ export default function CartReview() {
     )
   }
 
-  /* Pickup-anytime lab: ?pv=1..8 overrides; otherwise the first cart item's variant.
+  /* Every landing plays the Self-pickup v2 "Steady State" on the pickup card (the "₹X OFF" band
+     grows in, a mint flash, then rest); ?pv=1..3 still demos a lab arm instead.
      COD-cohort testers see the plain card — their education is the UPI-only strip. */
   const pickupVariant = isCodTestUser()
     ? null
-    : getPickupVariantById(searchParams.get('pv')) ??
-      getPickupVariantForProduct(firstProduct.product_id ?? firstProduct.id)
+    : getPickupVariantById(searchParams.get('pv')) ?? STEADY_STATE_VARIANT
 
   return (
     <div className="review-page">

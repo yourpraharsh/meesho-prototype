@@ -20,6 +20,10 @@ export const PICKUP_VARIANTS = [
   { id: 3, key: '3-spotlight-collapsed', group: 'Takeover', name: 'Spotlight on header-only card; store expands as it settles' },
 ]
 
+/* The cart review's pickup card on every landing (not a lab arm, so not in the list above):
+   Self-pickup v2 "Steady State" — the "₹X OFF" band grows in, a mint flash, then rest. */
+export const STEADY_STATE_VARIANT = { id: 'steady', key: 'steady', group: 'Default', name: 'Steady state: band grows in, mint flash, rest' }
+
 const VARIANT_PRODUCT_COUNT = PICKUP_VARIANTS.length
 
 let feedIdsCache = null

@@ -510,6 +510,48 @@ body:not(.ui-ios) .dtr .review-shell-back > svg {
   margin-top: -0.8px;
 }
 
+/* Steady State (cart review, every landing; SteadyEyebrow in DiscountIdeasLoud.jsx) — the
+   Figma prototype's Smart Animate durations, all ease in-out:
+     T1 band  0.5s  band grows in, stroke #CECEDE → Green Base, body stays white
+     T2 flash 0.2s  body → #F2FFF1
+     T3 done  0.5s  body back to white (the band and the green stroke stay)
+   A transition takes the duration of the state it moves INTO, so each beat sets its own.
+   The band grows by max-height, so cap it at its real height (3 pad + 20 line + 5 + 8 lip = 36;
+   the selected lip sits 2px lower): a looser cap reaches full height early and stops dead. */
+.dtr .dtr-card.dil-steady-card .dil-save-eyebrow--in {
+  max-height: 36px;
+}
+
+.dtr .dtr-card.dil-steady-card.dtr-card--selected .dil-save-eyebrow--in {
+  max-height: 38px;
+}
+
+.dtr .dtr-card.dil-steady-card:has(.dil-spot-eyebrow--band) {
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.5s ease-in-out,
+    margin-top 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-steady-card:has(.dil-spot-eyebrow--band) .dil-save-eyebrow::after {
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-steady-card:has(.dil-spot-eyebrow--flash) {
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.3s ease,
+    margin-top 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-steady-card:has(.dil-spot-eyebrow--flash) .dil-save-eyebrow::after {
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.3s ease;
+}
+
 /* the band carries the saving, so the in-card Save chip steps aside on band cards in every
    phase — no SoT frame has it, including the first beat before the band slides up (3695:106363:
    strike at y18.7, label at y29.5). Hiding it only once the band is in made the head jump 6px. */
