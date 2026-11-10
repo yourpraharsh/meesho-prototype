@@ -410,39 +410,85 @@ body:not(.ui-ios) .odp-help {
   letter-spacing: 2px;
 }
 
-/* ---------- delivery OTP card (out for delivery): copy · small COPY link ---------- */
+/* ---------- delivery OTP card (out for delivery): title · one block per digit · COPY | SHARE ---------- */
 .odp .odp-otp-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 16px;
+  padding: 12px 16px 16px;
 }
 
-.odp .odp-otp-card-text {
-  min-width: 0;
-}
-
-/* Subtitle1 Grey Base; the code a step up, spaced to read out */
+/* Subtitle1 Grey Base */
 .odp .odp-otp-card-title {
   margin: 0;
   font: 600 15px/20px var(--font-mier);
   color: var(--grey-base);
 }
 
-.odp .odp-otp-card-title .odp-otp {
-  font-size: 17px;
+/* COPY and SHARE at the foot, half the width each, one button type */
+.odp .odp-otp-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* outlined Jamun button: icon · Actions/Link label */
+.odp .odp-otp-card-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--jamun-base);
+  border-radius: 8px;
+  background: none;
+  font: 700 13px/16px var(--font-mier);
+  text-transform: uppercase;
+  color: var(--jamun-base);
+  cursor: pointer;
+}
+
+.odp .odp-otp-card-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+/* the PDP's share glyph, painted Jamun */
+.odp .odp-otp-card-icon--mask {
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+/* one block per digit: Grey T4 fill, Grey T3 hairline, Bold 20 */
+.odp .odp-otp-blocks {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.odp .odp-otp-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 48px;
+  box-sizing: border-box;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 8px;
+  background: var(--grey-t4-bg);
+  font: 700 22px/28px var(--font-mier);
+  color: var(--grey-base);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Body3 Grey T1 */
 .odp .odp-otp-card-sub {
-  margin: 4px 0 0;
+  margin: 10px 0 0;
   font: 400 13px/16px var(--font-mier);
   color: var(--grey-t1);
-}
-
-.odp .odp-otp-card-copy {
-  flex: none;
 }
 
 /* a missed attempt points at Out for Delivery and keeps its red status dot */

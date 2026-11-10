@@ -28,6 +28,7 @@ import truckCabSrc from '../assets/odp-sot/truck-cab.svg'
 import truckWheelSrc from '../assets/odp-sot/truck-wheel.svg'
 import locationSrc from '../assets/odp-sot/location.svg'
 import cardSrc from '../assets/odp-sot/card.svg'
+import shareSrc from '../assets/pdp-sot/info/share.svg'
 import './OrderDetails.css'
 import '../styles/odp-sot/odp.css'
 import { publicUrl } from '../utils/publicUrl'
@@ -352,33 +353,64 @@ function MissedDelivery({ store, eta, onOpen }) {
   )
 }
 
-/* out for delivery: the OTP said out loud at the door, with a small copy */
+/* out for delivery: the OTP in one block per digit, to read out at the door, then COPY and
+   SHARE side by side at the foot. SHARE opens the phone's share sheet, so someone else at home
+   can receive the parcel; where there is no share sheet the message is copied instead. */
 function DeliveryOtpCard({ otp }) {
-  const [copied, setCopied] = useState(false)
+  const [done, setDone] = useState(null) /* 'copy' | 'share' — the label reads "Copied" for 2s */
   useEffect(() => {
-    if (!copied) return undefined
-    const t = window.setTimeout(() => setCopied(false), 2000)
+    if (!done) return undefined
+    const t = window.setTimeout(() => setDone(null), 2000)
     return () => window.clearTimeout(t)
-  }, [copied])
-  const copy = async () => {
+  }, [done])
+  const writeClipboard = async (text) => {
     try {
-      await navigator.clipboard?.writeText(otp)
+      await navigator.clipboard?.writeText(text)
     } catch {
       /* clipboard blocked: the code is on screen anyway */
     }
-    setCopied(true)
+  }
+  const copy = async () => {
+    await writeClipboard(otp)
+    setDone('copy')
+  }
+  const share = async () => {
+    const text = `Delivery OTP for my Meesho order: ${otp}. Share it with the delivery partner when the parcel arrives.`
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Delivery OTP', text })
+      } catch {
+        /* sheet closed without sharing */
+      }
+      return
+    }
+    await writeClipboard(text)
+    setDone('share')
   }
   return (
     <section className="odp-section odp-otp-card" aria-label="Delivery OTP">
-      <div className="odp-otp-card-text">
-        <p className="odp-otp-card-title">
-          Delivery OTP is <b className="odp-otp">{otp}</b>
-        </p>
-        <p className="odp-otp-card-sub">Share it with the delivery partner at your door</p>
+      <p className="odp-otp-card-title">Delivery OTP</p>
+      <div className="odp-otp-blocks" role="img" aria-label={`OTP ${otp.split('').join(' ')}`}>
+        {otp.split('').map((digit, i) => (
+          <span key={i} className="odp-otp-block" aria-hidden>
+            {digit}
+          </span>
+        ))}
       </div>
-      <button type="button" className="odp-link odp-otp-card-copy" onClick={copy} aria-live="polite">
-        {copied ? 'Copied' : 'Copy'}
-      </button>
+      <p className="odp-otp-card-sub">Share it with the delivery partner at your door</p>
+      <div className="odp-otp-card-actions" aria-live="polite">
+        <button type="button" className="odp-otp-card-btn" onClick={copy}>
+          <svg className="odp-otp-card-icon" viewBox="0 0 16 16" fill="none" aria-hidden>
+            <rect x="5.25" y="5.25" width="9" height="9.5" rx="1.75" stroke="currentColor" strokeWidth="1.3" />
+            <path d="M10.75 3.25v-.5c0-.97-.78-1.75-1.75-1.75H3.5c-.97 0-1.75.78-1.75 1.75V9c0 .97.78 1.75 1.75 1.75h.25" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+          </svg>
+          {done === 'copy' ? 'Copied' : 'Copy'}
+        </button>
+        <button type="button" className="odp-otp-card-btn" onClick={share}>
+          <span className="odp-otp-card-icon odp-otp-card-icon--mask" style={{ '--icon': `url(${shareSrc})` }} aria-hidden />
+          {done === 'share' ? 'Copied' : 'Share'}
+        </button>
+      </div>
     </section>
   )
 }
