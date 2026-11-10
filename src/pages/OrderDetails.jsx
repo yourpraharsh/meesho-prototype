@@ -754,15 +754,14 @@ export default function OrderDetails() {
             {idea === 'inline-cta' && <InlineCta store={store} eta={eta} onOpen={openSheet} />}
             {idea === 'countdown' && <Countdown eta={eta} onOpen={openSheet} />}
 
-            <div className="odp-track">
-              <span className={`odp-tooltip${missed ? ' odp-tooltip--missed' : ''}${outForDelivery ? ' odp-tooltip--otp' : ''}`}>
-                <img className="odp-tooltip-dot" src={tooltipStatusSrc} alt="" aria-hidden />
-                {missed ? 'We missed you' : outForDelivery ? (
-                  <>
-                    Delivery OTP <b className="odp-otp">{deliveryOtp(order)}</b>
-                  </>
-                ) : 'Shipping Soon!'}
-              </span>
+            {/* out for delivery: no bubble over the lorry — the OTP has its own card below */}
+            <div className={`odp-track${outForDelivery ? ' odp-track--no-tip' : ''}`}>
+              {!outForDelivery && (
+                <span className={`odp-tooltip${missed ? ' odp-tooltip--missed' : ''}`}>
+                  <img className="odp-tooltip-dot" src={tooltipStatusSrc} alt="" aria-hidden />
+                  {missed ? 'We missed you' : 'Shipping Soon!'}
+                </span>
+              )}
               <span className="odp-line" aria-hidden />
               <span className={`odp-line odp-line--done${shipped ? ' odp-line--done-missed' : ''}`} aria-hidden />
               <span className="odp-node odp-node--1"><CheckNode done /></span>

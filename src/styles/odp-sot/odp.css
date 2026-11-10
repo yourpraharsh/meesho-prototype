@@ -221,6 +221,11 @@ body:not(.ui-ios) .odp-help {
   margin: 44px 28px 0;
 }
 
+/* out for delivery: no bubble over the lorry, so the track moves up under the status */
+.odp .odp-track--no-tip {
+  margin-top: 24px;
+}
+
 /* a two-line tooltip (store pickup) needs the full 140px timeline block */
 .odp .odp-track--pickup {
   margin-top: 64px;
@@ -386,28 +391,12 @@ body:not(.ui-ios) .odp-help {
 
 /* home: the lorry sits near the start, so the bubble hangs right of it (arrow 44px in)
    instead of running off the card */
-.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed):not(.odp-tooltip--otp) {
+.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed) {
   transform: translateX(-44px);
 }
 
-.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed):not(.odp-tooltip--otp)::after {
+.odp .odp-tooltip:not(.odp-tooltip--pickup):not(.odp-tooltip--missed)::after {
   left: 44px;
-}
-
-/* out for delivery: the bubble carries the delivery OTP; the lorry is near the track's end,
-   so the bubble hangs left of it (arrow 44px in from its right edge) */
-.odp .odp-tooltip--otp {
-  left: 70.2%;
-  transform: translateX(calc(-100% + 44px));
-}
-
-.odp .odp-tooltip--otp::after {
-  left: calc(100% - 44px);
-}
-
-.odp .odp-otp {
-  font-weight: 700;
-  letter-spacing: 2px;
 }
 
 /* ---------- delivery OTP card (out for delivery): title · one block per digit · COPY | SHARE ---------- */
