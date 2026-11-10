@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRailActions } from '../context/RailContext'
 import { scrollRootTo } from '../utils/scrollRoot'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { deliveryOtp, etaDay, getOrderById, isOutForDelivery, orderNumber, shortDate, shortEta, updateOrder } from '../utils/orders'
 import { DELIVERY_TYPE, getPickupSavings, getPickupStores, PICKUP_HOLD_DAYS } from '../utils/deliveryTypes'
 import { getReturnTypeById } from '../utils/checkoutConfig'
@@ -10,6 +10,9 @@ import { getProductById } from '../data/products'
 import { useCheckoutAddress } from '../components/review/useCheckoutAddress'
 import { SceneArt } from '../components/odp/Illustrations'
 import SkinText from '../components/SkinText'
+import { CopyIcon, OtpBlocks } from '../components/order/DeliveryOtp'
+import { useFlash } from '../hooks/useFlash'
+import { copyText, deliveryOtpMessage } from '../utils/deliveryOtp'
 /* Figma Self-pickup v2 · ODP 3996:8524 (the plain ODP) — exported icons */
 import appbarBackSrc from '../assets/payment-sot/top/appbar-back.svg'
 import chevronRightSrc from '../assets/review-sot/chevron-right-grey.svg'
@@ -357,25 +360,13 @@ function MissedDelivery({ store, eta, onOpen }) {
    SHARE side by side at the foot. SHARE opens the phone's share sheet, so someone else at home
    can receive the parcel; where there is no share sheet the message is copied instead. */
 function DeliveryOtpCard({ otp }) {
-  const [done, setDone] = useState(null) /* 'copy' | 'share' — the label reads "Copied" for 2s */
-  useEffect(() => {
-    if (!done) return undefined
-    const t = window.setTimeout(() => setDone(null), 2000)
-    return () => window.clearTimeout(t)
-  }, [done])
-  const writeClipboard = async (text) => {
-    try {
-      await navigator.clipboard?.writeText(text)
-    } catch {
-      /* clipboard blocked: the code is on screen anyway */
-    }
-  }
+  const [done, flash] = useFlash() /* 'copy' | 'share' — that button reads "Copied" for 2s */
   const copy = async () => {
-    await writeClipboard(otp)
-    setDone('copy')
+    await copyText(otp)
+    flash('copy')
   }
   const share = async () => {
-    const text = `Delivery OTP for my Meesho order: ${otp}. Share it with the delivery partner when the parcel arrives.`
+    const text = deliveryOtpMessage(otp)
     if (navigator.share) {
       try {
         await navigator.share({ title: 'Delivery OTP', text })
@@ -384,26 +375,17 @@ function DeliveryOtpCard({ otp }) {
       }
       return
     }
-    await writeClipboard(text)
-    setDone('share')
+    await copyText(text)
+    flash('share')
   }
   return (
     <section className="odp-section odp-otp-card" aria-label="Delivery OTP">
       <p className="odp-otp-card-title">Delivery OTP</p>
-      <div className="odp-otp-blocks" role="img" aria-label={`OTP ${otp.split('').join(' ')}`}>
-        {otp.split('').map((digit, i) => (
-          <span key={i} className="odp-otp-block" aria-hidden>
-            {digit}
-          </span>
-        ))}
-      </div>
+      <OtpBlocks otp={otp} className="odp-otp-blocks" blockClassName="odp-otp-block" />
       <p className="odp-otp-card-sub">Share it with the delivery partner at your door</p>
       <div className="odp-otp-card-actions" aria-live="polite">
         <button type="button" className="odp-otp-card-btn" onClick={copy}>
-          <svg className="odp-otp-card-icon" viewBox="0 0 16 16" fill="none" aria-hidden>
-            <rect x="5.25" y="5.25" width="9" height="9.5" rx="1.75" stroke="currentColor" strokeWidth="1.3" />
-            <path d="M10.75 3.25v-.5c0-.97-.78-1.75-1.75-1.75H3.5c-.97 0-1.75.78-1.75 1.75V9c0 .97.78 1.75 1.75 1.75h.25" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-          </svg>
+          <CopyIcon className="odp-otp-card-icon" />
           {done === 'copy' ? 'Copied' : 'Copy'}
         </button>
         <button type="button" className="odp-otp-card-btn" onClick={share}>
@@ -528,7 +510,11 @@ function CompareVisual({ store, savings, onOpen }) {
 export default function OrderDetails() {
   const { id } = useParams()
   const navigate = useNavigate()
-  useRailActions([{ id: 'back', icon: 'back', label: 'Back to My Orders', onClick: () => navigate('/orders') }])
+  /* opened from My Orders → back to it; from Home's out-for-delivery bar → back to Home */
+  const returnTo = useLocation().state?.returnTo ?? '/orders'
+  const backLabel = returnTo === '/orders' ? 'Back to My Orders' : 'Back'
+  const goBack = () => navigate(returnTo)
+  useRailActions([{ id: 'back', icon: 'back', label: backLabel, onClick: goBack }])
   const [, setVersion] = useState(0)
   const [sheetOpen, setSheetOpen] = useState(false)
   const [toast, setToast] = useState(null)
@@ -553,7 +539,7 @@ export default function OrderDetails() {
     return (
       <div className="odp">
         <header className="odp-header">
-          <button type="button" className="odp-back" onClick={() => navigate('/orders')} aria-label="Back">
+          <button type="button" className="odp-back" onClick={goBack} aria-label="Back">
             <BackIcon />
           </button>
           <h1 className="odp-title">Order Details</h1>
@@ -600,7 +586,7 @@ export default function OrderDetails() {
   return (
     <div className={`odp${idea === 'sticky-bar' ? ' odp--with-sticky' : ''}`}>
       <header className="odp-header">
-        <button type="button" className="odp-back" onClick={() => navigate('/orders')} aria-label="Back to My Orders">
+        <button type="button" className="odp-back" onClick={goBack} aria-label={backLabel}>
           <SkinText ios={<BackIcon />} android={<img className="odp-appbar-back" src={appbarBackSrc} alt="" aria-hidden />} />
         </button>
         <h1 className="odp-title">Order Details</h1>

@@ -1,0 +1,223 @@
+/* =====================================================================
+   Home · out-for-delivery bar — floats 8px above the bottom nav while an order is on its way:
+   product (44) · "Out for delivery" over OTP + one block per digit · COPY · WHATSAPP (40 circles).
+   70px tall. The feed and the skin control make room for it (bottom of this file).
+   ===================================================================== */
+
+/* centred by auto margins (not a transform), so the Duo rail column can pin it by left/right */
+.ofd-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(56px + var(--safe-bottom, 0px) + 8px);
+  margin: 0 auto;
+  width: calc(100% - 16px);
+  max-width: calc(430px - 16px);
+  height: 70px;
+  box-sizing: border-box;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 0 12px;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  animation: ofd-bar-in 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes ofd-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* product + text: one tap target that opens the order */
+.ofd-bar-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ofd-bar-thumb {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--grey-t4-bg);
+}
+
+.ofd-bar-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Subtitle2 Grey Base */
+.ofd-bar-title {
+  overflow: hidden;
+  font: 600 13px/16px var(--font-mier);
+  color: var(--grey-base);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ofd-bar-otp {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ofd-bar-otp-label {
+  font: 600 11px/14px var(--font-mier);
+  letter-spacing: 0.3px;
+  color: var(--grey-t1);
+}
+
+.ofd-bar-blocks {
+  display: flex;
+  gap: 4px;
+}
+
+/* the ODP card's digit block, scaled down: Grey T4 fill, Grey T3 hairline, Bold 15 */
+.ofd-bar-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 28px;
+  box-sizing: border-box;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 6px;
+  background: var(--grey-t4-bg);
+  font: 700 15px/20px var(--font-mier);
+  font-variant-numeric: tabular-nums;
+  color: var(--grey-base);
+}
+
+/* icon-only actions: 40px circles, one button type */
+.ofd-bar-icon-btn {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--grey-t3-divider);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--jamun-base);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ofd-bar-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.ofd-bar-icon--wa {
+  width: 22px;
+  height: 22px;
+}
+
+/* screen-reader-only "OTP copied" */
+.ofd-bar-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ofd-bar {
+    animation: none;
+  }
+}
+
+/* ---------- iOS (Liquid Glass): a glass card above the floating tab bar ---------- */
+body.ui-ios .ofd-bar {
+  bottom: calc(var(--glass-tab-bottom) + var(--glass-tab-h) + 10px);
+  width: calc(100% - 2 * var(--glass-inset-x));
+  max-width: calc(430px - 2 * var(--glass-inset-x));
+  padding: 0 14px 0 13px;
+  border: none;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: blur(var(--glass-blur-bar));
+  backdrop-filter: blur(var(--glass-blur-bar));
+  box-shadow: var(--glass-shadow-capsule);
+}
+
+body.ui-ios .ofd-bar-thumb {
+  border-radius: 12px;
+}
+
+/* ---------- iPhone Duo: as wide as its tab bar; with the side rail (no tab bar) it sits low in
+   the content column, clear of the rail (mirrored when the app is on the left of a split) ---------- */
+body.duo-device .app .ofd-bar {
+  max-width: 560px;
+}
+
+body.layout-duo .ofd-bar,
+body.duo-device.layout-duo .app .ofd-bar {
+  left: 16px;
+  right: calc(var(--duo-rail-w) + 16px);
+  bottom: calc(16px + var(--safe-bottom, 0px));
+  width: auto;
+  max-width: 560px; /* centred in the column on the wide displays */
+  margin: 0 auto;
+}
+
+body.layout-duo .duo-stage[data-split='left'] .app .ofd-bar {
+  left: calc(var(--duo-rail-w) + 16px);
+  right: 16px;
+}
+
+/* Book, full screen: stays on the left page instead of crossing the fold */
+body.layout-duo[data-posture='book'][data-split='full'] .app .ofd-bar {
+  right: calc(50% + 16px);
+}
+
+/* ---------- room for the bar: the feed's bottom reserve and the floating skin control ---------- */
+.home.home--ofd {
+  padding-bottom: calc(68px + 78px + var(--safe-bottom, 0px)) !important;
+}
+
+body.ui-ios .home.home--ofd {
+  padding-bottom: calc(var(--glass-tab-h) + 32px + 80px + var(--safe-bottom, 0px)) !important;
+}
+
+body.layout-duo .home.home--ofd {
+  padding-bottom: calc(24px + 86px + var(--safe-bottom, 0px)) !important;
+}
+
+body:has(.ofd-bar) .ui-skin {
+  bottom: calc(56px + 8px + 70px + 12px + var(--safe-bottom, 0px));
+}
+
+body.ui-ios:has(.ofd-bar) .ui-skin {
+  bottom: calc(var(--glass-tab-bottom) + var(--glass-tab-h) + 10px + 70px + 12px);
+}

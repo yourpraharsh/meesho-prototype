@@ -136,6 +136,15 @@ export function deliveryOtp(order) {
   return String(1000 + (hash % 9000))
 }
 
+/** The order on its way today, if any (Home's sticky OTP bar). A missed attempt isn't one. */
+export function getOutForDeliveryOrder() {
+  return (
+    getOrdersForListing().find(
+      (order) => isOutForDelivery(order) && !(order.switchIdea === 'missed-delivery' && order.paymentMethodId !== 'cod'),
+    ) ?? null
+  )
+}
+
 /** Orders to list: real ones from this session first, then the six samples. */
 export function getOrdersForListing() {
   const patches = readJson(PATCHES_KEY, {})

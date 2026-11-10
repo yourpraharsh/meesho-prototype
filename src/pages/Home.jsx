@@ -10,6 +10,8 @@ import { useCart } from '../context/CartContext'
 import CartBadge, { cartAriaLabel } from '../components/cart/CartBadge'
 import ProductCardGrid from '../components/ProductCardGrid'
 import BottomNav from '../components/BottomNav'
+import OutForDeliveryBar from '../components/order/OutForDeliveryBar'
+import { getOutForDeliveryOrder } from '../utils/orders'
 import { useCommittedPosture, useCommittedSplit, useUiLayout, useUiTheme } from '../utils/uiTheme'
 import { getScrollY, onRootScroll, scrollRootTo } from '../utils/scrollRoot'
 import { useScrollChrome } from '../hooks/useScrollChrome'
@@ -142,6 +144,9 @@ export default function Home() {
     sessionStorage.setItem(HOME_SCROLL_KEY, String(getScrollY()))
   }
 
+  /* an order out for delivery today → sticky bar above the nav with its OTP */
+  const ofdOrder = useMemo(() => getOutForDeliveryOrder(), [])
+
   /* cart icon (header + Duo rail): opens the cart; the feed position comes back on return */
   const { count: cartCount } = useCart()
   const goToCart = () => {
@@ -236,7 +241,7 @@ export default function Home() {
   return (
     <div
       ref={homeRef}
-      className={`home has-bottom-nav${toolbarDocked && collapseSettled ? ' home--toolbar-docked' : ''}`}
+      className={`home has-bottom-nav${ofdOrder ? ' home--ofd' : ''}${toolbarDocked && collapseSettled ? ' home--toolbar-docked' : ''}`}
     >
       {isListening && (
         <div className="voice-modal-overlay" onClick={() => recognitionRef.current?.stop()}>
@@ -382,6 +387,16 @@ export default function Home() {
 
       {wishlistOpen && (
         <WishlistDrawer returnTo={returnTo} onClose={() => setWishlistOpen(false)} />
+      )}
+      {ofdOrder && (
+        <OutForDeliveryBar
+          order={ofdOrder}
+          onOpen={() => {
+            /* the order's Back returns here, to the same feed position */
+            saveHomeScroll()
+            navigate(`/orders/${ofdOrder.id}`, { state: { returnTo } })
+          }}
+        />
       )}
       <BottomNav active="home" />
       <SearchSheet ref={searchSheetRef} onSubmit={goToSearch} />
