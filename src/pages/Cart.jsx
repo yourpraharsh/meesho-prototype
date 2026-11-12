@@ -9,15 +9,13 @@ import { scrollRootTo } from '../utils/scrollRoot'
 import { getDeliveryEtaForPin } from '../utils/checkoutConfig'
 import { getBuyNowFunctionalLayer } from '../utils/pdpPricing'
 import { getOutOfStockIds } from '../components/BuyNowSheet'
-import GlassStepper from '../components/GlassStepper'
 import SkinText from '../components/SkinText'
+import CartStepPill from '../components/cart/CartStepPill'
 import AddressPicker from '../components/review/AddressPicker'
 import { useCheckoutAddress } from '../components/review/useCheckoutAddress'
 import CartItemCard from '../components/cart/CartItemCard'
 import CartOptionSheet from '../components/cart/CartOptionSheet'
 import appbarBack from '../assets/cart-sot/cart-appbar-back.svg'
-import stepCurrent from '../assets/cart-sot/cart-stepper-current.svg'
-import stepUpcoming from '../assets/cart-sot/cart-stepper-upcoming.svg'
 import locationPin from '../assets/cart-sot/cart-location-pin.svg'
 import wishlistHeart from '../assets/cart-sot/cart-heart-outline-24.svg'
 import rowChevron from '../assets/cart-sot/cart-row-chevron-right.svg'
@@ -28,7 +26,6 @@ import '../components/review/ReviewShell.css'
 /* Cart page (Figma cart file utVjj3B1srPjlUd1kWDvGs · 1:1215) */
 import '../styles/cart-sot/cart.css'
 
-const CART_STEPS = ['Cart', 'Review', 'Payment']
 const QTY_OPTIONS = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, label: String(i + 1) }))
 /* snackbars sit 8px above the 68px footer (Figma 1:2055); 16px once the cart is empty */
 const TOAST_OFFSET = 76
@@ -68,33 +65,9 @@ const BackIcon = () => (
   </svg>
 )
 
-/** Meesho skin stepper (1:1599): Cart current, Review and Payment upcoming. */
-function CartStepper() {
-  return (
-    <ol className="cart-stepper" aria-label={`Step 1 of ${CART_STEPS.length}`}>
-      {CART_STEPS.map((label, i) => {
-        const current = i === 0
-        return (
-          <li
-            key={label}
-            className={`cart-stepper-step cart-stepper-step--${current ? 'current' : 'upcoming'}`}
-            aria-current={current ? 'step' : undefined}
-          >
-            <span className="cart-stepper-node">
-              <img src={current ? stepCurrent : stepUpcoming} alt="" />
-              <span className="cart-stepper-num">{i + 1}</span>
-            </span>
-            <span className="cart-stepper-label">{label}</span>
-          </li>
-        )
-      })}
-    </ol>
-  )
-}
-
 /**
  * Cart (/cart) — Figma cart file utVjj3B1srPjlUd1kWDvGs · 1:1215, toasts 1:2055 / 1:2802.
- * App bar + Cart · Review · Payment stepper → Delivery at strip → one card per cart line →
+ * App bar with a STEP 1/3 pill → Delivery at strip → one card per cart line →
  * Wishlist row → Price Details → sticky footer. Continue goes to /cart/review, where home
  * delivery vs store pickup is chosen for the whole cart.
  */
@@ -255,19 +228,9 @@ export default function Cart() {
             <SkinText ios={<BackIcon />} android={<img className="cart-appbar-back" src={appbarBack} alt="" aria-hidden />} />
           </button>
           <h1 className="review-shell-title cart-title">Cart</h1>
-          <span className="glass-nav-spacer" aria-hidden />
+          {/* no stepper (not in the app): a STEP pill at the right of the nav */}
+          {isEmpty ? <span className="glass-nav-spacer" aria-hidden /> : <CartStepPill current={1} />}
         </div>
-        {!isEmpty && (
-          <>
-            {/* folded / portrait Duo: the STEP pill stands in for the stepper */}
-            <span className="review-shell-step review-shell-step--duo">
-              <span className="review-shell-step-label">Step</span>
-              <span className="review-shell-step-value">1/{CART_STEPS.length}</span>
-            </span>
-            <GlassStepper current={1} steps={CART_STEPS} />
-            <SkinText ios={null} android={<CartStepper />} />
-          </>
-        )}
       </header>
 
       {isEmpty ? (

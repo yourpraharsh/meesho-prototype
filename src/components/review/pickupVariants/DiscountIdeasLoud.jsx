@@ -19,7 +19,7 @@
  *  14 compare-bars      animated price bars: home vs store, delta badge
  */
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './DiscountIdeasLoud.css'
 
@@ -247,9 +247,148 @@ function SteadyEyebrow({ pickupSavings, isPickup }) {
   )
 }
 
+/* ---- Cart review FTUX: the first 3 landings per card variant, then the Steady State ----
+   Figma self-pickup-v3 · self pickup at cart · "First-visit FTUX: highlight for both variants":
+     lift   hold 0.8s  page dims #353543 @70%, hole exactly at the card; the card, band already on,
+                       scaled ×1.0427 (328 → 342px). No ring, glow, gap or shadow
+     settle 0.5s       the card scales back to 1 (the dim stays; its hole follows), hold 0.2s
+     mint   0.3s       body → #F2FFF1, hold 0.4s
+     fade   0.5s       the dim and the mint fade out together
+     done              rest: band + green frame stay. Any tap skips here. Nothing expands. */
+const CART_FTUX_MAX_RUNS = 3
+const CART_FTUX_BEATS = { lift: ['settle', 800], settle: ['mint', 500 + 200], mint: ['fade', 300 + 400], fade: ['done', 500] }
+const CARD_RADIUS = 8
+
+/* Quota: ?spot=reset is cleared once per page load by testPincode.js (FTUX_KEYS), not on every
+   read: the cart routes carry location.search, so a clear-on-read would replay it every landing. */
+function readFtuxRuns(key) {
+  try {
+    return Number(window.localStorage.getItem(key) ?? 0)
+  } catch {
+    return 0
+  }
+}
+
+function recordFtuxRun(key) {
+  try {
+    window.localStorage.setItem(key, String(readFtuxRuns(key) + 1))
+  } catch {
+    /* quota just won't persist */
+  }
+}
+
+function CartFtuxEyebrow({ pickupSavings, runsKey }) {
+  const rootRef = useRef(null)
+  const holeRef = useRef(null)
+  const counted = useRef(false)
+  const [phase, setPhase] = useState('lift')
+  const dimUp = phase !== 'done'
+
+  useEffect(() => {
+    /* spend this landing once (the ref survives StrictMode's double effect) */
+    if (counted.current) return
+    counted.current = true
+    recordFtuxRun(runsKey)
+  }, [runsKey])
+
+  useEffect(() => {
+    const beat = CART_FTUX_BEATS[phase]
+    if (!beat) return undefined
+    const t = window.setTimeout(() => setPhase(beat[0]), beat[1])
+    return () => window.clearTimeout(t)
+  }, [phase])
+
+  /* The hole IS the card's edge on every frame: getBoundingClientRect includes the in-flight
+     scale, so the hole follows the settle, the scroll-to-top and late layout. Written straight to
+     the DOM, so nothing re-renders per frame; placed before the first paint. */
+  useLayoutEffect(() => {
+    if (!dimUp) return undefined
+    const card = rootRef.current?.closest('.dtr-card')
+    let raf = 0
+    const place = () => {
+      const hole = holeRef.current
+      if (card && hole) {
+        const r = card.getBoundingClientRect()
+        const s = card.offsetWidth ? r.width / card.offsetWidth : 1
+        Object.assign(hole.style, {
+          top: `${r.top}px`,
+          left: `${r.left}px`,
+          width: `${r.width}px`,
+          height: `${r.height}px`,
+          borderRadius: `${CARD_RADIUS * s}px`,
+        })
+      }
+      raf = window.requestAnimationFrame(place)
+    }
+    place()
+    return () => window.cancelAnimationFrame(raf)
+  }, [dimUp])
+
+  /* during the fade the dim lets taps through: a tap lands on rest AND does its job */
+  useEffect(() => {
+    if (phase !== 'fade') return undefined
+    const finish = () => setPhase('done')
+    window.addEventListener('pointerdown', finish, true)
+    return () => window.removeEventListener('pointerdown', finish, true)
+  }, [phase])
+
+  useEffect(() => {
+    if (!dimUp) return undefined
+    const onKey = (e) => {
+      if (e.key === 'Escape') setPhase('done')
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [dimUp])
+
+  return (
+    <div ref={rootRef} className={`dil-spot-eyebrow dil-ftux dil-ftux--${phase}`}>
+      {/* mounts already --in: the band is on from the first frame (no grow) */}
+      <div className="dil-save-eyebrow dil-save-eyebrow--in">₹{pickupSavings} OFF</div>
+      {dimUp &&
+        createPortal(
+          <div
+            className={`dil-ftux-dim${phase === 'fade' ? ' dil-ftux-dim--fade' : ''}`}
+            role="presentation"
+            aria-hidden
+            onClick={(e) => {
+              e.stopPropagation() /* portal clicks bubble to the card: don't select pickup */
+              setPhase('done') /* a tap skips straight to rest */
+            }}
+          >
+            <div ref={holeRef} className="dil-ftux-hole" />
+          </div>,
+          document.body,
+        )}
+    </div>
+  )
+}
+
+/* Decided once per landing: the FTUX while this variant's quota lasts and pickup isn't already
+   chosen (Back from Payment, a remembered cart choice); otherwise the Steady State. The
+   initialiser only reads (StrictMode calls it twice); the run is spent in CartFtuxEyebrow. */
+function CartPickupEyebrow({ runsKey, ...props }) {
+  const [ftux] = useState(() => !props.isPickup && readFtuxRuns(runsKey) < CART_FTUX_MAX_RUNS)
+  return ftux ? <CartFtuxEyebrow {...props} runsKey={runsKey} /> : <SteadyEyebrow {...props} />
+}
+
+const CartOpenEyebrow = (props) => <CartPickupEyebrow {...props} runsKey="meesho-cart-ftux-open-runs" />
+const CartClosedEyebrow = (props) => <CartPickupEyebrow {...props} runsKey="meesho-cart-ftux-closed-runs" />
+
+/* Cart review, Variant 1 (default): card always open. FTUX on the first 3 landings, then the
+   Steady State; Self-pickup v2 card edge (panelBody). */
 export const treatmentSteady = {
-  pickupCardClass: 'dil-spot-card dil-steady-card',
-  PickupEyebrow: SteadyEyebrow,
+  pickupCardClass: 'dil-spot-card dil-steady-card dil-ftux-card',
+  PickupEyebrow: CartOpenEyebrow,
+  panelBody: true,
+}
+
+/* Cart review, Variant 2 (?card=closed): band + header only until pickup is chosen; choosing
+   pickup opens the card, choosing Home closes it. Same FTUX and Steady State as Variant 1. */
+export const treatmentSteadyClosed = {
+  ...treatmentSteady,
+  PickupEyebrow: CartClosedEyebrow,
+  collapseUntilSelected: true,
 }
 
 /* ---- 2. Fly-in OFF banner ---- */

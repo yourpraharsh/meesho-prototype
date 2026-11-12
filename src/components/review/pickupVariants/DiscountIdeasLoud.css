@@ -52,6 +52,35 @@
   }
 }
 
+/* Cart FTUX dim (CartFtuxEyebrow), portalled to <body> so a transformed card can't trap it.
+   #353543 at 70%; the hole is exactly the card (JS writes its rect and radius every frame):
+   no ring, no glow, no gap, no pulse (Self-pickup v2). On from the first frame; fades with the
+   mint over 0.5s. */
+.dil-ftux-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.dil-ftux-dim--fade {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dil-ftux-hole {
+  position: fixed;
+  box-shadow: 0 0 0 9999px rgba(53, 53, 67, 0.7);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dil-ftux-dim {
+    transition: none;
+  }
+}
+
 /* Green "Save ₹35" eyebrow — the white content below reads as an inset
    rounded panel (a rounded "lip" at the eyebrow's foot), so the green wraps
    the card instead of ending in a hard line. Mounts collapsed, grows in. */

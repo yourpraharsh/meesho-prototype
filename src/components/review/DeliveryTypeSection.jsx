@@ -74,19 +74,6 @@ const WalkIcon = () => (
   </span>
 )
 
-const StoreClockIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden>
-    <circle cx="8" cy="8" r="6.5" fill="#5585F8" />
-    <path
-      d="M8 4.8V8l2.2 1.6"
-      stroke="#fff"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-)
-
 const MapIcon = () => (
   <img className="dtr-action-icon" src={actionMapIcon} alt="" width={16} height={16} aria-hidden />
 )
@@ -117,7 +104,7 @@ const StoreBadge = () => (
   <img className="dtr-store-badge" src={publicUrl('/badges/m-store.svg')} alt="Meesho Store" height={16} />
 )
 
-function StoreCard({ store, radio = false, selected = false, hoursOverride = null, onCallStore = null }) {
+function StoreCard({ store, radio = false, selected = false, onCallStore = null }) {
   const mapsHref =
     store.mapsHref ??
     `https://www.google.com/maps/search/${encodeURIComponent(`${store.name} ${store.landmark}`)}`
@@ -133,11 +120,7 @@ function StoreCard({ store, radio = false, selected = false, hoursOverride = nul
         <p className="dtr-store-meta">
           <WalkIcon /> {store.walk}
         </p>
-        {(store.hours || hoursOverride) && (
-          <p className="dtr-store-meta">
-            <StoreClockIcon /> {store.hours ?? hoursOverride}
-          </p>
-        )}
+        {/* no store-hours row (Self-pickup v2): the hours live in the Call Store sheet */}
         <div className="dtr-store-actions">
           <a
             className="dtr-store-action"
@@ -720,7 +703,6 @@ export function useDeliveryTypeChoice({
   const showHomePrice = !(treatment?.hidePrices || treatment?.hideHomePrice)
   const showPickupPrice = !(treatment?.hidePrices || treatment?.hidePickupPrice)
   const pickupLabel = treatment?.pickupLabel ?? 'Deliver to Meesho Pickup Store'
-  const storeHoursOverride = treatment?.storeHours ? treatment.storeHours(pickupWindow) : null
 
   /** Education sheet (1B) opens as soon as the user lands on the page. */
   useEffect(() => {
@@ -762,7 +744,6 @@ export function useDeliveryTypeChoice({
     showHomePrice,
     showPickupPrice,
     pickupLabel,
-    storeHoursOverride,
     codUser,
     handlePickupTap,
     showStoreSheet,
@@ -795,13 +776,73 @@ export function DeliveryTypeSection({ choice, deliveryEta, onChangeAddress }) {
     showHomePrice,
     showPickupPrice,
     pickupLabel,
-    storeHoursOverride,
     codUser,
     handlePickupTap,
     setShowStoreSheet,
     setUpiSheetOpen,
     setFaqStore,
   } = choice
+  const pickupInner = (
+    <>
+      <div className="dtr-card-head">
+        {treatment?.PickupPrice ? (
+          <treatment.PickupPrice {...variantProps} />
+        ) : (
+          showPickupPrice && (
+            <span className="dtr-card-price dtr-card-price--pickup">
+              <span className="dtr-card-mrp">₹{order.orderTotal}</span>
+              <span className="dtr-card-amount dtr-card-amount--save">₹{pickupTotal}</span>
+              <span className="dtr-card-save-chip">Save ₹{pickupSavings}</span>
+            </span>
+          )
+        )}
+        <span className="dtr-card-label">
+          {pickupLabel}
+          {treatment?.showSaveHint && pickupSavings > 0 && (
+            <span className="dtr-card-save-chip dtr-card-save-chip--inline">
+              Save ₹{pickupSavings}
+            </span>
+          )}
+          {treatment?.PickupSubLabel && (
+            <span className="dtr-card-sublabel">
+              <treatment.PickupSubLabel {...variantProps} />
+            </span>
+          )}
+        </span>
+        <RadioCheck selected={isPickup} />
+      </div>
+      {codUser && (
+        <UpiOnlyStrip
+          onOpen={() => {
+            /* Strip tap = choosing pickup too — select, then educate. */
+            onSelectDeliveryType(DELIVERY_TYPE.PICKUP)
+            setUpiSheetOpen(true)
+          }}
+        />
+      )}
+      {/* Collapsed arm: store details reveal only once pickup is selected */}
+      {!(treatment?.collapseUntilSelected && !isPickup) && (
+        <div className="dtr-card-body">
+      <div className="dtr-card-divider" aria-hidden />
+      {variantComponents?.Panel && <variantComponents.Panel {...variantProps} />}
+      <StoreCard store={activeStore} onCallStore={() => setFaqStore(activeStore)} />
+      <div className="dtr-card-divider" aria-hidden />
+      <button
+        type="button"
+        className="dtr-more-stores"
+        onClick={(e) => {
+          e.stopPropagation()
+          setShowStoreSheet(true)
+        }}
+      >
+        See More Stores
+        <ChevronRightIcon />
+      </button>
+        </div>
+      )}
+    </>
+  )
+
   return (
     <section className="review-shell-section dtr-delivery" aria-label="Select delivery type">
       <h2 className="dtr-delivery-heading">Select Delivery Type</h2>
@@ -856,7 +897,7 @@ export function DeliveryTypeSection({ choice, deliveryEta, onChangeAddress }) {
       <div
         className={`dtr-card${isPickup ? ' dtr-card--selected' : ''}${
           treatment?.pickupCardClass ? ` ${treatment.pickupCardClass}` : ''
-        }`}
+        }${treatment?.panelBody ? ' dil-panel-card' : ''}`}
         role="radio"
         aria-checked={isPickup}
         tabIndex={0}
@@ -866,62 +907,9 @@ export function DeliveryTypeSection({ choice, deliveryEta, onChangeAddress }) {
         }}
       >
         {treatment?.PickupEyebrow && <treatment.PickupEyebrow {...variantProps} />}
-        <div className="dtr-card-head">
-          {treatment?.PickupPrice ? (
-            <treatment.PickupPrice {...variantProps} />
-          ) : (
-            showPickupPrice && (
-              <span className="dtr-card-price dtr-card-price--pickup">
-                <span className="dtr-card-mrp">₹{order.orderTotal}</span>
-                <span className="dtr-card-amount dtr-card-amount--save">₹{pickupTotal}</span>
-                <span className="dtr-card-save-chip">Save ₹{pickupSavings}</span>
-              </span>
-            )
-          )}
-          <span className="dtr-card-label">
-            {pickupLabel}
-            {treatment?.showSaveHint && pickupSavings > 0 && (
-              <span className="dtr-card-save-chip dtr-card-save-chip--inline">
-                Save ₹{pickupSavings}
-              </span>
-            )}
-            {treatment?.PickupSubLabel && (
-              <span className="dtr-card-sublabel">
-                <treatment.PickupSubLabel {...variantProps} />
-              </span>
-            )}
-          </span>
-          <RadioCheck selected={isPickup} />
-        </div>
-        {codUser && (
-          <UpiOnlyStrip
-            onOpen={() => {
-              /* Strip tap = choosing pickup too — select, then educate. */
-              onSelectDeliveryType(DELIVERY_TYPE.PICKUP)
-              setUpiSheetOpen(true)
-            }}
-          />
-        )}
-        {/* Collapsed arm: store details reveal only once pickup is selected */}
-        {!(treatment?.collapseUntilSelected && !isPickup) && (
-          <div className="dtr-card-body">
-        <div className="dtr-card-divider" aria-hidden />
-        {variantComponents?.Panel && <variantComponents.Panel {...variantProps} />}
-        <StoreCard store={activeStore} hoursOverride={storeHoursOverride} onCallStore={() => setFaqStore(activeStore)} />
-        <div className="dtr-card-divider" aria-hidden />
-        <button
-          type="button"
-          className="dtr-more-stores"
-          onClick={(e) => {
-            e.stopPropagation()
-            setShowStoreSheet(true)
-          }}
-        >
-          See More Stores
-          <ChevronRightIcon />
-        </button>
-          </div>
-        )}
+        {/* Self-pickup v2 card edge (cart review): the band sits under a separate body with
+            8px corners and the border, which overlaps the band by 9px */}
+        {treatment?.panelBody ? <div className="dtr-card-panel">{pickupInner}</div> : pickupInner}
       </div>
     </section>
   )

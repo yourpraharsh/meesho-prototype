@@ -51,7 +51,13 @@ export function clearSelectedTestCohort() {
 export const OPEN_GATE_EVENT = 'meesho-open-gate'
 
 /** First-time-experience budgets (e.g. the review-page spotlight's 3 runs). */
-const FTUX_KEYS = ['meesho-spotlight-runs', 'meesho-spotlight-collapsed-runs']
+const FTUX_KEYS = [
+  'meesho-spotlight-runs',
+  'meesho-spotlight-collapsed-runs',
+  /* cart review FTUX, one budget per card variant (open / ?card=closed) */
+  'meesho-cart-ftux-open-runs',
+  'meesho-cart-ftux-closed-runs',
+]
 
 export function resetFtuxBudgets() {
   try {

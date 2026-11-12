@@ -8,7 +8,7 @@ import { getUserPaymentCohort } from '../utils/userPaymentProfile'
 import { REVIEW_VARIANT } from '../constants/reviewVariants'
 import DeliveryTypeReview from '../components/review/DeliveryTypeReview'
 import { DELIVERY_TYPE } from '../utils/deliveryTypes'
-import { STEADY_STATE_VARIANT, getPickupVariantById } from '../utils/pickupVariants'
+import { STEADY_CLOSED_VARIANT, STEADY_STATE_VARIANT, getPickupVariantById } from '../utils/pickupVariants'
 import { isCodTestUser } from '../utils/testPincode'
 import AddressPicker from '../components/review/AddressPicker'
 import { useCheckoutAddress } from '../components/review/useCheckoutAddress'
@@ -101,12 +101,15 @@ export default function CartReview() {
     )
   }
 
-  /* Every landing plays the Self-pickup v2 "Steady State" on the pickup card (the "₹X OFF" band
-     grows in, a mint flash, then rest); ?pv=1..3 still demos a lab arm instead.
-     COD-cohort testers see the plain card — their education is the UPI-only strip. */
+  /* Pickup card, two variants (Figma self-pickup v3 · self pickup at cart): Variant 1 (default)
+     card always open; ?card=closed → Variant 2, card closed until pickup is chosen (tapping it
+     opens it). Both play the first-visit FTUX on the first 3 landings (?spot=reset replays it),
+     then the Self-pickup v2 "Steady State" (band grows in, mint flash, rest). ?pv=1..3 still demos
+     a lab arm; COD-cohort testers see the plain card (their education is the UPI-only strip). */
+  const cardVariant = searchParams.get('card') === 'closed' ? STEADY_CLOSED_VARIANT : STEADY_STATE_VARIANT
   const pickupVariant = isCodTestUser()
     ? null
-    : getPickupVariantById(searchParams.get('pv')) ?? STEADY_STATE_VARIANT
+    : getPickupVariantById(searchParams.get('pv')) ?? cardVariant
 
   return (
     <div className="review-page">

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRailActions } from '../../context/RailContext'
-import GlassStepper from '../GlassStepper'
 import SkinText from '../SkinText'
+import CartStepPill from '../cart/CartStepPill'
 import {
   getPaymentMethodIdsForCohort,
   isExtendedPaymentSelection,
@@ -12,8 +12,6 @@ import PaymentBrandIcon from './PaymentBrandIcon'
 import { PaymentMethodCard as BasePaymentMethodCard } from './PaymentMethodCards'
 import paysChevronIcon from '../../assets/payment-sot/bottom/chevron-right.svg'
 import paysAppbarBack from '../../assets/payment-sot/top/appbar-back.svg'
-import paysStepDone from '../../assets/payment-sot/top/stepper-done.svg'
-import paysStepCurrent from '../../assets/payment-sot/top/stepper-current.svg'
 import './PaymentPage.css'
 import './CheckoutAddressSection.css'
 /* Meesho Design SoT payment page (167:26405 collapsed, 167:26572 Pay Online expanded) */
@@ -416,45 +414,9 @@ export default function PaymentPage({
             />
           </button>
           <h1 className="payment-page-title"><SkinText ios="Review Your Order" android="Payment Method" /></h1>
-          <span className="glass-nav-spacer" aria-hidden />
+          {/* cart flow: a STEP 3/3 pill at the right of the nav (no stepper, not in the app) */}
+          {showSteps ? <CartStepPill current={stepCount} total={stepCount} /> : <span className="glass-nav-spacer" aria-hidden />}
         </div>
-        {showSteps && (
-          <span className="payment-page-step">
-            <span className="payment-page-step-label">Step</span>
-            <span className="payment-page-step-value">{`${stepCount}/${stepCount}`}</span>
-          </span>
-        )}
-        {showSteps && <GlassStepper current={stepCount} steps={steps} />}
-        <SkinText
-          ios={null}
-          android={
-            showSteps ? (
-              <ol
-                className={`pays-stepper${stepCount === 3 ? ' pays-stepper--3' : ''}`}
-                aria-label={`Step ${stepCount} of ${stepCount}`}
-              >
-                {steps.map((label, i) =>
-                  i < stepCount - 1 ? (
-                    <li key={label} className="pays-stepper-step pays-stepper-step--done">
-                      <span className="pays-stepper-node">
-                        <img src={paysStepDone} alt="" />
-                      </span>
-                      <span className="pays-stepper-label">{label}</span>
-                    </li>
-                  ) : (
-                    <li key={label} className="pays-stepper-step pays-stepper-step--current" aria-current="step">
-                      <span className="pays-stepper-node">
-                        <img src={paysStepCurrent} alt="" />
-                        <span className="pays-stepper-num">{stepCount}</span>
-                      </span>
-                      <span className="pays-stepper-label">{label}</span>
-                    </li>
-                  ),
-                )}
-              </ol>
-            ) : null
-          }
-        />
       </header>
 
       {offerParts && (

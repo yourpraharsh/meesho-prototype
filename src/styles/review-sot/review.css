@@ -305,12 +305,14 @@ body:not(.ui-ios) .dtr .review-shell-back > svg {
   padding: 14px 11px 4px;
 }
 
-/* 108 x 125 photo, 0.5px #CECEDE stroke, 8px radius */
+/* 108px photo, 0.5px #CECEDE stroke, 8px radius; fills the block's height without setting it
+   (the photos are 600 × 800, so their own aspect would make the block taller than the details) */
 .dtr .dtr-delivery .dtr-store-photo {
   width: 108px;
-  min-height: 125px;
+  min-height: 0;
   border: 0.5px solid #cecede;
   border-radius: 8px;
+  contain: size;
 }
 
 /* name, 8, Store tag, 8, meta rows (4 apart), 8, actions */
@@ -343,22 +345,21 @@ body:not(.ui-ios) .dtr .review-shell-back > svg {
   height: 16px;
 }
 
-/* the meta icon bubble: 16px, Blue Base @10% fill, 0.2px Blue Base @20% stroke */
+/* the meta icon bubble: 16px, Blue Base @10% fill, 0.2px Blue Base @20% stroke. The stroke is an
+   inset shadow so it takes no layout space: a real 0.2px border rounds up to a device pixel and
+   pushed the glyph off centre. The glyph sits dead centre (Self-pickup v2). */
 .dtr .dtr-meta-icon {
-  position: relative;
   flex: none;
-  display: block;
+  display: grid;
+  place-items: center;
   width: 16px;
   height: 16px;
-  border: 0.2px solid rgba(85, 133, 248, 0.2);
   border-radius: 50%;
   background: rgba(85, 133, 248, 0.1);
+  box-shadow: inset 0 0 0 0.2px rgba(85, 133, 248, 0.2);
 }
 
 .dtr .dtr-meta-icon > img {
-  position: absolute;
-  top: -0.2px;
-  left: -0.2px;
   display: block;
   width: 16px;
   height: 16px;
@@ -557,6 +558,115 @@ body:not(.ui-ios) .dtr .review-shell-back > svg {
    strike at y18.7, label at y29.5). Hiding it only once the band is in made the head jump 6px. */
 .dtr .dtr-card.dil-spot-card .dtr-card-price--pickup > .dtr-card-save-chip {
   display: none;
+}
+
+/* Self-pickup v2 card edge (cart review: treatment.panelBody → .dil-panel-card + .dtr-card-panel).
+   The band (8px top radius, square bottom) sits UNDER a separate body that has 8px corners all
+   round and the 1px frame; the body overlaps the band's bottom by 9px, so the green shows in the
+   body's rounded top corners. The .dtr-card shell stays the radio, the tap target and the FTUX
+   scale; it has no border or fill of its own (the mint lives on the body via --dil-panel). */
+.dtr .dtr-delivery .dtr-card.dil-panel-card {
+  border: 0;
+  background: transparent;
+}
+
+.dtr .dtr-card.dil-panel-card .dil-save-eyebrow--in {
+  max-height: 37px;
+  margin: 0;
+  padding: 3px 12px 14px; /* 5px of green under the label + the 9px the body covers */
+}
+
+.dtr .dtr-card.dil-panel-card.dtr-card--selected .dil-save-eyebrow--in {
+  max-height: 39px;
+  padding-bottom: 16px; /* selected: 30px of band shows */
+}
+
+.dtr .dtr-card.dil-panel-card .dil-save-eyebrow::after {
+  content: none; /* the body draws its own top edge */
+}
+
+.dtr .dtr-card.dil-panel-card > .dtr-card-panel {
+  position: relative; /* paints over the band, which carries a transform */
+  z-index: 1;
+  border: 1px solid var(--sot-frame);
+  border-radius: 8px;
+  background-color: var(--dil-panel, var(--white));
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.3s ease,
+    margin-top 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-panel-card:has(.dil-save-eyebrow--in) > .dtr-card-panel {
+  margin-top: -9px;
+}
+
+.dtr .dtr-card.dil-panel-card.dtr-card--selected:has(.dil-save-eyebrow--in) .dtr-card-panel > .dtr-card-head {
+  padding-top: 18.5px;
+}
+
+.dtr .dtr-card.dil-steady-card.dil-panel-card:has(.dil-spot-eyebrow--band) > .dtr-card-panel {
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.5s ease-in-out,
+    margin-top 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-steady-card.dil-panel-card:has(.dil-spot-eyebrow--flash) > .dtr-card-panel {
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.3s ease,
+    margin-top 0.5s ease-in-out;
+}
+
+/* Cart FTUX (CartFtuxEyebrow in DiscountIdeasLoud.jsx): the first 3 landings per card variant,
+   both variants, nothing expands. The band is on from the first frame. Ease in-out; a transition
+   takes the duration of the beat it moves INTO:
+     lift   hold 0.8s  card scaled ×1.0427 (328 → 342px), no shadow (the dim is DiscountIdeasLoud.css)
+     settle 0.5s       card scales back to 1; the dim stays and its hole follows; hold 0.2s
+     mint   0.3s       body → #F2FFF1; hold 0.4s
+     fade   0.5s       body back to white, on the dim's own 0.5s fade
+     done              rest: band + green frame stay */
+.dtr .dtr-card.dil-ftux-card:has(.dil-ftux--lift) {
+  transform: scale(1.0427);
+  box-shadow: none;
+  transition: none;
+}
+
+.dtr .dtr-card.dil-ftux-card:has(.dil-ftux--settle) {
+  transform: none;
+  box-shadow: none;
+  transition: transform 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-ftux-card:has(.dil-ftux--mint) {
+  --dil-panel: #f2fff1;
+}
+
+.dtr .dtr-card.dil-ftux-card:has(.dil-ftux--mint) > .dtr-card-panel {
+  transition:
+    background-color 0.3s ease-in-out,
+    border-color 0.3s ease,
+    margin-top 0.5s ease-in-out;
+}
+
+.dtr .dtr-card.dil-ftux-card:has(.dil-ftux--fade) > .dtr-card-panel {
+  transition:
+    background-color 0.5s ease-in-out,
+    border-color 0.3s ease,
+    margin-top 0.5s ease-in-out;
+}
+
+/* reduced motion: no scale, no fades; the dim and the mint still mark the card */
+@media (prefers-reduced-motion: reduce) {
+  .dtr .dtr-card.dil-ftux-card:has(.dil-ftux:not(.dil-ftux--done)) {
+    transform: none;
+    transition: none;
+  }
+
+  .dtr .dtr-card.dil-ftux-card:has(.dil-ftux:not(.dil-ftux--done)) > .dtr-card-panel {
+    transition: none;
+  }
 }
 
 /* ------------------------------------------------------------ Price Details row (card/price) */

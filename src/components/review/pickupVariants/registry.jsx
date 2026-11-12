@@ -16,6 +16,8 @@ const REGISTRY = {
   '3-spotlight-collapsed': { cardTreatment: DIL.treatmentSpotlightCollapsed },
   /* not a lab arm: the cart review's default (Self-pickup v2 "Steady State") */
   steady: { cardTreatment: DIL.treatmentSteady },
+  /* cart review Variant 2 (?card=closed): card closed until pickup is chosen */
+  'steady-closed': { cardTreatment: DIL.treatmentSteadyClosed },
   /* 4–14 (offer sheet, swing tag, banners, scratch card, countdown, confetti…) removed */
 }
 

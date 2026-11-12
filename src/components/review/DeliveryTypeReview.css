@@ -622,6 +622,51 @@
   align-self: flex-start;
 }
 
+/* Store-list sheet cards (Self-pickup v2): 5px inset round the photo; 100px photo, 6px radius,
+   filling the card's height without setting it (the photos are 600 × 800); radio in the top-right
+   corner; See Map / Call Store as two equal 30px buttons inside the card (Call Store used to run
+   past the card edge). Scoped to the sheet, so the pickup card on the page is untouched. */
+.dtr .dtr-stores-sheet .dtr-store {
+  position: relative;
+  gap: 8px;
+  padding: 5px;
+}
+
+.dtr .dtr-stores-sheet .dtr-store-photo {
+  width: 100px;
+  min-height: 0;
+  border-radius: 6px;
+  contain: size;
+}
+
+.dtr .dtr-stores-sheet .dtr-store-body {
+  padding: 7px 7px 7px 0;
+}
+
+.dtr .dtr-stores-sheet .dtr-store-name {
+  padding-right: 26px; /* clears the radio */
+}
+
+.dtr .dtr-stores-sheet .dtr-store-radio-col {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.dtr .dtr-stores-sheet .dtr-store-actions {
+  width: 100%;
+  margin-top: auto;
+}
+
+.dtr .dtr-stores-sheet .dtr-store-action {
+  flex: 1 1 0;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 30px;
+  padding: 0 6px;
+}
+
 /* Sticky commit CTA */
 .dtr-stores-footer {
   padding: 12px 16px calc(12px + var(--safe-bottom, 0));

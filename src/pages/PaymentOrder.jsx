@@ -316,7 +316,8 @@ export default function PaymentOrder({ cart = false }) {
       <PaymentPage
         layout={useStep2PaymentLayout ? 'prepaid-v3' : 'default'}
         cohort={paymentCohort}
-        offerLabel={offerLabel}
+        /* the "₹X OFF on this order" band: Buy Now only (the app's cart payment has none) */
+        offerLabel={cart ? null : offerLabel}
         address={useStep2PaymentLayout ? null : address}
         addressConfirmed={justUpdated}
         deliveryEta={useStep2PaymentLayout ? null : deliveryEta}

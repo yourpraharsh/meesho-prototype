@@ -24,6 +24,10 @@ export const PICKUP_VARIANTS = [
    Self-pickup v2 "Steady State" — the "₹X OFF" band grows in, a mint flash, then rest. */
 export const STEADY_STATE_VARIANT = { id: 'steady', key: 'steady', group: 'Default', name: 'Steady state: band grows in, mint flash, rest' }
 
+/* Variant 2 (?card=closed): the pickup card shows band + header only until pickup is chosen; choosing
+   pickup opens it, choosing Home closes it. Same first-visit FTUX and Steady State as Variant 1. */
+export const STEADY_CLOSED_VARIANT = { id: 'steady-closed', key: 'steady-closed', group: 'Default', name: 'Card closed until pickup is selected' }
+
 const VARIANT_PRODUCT_COUNT = PICKUP_VARIANTS.length
 
 let feedIdsCache = null

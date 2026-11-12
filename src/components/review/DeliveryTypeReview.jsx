@@ -3,7 +3,7 @@ import { useRailActions } from '../../context/RailContext'
 import { getHeroImageForProduct } from '../../data/categoryProductImages'
 import { ReviewDiscountMarker } from '../plp/PlpPriceMarkers'
 import { buildOrderDiscountLines, getPlpIndexForProduct } from '../../utils/orderDiscountLines'
-import GlassStepper from '../GlassStepper'
+import CartStepPill from '../cart/CartStepPill'
 import { getStoreFaqVariantForProduct } from '../../utils/pickupVariants'
 import {
   ChevronRightIcon,
@@ -17,10 +17,6 @@ import './ReviewShell.css'
 import './DeliveryTypeReview.css'
 
 const IMAGE_FALLBACK = 'https://placehold.co/400x400/e2e8f0/64748b?text=Product'
-
-/** Cart checkout steps (cart review = step 2). The Buy Now flow shows no step progress. */
-const CART_STEPS = ['Cart', 'Review', 'Payment']
-const CART_STEP_CURRENT = 2
 
 /** Same rating the PDP and cards show: product rating, capped at 4.9, one decimal. */
 const getLineRating = (product) => {
@@ -56,31 +52,6 @@ const ChevronDownIcon = ({ expanded }) => (
   </svg>
 )
 
-
-/**
- * Android cart stepper band (cart file utVjj3B1srPjlUd1kWDvGs, 1:1190): Cart done, Review
- * current, Payment upcoming. iOS / Duo hide it (CSS) and use GlassStepper / the STEP pill.
- */
-function CartStepper() {
-  return (
-    <ol className="dtr-cstep" aria-label={`Step ${CART_STEP_CURRENT} of ${CART_STEPS.length}`}>
-      {CART_STEPS.map((label, i) => {
-        const n = i + 1
-        const state = n < CART_STEP_CURRENT ? 'done' : n === CART_STEP_CURRENT ? 'current' : 'todo'
-        return (
-          <li
-            key={label}
-            className={`dtr-cstep-step dtr-cstep-step--${state}`}
-            aria-current={state === 'current' ? 'step' : undefined}
-          >
-            <span className="dtr-cstep-node">{state === 'done' ? null : n}</span>
-            <span className="dtr-cstep-label">{label}</span>
-          </li>
-        )
-      })}
-    </ol>
-  )
-}
 
 /** Compact cart item row (cart 1:1097): image | title, price, rating · Size / Qty, ETA. */
 function CartItemRow({ line, deliveryEta }) {
@@ -205,23 +176,15 @@ export default function DeliveryTypeReview({
             <BackIcon />
           </button>
           <h1 className="review-shell-title">Review Your Order</h1>
-          <span className="glass-nav-spacer" aria-hidden />
+          {/* cart: a STEP 2/3 pill at the right of the nav (no stepper, not in the app);
+              Buy Now shows no step progress on any skin */}
+          {isCart ? <CartStepPill current={2} /> : <span className="glass-nav-spacer" aria-hidden />}
         </div>
-        <span className="review-shell-step-spacer" aria-hidden />
-        {/* step progress rides the cart flow only; Buy Now shows none on any skin */}
-        {isCart && (
-          <>
-            <span className="review-shell-step review-shell-step--duo">
-              <span className="review-shell-step-label">Step</span>
-              <span className="review-shell-step-value">{`${CART_STEP_CURRENT}/${CART_STEPS.length}`}</span>
-            </span>
-            <GlassStepper steps={CART_STEPS} current={CART_STEP_CURRENT} />
-          </>
-        )}
+        {!isCart && <span className="review-shell-step-spacer" aria-hidden />}
       </header>
-      {isCart && <CartStepper />}
 
-      {effectiveOrder.totalDiscount > 0 && (
+      {/* the "₹X OFF on this order" band: Buy Now only (the app's cart review has none) */}
+      {!isCart && effectiveOrder.totalDiscount > 0 && (
         <div className="dtr-offer" role="status">
           <p className="dtr-offer-text">
             <span className="dtr-offer-highlight">₹{effectiveOrder.totalDiscount} OFF</span>

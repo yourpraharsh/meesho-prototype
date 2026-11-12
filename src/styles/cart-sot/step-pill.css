@@ -1,0 +1,33 @@
+/* Cart flow "STEP n/3" pill (CartStepPill): right end of the top nav on Cart, Review and Payment.
+   Figma self-pickup-v3 · self pickup at cart: 64 × 20, fill #E7EEFF, 1px #5585F8, Caption3 caps. */
+.cart-step-pill {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 20px;
+  min-width: 64px;
+  margin-left: auto; /* right end even where the title doesn't fill the row */
+  padding: 0 8px;
+  border: 1px solid var(--blue-base);
+  border-radius: 10px;
+  background: var(--blue-t2);
+  color: var(--blue-base);
+  font: 700 10px/12px var(--font-mier);
+  letter-spacing: 0.012em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* iPhone glass bar: the 64px pill replaces the 40px trailing spacer, so pad the centred title by
+   the 24px difference to keep it centred (not on Duo, where titles sit left) */
+body.ui-ios:not(.duo-device) :is(.review-shell-header-main, .payment-page-header-main):has(> .cart-step-pill) > :is(.review-shell-title, .payment-page-title) {
+  padding-left: 24px;
+}
+
+/* Android payment bar: with the stepper row gone the header's own divider would stack under the
+   header row's rule (2px); keep one, like the Cart bar */
+body:not(.ui-ios) .payment-page .payment-page-header:has(.cart-step-pill) {
+  border-bottom: none;
+}
