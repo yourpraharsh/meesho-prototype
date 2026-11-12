@@ -27,9 +27,10 @@ export const SWITCH_IDEAS = [
   'compare', // 9 icon-first Home vs Store comparison
 ]
 
-/* Idea: the first sample order is out for delivery and shows its delivery OTP on the OLP
-   card's line and on the ODP's truck (false → every order is back to "Order Placed") */
-const DELIVERY_OTP_IDEA = true
+/* Idea: the first sample order is out for delivery and shows its delivery OTP (the OLP card's
+   line, the ODP's OTP card with Copy / Share, the Home out-for-delivery bar).
+   Off for now (12 Nov 2026): every order is back to "Order Placed"; true brings it all back. */
+const DELIVERY_OTP_IDEA = false
 
 export const ORDER_STATUS = {
   PLACED: 'placed',
