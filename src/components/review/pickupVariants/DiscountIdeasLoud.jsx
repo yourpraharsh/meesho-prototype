@@ -383,7 +383,7 @@ export const treatmentSteady = {
   panelBody: true,
 }
 
-/* Cart review, Variant 2 (?card=closed): band + header only until pickup is chosen; choosing
+/* Cart review, Variant 2 (test gate: "Card closed until tapped", or ?card=closed): band + header only until pickup is chosen; choosing
    pickup opens the card, choosing Home closes it. Same FTUX and Steady State as Variant 1. */
 export const treatmentSteadyClosed = {
   ...treatmentSteady,

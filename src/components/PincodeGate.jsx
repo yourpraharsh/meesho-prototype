@@ -7,6 +7,9 @@ import {
   getSelectedTestCohort,
   setSelectedTestCohort,
   clearSelectedTestCohort,
+  getSelectedCardVariant,
+  setSelectedCardVariant,
+  clearSelectedCardVariant,
   getStoreCountForPincode,
   OPEN_GATE_EVENT,
 } from '../utils/testPincode'
@@ -30,6 +33,14 @@ const CashIcon = () => (
   </svg>
 )
 
+const CardIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" width="22" height="22" aria-hidden>
+    <rect x="3" y="5" width="18" height="15" rx="2.5" stroke="var(--jamun-base)" strokeWidth="1.8" />
+    <path d="M3 9.5h18" stroke="var(--jamun-base)" strokeWidth="1.8" />
+    <path d="M7 13.5h6M7 16.5h4" stroke="var(--jamun-base)" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+)
+
 const ChevronIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18" aria-hidden>
     <path d="m9 18 6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -41,29 +52,39 @@ const COHORT_OPTIONS = [
   { value: 'non-cod', label: 'UPI / Online payment', meta: 'I usually pay online while ordering' },
 ]
 
+/* Moderator's pick: how the store pickup card shows on the cart Review (Figma self-pickup v3) */
+const CARD_OPTIONS = [
+  { value: 'open', label: 'Card always open', meta: 'Variant 1 · store details always show' },
+  { value: 'closed', label: 'Card closed until tapped', meta: 'Variant 2 · band + header only; tapping opens it' },
+]
+
 /**
- * User-testing gate — pincode, then payment habit (COD vs non-COD cohort),
- * shown before any app UI on first launch. The home-header "Meesho User"
- * chip re-launches the same flow via OPEN_GATE_EVENT so the researcher can
- * switch pincode/cohort between participants. Choices are session-scoped;
- * ?pin= / ?cohort= pre-select and skip.
+ * User-testing gate — pincode, then payment habit (COD vs non-COD cohort), then
+ * (non-COD only) the cart pickup card variant, shown before any app UI on first
+ * launch. The home-header "Meesho User" chip re-launches the same flow via
+ * OPEN_GATE_EVENT so the researcher can switch pincode/cohort/card between
+ * participants. Choices are session-scoped; ?pin= / ?cohort= / ?card= pre-select
+ * and skip. COD testers see the plain pickup card, so they skip the card step.
  */
 export default function PincodeGate({ children }) {
   const [pin, setPin] = useState(getSelectedPincode)
   const [cohort, setCohort] = useState(getSelectedTestCohort)
+  const [card, setCard] = useState(getSelectedCardVariant)
 
   useEffect(() => {
     const reopen = () => {
       clearSelectedPincode()
       clearSelectedTestCohort()
+      clearSelectedCardVariant()
       setPin(null)
       setCohort(null)
+      setCard(null)
     }
     window.addEventListener(OPEN_GATE_EVENT, reopen)
     return () => window.removeEventListener(OPEN_GATE_EVENT, reopen)
   }, [])
 
-  if (pin && cohort) return children
+  if (pin && cohort && (card || cohort === 'cod')) return children
 
   const choosePin = (value) => {
     setSelectedPincode(value)
@@ -75,22 +96,51 @@ export default function PincodeGate({ children }) {
     setCohort(value)
   }
 
-  const askingCohort = Boolean(pin)
+  const chooseCard = (value) => {
+    setSelectedCardVariant(value)
+    setCard(value)
+  }
+
+  const askingCard = Boolean(pin && cohort)
+  const askingCohort = Boolean(pin) && !askingCard
 
   return (
     <div className="pincode-gate">
       <div className="pincode-gate-card">
-        <span className="pincode-gate-icon">{askingCohort ? <CashIcon /> : <PinIcon />}</span>
+        <span className="pincode-gate-icon">
+          {askingCard ? <CardIcon /> : askingCohort ? <CashIcon /> : <PinIcon />}
+        </span>
         <h1 className="pincode-gate-title">
-          {askingCohort ? 'How do you usually pay?' : 'Where should we deliver?'}
+          {askingCard ? 'Pickup card on cart Review' : askingCohort ? 'How do you usually pay?' : 'Where should we deliver?'}
         </h1>
         <p className="pincode-gate-sub">
-          {askingCohort
-            ? 'Pick what you do most often on Meesho'
-            : 'Select your area PIN code to continue'}
+          {askingCard
+            ? 'For the moderator: pick the variant for this participant'
+            : askingCohort
+              ? 'Pick what you do most often on Meesho'
+              : 'Select your area PIN code to continue'}
         </p>
 
-        {askingCohort ? (
+        {askingCard ? (
+          <div className="pincode-gate-list" role="listbox" aria-label="Pickup card variant">
+            {CARD_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                className="pincode-gate-option"
+                onClick={() => chooseCard(option.value)}
+              >
+                <span className="pincode-gate-cohort">
+                  <span className="pincode-gate-pin">{option.label}</span>
+                  <span className="pincode-gate-meta">{option.meta}</span>
+                </span>
+                <span className="pincode-gate-chevron" aria-hidden>
+                  <ChevronIcon />
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : askingCohort ? (
           <div className="pincode-gate-list" role="listbox" aria-label="Usual payment method">
             {COHORT_OPTIONS.map((option) => (
               <button

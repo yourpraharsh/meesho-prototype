@@ -9,7 +9,7 @@ import { REVIEW_VARIANT } from '../constants/reviewVariants'
 import DeliveryTypeReview from '../components/review/DeliveryTypeReview'
 import { DELIVERY_TYPE } from '../utils/deliveryTypes'
 import { STEADY_CLOSED_VARIANT, STEADY_STATE_VARIANT, getPickupVariantById } from '../utils/pickupVariants'
-import { isCodTestUser } from '../utils/testPincode'
+import { getSelectedCardVariant, isCodTestUser } from '../utils/testPincode'
 import AddressPicker from '../components/review/AddressPicker'
 import { useCheckoutAddress } from '../components/review/useCheckoutAddress'
 import '../components/review/ReviewShell.css'
@@ -101,12 +101,13 @@ export default function CartReview() {
     )
   }
 
-  /* Pickup card, two variants (Figma self-pickup v3 · self pickup at cart): Variant 1 (default)
-     card always open; ?card=closed → Variant 2, card closed until pickup is chosen (tapping it
-     opens it). Both play the first-visit FTUX on the first 3 landings (?spot=reset replays it),
-     then the Self-pickup v2 "Steady State" (band grows in, mint flash, rest). ?pv=1..3 still demos
-     a lab arm; COD-cohort testers see the plain card (their education is the UPI-only strip). */
-  const cardVariant = searchParams.get('card') === 'closed' ? STEADY_CLOSED_VARIANT : STEADY_STATE_VARIANT
+  /* Pickup card, two variants (Figma self-pickup v3 · self pickup at cart), picked by the moderator
+     in the test gate (or ?card=open|closed): Variant 1 card always open (also the default);
+     Variant 2 card closed until pickup is chosen (tapping it opens it). Both play the first-visit
+     FTUX on the first 3 landings (?spot=reset replays it), then the Self-pickup v2 "Steady State"
+     (band grows in, mint flash, rest). ?pv=1..3 still demos a lab arm; COD-cohort testers see the
+     plain card (their education is the UPI-only strip). */
+  const cardVariant = getSelectedCardVariant() === 'closed' ? STEADY_CLOSED_VARIANT : STEADY_STATE_VARIANT
   const pickupVariant = isCodTestUser()
     ? null
     : getPickupVariantById(searchParams.get('pv')) ?? cardVariant

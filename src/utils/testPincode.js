@@ -47,7 +47,41 @@ export function clearSelectedTestCohort() {
   }
 }
 
-/** Re-launch the gate flow (pincode → cohort) from anywhere in the app. */
+/** 'open' | 'closed' — cart review pickup card variant, asked in the gate after the cohort
+ *  (moderator's pick per participant). ?card=open|closed pre-selects it and skips the step. */
+const CARD_KEY = 'meesho-test-card'
+
+export function getSelectedCardVariant() {
+  try {
+    const urlCard = new URLSearchParams(window.location.search).get('card')
+    if (urlCard === 'open' || urlCard === 'closed') {
+      window.sessionStorage.setItem(CARD_KEY, urlCard)
+      return urlCard
+    }
+    const stored = window.sessionStorage.getItem(CARD_KEY)
+    return stored === 'open' || stored === 'closed' ? stored : null
+  } catch {
+    return null
+  }
+}
+
+export function setSelectedCardVariant(card) {
+  try {
+    window.sessionStorage.setItem(CARD_KEY, card)
+  } catch {
+    /* gate will re-ask */
+  }
+}
+
+export function clearSelectedCardVariant() {
+  try {
+    window.sessionStorage.removeItem(CARD_KEY)
+  } catch {
+    /* noop */
+  }
+}
+
+/** Re-launch the gate flow (pincode → cohort → pickup card) from anywhere in the app. */
 export const OPEN_GATE_EVENT = 'meesho-open-gate'
 
 /** First-time-experience budgets (e.g. the review-page spotlight's 3 runs). */
