@@ -219,7 +219,8 @@ body.ui-ios .dtr--cart .glass-stepper::before {
 }
 
 /* 16px row: grey truck (16 x 11.478 at y2), 4, "Free Delivery by" Book 11/16 1.2% #333,
-   2, date in Bold */
+   a word space, date in Bold. The date is never cut: on a row too narrow for one line it
+   wraps whole onto a second line instead of ellipsing */
 .dtr--cart .dtr-citem-eta {
   display: flex;
   align-items: center;
@@ -237,18 +238,17 @@ body.ui-ios .dtr--cart .glass-stepper::before {
 }
 
 .dtr--cart .dtr-citem-eta-text {
-  overflow: hidden;
   min-width: 0;
   font: 400 11px/16px var(--font-mier);
   letter-spacing: 0.132px;
   color: #333333;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
+/* the word space (2.5px) + 1px = the 3.5px gap set in Figma */
 .dtr--cart .dtr-citem-eta-text > strong {
-  margin-left: 2px;
+  margin-left: 1px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 /* ------------------------------------------------- Price Details (N Products) (1:1149) */

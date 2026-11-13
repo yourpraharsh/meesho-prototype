@@ -89,7 +89,7 @@ function CartItemRow({ line, deliveryEta }) {
             <p className="dtr-citem-eta">
               <span className="dtr-citem-truck" aria-hidden />
               <span className="dtr-citem-eta-text">
-                Free Delivery by<strong>{deliveryEta}</strong>
+                Free Delivery by <strong>{deliveryEta}</strong>
               </span>
             </p>
           )}

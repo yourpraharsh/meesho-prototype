@@ -451,11 +451,13 @@ body.ui-ios .cart-page .cart-body {
   transform: rotate(-90deg);
 }
 
-/* truck · 4 · "Free Delivery by" Book 11/16 · 2 · date Bold 11/16, #333 */
+/* truck · 4 · "Free Delivery by" Book 11/16 · 3.5 (the Figma gap) · date Bold 11/16, #333.
+   The date is never cut: on a row too narrow for one line it wraps whole to a second line */
 .cart-page .cart-item-delivery {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
+  gap: 0 4px;
   max-width: 100%;
   margin: 8px 0 0;
   font: 400 11px/16px var(--font-mier);
@@ -465,11 +467,8 @@ body.ui-ios .cart-page .cart-body {
 }
 
 .cart-page .cart-item-delivery strong {
-  min-width: 0;
-  margin-left: -2px;
+  margin-left: -0.5px;
   font-weight: 700;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .cart-page .cart-item-truck {

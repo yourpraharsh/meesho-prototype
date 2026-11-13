@@ -251,9 +251,9 @@ function SteadyEyebrow({ pickupSavings, isPickup }) {
    Figma self-pickup-v3 · self pickup at cart · "First-visit FTUX: highlight for both variants":
      lift   hold 0.8s  page dims #353543 @70%, hole exactly at the card; the card, band already on,
                        scaled ×1.0427 (328 → 342px). No ring, glow, gap or shadow
-     settle 0.5s       the card scales back to 1 (the dim stays; its hole follows), hold 0.2s
-     mint   0.3s       body → #F2FFF1, hold 0.4s
-     fade   0.5s       the dim and the mint fade out together
+     settle 0.5s       the card scales back to 1 and the dim fades out with it, hold 0.2s
+     mint   0.3s       body → #F2FFF1 (no dim), hold 0.4s
+     fade   0.5s       the mint fades out
      done              rest: band + green frame stay. Any tap skips here. Nothing expands. */
 const CART_FTUX_MAX_RUNS = 3
 const CART_FTUX_BEATS = { lift: ['settle', 800], settle: ['mint', 500 + 200], mint: ['fade', 300 + 400], fade: ['done', 500] }
@@ -282,7 +282,9 @@ function CartFtuxEyebrow({ pickupSavings, runsKey }) {
   const holeRef = useRef(null)
   const counted = useRef(false)
   const [phase, setPhase] = useState('lift')
-  const dimUp = phase !== 'done'
+  /* the dim is up for the lift and fades out over the settle (0.5s of its 0.7s), then unmounts */
+  const dimUp = phase === 'lift' || phase === 'settle'
+  const running = phase !== 'done'
 
   useEffect(() => {
     /* spend this landing once (the ref survives StrictMode's double effect) */
@@ -324,22 +326,23 @@ function CartFtuxEyebrow({ pickupSavings, runsKey }) {
     return () => window.cancelAnimationFrame(raf)
   }, [dimUp])
 
-  /* during the fade the dim lets taps through: a tap lands on rest AND does its job */
+  /* once the dim is going (settle, mint, fade) taps reach the page: a tap lands on rest AND
+     does its job */
   useEffect(() => {
-    if (phase !== 'fade') return undefined
+    if (phase === 'lift' || phase === 'done') return undefined
     const finish = () => setPhase('done')
     window.addEventListener('pointerdown', finish, true)
     return () => window.removeEventListener('pointerdown', finish, true)
   }, [phase])
 
   useEffect(() => {
-    if (!dimUp) return undefined
+    if (!running) return undefined
     const onKey = (e) => {
       if (e.key === 'Escape') setPhase('done')
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [dimUp])
+  }, [running])
 
   return (
     <div ref={rootRef} className={`dil-spot-eyebrow dil-ftux dil-ftux--${phase}`}>
@@ -348,7 +351,7 @@ function CartFtuxEyebrow({ pickupSavings, runsKey }) {
       {dimUp &&
         createPortal(
           <div
-            className={`dil-ftux-dim${phase === 'fade' ? ' dil-ftux-dim--fade' : ''}`}
+            className={`dil-ftux-dim${phase === 'settle' ? ' dil-ftux-dim--fade' : ''}`}
             role="presentation"
             aria-hidden
             onClick={(e) => {
