@@ -80,15 +80,25 @@ export default function CartReview() {
 
   if (lines.length === 0) return null
 
+  /* Back is a real Back: pushing /cart here stacked Cart → Review → Cart, so the cart's own Back
+     returned to this review. Opened some other way (a link, a reload): replace with the cart. */
   const handleBack = () => {
-    navigate({ pathname: '/cart', search: location.search })
+    if (location.state?.fromCart && (window.history.state?.idx ?? 0) > 0) navigate(-1)
+    else navigate({ pathname: '/cart', search: location.search }, { replace: true })
   }
 
   const goToPaymentStep = ({ storeId = null } = {}) => {
+    /* mark this review's history entry first: Back from Payment (the button or the browser's)
+       returns to it, and a `settled` entry shows the pickup card at rest — no FTUX, no beats */
+    navigate(
+      { pathname: location.pathname, search: location.search },
+      { replace: true, state: { ...(location.state ?? {}), settled: true } },
+    )
     navigate(
       { pathname: '/cart/payment', search: location.search },
       {
         state: {
+          fromReview: true,
           cohort,
           reviewVariant: REVIEW_VARIANT.CLARITY,
           /* Every payment entry re-applies the delivery-type rule —

@@ -46,7 +46,7 @@ export default function PaymentOrder({ cart = false }) {
   const navigate = useNavigate()
   const location = useLocation()
   const [searchParams] = useSearchParams()
-  const { items: cartItems, clear: clearCart } = useCart()
+  const { items: cartItems, clear: clearCart, setDelivery } = useCart()
   const product = cart ? null : getProductById(id)
 
   const checkoutState = location.state?.checkout
@@ -210,8 +210,17 @@ export default function PaymentOrder({ cart = false }) {
 
   const handleBack = () => {
     if (cart) {
+      /* a real Back to the review (pushing it stacked Review → Payment → Review → Cart). The choice
+         made here (the COD switch moves pickup to home) rides on the cart's remembered delivery,
+         which the review starts from. */
+      if (deliveryTypeId) setDelivery({ deliveryTypeId, ...(storeId ? { storeId } : {}) })
+      if (location.state?.fromReview && (window.history.state?.idx ?? 0) > 0) {
+        navigate(-1)
+        return
+      }
       navigate(`/cart/review${location.search}`, {
-        state: { cohort: location.state?.cohort, paymentMethodId, deliveryTypeId, storeId },
+        replace: true,
+        state: { cohort: location.state?.cohort, paymentMethodId, deliveryTypeId, storeId, settled: true },
       })
       return
     }

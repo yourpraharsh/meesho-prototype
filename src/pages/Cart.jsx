@@ -170,8 +170,9 @@ export default function Cart() {
     priceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }
 
+  /* fromCart: the review's Back can then pop back here instead of stacking a new cart page */
   const handleContinue = () => {
-    navigate({ pathname: '/cart/review', search: location.search })
+    navigate({ pathname: '/cart/review', search: location.search }, { state: { fromCart: true } })
   }
 
   const goShopping = (state) => {

@@ -21,6 +21,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocation } from 'react-router-dom'
 import './DiscountIdeasLoud.css'
 
 const pickupCardRect = () => {
@@ -219,10 +220,11 @@ const prefersReducedMotion = () => {
   }
 }
 
-function SteadyEyebrow({ pickupSavings, isPickup }) {
-  /* landing with pickup already chosen (Back from Payment, a remembered cart choice) shows the
-     selected state straight away — the beats start from Home selected. Read once, on mount. */
-  const [phase, setPhase] = useState(() => (isPickup || prefersReducedMotion() ? 'done' : 'rest'))
+function SteadyEyebrow({ pickupSavings, isPickup, settled = false }) {
+  /* landing with pickup already chosen (a remembered cart choice) or coming back from Payment
+     (settled) shows the final state straight away — the beats start from Home selected. Read
+     once, on mount. */
+  const [phase, setPhase] = useState(() => (settled || isPickup || prefersReducedMotion() ? 'done' : 'rest'))
 
   useEffect(() => {
     const beat = STEADY_BEATS[phase]
@@ -371,8 +373,11 @@ function CartFtuxEyebrow({ pickupSavings, runsKey }) {
    chosen (Back from Payment, a remembered cart choice); otherwise the Steady State. The
    initialiser only reads (StrictMode calls it twice); the run is spent in CartFtuxEyebrow. */
 function CartPickupEyebrow({ runsKey, ...props }) {
-  const [ftux] = useState(() => !props.isPickup && readFtuxRuns(runsKey) < CART_FTUX_MAX_RUNS)
-  return ftux ? <CartFtuxEyebrow {...props} runsKey={runsKey} /> : <SteadyEyebrow {...props} />
+  /* Back from Payment lands on this review's history entry, which the review marked `settled`
+     on its way out (CartReview goToPaymentStep): no FTUX, no steady beats — the card at rest */
+  const settled = Boolean(useLocation().state?.settled)
+  const [ftux] = useState(() => !settled && !props.isPickup && readFtuxRuns(runsKey) < CART_FTUX_MAX_RUNS)
+  return ftux ? <CartFtuxEyebrow {...props} runsKey={runsKey} /> : <SteadyEyebrow {...props} settled={settled} />
 }
 
 const CartOpenEyebrow = (props) => <CartPickupEyebrow {...props} runsKey="meesho-cart-ftux-open-runs" />
